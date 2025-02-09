@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public interface IDecideRight
 {
-    public void DecidingRight() 
+    public void DecidingRight(object sender, EventArgs e) 
     { 
     
     }

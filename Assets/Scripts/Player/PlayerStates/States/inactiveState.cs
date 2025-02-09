@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,6 @@ using UnityEngine;
 /// This should check whether it's their turn or they enter combat and provide the correct state
 /// </summary>
 
-//TODO Tomorrow: Improve the States in order to be tested
 public class inactiveState : playerStateBase
 {
     private bool beginTurn;
@@ -16,6 +16,8 @@ public class inactiveState : playerStateBase
 
     public override void EnterState(playerStateManager player)
     {
+        player.startTurn += PlayerTurn;
+        
         //This will provide any 
         Debug.Log("Turn Ended");
     }
@@ -24,7 +26,7 @@ public class inactiveState : playerStateBase
     {
         if (beginTurn)
         {
-            ExitState(player);
+            player.ChangeState(player.startState);
         }
         
         //TODO: Add a method that checks if the player has collided with the enemy and if they have then change the state to defend
@@ -33,9 +35,10 @@ public class inactiveState : playerStateBase
     public override void ExitState(playerStateManager player)
     {
         beginTurn = false;
+        player.startTurn -= PlayerTurn;
     }
 
-    public void PlayerTurn()
+    public void PlayerTurn(object sender, EventArgs e)
     {
         beginTurn = true;
     }

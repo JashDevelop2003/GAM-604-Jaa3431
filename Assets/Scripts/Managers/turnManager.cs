@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,25 +11,35 @@ using Random = UnityEngine.Random;
 
 public class turnManager : Singleton<turnManager>
 {
+    //this provides an array to collect all of the players
     [SerializeField] private GameObject[] Players;
-    public EventHandler playerTurn; 
+    int currentPlayerTurn;
     
     // Start is called before the first frame update
     void Start()
+
     {
+        //This gathers all of the players since each player object provides a tag called "Player"
         Players = GameObject.FindGameObjectsWithTag("Player");
-        RandomiseBeginner(Random.Range(0, Players.Length));
+
+        //To start the game the manager will need to see who starts first
+        //Arrays always start with [0] and since the max is excluded this only provide a value of 0 or max player
+        //Example: If there's 3 players then the randomiser will pick an integer between 0 to 2 with 0 representing the first player and 2 representing the third player
+        currentPlayerTurn = Random.Range(0, Players.Length);
+        StartTurn();
 
     }
 
-    void RandomiseBeginner(int startingPlayer)
+    //this provides the 
+    public void StartTurn()
     {
-        StartTurn(startingPlayer);
-    }
+        if(currentPlayerTurn >= Players.Length) 
+        {
+            currentPlayerTurn = 0;
+        }
 
+        Players[currentPlayerTurn].GetComponent<playerStateManager>().StartPlayerTurn();
 
-    public void StartTurn(int currentPlayerTurn)
-    {
-        
+        currentPlayerTurn++;
     }
 }

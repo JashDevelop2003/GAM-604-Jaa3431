@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 public interface IDecideDown
 {
-    public void DecideDown()
+    public void DecidingDown(object sender, EventArgs e)
     {
 
     }
