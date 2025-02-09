@@ -51,6 +51,7 @@ public class playerStateManager : MonoBehaviour
         //If the current state isn't the inactive state then something went wrong
         if(currentState == inactiveState)
         {
+            Debug.Log(gameObject.name + " 's turn");
             startTurn?.Invoke(this, EventArgs.Empty);
         }
         else

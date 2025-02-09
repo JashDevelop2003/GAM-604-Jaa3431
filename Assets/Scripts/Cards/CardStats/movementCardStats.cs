@@ -19,6 +19,7 @@ public class movementCardStats : ScriptableObject
 
     public string cardName;
     public string cardDescription;
-    public int moveValue;
+    public int minimumMoveValue;
+    public int maximumMoveValue;
     public int manaCost;
 }
