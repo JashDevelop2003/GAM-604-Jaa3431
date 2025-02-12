@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 103398205939665575}
   - component: {fileID: 7579160754430286414}
   - component: {fileID: 3797101923829565271}
+  - component: {fileID: 4079671881412056026}
   - component: {fileID: 7842795651466061481}
   m_Layer: 0
   m_Name: TestPrefab3
@@ -84,6 +85,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4079671881412056026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3675408306066046744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 599013c121d7dd442832dafa34771b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testData: {fileID: 11400000, guid: 624c2f9d5091ec64b906997f8362575c, type: 2}
 --- !u!136 &7842795651466061481
 CapsuleCollider:
   m_ObjectHideFlags: 0

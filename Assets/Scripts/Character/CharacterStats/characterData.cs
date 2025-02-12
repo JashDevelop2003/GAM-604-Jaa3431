@@ -26,4 +26,8 @@ public class characterData : ScriptableObject
     // - Movement is 2
     // - Status is 3
     // - Curse is 4
+
+    public List<offenceCardStats> startingOffenceCards;
+    public List<defenceCardStats> startingDefenceCards;
+    public List<movementCardStats> startingMovementCards;
 }
