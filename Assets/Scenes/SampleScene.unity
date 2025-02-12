@@ -859,6 +859,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPrefab3
       objectReference: {fileID: 0}
+    - target: {fileID: 4079671881412056026, guid: f0ece24d7db46bb408a1bb3932e30b2a, type: 3}
+      propertyPath: testData
+      value: 
+      objectReference: {fileID: 11400000, guid: 624c2f9d5091ec64b906997f8362575c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
