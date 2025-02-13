@@ -7,8 +7,6 @@ using UnityEngine;
 public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRight, IDecideLeft, IConfirm
 
 {
-    
-
     public override void EnterState(playerStateManager player)
     {
 
@@ -51,7 +49,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
     public void DecidingRight(object sender, EventArgs e)
     {
-        Debug.Log("This will be changing to the Moving State");
+        Debug.LogWarning("Needs to Implement Movement Card");
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)

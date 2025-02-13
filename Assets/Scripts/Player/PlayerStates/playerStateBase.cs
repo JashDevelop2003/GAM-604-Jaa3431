@@ -8,6 +8,8 @@ using UnityEngine;
 /// Each state will override these states to behaving during runtime
 /// </summary>
 
+
+//TODO: Change the player state base to MonoBehaviour & Create a new State Machine
 public abstract class playerStateBase
 {
     //All of these states will be used in the playerStateManager which will provide each of these states to be used

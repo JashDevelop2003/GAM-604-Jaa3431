@@ -38,6 +38,7 @@ public class playerStateManager : MonoBehaviour
     {
         controls =  GetComponent<boardControls>();
         controller = GetComponent<playerController>();
+        startTurn += controller.RegainMana;
 
         //this begins the player in the inactive state where nothing happens until is the player's turn
         currentState = inactiveState;
@@ -60,7 +61,7 @@ public class playerStateManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame and keeps updatubg the current state's update method
+    // Update is called once per frame and keeps updating the current state's update method
     void Update()
     {
         currentState.UpdateState(this);
