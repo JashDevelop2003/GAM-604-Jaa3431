@@ -131,7 +131,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 148208158}
-  - component: {fileID: 148208159}
   m_Layer: 0
   m_Name: MovementDeck
   m_TagString: Untagged
@@ -154,25 +153,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 404600157}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &148208159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148208157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f79c6aef21e917e48b7495d79df560e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 2
-  emptyCardsPrefabs:
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
-  - {fileID: 3675408306066046744, guid: f0ece24d7db46bb408a1bb3932e30b2a, type: 3}
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
 --- !u!1 &329044114
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 329044117}
   - component: {fileID: 329044118}
-  - component: {fileID: 329044119}
+  - component: {fileID: 329044121}
   - component: {fileID: 329044120}
   m_Layer: 0
   m_Name: PlayerOne
@@ -191,7 +171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &329044117
 Transform:
   m_ObjectHideFlags: 0
@@ -223,18 +203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: 624c2f9d5091ec64b906997f8362575c, type: 2}
---- !u!114 &329044119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329044114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b40eac3d958af3642b400a581dc3b79b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &329044120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +213,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2ae5e04c4917c148be7c19b2c8b956f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &329044121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40eac3d958af3642b400a581dc3b79b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &404600154
@@ -362,16 +342,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 514390046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f79c6aef21e917e48b7495d79df560e2, type: 3}
+  m_Script: {fileID: 11500000, guid: eb0d5a9b65ade4543bdc3d1a60bbd2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 2
-  emptyCardsPrefabs:
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
-  - {fileID: 3675408306066046744, guid: f0ece24d7db46bb408a1bb3932e30b2a, type: 3}
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
+  emptyPrefabs: {fileID: 749973323476722428, guid: bab26cfe8510f444e973929680497e42, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &809014084
 Transform:
   m_ObjectHideFlags: 0
@@ -520,7 +494,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 957601614}
-  - component: {fileID: 957601615}
   m_Layer: 0
   m_Name: DefenceDeck
   m_TagString: Untagged
@@ -543,25 +516,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 404600157}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &957601615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957601613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f79c6aef21e917e48b7495d79df560e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 1
-  emptyCardsPrefabs:
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
-  - {fileID: 3675408306066046744, guid: f0ece24d7db46bb408a1bb3932e30b2a, type: 3}
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +617,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1304816040}
-  - component: {fileID: 1304816041}
   m_Layer: 0
   m_Name: OffenceDeck
   m_TagString: Untagged
@@ -686,25 +639,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 404600157}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1304816041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1304816039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f79c6aef21e917e48b7495d79df560e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 0
-  emptyCardsPrefabs:
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
-  - {fileID: 3675408306066046744, guid: f0ece24d7db46bb408a1bb3932e30b2a, type: 3}
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
 --- !u!1 &1586932753
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,7 +648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1586932754}
-  - component: {fileID: 1586932755}
+  - component: {fileID: 1586932756}
   m_Layer: 0
   m_Name: OffenceDeck
   m_TagString: Untagged
@@ -737,7 +671,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 329044117}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1586932755
+--- !u!114 &1586932756
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -746,16 +680,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1586932753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f79c6aef21e917e48b7495d79df560e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 450d83e184daa164aaf04d08e55dc51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 0
-  emptyCardsPrefabs:
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
-  - {fileID: 3675408306066046744, guid: f0ece24d7db46bb408a1bb3932e30b2a, type: 3}
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
+  emptyPrefabs: {fileID: 1627439447038818509, guid: f84b62052c19d7f48b76ab41231ea562, type: 3}
 --- !u!1 &1719994119
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,16 +725,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1719994119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f79c6aef21e917e48b7495d79df560e2, type: 3}
+  m_Script: {fileID: 11500000, guid: f1adc93368857094097bcfc8e4318924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
-  emptyCardsPrefabs:
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
-  - {fileID: 3675408306066046744, guid: f0ece24d7db46bb408a1bb3932e30b2a, type: 3}
-  - {fileID: 2314140749370596495, guid: b568981b17bee8142a78f1ff6ce923e3, type: 3}
-  - {fileID: 8483704367916981294, guid: 4c22c60079ab416408d7f60eaeb31bc2, type: 3}
+  emptyPrefabs: {fileID: 3397653743963208638, guid: 01add095f183e0c48b60d719d5e530a4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
