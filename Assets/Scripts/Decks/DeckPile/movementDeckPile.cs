@@ -12,4 +12,17 @@ public class movementDeckPile : MonoBehaviour
     {
         movementCards.Add(card);
     }
+
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            DrawCards();
+        }
+    }
+
+    public void DrawCards()
+    {
+
+    }
 }
