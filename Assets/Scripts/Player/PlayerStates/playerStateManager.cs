@@ -27,6 +27,7 @@ public class playerStateManager : MonoBehaviour
     private startState startState;
     private decidingState decidingState;
     private rollState rollState;
+    private moveState moveState;
 
     public playerStateBase PreviousState
     {
@@ -48,9 +49,14 @@ public class playerStateManager : MonoBehaviour
         get { return decidingState; }
     }
 
-    public playerStateBase RollState
+    public rollState RollState
     {
         get { return rollState; }
+    }
+
+    public moveState MoveState
+    {
+        get { return moveState; }
     }
 
 
@@ -58,12 +64,13 @@ public class playerStateManager : MonoBehaviour
     void Start()
     {
         //This collect the component required to start the turn and each of the states
-        //TODO: Add Roll, Move, Choosing, Selecting, Attack & Defend States
+        //TODO: Add Choosing, Selecting, Attack & Defend States
         controller = GetComponent<playerController>();
         inactiveState = GetComponent<inactiveState>();
         startState = GetComponent<startState>();
         decidingState = GetComponent<decidingState>();
         rollState = GetComponent<rollState>();
+        moveState = GetComponent<moveState>();
 
         startTurn += controller.RegainMana;
 

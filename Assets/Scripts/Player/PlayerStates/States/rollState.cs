@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class rollState : playerStateBase, IConfirm, ICancel
 {
-    //private bool rollDice;
+    private bool rollDice;
     private bool rollCancel;
     
     private int minimumRoll;
@@ -25,7 +25,7 @@ public class rollState : playerStateBase, IConfirm, ICancel
     public override void EnterState(playerStateManager player)
     {
         rollCancel = false;
-        //rollDice = false;
+        rollDice = false;
         controls = GetComponent<boardControls>();
         controller = GetComponent<playerController>();
         Controls.confirmPressed += ConfirmingChoice;
@@ -34,6 +34,11 @@ public class rollState : playerStateBase, IConfirm, ICancel
 
     public override void UpdateState(playerStateManager player)
     {
+        if (rollDice) 
+        {
+            player.ChangeState(player.MoveState);
+        }
+        
         if (rollCancel)
         {
             player.ChangeState(player.DecidingState);
@@ -57,8 +62,8 @@ public class rollState : playerStateBase, IConfirm, ICancel
     {
         if(controller.GetModel.CurrentMana >= manaCost)
         {
-           controller.Roll(manaCost, UnityEngine.Random.Range(minimumRoll, maximumRoll+1));
-            //rollDice = true;
+            controller.Roll(manaCost, UnityEngine.Random.Range(minimumRoll, maximumRoll+1));
+            rollDice = true;
         }
         else 
         {
