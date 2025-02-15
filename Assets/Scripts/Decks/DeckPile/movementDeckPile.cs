@@ -6,6 +6,7 @@ public class movementDeckPile : MonoBehaviour
 {
     public List<GameObject> movementCards = new List<GameObject>();
     [SerializeField] private int[] moveCards = new int[3];
+    [SerializeField] private GameObject[] selectedCards = new GameObject[3];
 
     // Update is called once per frame
     public void AddCard(GameObject card)
@@ -13,16 +14,26 @@ public class movementDeckPile : MonoBehaviour
         movementCards.Add(card);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            DrawCards();
-        }
-    }
-
     public void DrawCards()
     {
+        for (int i = 0; i < moveCards.Length; i++)
+        {
+            moveCards[i] = Random.Range(0, movementCards.Count);
+        }
 
+        while (moveCards[1] == moveCards[0])
+        {
+            moveCards[1] = Random.Range(0, movementCards.Count);
+        }
+
+        while (moveCards[2] == moveCards[1] || moveCards[2] == moveCards[0])
+        {
+            moveCards[2] = Random.Range(0, movementCards.Count);
+        }
+
+        for (int i = 0;i < selectedCards.Length;i++) 
+        {
+            selectedCards[i] = movementCards[moveCards[i]];
+        }
     }
 }
