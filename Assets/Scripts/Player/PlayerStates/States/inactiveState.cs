@@ -26,7 +26,7 @@ public class inactiveState : playerStateBase
     {
         if (beginTurn)
         {
-            player.ChangeState(player.startState);
+            player.ChangeState(player.StartState);
         }
         
         //TODO: Add a method that checks if the player has collided with the enemy and if they have then change the state to defend

@@ -13,7 +13,7 @@ public class startState : playerStateBase
 
     public override void UpdateState(playerStateManager player)
     {
-        player.ChangeState(player.decidingState);
+        player.ChangeState(player.DecidingState);
     }
 
     public override void ExitState(playerStateManager player)

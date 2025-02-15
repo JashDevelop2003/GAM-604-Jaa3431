@@ -165,6 +165,9 @@ GameObject:
   - component: {fileID: 329044118}
   - component: {fileID: 329044121}
   - component: {fileID: 329044120}
+  - component: {fileID: 329044124}
+  - component: {fileID: 329044123}
+  - component: {fileID: 329044122}
   m_Layer: 0
   m_Name: PlayerOne
   m_TagString: Player
@@ -225,6 +228,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40eac3d958af3642b400a581dc3b79b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &329044122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b293dd00d68ea46a868a691f0f2027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &329044123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391142e2f8814624c87f6863714e6513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &329044124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01b60aae8ba3034fb8a27caa2bac227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &404600154
@@ -311,6 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 514390047}
   - component: {fileID: 514390048}
+  - component: {fileID: 514390049}
   m_Layer: 0
   m_Name: MovementDeck
   m_TagString: Untagged
@@ -346,6 +386,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 749973323476722428, guid: bab26cfe8510f444e973929680497e42, type: 3}
+--- !u!114 &514390049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514390046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3611195b0d522624584ee6d2ac2a043f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementCards: []
+  moveCards: 000000000000000000000000
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

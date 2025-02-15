@@ -13,13 +13,7 @@ public class playerStateManager : MonoBehaviour
 {
     //the state manager collects the controls and logic in the player object in order to call certain events for certain states
     private playerController controller;
-    private boardControls controls;
-    public boardControls Controls
-    { 
-        get { return controls; }
-        set { controls = value; }
-    
-    }
+
     
     //this event occurs when the player turn starts which changes the state and ragain their mana
     public event EventHandler startTurn;
@@ -28,16 +22,34 @@ public class playerStateManager : MonoBehaviour
     //These are the states that each state is inherit from the player state base
     //each state must be created inside of the state manager which can be able to inherit a monobehaviour from the state manager
     private playerStateBase currentState;
-    public inactiveState inactiveState = new inactiveState();
-    public startState startState = new startState();
-    public decidingState decidingState = new decidingState();
+    private inactiveState inactiveState;
+    private startState startState;
+    private decidingState decidingState;
 
-    
+    public inactiveState InactiveState
+    {
+        get { return inactiveState; }
+    }
+
+    public startState StartState
+    {
+        get { return startState; }
+    }
+
+    public decidingState DecidingState
+    {
+        get { return decidingState; }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        controls =  GetComponent<boardControls>();
         controller = GetComponent<playerController>();
+        inactiveState = GetComponent<inactiveState>();
+        startState = GetComponent<startState>();
+        decidingState = GetComponent<decidingState>();
+
         startTurn += controller.RegainMana;
 
         //this begins the player in the inactive state where nothing happens until is the player's turn

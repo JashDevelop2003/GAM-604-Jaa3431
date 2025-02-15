@@ -7,14 +7,22 @@ using UnityEngine;
 public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRight, IDecideLeft, IConfirm
 
 {
+    private boardControls controls;
+    public boardControls Controls
+    {
+        get { return controls; }
+        set { controls = value; }
+
+    }
+
     public override void EnterState(playerStateManager player)
     {
-
-        player.Controls.upPressed += DecidingUp;
-        player.Controls.downPressed += DecidingDown;
-        player.Controls.leftPressed += DecidingLeft;
-        player.Controls.rightPressed += DecidingRight;
-        player.Controls.confirmPressed += ConfirmingChoice;
+        controls = GetComponent<boardControls>();
+        Controls.upPressed += DecidingUp;
+        Controls.downPressed += DecidingDown;
+        Controls.leftPressed += DecidingLeft;
+        Controls.rightPressed += DecidingRight;
+        Controls.confirmPressed += ConfirmingChoice;
 
     }
 
@@ -25,11 +33,11 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
     public override void ExitState(playerStateManager player)
     {
-        player.Controls.upPressed += DecidingUp;
-        player.Controls.downPressed += DecidingDown;
-        player.Controls.leftPressed += DecidingLeft;
-        player.Controls.rightPressed += DecidingRight;
-        player.Controls.confirmPressed += ConfirmingChoice;
+        Controls.upPressed += DecidingUp;
+        Controls.downPressed += DecidingDown;
+        Controls.leftPressed += DecidingLeft;
+        Controls.rightPressed += DecidingRight;
+        Controls.confirmPressed += ConfirmingChoice;
     }
 
     void DecidingUp(object sender, EventArgs e)

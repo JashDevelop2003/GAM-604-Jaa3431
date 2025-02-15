@@ -39,5 +39,8 @@ public class movementCard : MonoBehaviour
         rollMaximumValue = MoveCard.maximumMoveValue;
         manaCost = moveCard.manaCost;
         gameObject.name = moveCard.name;
+
+        movementDeckPile deck = GetComponentInParent<movementDeckPile>();
+        deck.AddCard(this.gameObject);
     }
 }
