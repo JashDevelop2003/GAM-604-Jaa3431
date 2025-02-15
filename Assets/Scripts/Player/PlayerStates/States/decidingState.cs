@@ -20,7 +20,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         get { return movementDeck; }
     }
 
-    public GameObject selectedCard;
+    private GameObject selectedCard;
 
     private int minRoll;
     private int maxRoll;
