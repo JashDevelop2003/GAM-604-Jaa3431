@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class movementDeckPile : MonoBehaviour
 {
-    public List<GameObject> movementCards = new List<GameObject>();
+    private List<GameObject> movementCards = new List<GameObject>();
     [SerializeField] private int[] moveCards = new int[3];
     [SerializeField] private GameObject[] selectedCards = new GameObject[3];
+    public GameObject[] SelectedCards
+    {
+        get { return selectedCards; }
+    }
 
     // Update is called once per frame
     public void AddCard(GameObject card)

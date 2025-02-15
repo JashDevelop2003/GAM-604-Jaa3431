@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 329044124}
   - component: {fileID: 329044123}
   - component: {fileID: 329044122}
+  - component: {fileID: 329044125}
   m_Layer: 0
   m_Name: PlayerOne
   m_TagString: Player
@@ -242,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b293dd00d68ea46a868a691f0f2027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedCard: {fileID: 0}
 --- !u!114 &329044123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +268,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01b60aae8ba3034fb8a27caa2bac227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &329044125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4be3720d2945d94f986bcc028603ccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimumRoll: 0
+  maximumRoll: 0
+  manaCost: 0
 --- !u!1 &404600154
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,8 +415,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3611195b0d522624584ee6d2ac2a043f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementCards: []
   moveCards: 000000000000000000000000
+  selectedCards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

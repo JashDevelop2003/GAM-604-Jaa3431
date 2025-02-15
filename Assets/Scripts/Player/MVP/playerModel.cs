@@ -43,6 +43,13 @@ public class playerModel
         set { currentCash = value; }
     }
 
+    private int rollValue;
+    public int RollValue
+    {
+        get { return rollValue; }
+        set { rollValue = value; }
+    }
+
     private float thrustMultiplier;
     public float ThrustMultiplier
     {
@@ -67,6 +74,7 @@ public class playerModel
         CurrentMana = characterData.Mana;
         MaxMana = characterData.Mana;
         currentCash = characterData.startingCash;
+        rollValue = 0;
         thrustMultiplier = 1;
         guardMultiplier = 1;
     }

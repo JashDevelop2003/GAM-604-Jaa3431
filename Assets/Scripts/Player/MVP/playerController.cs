@@ -9,6 +9,7 @@ public class playerController : MonoBehaviour
     private playerModel playerModel;
     [SerializeField] private characterData Data;
     public characterData GetData {  get { return Data; } }
+    public playerModel GetModel {  get { return playerModel; } }
 
     void Awake()
     {
@@ -20,6 +21,14 @@ public class playerController : MonoBehaviour
     {
         playerModel.CurrentMana = playerModel.MaxMana;
         Debug.Log("Event Sent");
+    }
+
+    public void Roll(int rollCost, int value) 
+    { 
+        playerModel.CurrentMana -= rollCost;
+        playerModel.RollValue = value;
+        Debug.Log(playerModel.CurrentMana + "/" + playerModel.MaxMana);
+        Debug.Log(playerModel.RollValue);
     }
 
 

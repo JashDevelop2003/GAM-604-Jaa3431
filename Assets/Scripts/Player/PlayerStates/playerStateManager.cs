@@ -11,7 +11,7 @@ using UnityEngine;
 /// 
 public class playerStateManager : MonoBehaviour
 {
-    //the state manager collects the controls and logic in the player object in order to call certain events for certain states
+    //the state manager collects the controls and logic in order for the controller to regain mana at the start of the turn
     private playerController controller;
 
     
@@ -22,10 +22,17 @@ public class playerStateManager : MonoBehaviour
     //These are the states that each state is inherit from the player state base
     //each state must be created inside of the state manager which can be able to inherit a monobehaviour from the state manager
     private playerStateBase currentState;
+    private playerStateBase previousState;
     private inactiveState inactiveState;
     private startState startState;
     private decidingState decidingState;
+    private rollState rollState;
 
+    public playerStateBase PreviousState
+    {
+        get { return previousState; }
+    }
+    
     public inactiveState InactiveState
     {
         get { return inactiveState; }
@@ -41,14 +48,22 @@ public class playerStateManager : MonoBehaviour
         get { return decidingState; }
     }
 
+    public playerStateBase RollState
+    {
+        get { return rollState; }
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
+        //This collect the component required to start the turn and each of the states
+        //TODO: Add Roll, Move, Choosing, Selecting, Attack & Defend States
         controller = GetComponent<playerController>();
         inactiveState = GetComponent<inactiveState>();
         startState = GetComponent<startState>();
         decidingState = GetComponent<decidingState>();
+        rollState = GetComponent<rollState>();
 
         startTurn += controller.RegainMana;
 
@@ -85,8 +100,10 @@ public class playerStateManager : MonoBehaviour
     public void ChangeState(playerStateBase newState)
     {
         currentState.ExitState(this);
+        previousState = currentState;
+        Debug.Log("Previous State: " + previousState.ToString());
         currentState = newState;
-        Debug.Log(newState.ToString());
+        Debug.Log("Current State: " + currentState.ToString());
         currentState.EnterState(this);
     }
 }

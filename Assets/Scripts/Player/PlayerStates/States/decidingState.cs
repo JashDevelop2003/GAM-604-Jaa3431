@@ -12,11 +12,26 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     {
         get { return controls; }
         set { controls = value; }
-
     }
+
+    private movementDeckPile movementDeck;
+    public movementDeckPile MovementDeck
+    {
+        get { return movementDeck; }
+    }
+
+    public GameObject selectedCard;
+
+    private int minRoll;
+    private int maxRoll;
+    private int manaCost;
+
+    private bool hasSelected;
 
     public override void EnterState(playerStateManager player)
     {
+        hasSelected = false;
+        
         controls = GetComponent<boardControls>();
         Controls.upPressed += DecidingUp;
         Controls.downPressed += DecidingDown;
@@ -24,44 +39,70 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         Controls.rightPressed += DecidingRight;
         Controls.confirmPressed += ConfirmingChoice;
 
+        movementDeck = GetComponentInChildren<movementDeckPile>();
+        if(player.PreviousState == player.StartState)
+        {
+            movementDeck.DrawCards();
+        }
+
     }
 
     public override void UpdateState(playerStateManager player)
     {
-        Debug.LogWarning("Needs Moving State");
+        if (hasSelected)
+        {
+            Debug.Log(selectedCard.name);
+            movementCard moveCard = selectedCard.GetComponent<movementCard>();
+            minRoll = moveCard.RollMinimumValue;
+            maxRoll = moveCard.RollMaximumValue;
+            manaCost = moveCard.ManaCost;
+            player.ChangeState(player.RollState);
+        }
+        
     }
 
     public override void ExitState(playerStateManager player)
     {
-        Controls.upPressed += DecidingUp;
-        Controls.downPressed += DecidingDown;
-        Controls.leftPressed += DecidingLeft;
-        Controls.rightPressed += DecidingRight;
-        Controls.confirmPressed += ConfirmingChoice;
+        rollState Rolling = player.RollState.GetComponent<rollState>();
+        Rolling.CollectValue(minRoll, maxRoll, manaCost);
+
+        Controls.upPressed -= DecidingUp;
+        Controls.downPressed -= DecidingDown;
+        Controls.leftPressed -= DecidingLeft;
+        Controls.rightPressed -= DecidingRight;
+        Controls.confirmPressed -= ConfirmingChoice;
     }
 
     void DecidingUp(object sender, EventArgs e)
     {
-        Debug.LogWarning("Needs to Implement Movement Card");
+        selectedCard = movementDeck.SelectedCards[1];
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
-        Debug.LogWarning("Needs to Implement Status Card");
+        selectedCard = null;
+        Debug.LogWarning("Needs to Implement Movement Card");
     }
 
     public void DecidingLeft(object sender, EventArgs e)
-    {
-        Debug.LogWarning("Needs to Implement Movement Card");
+    {       
+        selectedCard = movementDeck.SelectedCards[0];
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
-        Debug.LogWarning("Needs to Implement Movement Card");
+        selectedCard = movementDeck.SelectedCards[2];
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
     {
-        Debug.Log("This will be changing to the Moving State");
+        if (selectedCard != null)
+        {
+            hasSelected = true;
+        }
+        else
+        {
+            Debug.LogError("The Card has not been selected");
+        }
     }
 }
