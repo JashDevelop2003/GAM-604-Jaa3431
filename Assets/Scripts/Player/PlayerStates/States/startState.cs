@@ -8,7 +8,7 @@ public class startState : playerStateBase
 {
     public override void EnterState(playerStateManager player)
     {
-        Debug.LogWarning("Requires Movement Cards to be Draw");
+        Debug.Log("May Optimise Enter State to apply regaining mana & enabling controls");
     }
 
     public override void UpdateState(playerStateManager player)

@@ -1,8 +1,10 @@
+
+using UnityEngine;
+
 /// <summary>
 /// This script is the model that handles the data from the MVP architecture
 /// This should collect the character data and provide changes
 /// </summary>
-
 public class playerModel
 {
     //This is the character data that should provide values for variables to change their values

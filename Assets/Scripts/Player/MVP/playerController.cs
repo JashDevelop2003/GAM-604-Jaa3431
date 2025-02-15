@@ -8,12 +8,17 @@ public class playerController : MonoBehaviour
 {
     private playerModel playerModel;
     [SerializeField] private characterData Data;
+    [SerializeField] private GameObject currentSpace;
+
+    public playerModel GetModel { get { return playerModel; } }
     public characterData GetData {  get { return Data; } }
-    public playerModel GetModel {  get { return playerModel; } }
+
+    public GameObject Space { get { return currentSpace; } set { currentSpace = value; } }
 
     void Awake()
     {
         playerModel = new playerModel(Data);
+        transform.position = new Vector3(currentSpace.transform.position.x, 2f, currentSpace.transform.position.z);
     }
 
 
