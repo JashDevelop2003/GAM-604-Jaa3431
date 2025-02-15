@@ -5,8 +5,8 @@ using UnityEngine;
 public class spaceBehaviour : MonoBehaviour
 {
     [SerializeField] private spaceEnum spaceType;
-    [SerializeField] private Transform nextSpace;
+    [SerializeField] private GameObject nextSpace;
 
     public spaceEnum SpaceType { get { return spaceType; } }
-    public Transform NextSpace { get { return nextSpace; } }
+    public GameObject NextSpace { get { return nextSpace; } }
 }

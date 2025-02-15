@@ -153,6 +153,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 404600157}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &181071374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6672714552605233790, guid: f7be1fc705d474e4ca9067b85790b012, type: 3}
+  m_PrefabInstance: {fileID: 2685774900518560719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &181071375 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4036311162593024137, guid: f7be1fc705d474e4ca9067b85790b012, type: 3}
@@ -488,6 +493,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!1 &678270197 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8485824422548104299, guid: 9f172bd8d4f01c447b6a32d33eaa8c68, type: 3}
+  m_PrefabInstance: {fileID: 6092525065568724941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &678270198 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1086997512162629914, guid: 9f172bd8d4f01c447b6a32d33eaa8c68, type: 3}
@@ -971,7 +981,11 @@ PrefabInstance:
     - target: {fileID: 6501196255705245758, guid: f7be1fc705d474e4ca9067b85790b012, type: 3}
       propertyPath: nextSpace
       value: 
-      objectReference: {fileID: 1616997786}
+      objectReference: {fileID: 1616997785}
+    - target: {fileID: 6501196255705245758, guid: f7be1fc705d474e4ca9067b85790b012, type: 3}
+      propertyPath: spaceType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6672714552605233790, guid: f7be1fc705d474e4ca9067b85790b012, type: 3}
       propertyPath: m_Name
       value: RedSpace
@@ -992,7 +1006,11 @@ PrefabInstance:
     - target: {fileID: -653256126513704547, guid: 9f172bd8d4f01c447b6a32d33eaa8c68, type: 3}
       propertyPath: nextSpace
       value: 
-      objectReference: {fileID: 181071375}
+      objectReference: {fileID: 181071374}
+    - target: {fileID: -653256126513704547, guid: 9f172bd8d4f01c447b6a32d33eaa8c68, type: 3}
+      propertyPath: spaceType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1086997512162629914, guid: 9f172bd8d4f01c447b6a32d33eaa8c68, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1053,7 +1071,7 @@ PrefabInstance:
     - target: {fileID: -2788529520182606006, guid: 1baa6731d589905489217cd1ab42e6c1, type: 3}
       propertyPath: nextSpace
       value: 
-      objectReference: {fileID: 678270198}
+      objectReference: {fileID: 678270197}
     - target: {fileID: 3562709910066574082, guid: 1baa6731d589905489217cd1ab42e6c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.67
