@@ -14,8 +14,11 @@ public class moveState : playerStateBase
     private playerController controller;
     private Coroutine movePlayer;
 
+
+    private GameObject currentPath;
+    private int currentSpaceInt;
     private GameObject currentSpace;
-    private spaceBehaviour spaceBehaviour;
+    private pathOrder pathOrder;
     private spaceEnum currentSpaceType;
     private GameObject targetSpace;
     private Vector3 spacePosition;
@@ -27,10 +30,11 @@ public class moveState : playerStateBase
         controller = GetComponent<playerController>();
         movement = controller.GetModel.RollValue;
 
-        currentSpace = controller.Space;
-        spaceBehaviour = currentSpace.GetComponent<spaceBehaviour>();
-        targetSpace = spaceBehaviour.NextSpace;
-        spacePosition = new Vector3(targetSpace.transform.position.x, 2f, targetSpace.transform.position.z);
+       currentPath = controller.Path;
+       pathOrder = currentPath.GetComponent<pathOrder>();
+       currentSpace = pathOrder.SpaceOrder[currentSpaceInt];
+       targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
+       spacePosition = new Vector3(targetSpace.transform.position.x, 2f, targetSpace.transform.position.z);
 
 
         movePlayer = StartCoroutine(Moving());
@@ -38,8 +42,8 @@ public class moveState : playerStateBase
 
     public override void UpdateState(playerStateManager player)
     {
-        //var moveSpeed = speed * Time.deltaTime;
-       // transform.position = Vector3.MoveTowards(transform.position, spacePosition, moveSpeed);
+        var moveSpeed = speed * Time.deltaTime;
+        //transform.position = Vector3.MoveTowards(transform.position, spacePosition, moveSpeed);
 
         if (movementEnd)
         {
@@ -61,11 +65,10 @@ public class moveState : playerStateBase
         Debug.Log("Will need to have an exit towards stopping the Coroutine if the movementEnd is still false");
     }
 
-    void ChangeTarget()
+    void ChangeTarget(int nextSpace)
     {
-        currentSpace = targetSpace;
-        spaceBehaviour = currentSpace.GetComponent<spaceBehaviour>();
-        targetSpace = spaceBehaviour.NextSpace;
+        currentSpace = pathOrder.SpaceOrder[currentSpaceInt];
+        targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
         spacePosition = new Vector3(targetSpace.transform.position.x, 2f, targetSpace.transform.position.z);
         movement--;
         Debug.Log("Target Reached, Current Movement: " + movement);
@@ -83,7 +86,8 @@ public class moveState : playerStateBase
             {
                 if (info.collider.gameObject == targetSpace.gameObject)
                 {
-                    ChangeTarget();
+                    currentSpaceInt++;
+                    ChangeTarget(currentSpaceInt);
                 }
                 //TODO: Add directional choice where will change the object's direction                
             }
