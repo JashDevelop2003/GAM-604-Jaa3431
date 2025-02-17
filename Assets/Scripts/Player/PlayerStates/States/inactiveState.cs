@@ -11,6 +11,7 @@ using UnityEngine;
 
 public class inactiveState : playerStateBase
 {
+
     private bool beginTurn;
     //private bool beginCombat; <--- This will be use during combat change the state to Defend
 
@@ -18,8 +19,11 @@ public class inactiveState : playerStateBase
     {
         player.startTurn += PlayerTurn;
         
-        //This will provide any 
-        Debug.Log("Turn Ended");
+        if(player.PreviousState != null)
+        {
+            player.EndTurn();
+            Debug.Log("Turn Ended");
+        }
     }
 
     public override void UpdateState(playerStateManager player)

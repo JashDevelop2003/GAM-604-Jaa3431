@@ -119,4 +119,11 @@ public class playerStateManager : MonoBehaviour
         Debug.Log("Current State: " + currentState.ToString());
         currentState.EnterState(this);
     }
+
+    public void EndTurn()
+    {
+        GameObject manager = GameObject.FindGameObjectWithTag("Manager");
+        turnManager turnManager = manager.GetComponent<turnManager>();
+        turnManager.StartTurn();
+    }
 }

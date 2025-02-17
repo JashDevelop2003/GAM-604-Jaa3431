@@ -63,7 +63,8 @@ public class moveState : playerStateBase
 
         if (movementEnd)
         {
-            Debug.LogWarning("Needs Space Behaviour");
+            player.ChangeState(player.InactiveState);
+            //Debug.LogWarning("Needs Space Behaviour");
         }
 
         if (changeDirection) 
