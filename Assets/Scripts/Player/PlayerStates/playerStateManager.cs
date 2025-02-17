@@ -28,6 +28,7 @@ public class playerStateManager : MonoBehaviour
     private decidingState decidingState;
     private rollState rollState;
     private moveState moveState;
+    private choosingState choosingState;
 
     public playerStateBase PreviousState
     {
@@ -59,6 +60,10 @@ public class playerStateManager : MonoBehaviour
         get { return moveState; }
     }
 
+    public choosingState ChoosingState
+    {
+        get { return choosingState; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +76,7 @@ public class playerStateManager : MonoBehaviour
         decidingState = GetComponent<decidingState>();
         rollState = GetComponent<rollState>();
         moveState = GetComponent<moveState>();
+        choosingState = GetComponent<choosingState>();
 
         startTurn += controller.RegainMana;
 

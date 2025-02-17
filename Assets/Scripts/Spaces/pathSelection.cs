@@ -19,16 +19,12 @@ public class pathSelection : MonoBehaviour
         get { return playerChoices; } 
     
     }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     //This checks if the player direction
     public void PathSelections(directionEnum playerDirection)
     {
+        playerChoices.Clear();
+        
         foreach (Paths pathChoice in pathChoices) 
         { 
             if (pathChoice.directionRestriction != playerDirection)

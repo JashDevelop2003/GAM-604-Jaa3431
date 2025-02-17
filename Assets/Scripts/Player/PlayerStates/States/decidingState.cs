@@ -73,7 +73,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         Controls.confirmPressed -= ConfirmingChoice;
     }
 
-    void DecidingUp(object sender, EventArgs e)
+    public void DecidingUp(object sender, EventArgs e)
     {
         selectedCard = movementDeck.SelectedCards[1];
     }

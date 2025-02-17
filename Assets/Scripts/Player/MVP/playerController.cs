@@ -20,7 +20,7 @@ public class playerController : MonoBehaviour
         pathOrder startingSpace = currentPath.GetComponent<pathOrder>();
 
         playerModel = new playerModel(Data);
-        transform.position = new Vector3(startingSpace.SpaceOrder[0].transform.position.x, 2f, startingSpace.SpaceOrder[0].transform.position.z);
+        transform.position = new Vector3(startingSpace.SpaceOrder[1].transform.position.x, 2f, startingSpace.SpaceOrder[1].transform.position.z);
     }
 
 

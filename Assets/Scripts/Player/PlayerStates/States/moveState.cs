@@ -7,35 +7,52 @@ using UnityEngine.UIElements;
 public class moveState : playerStateBase
 {
     private int movement;
+
     private float speed = 2f;
     private Ray detectRay;
     private Vector3 rayPosition;
+
+    private bool changeDirection;
     private bool movementEnd;
+
     private playerController controller;
     private Coroutine movePlayer;
 
+    private directionEnum currentDirection;
 
     private GameObject currentPath;
-    private int currentSpaceInt;
+    private int currentSpaceInt = 1;
+
     private GameObject currentSpace;
     private pathOrder pathOrder;
     private spaceEnum currentSpaceType;
+
     private GameObject targetSpace;
+
     private Vector3 spacePosition;
     
     public override void EnterState(playerStateManager player)
     {
-        movementEnd = false;
+        if(player.PreviousState == player.ChoosingState)
+        {
+            currentSpaceInt = 0;
+        }
 
         controller = GetComponent<playerController>();
-        movement = controller.GetModel.RollValue;
+        currentPath = controller.Path;
+        pathOrder = currentPath.GetComponent<pathOrder>();
+        currentDirection = pathOrder.Direction;
+        currentSpace = pathOrder.SpaceOrder[currentSpaceInt];
+        targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
 
-       currentPath = controller.Path;
-       pathOrder = currentPath.GetComponent<pathOrder>();
-       currentSpace = pathOrder.SpaceOrder[currentSpaceInt];
-       targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
-       spacePosition = new Vector3(targetSpace.transform.position.x, 2f, targetSpace.transform.position.z);
-
+        
+        if (player.PreviousState == player.RollState)
+        {
+            movement = controller.GetModel.RollValue;
+        }
+        
+        movementEnd = false;
+        changeDirection = false;
 
         movePlayer = StartCoroutine(Moving());
     }
@@ -43,11 +60,17 @@ public class moveState : playerStateBase
     public override void UpdateState(playerStateManager player)
     {
         var moveSpeed = speed * Time.deltaTime;
-        //transform.position = Vector3.MoveTowards(transform.position, spacePosition, moveSpeed);
 
         if (movementEnd)
         {
             Debug.LogWarning("Needs Space Behaviour");
+        }
+
+        if (changeDirection) 
+        {
+            choosingState choosing = player.ChoosingState.GetComponent<choosingState>();
+            choosing.CollectCurrentPath(pathOrder.SpaceOrder[currentSpaceInt], currentDirection);
+            player.ChangeState(player.ChoosingState);
         }
 
 
@@ -61,15 +84,14 @@ public class moveState : playerStateBase
     }
 
     public override void ExitState(playerStateManager player) 
-    {
-        Debug.Log("Will need to have an exit towards stopping the Coroutine if the movementEnd is still false");
+    {        
+        StopCoroutine(movePlayer);
     }
 
     void ChangeTarget(int nextSpace)
     {
         currentSpace = pathOrder.SpaceOrder[currentSpaceInt];
         targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
-        spacePosition = new Vector3(targetSpace.transform.position.x, 2f, targetSpace.transform.position.z);
         movement--;
         Debug.Log("Target Reached, Current Movement: " + movement);
     }
@@ -87,9 +109,17 @@ public class moveState : playerStateBase
                 if (info.collider.gameObject == targetSpace.gameObject)
                 {
                     currentSpaceInt++;
-                    ChangeTarget(currentSpaceInt);
+                    if(currentSpaceInt + 1 == pathOrder.SpaceOrder.Count)
+                    {
+                        changeDirection = true;
+                    }
+                    else
+                    {
+                        ChangeTarget(currentSpaceInt);
+                    }
+                    
                 }
-                //TODO: Add directional choice where will change the object's direction                
+                               
             }
             yield return null;
         }
