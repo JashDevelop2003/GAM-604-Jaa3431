@@ -28,7 +28,7 @@ public class startState : playerStateBase
 
     public override void ExitState(playerStateManager player)
     {
-        startingTurn += controller.RegainMana;
+        startingTurn -= controller.RegainMana;
         Debug.Log("Requires Status Effect (TODO: Next Stage)");
     }
 }
