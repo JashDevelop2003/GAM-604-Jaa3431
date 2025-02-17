@@ -78,8 +78,6 @@ public class playerStateManager : MonoBehaviour
         moveState = GetComponent<moveState>();
         choosingState = GetComponent<choosingState>();
 
-        startTurn += controller.RegainMana;
-
         //this begins the player in the inactive state where nothing happens until is the player's turn
         currentState = inactiveState;
         currentState.EnterState(this);
