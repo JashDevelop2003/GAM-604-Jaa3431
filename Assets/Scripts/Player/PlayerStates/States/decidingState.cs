@@ -31,6 +31,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public override void EnterState(playerStateManager player)
     {
         hasSelected = false;
+        selectedCard = null;
         
         controls = GetComponent<boardControls>();
         Controls.upPressed += DecidingUp;
@@ -40,6 +41,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         Controls.confirmPressed += ConfirmingChoice;
 
         movementDeck = GetComponentInChildren<movementDeckPile>();
+
         if(player.PreviousState == player.StartState)
         {
             movementDeck.DrawCards();
