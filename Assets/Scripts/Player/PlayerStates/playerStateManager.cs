@@ -21,7 +21,7 @@ public class playerStateManager : MonoBehaviour
 
     //These are the states that each state is inherit from the player state base
     //each state must be created inside of the state manager which can be able to inherit a monobehaviour from the state manager
-    private playerStateBase currentState;
+   [SerializeField] private playerStateBase currentState;
     private playerStateBase previousState;
     private inactiveState inactiveState;
     private startState startState;
