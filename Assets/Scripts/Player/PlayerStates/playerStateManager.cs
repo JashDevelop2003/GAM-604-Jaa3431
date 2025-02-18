@@ -122,8 +122,6 @@ public class playerStateManager : MonoBehaviour
     {
         GameObject manager = GameObject.FindGameObjectWithTag("Manager");
         turnManager turnManager = manager.GetComponent<turnManager>();
-
-        Debug.Log(turnManager);
-        //turnManager.StartTurn();
+        turnManager.StartTurn();
     }
 }

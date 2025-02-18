@@ -13,7 +13,7 @@ public class turnManager : Singleton<turnManager>
 {
     //this provides an array to collect all of the players
     [SerializeField] private GameObject[] Players;
-    int currentPlayerTurn;
+    [SerializeField] int currentPlayerTurn;
     
     // Start is called before the first frame update
     void Start()
