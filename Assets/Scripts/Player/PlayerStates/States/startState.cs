@@ -8,7 +8,7 @@ using UnityEngine;
 public class startState : playerStateBase
 
 {
-    //the state manager collects the controls and logic in order for the controller to regain mana at the start of the turn
+    //this is to collect the controller's Regain mana method inside the controller.
     private playerController controller;
 
     //this event occurs when the player turn starts which changes the state and ragain their mana
