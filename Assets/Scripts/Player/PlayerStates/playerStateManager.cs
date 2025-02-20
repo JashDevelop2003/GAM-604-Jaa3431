@@ -11,8 +11,6 @@ using UnityEngine;
 /// 
 public class playerStateManager : MonoBehaviour
 {
-    //the state manager collects the controls and logic in order for the controller to regain mana at the start of the turn
-    private playerController controller;
 
     
     //this event occurs when the player turn starts which changes the state and ragain their mana
@@ -70,7 +68,6 @@ public class playerStateManager : MonoBehaviour
     {
         //This collect the component required to start the turn and each of the states
         //TODO: Add Choosing, Selecting, Attack & Defend States
-        controller = GetComponent<playerController>();
         inactiveState = GetComponent<inactiveState>();
         startState = GetComponent<startState>();
         decidingState = GetComponent<decidingState>();

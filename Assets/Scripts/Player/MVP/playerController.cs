@@ -24,10 +24,10 @@ public class playerController : MonoBehaviour
     }
 
 
-    public void RegainMana(object sender, EventArgs e)
+    public void RegainMana()
     {
         playerModel.CurrentMana = playerModel.MaxMana;
-        Debug.Log("Event Sent");
+        Debug.Log("Mana Regain");
     }
 
     public void Roll(int rollCost, int value) 

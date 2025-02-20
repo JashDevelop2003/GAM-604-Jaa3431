@@ -705,7 +705,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344353842}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40eac3d958af3642b400a581dc3b79b, type: 3}
   m_Name: 
@@ -1634,6 +1634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Players: []
+  currentPlayerTurn: 0
 --- !u!1 &847038865 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8000972542770498766, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
