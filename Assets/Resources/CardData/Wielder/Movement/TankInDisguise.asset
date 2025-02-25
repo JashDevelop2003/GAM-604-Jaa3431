@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520cd02742583cb449b5c21dac472603, type: 3}
+  m_Name: TankInDisguise
+  m_EditorClassIdentifier: 
+  characterCard: 0
+  cardType: 2
+  cardRarity: 1
+  cardName: TankInDisguise
+  cardDescription: Rolls 3-7, Applies Confused to Self
+  minimumMoveValue: 3
+  maximumMoveValue: 7
+  manaCost: 2

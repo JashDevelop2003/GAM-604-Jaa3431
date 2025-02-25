@@ -27,7 +27,13 @@ public class characterData : ScriptableObject
     // - Status is 3
     // - Curse is 4
 
+    //These are the cards the player should start off with
     public List<offenceCardStats> startingOffenceCards;
     public List<defenceCardStats> startingDefenceCards;
     public List<movementCardStats> startingMovementCards;
+
+    //These are the common cards that will appear when obtaining a uncommon card
+    public List<offenceCardStats> possibleOffenceCards;
+    public List<defenceCardStats> possibleDefenceCards;
+    public List<movementCardStats> possibleMovementCards;
 }

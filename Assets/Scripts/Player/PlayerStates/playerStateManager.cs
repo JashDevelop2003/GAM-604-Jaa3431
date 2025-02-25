@@ -27,6 +27,7 @@ public class playerStateManager : MonoBehaviour
     private rollState rollState;
     private moveState moveState;
     private choosingState choosingState;
+    private pickingState pickingState;
 
     public playerStateBase PreviousState
     {
@@ -63,6 +64,11 @@ public class playerStateManager : MonoBehaviour
         get { return choosingState; }
     }
 
+    public pickingState PickingState
+    {
+        get { return pickingState; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +80,7 @@ public class playerStateManager : MonoBehaviour
         rollState = GetComponent<rollState>();
         moveState = GetComponent<moveState>();
         choosingState = GetComponent<choosingState>();
+        pickingState = GetComponent<pickingState>();
 
         //this begins the player in the inactive state where nothing happens until is the player's turn
         currentState = inactiveState;

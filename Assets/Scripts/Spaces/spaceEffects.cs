@@ -38,7 +38,7 @@ public class spaceEffects : MonoBehaviour
 
         else if (type == spaceEnum.Card)
         {
-            Debug.Log("Needs Picking State");
+            state.ChangeState(state.PickingState);
         }
     }
 }

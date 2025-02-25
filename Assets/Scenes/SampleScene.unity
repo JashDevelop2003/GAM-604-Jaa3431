@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 329044125}
   - component: {fileID: 329044128}
   - component: {fileID: 329044129}
+  - component: {fileID: 329044130}
   m_Layer: 0
   m_Name: PlayerOne
   m_TagString: Player
@@ -588,6 +589,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04429b483b5743e42be84d48eb331c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &329044130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1b3cf1790ba69498d879bebb2e9719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleMovementCards: []
+  rarity: 1
+  typeSelected: 5
 --- !u!1 &344353842
 GameObject:
   m_ObjectHideFlags: 0

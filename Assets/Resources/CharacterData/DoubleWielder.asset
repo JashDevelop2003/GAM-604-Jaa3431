@@ -31,3 +31,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be7ca579cf1d6454a937366531556f05, type: 2}
   - {fileID: 11400000, guid: edf6252555852a342a7b86c9d766684f, type: 2}
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
+  possibleOffenceCards: []
+  possibleDefenceCards: []
+  possibleMovementCards:
+  - {fileID: 11400000, guid: bed9d6d3a5c2f734581f2d865e335b99, type: 2}
+  - {fileID: 11400000, guid: 99cbff2611d5a5f4d96630d311a717f7, type: 2}
+  - {fileID: 11400000, guid: 968725c8e30534b4c9c41fafbca17941, type: 2}
+  - {fileID: 11400000, guid: f10e5f3e5f496e44d8fdf8fe86d1c3c9, type: 2}
+  - {fileID: 11400000, guid: 068a4d2c87d50f14788c24d14527285f, type: 2}

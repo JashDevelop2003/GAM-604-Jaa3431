@@ -7,5 +7,6 @@ public enum CardType
     Defence,
     Movement,
     Status,
-    Curse
+    Curse,
+    Null
 }
