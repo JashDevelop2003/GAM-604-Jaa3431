@@ -27,6 +27,9 @@ public class moveState : playerStateBase
     private pathOrder pathOrder;
     private spaceEnum currentSpaceType;
 
+    [SerializeField] private GameObject effectManager; //The effect manager is the board map
+    private spaceEffects spaceEffects;
+
     private GameObject targetSpace;
 
     private Vector3 spacePosition;
@@ -42,8 +45,11 @@ public class moveState : playerStateBase
         currentPath = controller.Path;
         pathOrder = currentPath.GetComponent<pathOrder>();
         currentDirection = pathOrder.Direction;
+
         currentSpace = pathOrder.SpaceOrder[currentSpaceInt];
         targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
+
+        spaceEffects = effectManager.GetComponent<spaceEffects>();
 
         
         if (player.PreviousState == player.RollState)
@@ -92,6 +98,8 @@ public class moveState : playerStateBase
     void ChangeTarget(int nextSpace)
     {
         currentSpace = pathOrder.SpaceOrder[currentSpaceInt];
+        spaceBehaviour type = pathOrder.SpaceOrder[currentSpaceInt].transform.GetComponent<spaceBehaviour>();
+        currentSpaceType = type.SpaceType;
         targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
         movement--;
         Debug.Log("Target Reached, Current Movement: " + movement);
@@ -124,6 +132,9 @@ public class moveState : playerStateBase
             }
             yield return null;
         }
-        movementEnd = true;
+
+        spaceEffects.ActivateEffect(this.gameObject, currentSpaceType);
+
+       // movementEnd = true;
     }
 }

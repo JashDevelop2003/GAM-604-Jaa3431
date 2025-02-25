@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec86f5f58bef3e4497c4dccc24494e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectManager: {fileID: 1699877339}
 --- !u!114 &329044129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,6 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec86f5f58bef3e4497c4dccc24494e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectManager: {fileID: 0}
 --- !u!114 &344353845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2763,8 +2765,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1699877340}
+  - component: {fileID: 1699877341}
   m_Layer: 0
-  m_Name: Spaces
+  m_Name: BoardMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2806,6 +2809,18 @@ Transform:
   - {fileID: 1277357617}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1699877341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699877339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580e6f9947ae9954a89a0e359d88dbcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1719994119
 GameObject:
   m_ObjectHideFlags: 0

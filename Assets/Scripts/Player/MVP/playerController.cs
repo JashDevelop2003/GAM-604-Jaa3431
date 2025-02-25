@@ -30,6 +30,23 @@ public class playerController : MonoBehaviour
         Debug.Log("Mana Regain");
     }
 
+    public void ChangeCash(int value)
+    {
+
+        if (value >= playerModel.CurrentCash)
+        {
+            playerModel.CurrentCash = 0;
+        }
+
+        else
+        {
+            playerModel.CurrentCash += value;
+
+        }
+
+        Debug.Log("Cash Changed to: " + playerModel.CurrentCash);
+    }
+
     public void Roll(int rollCost, int value) 
     { 
         playerModel.CurrentMana -= rollCost;
