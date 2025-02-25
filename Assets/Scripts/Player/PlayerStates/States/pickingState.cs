@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm
+public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm, ICancel
 {
     private boardControls controls;
     public boardControls Controls
@@ -120,9 +120,18 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 //this will then add the offence card component into the deck & add the offence card data in the card object
                 movementCard movement = card.AddComponent<movementCard>();
                 movement.CreateCard(selectedMovementCard);
+                cardCollected = true;
+            }
+
+            else if (card == null) 
+            {
+                Debug.LogWarning("No Available Cards, Select a Different Deck");
             }
         }
+    }
 
+    public void Cancel(object sender, EventArgs e)
+    {
         cardCollected = true;
     }
 
