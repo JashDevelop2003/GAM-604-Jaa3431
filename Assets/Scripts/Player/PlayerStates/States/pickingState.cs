@@ -47,7 +47,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         {
             rarity = CardRarity.Uncommon;
         }
-        else
+        else if(rarityInt == 4)
         {
             rarity = CardRarity.Rare;
         }
@@ -112,8 +112,9 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 selectedCard = UnityEngine.Random.Range(0, possibleMovementCards.Count);
                 selectedMovementCard = possibleMovementCards[selectedCard];
             }
-            
-            GameObject card = movementDeckPool.instance.GetAvailableMovement();
+
+            movementDeckPool pool = GetComponentInChildren<movementDeckPool>();
+            GameObject card = pool.GetAvailableMovement();
             if (card != null)
             {
                 card.SetActive(true);
