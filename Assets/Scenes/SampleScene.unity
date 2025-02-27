@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 88398407}
   - component: {fileID: 88398408}
+  - component: {fileID: 88398409}
   m_Layer: 0
   m_Name: OffenceDeck
   m_TagString: Untagged
@@ -167,6 +168,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 1627439447038818509, guid: f84b62052c19d7f48b76ab41231ea562, type: 3}
+--- !u!114 &88398409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88398406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9f63fc4f5b2746b752032440ed04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCards: 00000000000000000000000000000000
+  selectedCards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &96210606 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8485824422548104299, guid: 9f172bd8d4f01c447b6a32d33eaa8c68, type: 3}
@@ -402,6 +421,8 @@ GameObject:
   - component: {fileID: 329044128}
   - component: {fileID: 329044129}
   - component: {fileID: 329044130}
+  - component: {fileID: 329044131}
+  - component: {fileID: 329044132}
   m_Layer: 0
   m_Name: PlayerOne
   m_TagString: Player
@@ -577,6 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectManager: {fileID: 1699877339}
+  opponentDetected: {fileID: 0}
 --- !u!114 &329044129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,6 +626,54 @@ MonoBehaviour:
   possibleMovementCards: []
   rarity: 1
   typeSelected: 5
+--- !u!65 &329044131
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1, y: 0.2, z: 1.1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &329044132
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &344353842
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +695,8 @@ GameObject:
   - component: {fileID: 344353844}
   - component: {fileID: 344353843}
   - component: {fileID: 344353855}
+  - component: {fileID: 344353856}
+  - component: {fileID: 344353857}
   m_Layer: 0
   m_Name: PlayerTwo
   m_TagString: Player
@@ -657,6 +729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectManager: {fileID: 1699877339}
+  opponentDetected: {fileID: 0}
 --- !u!114 &344353845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,7 +876,7 @@ Transform:
   m_GameObject: {fileID: 344353842}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.985233, y: -9.911295, z: -8.103947}
+  m_LocalPosition: {x: 17.985233, y: 2.38, z: -8.103947}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -827,6 +900,54 @@ MonoBehaviour:
   possibleMovementCards: []
   rarity: 0
   typeSelected: 0
+--- !u!65 &344353856
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344353842}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1, y: 0.1, z: 1.1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &344353857
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344353842}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &375598503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8232674871198528104, guid: 1baa6731d589905489217cd1ab42e6c1, type: 3}
@@ -1568,6 +1689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 731113568}
   - component: {fileID: 731113569}
+  - component: {fileID: 731113570}
   m_Layer: 0
   m_Name: DefenceDeck
   m_TagString: Untagged
@@ -1603,6 +1725,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 3397653743963208638, guid: 01add095f183e0c48b60d719d5e530a4, type: 3}
+--- !u!114 &731113570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731113567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc9995190182124a9e18ba46cd3dce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defendCards: 00000000000000000000000000000000
+  selectedCards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &740122715 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8232674871198528104, guid: 1baa6731d589905489217cd1ab42e6c1, type: 3}
@@ -2587,6 +2727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1586932754}
   - component: {fileID: 1586932756}
+  - component: {fileID: 1586932757}
   m_Layer: 0
   m_Name: OffenceDeck
   m_TagString: Untagged
@@ -2622,6 +2763,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 1627439447038818509, guid: f84b62052c19d7f48b76ab41231ea562, type: 3}
+--- !u!114 &1586932757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586932753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9f63fc4f5b2746b752032440ed04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCards: 00000000000000000000000000000000
+  selectedCards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1614410884 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6672714552605233790, guid: f7be1fc705d474e4ca9067b85790b012, type: 3}
@@ -2863,6 +3022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719994120}
   - component: {fileID: 1719994121}
+  - component: {fileID: 1719994122}
   m_Layer: 0
   m_Name: DefenceDeck
   m_TagString: Untagged
@@ -2898,6 +3058,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 3397653743963208638, guid: 01add095f183e0c48b60d719d5e530a4, type: 3}
+--- !u!114 &1719994122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719994119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc9995190182124a9e18ba46cd3dce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defendCards: 00000000000000000000000000000000
+  selectedCards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1735053287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6672714552605233790, guid: f7be1fc705d474e4ca9067b85790b012, type: 3}

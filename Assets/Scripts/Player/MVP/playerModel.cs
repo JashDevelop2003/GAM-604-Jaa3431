@@ -66,7 +66,7 @@ public class playerModel
         set { guardMultiplier = value; }
     }
 
-    
+    //the player model will be created into the controller and provide the character data in the game
     public playerModel(characterData CharacterData)
     {
         characterData = CharacterData;

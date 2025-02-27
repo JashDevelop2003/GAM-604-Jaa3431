@@ -19,8 +19,11 @@ public class playerStateManager : MonoBehaviour
 
     //These are the states that each state is inherit from the player state base
     //each state must be created inside of the state manager which can be able to inherit a monobehaviour from the state manager
-   [SerializeField] private playerStateBase currentState;
+    //These are the current and previous state, this check for the current state the previous transition
+    [SerializeField] private playerStateBase currentState;
     private playerStateBase previousState;
+
+    //These are all the states that exist and is use to change around
     private inactiveState inactiveState;
     private startState startState;
     private decidingState decidingState;
@@ -28,7 +31,10 @@ public class playerStateManager : MonoBehaviour
     private moveState moveState;
     private choosingState choosingState;
     private pickingState pickingState;
+    private attackState attackState;
+    private defendState defendState;
 
+    //These are to call the states in order for the states to change
     public playerStateBase PreviousState
     {
         get { return previousState; }
@@ -69,6 +75,16 @@ public class playerStateManager : MonoBehaviour
         get { return pickingState; }
     }
 
+    public attackState AttackState 
+    { 
+        get { return attackState; } 
+    }
+
+    public defendState DefendState 
+    { 
+        get { return defendState; } 
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +97,8 @@ public class playerStateManager : MonoBehaviour
         moveState = GetComponent<moveState>();
         choosingState = GetComponent<choosingState>();
         pickingState = GetComponent<pickingState>();
+        attackState = GetComponent<attackState>();
+        defendState = GetComponent<defendState>();
 
         //this begins the player in the inactive state where nothing happens until is the player's turn
         currentState = inactiveState;
@@ -104,6 +122,7 @@ public class playerStateManager : MonoBehaviour
     }
 
     // Update is called once per frame and keeps updating the current state's update method
+    // In this scenario Update is use to call once per frame in the current state's update state
     void Update()
     {
         currentState.UpdateState(this);
@@ -122,10 +141,14 @@ public class playerStateManager : MonoBehaviour
         currentState.EnterState(this);
     }
 
+    //This ends the turn of the player by calling the turn manager instance to change to the next turn
     public void EndTurn()
     {
-        GameObject manager = GameObject.FindGameObjectWithTag("Manager");
-        turnManager turnManager = manager.GetComponent<turnManager>();
+        //GameObject manager = GameObject.FindGameObjectWithTag("Manager");
+        //turnManager turnManager = manager.GetComponent<turnManager>();
+        //turnManager.StartTurn();
+
+        turnManager turnManager = Singleton<turnManager>.Instance;
         turnManager.StartTurn();
     }
 }

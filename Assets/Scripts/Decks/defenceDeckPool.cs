@@ -5,7 +5,7 @@ using UnityEngine;
 public class defenceDeckPool : MonoBehaviour
 {
     //The deckpool will need to reference itself to identify the which deck is being pooled
-    public static defenceDeckPool instance;
+    //public static defenceDeckPool instance;
 
     //this enum provides the correct deck capacity to match with the player's character stats
     deckTypeEnum deckType = deckTypeEnum.Defence;
@@ -30,12 +30,6 @@ public class defenceDeckPool : MonoBehaviour
         //This collects from the character data on the starting offence cards and deck capacity based upon the type of deck
         startingDefenceCards = player.GetData.startingDefenceCards;
         amountToPool = player.GetData.deckCapacity[(int)deckType];
-
-        //this creates it's own static deck pool in order to pool the objects and be use for referencing
-        if (instance == null)
-        {
-            instance = this;
-        }
     }
 
     // Start is called before the first frame update
@@ -76,7 +70,7 @@ public class defenceDeckPool : MonoBehaviour
         {
             //This checks if there is any available defence card to be use
             //If there is then this will set the card to active and enable in the hierarchy
-            GameObject card = instance.GetAvailableDefence();
+            GameObject card = GetAvailableDefence();
             if (card != null)
             {
                 card.SetActive(true);

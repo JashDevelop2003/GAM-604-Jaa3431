@@ -11,39 +11,57 @@ using UnityEngine;
 
 public class inactiveState : playerStateBase
 {
-
+    //the booleans are used to change to a specfic state
+    //beginTurn changes the current state to start state
+    //TODO: beginCombat changes the current state to defend state
     private bool beginTurn;
-    //private bool beginCombat; <--- This will be use during combat change the state to Defend
+    private bool beginCombat;
 
+    //the enter state checks whether if the player ends their turn or their combat
     public override void EnterState(playerStateManager player)
     {
+        //this enables the player turn method to start the player turn once their turn is over
         player.startTurn += PlayerTurn;
-        
-        if(player.PreviousState != null)
+
+        beginCombat = false;
+
+        //this checks if the previous state was an actual state (TODO: besides defend state) then end their turn
+        if (player.PreviousState != null)
         {
             player.EndTurn();
             Debug.Log("Turn Ended");
         }
     }
 
+    //this state checks when begin turn is turned to true, which will begin the player's turn
     public override void UpdateState(playerStateManager player)
     {
         if (beginTurn)
         {
             player.ChangeState(player.StartState);
         }
+        if (beginCombat) 
+        { 
+            player.ChangeState(player.DefendState);
+        }
         
-        //TODO: Add a method that checks if the player has collided with the enemy and if they have then change the state to defend
     }
 
+    //the boolean will become false & player turn will be disabled from the start turn event
     public override void ExitState(playerStateManager player)
     {
         beginTurn = false;
         player.startTurn -= PlayerTurn;
     }
 
+    //This method waits until the start turn event invokes which makes begin turn become true
     public void PlayerTurn(object sender, EventArgs e)
     {
         beginTurn = true;
+    }
+
+    public void DefendCombat(object sender, EventArgs e) 
+    {
+        beginCombat = true;
     }
 }

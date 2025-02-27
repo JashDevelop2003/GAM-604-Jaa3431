@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Defence Cards are when set active for the defence deck pool will provide suitable card data to be use for reducing damage
+/// Once this card is created, the card is sent to the deck pile for the card to be used during the defending state
+/// </summary>
+
 public class defenceCard : MonoBehaviour
 {
     [SerializeField] private defenceCardStats defendCard;
@@ -25,11 +30,16 @@ public class defenceCard : MonoBehaviour
         set { manaCost = value; }
     }
 
+    //this method is called from either the picking state or the defence deck pool itself and provides the stats onto the object
+    //This will then add the card into the offence deck to be used during the defend state
     public void CreateCard(defenceCardStats newCard)
     {
         DefendCard = newCard;
         defendValue = defendCard.defendValue;
         manaCost = defendCard.manaCost;
         gameObject.name = defendCard.name;
+
+        defenceDeckPile deck = GetComponentInParent<defenceDeckPile>();
+        deck.AddCard(this.gameObject);
     }
 }

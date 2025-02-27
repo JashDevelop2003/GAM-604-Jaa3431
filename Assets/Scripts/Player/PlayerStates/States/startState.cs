@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// First Playable: The Start State is use to regain mana for the player
+/// </summary>
 
 //TODO Tomorrow: Improve the States in order to be tested
 public class startState : playerStateBase
@@ -18,12 +20,13 @@ public class startState : playerStateBase
 
     public override void UpdateState(playerStateManager player)
     {
+        //This changes the state immediately to the deciding state
         player.ChangeState(player.DecidingState);
     }
 
     public override void ExitState(playerStateManager player)
     {
         controller.RegainMana();
-        Debug.Log("Requires Status Effect (TODO: Next Stage)");
+        //TODO Next Stage: Apply Status Effects
     }
 }
