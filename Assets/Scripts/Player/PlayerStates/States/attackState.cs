@@ -85,12 +85,17 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     public void DecidingRight(object sender, EventArgs e)
     {
-        selectedCard = offenceDeck.SelectedCards[1];
+        selectedCard = offenceDeck.SelectedCards[2];
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
     {
         offenceCard attackCard = selectedCard.GetComponent<offenceCard>();
+        if (attackCard == null) 
+        {
+            Debug.LogWarning("You haven't chosen a card yet");
+        }
+        
         if(controller.GetModel.CurrentMana >= attackCard.ManaCost && !attackConfirm)
         {
             combatSystem.AttackerReady(this.gameObject, attackCard.AttackValue);

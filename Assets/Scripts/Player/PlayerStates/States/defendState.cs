@@ -95,7 +95,12 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
     public void ConfirmingDefend(object sender, EventArgs e)
     {
         defenceCard defendCard = selectedCard.GetComponent<defenceCard>();
-        if(controller.GetModel.CurrentMana >= defendCard.ManaCost && !defendConfirm)
+        if (defendCard == null)
+        {
+            Debug.LogWarning("You haven't chosen a card yet");
+        }
+
+        if (controller.GetModel.CurrentMana >= defendCard.ManaCost && !defendConfirm)
         {
             combatSystem.DefenderReady(this.gameObject, defendCard.DefendValue);
             defendConfirm = true;

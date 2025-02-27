@@ -74,6 +74,7 @@ public class playerController : MonoBehaviour
         else
         {
             playerModel.CurrentHealth += value;
+            Debug.Log("Health Changed " + playerModel.CurrentHealth + " to " + playerModel.MaxHealth);
         }
     }
 
