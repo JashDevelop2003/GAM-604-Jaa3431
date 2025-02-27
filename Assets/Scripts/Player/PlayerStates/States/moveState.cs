@@ -169,7 +169,13 @@ public class moveState : playerStateBase
         movement--;
         Debug.Log("Target Reached, Current Movement: " + movement);
 
+        if (invincibleBattle)
+        {
+            invincibleBattle = false;
+        }
+
         CheckCombat();
+        
     }
 
     //This coroutine is used to move the player around the board based on their targeted space
@@ -237,9 +243,10 @@ public class moveState : playerStateBase
 
     void CheckCombat()
     {
-        if(opponentDetected != null)
+        if(opponentDetected != null && !invincibleBattle)
         {
-            combatEngage?.Invoke(this, EventArgs.Empty);
+            invincibleBattle = true;
+            combatEngage?.Invoke(this, EventArgs.Empty);           
         }
     }
     

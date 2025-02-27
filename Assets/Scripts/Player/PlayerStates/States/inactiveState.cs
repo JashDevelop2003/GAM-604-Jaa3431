@@ -26,7 +26,7 @@ public class inactiveState : playerStateBase
         beginCombat = false;
 
         //this checks if the previous state was an actual state (TODO: besides defend state) then end their turn
-        if (player.PreviousState != null)
+        if (player.PreviousState != null && player.PreviousState != player.DefendState)
         {
             player.EndTurn();
             Debug.Log("Turn Ended");

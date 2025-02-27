@@ -421,6 +421,8 @@ GameObject:
   - component: {fileID: 329044128}
   - component: {fileID: 329044129}
   - component: {fileID: 329044130}
+  - component: {fileID: 329044134}
+  - component: {fileID: 329044133}
   - component: {fileID: 329044131}
   - component: {fileID: 329044132}
   m_Layer: 0
@@ -674,6 +676,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &329044133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b08341557cf4084ab303fe53efb4f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatManager: {fileID: 1902622677}
+  combatSystem: {fileID: 0}
+  defenceDeck: {fileID: 0}
+  selectedCard: {fileID: 0}
+--- !u!114 &329044134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80e4232c1ed8d34d891151d765bb488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatManager: {fileID: 1902622677}
+  combatSystem: {fileID: 0}
+  offenceDeck: {fileID: 0}
+  selectedCard: {fileID: 0}
 --- !u!1 &344353842
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,6 +729,8 @@ GameObject:
   - component: {fileID: 344353844}
   - component: {fileID: 344353843}
   - component: {fileID: 344353855}
+  - component: {fileID: 344353859}
+  - component: {fileID: 344353858}
   - component: {fileID: 344353856}
   - component: {fileID: 344353857}
   m_Layer: 0
@@ -948,6 +984,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &344353858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344353842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b08341557cf4084ab303fe53efb4f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatManager: {fileID: 1902622677}
+  combatSystem: {fileID: 0}
+  defenceDeck: {fileID: 0}
+  selectedCard: {fileID: 0}
+--- !u!114 &344353859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344353842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80e4232c1ed8d34d891151d765bb488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatManager: {fileID: 1902622677}
+  combatSystem: {fileID: 0}
+  offenceDeck: {fileID: 0}
+  selectedCard: {fileID: 0}
 --- !u!1 &375598503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8232674871198528104, guid: 1baa6731d589905489217cd1ab42e6c1, type: 3}
@@ -3151,6 +3219,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7be1fc705d474e4ca9067b85790b012, type: 3}
+--- !u!1 &1902622677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1902622678}
+  m_Layer: 0
+  m_Name: CombatSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1902622678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902622677}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.03, y: 2, z: -0.06}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1950636837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3542,3 +3641,4 @@ SceneRoots:
   - {fileID: 344353854}
   - {fileID: 1699877340}
   - {fileID: 2012154419}
+  - {fileID: 1902622678}

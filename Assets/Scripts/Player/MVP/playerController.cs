@@ -65,5 +65,17 @@ public class playerController : MonoBehaviour
         Debug.Log(playerModel.RollValue);
     }
 
+    public void ChangeHealth(int value) 
+    {
+        if(value >= playerModel.CurrentHealth)
+        {
+            Debug.Log("Game Over");
+        }
+        else
+        {
+            playerModel.CurrentHealth += value;
+        }
+    }
+
 
 }
