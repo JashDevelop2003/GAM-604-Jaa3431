@@ -6,7 +6,7 @@ using UnityEngine;
 public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm
 {
     [SerializeField] private GameObject combatManager;
-    [SerializeField] private combatSystem combatSystem;
+    private combatSystem combatSystem;
     
     private boardControls controls;
     public boardControls Controls
@@ -17,13 +17,13 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     playerController controller;
     
-    [SerializeField] private offenceDeckPile offenceDeck;
+    private offenceDeckPile offenceDeck;
     public offenceDeckPile OffenceDeck
     {
         get { return offenceDeck; }
     }
 
-    [SerializeField] private GameObject selectedCard;
+    private GameObject selectedCard;
 
     private bool attackConfirm;
     private bool combatFinished;

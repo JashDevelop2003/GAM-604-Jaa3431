@@ -6,7 +6,7 @@ using UnityEngine;
 public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft, IDefendRight, IDefendConfirm
 {
     [SerializeField] private GameObject combatManager;
-    [SerializeField] private combatSystem combatSystem;
+    private combatSystem combatSystem;
 
     private boardControls controls;
     public boardControls Controls
@@ -17,13 +17,13 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
 
     playerController controller;
 
-    [SerializeField] private defenceDeckPile defenceDeck;
+    private defenceDeckPile defenceDeck;
     public defenceDeckPile DefenceDeck
     {
         get { return defenceDeck; }
     }
 
-    [SerializeField] private GameObject selectedCard;
+    private GameObject selectedCard;
 
     private int defendValue;
     private int manaCost;

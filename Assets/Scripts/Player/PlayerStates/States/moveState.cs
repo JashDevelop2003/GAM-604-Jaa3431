@@ -215,6 +215,7 @@ public class moveState : playerStateBase
         }
 
         //Once the loop is over (which is when movement reaches 0), apply the space effect based on the type of space the player is currently on
+        yield return new WaitForSeconds(1);
         spaceEffects.ActivateEffect(this.gameObject, currentSpaceType);
 
        // movementEnd = true;

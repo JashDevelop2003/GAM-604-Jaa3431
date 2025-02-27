@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class combatSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject attackingPlayer;
-    [SerializeField] private playerController attackingPlayerController;
-    [SerializeField] private int attackValue;
-    [SerializeField] private float thrustMultiplier;
+    private GameObject attackingPlayer;
+    private playerController attackingPlayerController;
+    private int attackValue;
+    private float thrustMultiplier;
     private bool attackerReady;
 
 
-    [SerializeField] private GameObject defendingPlayer;
-    [SerializeField] private playerController defendingPlayerController;
-    [SerializeField] private int defendValue;
-    [SerializeField] private float guardMultiplier;
+    private GameObject defendingPlayer;
+    private playerController defendingPlayerController;
+    private int defendValue;
+    private float guardMultiplier;
     private bool defenderReady;
 
     public event EventHandler combatComplete;

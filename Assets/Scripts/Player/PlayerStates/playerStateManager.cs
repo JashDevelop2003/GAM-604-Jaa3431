@@ -21,7 +21,7 @@ public class playerStateManager : MonoBehaviour
     //each state must be created inside of the state manager which can be able to inherit a monobehaviour from the state manager
     //These are the current and previous state, this check for the current state the previous transition
     [SerializeField] private playerStateBase currentState;
-    private playerStateBase previousState;
+    [SerializeField] private playerStateBase previousState;
 
     //These are all the states that exist and is use to change around
     private inactiveState inactiveState;
