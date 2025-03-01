@@ -23,6 +23,13 @@ public class playerStateManager : MonoBehaviour
     [SerializeField] private playerStateBase currentState;
     [SerializeField] private playerStateBase previousState;
 
+    public playerStateBase CurrentState
+    {
+
+        get { return currentState; } 
+    
+    }
+
     //These are all the states that exist and is use to change around
     private inactiveState inactiveState;
     private startState startState;

@@ -29,7 +29,7 @@ public class startState : playerStateBase
         controller.RegainMana();
 
         //If the player's character is wielder then decrement the cooldown & see if the character changes state
-        if (controller.GetData.character == characterEnum.Wielder) 
+        if (controller.GetModel.Character == characterEnum.Wielder) 
         {
             controller.ActivatePassive();
         }

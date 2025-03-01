@@ -66,12 +66,25 @@ public class playerModel
         set { guardMultiplier = value; }
     }
 
+    private float rollMultiplier;
+    public float RollMultiplier
+    {
+        get { return rollMultiplier; }
+        set { rollMultiplier = value; }
+    }
+
     private characterEnum character;
     public characterEnum Character
     {
         get { return character; }
     }
 
+    private bool isAlive;
+    public bool IsAlive
+    {
+        get { return isAlive; }
+        set { isAlive = value; }
+    }
 
     //the player model will be created into the controller and provide the character data in the game
     public playerModel(characterData CharacterData)
@@ -86,6 +99,8 @@ public class playerModel
         rollValue = 0;
         thrustMultiplier = 1;
         guardMultiplier = 1;
+        rollMultiplier = 1;
         character = characterData.character;
+        isAlive = true;
     }
 }

@@ -19,8 +19,8 @@ public class combatSystem : MonoBehaviour
     // - The multiplier of the thrust
     private GameObject attackingPlayer;
     private playerController attackingPlayerController;
-    [SerializeField] private int attackValue;
-    [SerializeField] private float thrustMultiplier;
+    private int attackValue;
+    private float thrustMultiplier;
     private bool attackerReady;
 
     //The defender provides:
@@ -30,11 +30,27 @@ public class combatSystem : MonoBehaviour
     // - The multiplier of the guard
     private GameObject defendingPlayer;
     private playerController defendingPlayerController;
-    [SerializeField] private int defendValue;
-    [SerializeField] private float guardMultiplier;
+    private int defendValue;
+    private float guardMultiplier;
     private bool defenderReady;
 
     public event EventHandler combatComplete;
+
+    public GameObject DefendingPlayer
+    {
+        get { return defendingPlayer; }
+    }
+
+    //These are essential for the grim reaper's passive ability Soul Steal
+    //This will allows the reaper to calculate how much health the player restores
+    public int AttackValue
+    {
+        get { return attackValue; }
+    }
+    public int DefendValue
+    {
+        get { return defendValue; }
+    }
 
     public void AttackerReady(GameObject attacker, int value)
     {
@@ -46,7 +62,7 @@ public class combatSystem : MonoBehaviour
         //This is the passive ability that either doubles or halves the wielder's thrust depending on the stance
         //This instance the ability will doulbe the thrust when in aggressive stance
         //And the ability will half the thrust when in passive stance
-        if (attackingPlayerController.GetData.character == characterEnum.Wielder) 
+        if (attackingPlayerController.GetModel.Character == characterEnum.Wielder) 
         { 
             passiveAgression wielderStance = attackingPlayer.GetComponentInChildren<passiveAgression>();
             if(wielderStance.Stance == stanceEnum.Aggressive)
@@ -56,6 +72,15 @@ public class combatSystem : MonoBehaviour
             else
             {
                 thrustMultiplier /= 2;
+            }
+        }
+
+        if (attackingPlayerController.GetModel.Character == characterEnum.Reaper)
+        {
+            lastReapsort abilityActive = attackingPlayerController.GetComponentInChildren<lastReapsort>();
+            if (abilityActive.LastReapsortActive)
+            {
+                thrustMultiplier *= 3;
             }
         }
 
@@ -76,7 +101,7 @@ public class combatSystem : MonoBehaviour
         //This is the passive ability that either doubles or halves the wielder's thrust depending on the stance
         //This instance the ability will doulbe the thrust when in aggressive stance
         //And the ability will half the thrust when in passive stance
-        if (defendingPlayerController.GetData.character == characterEnum.Wielder)
+        if (defendingPlayerController.GetModel.Character == characterEnum.Wielder)
         {
             passiveAgression wielderStance = defendingPlayer.GetComponentInChildren<passiveAgression>();
             if (wielderStance.Stance == stanceEnum.Passive)
@@ -108,6 +133,23 @@ public class combatSystem : MonoBehaviour
         if(attackValue > defendValue)
         {
             defendingPlayerController.ChangeHealth(defendValue - attackValue);
+            
+            //this checks if the attacker's character is reaper which allows the reaper to heal 25% damage
+            if(attackingPlayerController.GetModel.Character == characterEnum.Reaper)
+            {
+                //This only allows the reaper to heal if the value is above 4
+                //This is because the value will be an int and healing 0 is unecessary
+                if(attackValue - defendValue >= 4)
+                {
+                    attackingPlayerController.ActivatePassive();
+                }
+
+                lastReapsort abilityActive = attackingPlayerController.GetComponentInChildren<lastReapsort>();
+                if (abilityActive.LastReapsortActive)
+                {
+                    attackingPlayerController.ActivateOneUse();
+                }
+            }
         }
 
         BattleOver();

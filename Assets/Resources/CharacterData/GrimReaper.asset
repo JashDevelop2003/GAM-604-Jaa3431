@@ -51,4 +51,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fb858ab81bf224b48af31a53531b3011, type: 2}
   - {fileID: 11400000, guid: 482301308167eb24e80114d57f0c8001, type: 2}
   - {fileID: 11400000, guid: 29184e6e300e57a44b3b073a2c0ee38f, type: 2}
-  characterObject: {fileID: 0}
+  characterObject: {fileID: 4041446733811344979, guid: e08fcfe5dd961474ba73f5cb01afb1eb, type: 3}
