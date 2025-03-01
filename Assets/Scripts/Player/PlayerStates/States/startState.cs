@@ -27,6 +27,12 @@ public class startState : playerStateBase
     public override void ExitState(playerStateManager player)
     {
         controller.RegainMana();
+
+        //If the player's character is wielder then decrement the cooldown & see if the character changes state
+        if (controller.GetData.character == characterEnum.Wielder) 
+        {
+            controller.ActivatePassive();
+        }
         //TODO Next Stage: Apply Status Effects
     }
 }

@@ -33,7 +33,7 @@ public class passiveAgression : MonoBehaviour
     private int startingStance;
 
     //This is the cooldown to provide on the character
-    private int changeCooldown;
+    [SerializeField] private int changeCooldown;
 
     //When awake the class has to gather the controller component and then decide if the player starts their character of with being passive or aggressive
     void Awake()
@@ -49,6 +49,7 @@ public class passiveAgression : MonoBehaviour
             stance = stanceEnum.Aggressive;
         }
 
+        changeCooldown = 3;
         controller.passiveEvent += DecrementCooldown;
 
     }
@@ -77,6 +78,7 @@ public class passiveAgression : MonoBehaviour
         }
 
         changeCooldown = 3;
+        Debug.Log("Change to " + stance);
     }
 
     private void OnDisable()
