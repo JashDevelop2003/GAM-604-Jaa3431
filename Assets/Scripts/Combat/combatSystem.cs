@@ -19,7 +19,7 @@ public class combatSystem : MonoBehaviour
     // - The multiplier of the thrust
     private GameObject attackingPlayer;
     private playerController attackingPlayerController;
-    private int attackValue;
+    [SerializeField] private int attackValue;
     private float thrustMultiplier;
     private bool attackerReady;
 
@@ -30,16 +30,11 @@ public class combatSystem : MonoBehaviour
     // - The multiplier of the guard
     private GameObject defendingPlayer;
     private playerController defendingPlayerController;
-    private int defendValue;
+    [SerializeField] private int defendValue;
     private float guardMultiplier;
     private bool defenderReady;
 
     public event EventHandler combatComplete;
-
-    public GameObject DefendingPlayer
-    {
-        get { return defendingPlayer; }
-    }
 
     //These are essential for the grim reaper's passive ability Soul Steal
     //This will allows the reaper to calculate how much health the player restores
@@ -124,8 +119,14 @@ public class combatSystem : MonoBehaviour
     {
         if (attackerReady && defenderReady) 
         {
-            BattleCalculation();
+            StartCoroutine(Calculating());
         }
+    }
+
+    IEnumerator Calculating()
+    {
+        yield return new WaitForSeconds(1);
+        BattleCalculation();
     }
 
     public void BattleCalculation()
@@ -152,11 +153,19 @@ public class combatSystem : MonoBehaviour
             }
         }
 
+        StartCoroutine(BattleFinished());
+    }
+
+    IEnumerator BattleFinished()
+    {
+        yield return new WaitForSeconds(1);
         BattleOver();
     }
 
     private void BattleOver()
     {
+        attackerReady = false;
+        defenderReady = false;
         combatComplete?.Invoke(this, EventArgs.Empty);
     }
 }

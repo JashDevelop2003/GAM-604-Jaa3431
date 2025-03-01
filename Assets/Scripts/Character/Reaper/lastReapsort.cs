@@ -7,7 +7,7 @@ public class lastReapsort : MonoBehaviour
 {
     //The boolean is used to prevent the player from using the ability again
     private bool passiveUsed = false;
-    private bool lastReapsortActive = false;
+    [SerializeField] private bool lastReapsortActive = false;
     public bool LastReapsortActive
     {
         get { return lastReapsortActive; }
@@ -22,12 +22,21 @@ public class lastReapsort : MonoBehaviour
     [SerializeField] private GameObject combatManager;
     combatSystem combatSystem;
 
+    [SerializeField] private GameObject opponentObject;
+    public GameObject OpponentObject
+    {
+        get { return opponentObject; }
+        set { opponentObject = value; }
+    }
+
+
 
     //When awake the class has to gather the controller component
     void Awake()
     {
         controller = GetComponentInParent<playerController>();
         stateManager = GetComponentInParent<playerStateManager>();
+        combatManager = GameObject.Find("CombatSystem");
         combatSystem = combatManager.GetComponent<combatSystem>();
 
         controller.oneUseEvent += BeginReaping;
@@ -41,8 +50,6 @@ public class lastReapsort : MonoBehaviour
             lastReapsortActive = true;
             controller.oneUseEvent += CheckOpponentHealth;
             controller.oneUseEvent -= BeginReaping;
-            abilityBegin = StartCoroutine(Reaping());
-
         }
         else
         {
@@ -52,29 +59,14 @@ public class lastReapsort : MonoBehaviour
 
     public void CheckOpponentHealth(object sender, EventArgs e)
     {
-        playerController opponent = combatSystem.DefendingPlayer.GetComponent<playerController>();
-        if (!opponent.GetModel.IsAlive)
+        playerController opponentController = opponentObject.GetComponent<playerController>();
+        if (!opponentController.GetModel.IsAlive)
         {
             lastReapsortActive = false;
         }
-    }
-
-    private IEnumerator Reaping()
-    {
-        while(lastReapsortActive || stateManager.CurrentState != stateManager.InactiveState)
+        else
         {
-            yield return null;
-        }
-        if (!lastReapsortActive)
-        {
-            controller.oneUseEvent -= CheckOpponentHealth;
-            controller.oneUseEvent += BeginReaping;
-            Debug.Log("Player Successfully Defeated Someone");
-        }
-        else if(stateManager.CurrentState == stateManager.InactiveState)
-        {
-            controller.GetModel.IsAlive = false;
-            Debug.Log("Player has Failed to Defeat Someone");
+            Debug.Log("Still alive");
         }
     }
 

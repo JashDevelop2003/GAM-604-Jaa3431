@@ -59,7 +59,7 @@ public class moveState : playerStateBase
     //A vector 3 is used to move the player around the board
     private Vector3 spacePosition;
 
-    [SerializeField] GameObject opponentDetected;
+    [SerializeField] private GameObject opponentDetected;
     private bool invincibleBattle;
 
     public event EventHandler combatEngage;
@@ -246,6 +246,15 @@ public class moveState : playerStateBase
     {
         if(opponentDetected != null && !invincibleBattle)
         {
+            if (controller.GetModel.Character == characterEnum.Reaper)
+            {
+                lastReapsort abilityActive = GetComponentInChildren<lastReapsort>();
+                if (abilityActive.LastReapsortActive)
+                {
+                    abilityActive.OpponentObject = opponentDetected;
+                }
+            }
+
             invincibleBattle = true;
             combatEngage?.Invoke(this, EventArgs.Empty);           
         }

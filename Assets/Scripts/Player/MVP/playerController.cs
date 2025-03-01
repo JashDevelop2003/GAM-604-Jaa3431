@@ -78,11 +78,13 @@ public class playerController : MonoBehaviour
         if(playerModel.CurrentHealth + value <= 0)
         {
             playerModel.IsAlive = false;
+            Debug.Log("Game Over");
         }
         //Else if the current health being added from the the value is greater than the max health, the current health will maximise to only the maximum health
         else if (playerModel.CurrentHealth + value > playerModel.MaxHealth)
         {
             playerModel.CurrentHealth = playerModel.MaxHealth;
+            Debug.Log("No Overhealth in this game, otherwise the game will be longer :-) ");
         }
         //otherwise the value adds (or subtract if the value is negative) to the new current health
         else

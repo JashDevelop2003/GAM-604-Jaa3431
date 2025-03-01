@@ -21,7 +21,7 @@ public class passiveAgression : MonoBehaviour
 
     //This is the stance which will be use to identify which stance the character is currently on
     //This will be use for the battle system to check which stance the character is on to double/half thrust or guard
-    private stanceEnum stance;
+    [SerializeField] private stanceEnum stance;
     public stanceEnum Stance
     {
 

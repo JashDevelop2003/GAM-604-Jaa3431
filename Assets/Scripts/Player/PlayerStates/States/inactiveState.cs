@@ -17,11 +17,26 @@ public class inactiveState : playerStateBase
     private bool beginTurn;
     private bool beginCombat;
 
+    //This is use in order to instant defeat the grim reaper if she's still in her last reapsort form
+    playerController controller;
+
     //the enter state checks whether if the player ends their turn or their combat
     public override void EnterState(playerStateManager player)
     {
+        controller = GetComponent<playerController>();
+        if(controller.GetModel.Character == characterEnum.Reaper)
+        {
+            lastReapsort instantDefeat = GetComponentInChildren<lastReapsort>();
+            if (instantDefeat.LastReapsortActive)
+            {
+                controller.GetModel.IsAlive = false;
+                Debug.Log("Player cannot defeat opponent successfully");
+            }
+        }
+
         //this enables the player turn method to start the player turn once their turn is over
         player.startTurn += PlayerTurn;
+
 
         beginCombat = false;
 

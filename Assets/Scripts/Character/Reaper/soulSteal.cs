@@ -13,21 +13,26 @@ public class soulSteal : MonoBehaviour
     combatSystem combatSystem;
 
     private float healthPercentage = 0.25f; //25% in float
+    [SerializeField] private int healthValue;
+    [SerializeField] private int attackValue;
+    [SerializeField] private int defendValue;
 
     //When awake the class has to gather the controller component
     void Awake()
     {
         controller = GetComponentInParent<playerController>();
+        combatManager = GameObject.Find("CombatSystem");
         combatSystem = combatManager.GetComponent<combatSystem>();
         controller.passiveEvent += GainHealth;
     }
 
     public void GainHealth(object sender, EventArgs e)
     {
-        int attackValue = combatSystem.AttackValue;
-        int defendValue = combatSystem.DefendValue;
-        controller.ChangeHealth((int)((attackValue - defendValue) * healthPercentage));
-        Debug.Log("Heal Value: " + (int)((attackValue - defendValue) * healthPercentage));
+        attackValue = combatSystem.AttackValue;
+        defendValue = combatSystem.DefendValue;
+        healthValue = (int)((attackValue - defendValue) * healthPercentage);
+        controller.ChangeHealth(healthValue);
+        Debug.Log("Heal Value: " + healthValue);
     }
 
     private void OnDisable()
