@@ -29,6 +29,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
     //this will be use to send to the roll state what card was selected to roll
     private GameObject selectedCard;
+    private movementCard moveCard;
 
     //These values will be converted to the roll state to roll the minimum and maximum value along with using suitable amount of mana
     private int minRoll;
@@ -48,6 +49,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         hasSelected = false;
         usingAbility = false;
         selectedCard = null;
+        moveCard = null;
         
         //Each controls adds the event for each key to enable the correct input on choosing a specifc card
         controls = GetComponent<boardControls>();
@@ -81,7 +83,6 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         {
             Debug.Log(selectedCard.name);
             //This is to collect the reference of the card that was selected and provide the data of the roll values and mana cost
-            movementCard moveCard = selectedCard.GetComponent<movementCard>();
             minRoll = moveCard.RollMinimumValue;
             maxRoll = moveCard.RollMaximumValue;
             manaCost = moveCard.ManaCost;
@@ -114,6 +115,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingUp(object sender, EventArgs e)
     {
         selectedCard = movementDeck.SelectedCards[1];
+        moveCard = selectedCard.GetComponent<movementCard>();
         usingAbility = false;
         Debug.Log(selectedCard.name);
     }
@@ -128,6 +130,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingLeft(object sender, EventArgs e)
     {       
         selectedCard = movementDeck.SelectedCards[0];
+        moveCard = selectedCard.GetComponent<movementCard>();
         usingAbility = false;
         Debug.Log(selectedCard.name);
     }
@@ -135,6 +138,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedCard = movementDeck.SelectedCards[2];
+        moveCard = selectedCard.GetComponent<movementCard>();
         usingAbility = false;
         Debug.Log(selectedCard.name);
     }
@@ -144,7 +148,14 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         //If there is a GameObject inside of confirm choice then the player has successfully selected
         if (selectedCard != null)
         {
-            hasSelected = true;
+            if(controller.GetModel.CurrentMana >= moveCard.ManaCost)
+            {
+                hasSelected = true;
+            }
+            else
+            {
+                Debug.LogWarning("You don't have enough mana to use that move card");
+            }
         }
         //otherwise check is the player is using an ability
         else
@@ -169,6 +180,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void UsingAbility(object sender, EventArgs e)
     {
         selectedCard = null;
+        moveCard = null;
         usingAbility = true;
     }
 }

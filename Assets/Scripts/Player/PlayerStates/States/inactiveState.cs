@@ -23,6 +23,8 @@ public class inactiveState : playerStateBase
     //the enter state checks whether if the player ends their turn or their combat
     public override void EnterState(playerStateManager player)
     {
+        //This is called to check if the player is the reaper and is on their last reapsort form
+        //If it turns out the boolean is ture then the player is instantly defeated
         controller = GetComponent<playerController>();
         if(controller.GetModel.Character == characterEnum.Reaper)
         {

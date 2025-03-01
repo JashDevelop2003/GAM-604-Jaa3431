@@ -63,10 +63,14 @@ public class playerController : MonoBehaviour
         Debug.Log("Cash Changed to: " + playerModel.CurrentCash);
     }
 
+    public void ChangeMana(int cost)
+    {
+        playerModel.CurrentMana -= cost;
+    }
+
     //Roll is a mathod that subtracts the mana based on mana cost (parameter is roll cost) and the value of the dice (parameter is value)
-    public void Roll(int rollCost, int value) 
+    public void Roll(int value) 
     { 
-        playerModel.CurrentMana -= rollCost;
         playerModel.RollValue = value;
         Debug.Log(playerModel.CurrentMana + "/" + playerModel.MaxMana);
         Debug.Log(playerModel.RollValue);

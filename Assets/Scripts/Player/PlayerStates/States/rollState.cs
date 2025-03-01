@@ -81,11 +81,9 @@ public class rollState : playerStateBase, IConfirm, ICancel
     //This interface method rolls the dice for the player if their mana is above or equal to the mana cost
     public void ConfirmingChoice(object sender, EventArgs e)
     {
-        //if the player's current mana is equal to or above the mana cost
         //the roll a dice value between the minimum and maximum roll value
         //This is then multiplied by the roll multiplier & converts the value to an int (rounding down)
-        if(controller.GetModel.CurrentMana >= manaCost)
-        {
+
             //This checks if the player playing as the reaper has activated their one use ability
             if (controller.GetModel.Character == characterEnum.Reaper) 
             {
@@ -93,27 +91,25 @@ public class rollState : playerStateBase, IConfirm, ICancel
                 lastReapsort abilityActive = controller.GetComponentInChildren<lastReapsort>();
                 if (abilityActive.LastReapsortActive)
                 {
-                    controller.Roll(manaCost, (int)((UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * (controller.GetModel.RollMultiplier * 3))));
+                    controller.Roll((int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * (controller.GetModel.RollMultiplier * 3)));
                 }
                 //otherwise is just normal movement
                 else
                 {
-                    controller.Roll(manaCost, (int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * controller.GetModel.RollMultiplier));
+                    controller.Roll((int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * controller.GetModel.RollMultiplier));
                 }
+
+                //This decreases the mana based on the card's required mana
+                controller.ChangeMana(manaCost);
             }
-            //This is for the rest of the players
+
+            //This is for the rest of the players that are not playing as the reaper
             else
             {
-                controller.Roll(manaCost, (int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * controller.GetModel.RollMultiplier));
+                controller.Roll((int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * controller.GetModel.RollMultiplier));
             }
+
             rollDice = true;
-        }
-        //Otherwise, inform the player they cannot use this card to roll and return them back to the deciding state
-        else 
-        {
-            Debug.LogWarning("You don't have enough mana to roll");
-            rollCancel = true;
-        }
     }
 
     //This interface method returns the player back to the deciding state

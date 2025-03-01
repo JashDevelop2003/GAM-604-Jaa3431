@@ -38,6 +38,11 @@ public class combatSystem : MonoBehaviour
 
     //These are essential for the grim reaper's passive ability Soul Steal
     //This will allows the reaper to calculate how much health the player restores
+    public GameObject DefendingPlayer
+    {
+        get { return defendingPlayer; }
+    }
+    
     public int AttackValue
     {
         get { return attackValue; }
@@ -123,6 +128,7 @@ public class combatSystem : MonoBehaviour
         }
     }
 
+    //This Coroutine provides time for other methods to call and finish their coding to ready the combat
     IEnumerator Calculating()
     {
         yield return new WaitForSeconds(1);
@@ -131,6 +137,8 @@ public class combatSystem : MonoBehaviour
 
     public void BattleCalculation()
     {
+        //This checks if the attack value is above the defend value
+        //If it is then have the defender recieve the difference between the value as damage
         if(attackValue > defendValue)
         {
             defendingPlayerController.ChangeHealth(defendValue - attackValue);
@@ -145,6 +153,8 @@ public class combatSystem : MonoBehaviour
                     attackingPlayerController.ActivatePassive();
                 }
 
+                //This checks if the reaper is in her last reapsort form
+                //If she is then invoke the new event to check if the opponent is defeated
                 lastReapsort abilityActive = attackingPlayerController.GetComponentInChildren<lastReapsort>();
                 if (abilityActive.LastReapsortActive)
                 {
@@ -156,12 +166,15 @@ public class combatSystem : MonoBehaviour
         StartCoroutine(BattleFinished());
     }
 
+    //This Coroutine is used to provide time for battle calculation to be complete towards other abilities being used.
     IEnumerator BattleFinished()
     {
         yield return new WaitForSeconds(1);
         BattleOver();
     }
 
+    //Once the battle has finished this turns the booleans to false & invokes each character to the correct state
+    //The Attacker will return to the moving state & the Defender will return to the exit state
     private void BattleOver()
     {
         attackerReady = false;

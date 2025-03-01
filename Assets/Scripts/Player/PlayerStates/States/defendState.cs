@@ -103,7 +103,12 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         if (controller.GetModel.CurrentMana >= defendCard.ManaCost && !defendConfirm)
         {
             combatSystem.DefenderReady(this.gameObject, defendCard.DefendValue);
+            controller.ChangeMana(defendCard.ManaCost);
             defendConfirm = true;
+        }
+        else
+        {
+            Debug.LogWarning("You don't have enough mana to use that defend card");
         }
     }
 

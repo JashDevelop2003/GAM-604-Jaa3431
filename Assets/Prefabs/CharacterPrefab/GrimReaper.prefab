@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab608d546af00c44aaedef9c84ccc7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatManager: {fileID: 6682032860993179926, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
+  combatManager: {fileID: 0}
+  healthValue: 0
+  attackValue: 0
+  defendValue: 0
 --- !u!114 &2255775709323552898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,4 +61,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f974b83cd5301124583f0cf00f02e74c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatManager: {fileID: 6682032860993179926, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
+  lastReapsortActive: 0
+  combatManager: {fileID: 0}
+  opponentObject: {fileID: 0}

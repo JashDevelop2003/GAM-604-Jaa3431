@@ -246,14 +246,6 @@ public class moveState : playerStateBase
     {
         if(opponentDetected != null && !invincibleBattle)
         {
-            if (controller.GetModel.Character == characterEnum.Reaper)
-            {
-                lastReapsort abilityActive = GetComponentInChildren<lastReapsort>();
-                if (abilityActive.LastReapsortActive)
-                {
-                    abilityActive.OpponentObject = opponentDetected;
-                }
-            }
 
             invincibleBattle = true;
             combatEngage?.Invoke(this, EventArgs.Empty);           
