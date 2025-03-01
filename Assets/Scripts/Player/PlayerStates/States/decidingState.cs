@@ -35,6 +35,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     private int minRoll;
     private int maxRoll;
     private int manaCost;
+    [SerializeField] private int lowestManaCost;
 
     //This boolean checks when the player has selected a movement card and can move onto the roll state
     private bool hasSelected;
@@ -42,14 +43,18 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     //This boolean checks when the player has selected the ability and can use their one use ability
     private bool usingAbility;
 
+    private bool unableMove;
+
     public override void EnterState(playerStateManager player)
     {
         //The hasSelected & usingAbility boolean stays false when entering the state to be capable of returning to the state
         //selectedCard becomes null to prevent a card being chosen despite not being the 1 of 3 cards drawn from the deck
         hasSelected = false;
         usingAbility = false;
+        unableMove = false;
         selectedCard = null;
         moveCard = null;
+        lowestManaCost = 99;
         
         //Each controls adds the event for each key to enable the correct input on choosing a specifc card
         controls = GetComponent<boardControls>();
@@ -71,6 +76,20 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         if(player.PreviousState == player.StartState)
         {
             movementDeck.DrawCards();
+            //This for loop checks which card has the lowest maan cost which will be use to check if the player can use the card
+            for (int i = 0; i < movementDeck.SelectedCards.Length; i++) 
+            { 
+                movementCard card = movementDeck.SelectedCards[i].GetComponent<movementCard>();
+                if(card.ManaCost < lowestManaCost)
+                {
+                    lowestManaCost = card.ManaCost;
+                }
+            }
+
+            if(controller.GetModel.CurrentMana < lowestManaCost)
+            {
+                unableMove = true;
+            }
         }
 
     }
@@ -90,14 +109,22 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             //This is to change the state to roll state
             player.ChangeState(player.RollState);
         }
+
+        if (unableMove)
+        {
+            player.ChangeState(player.InactiveState);
+        }
         
     }
 
     public override void ExitState(playerStateManager player)
     {
         //Before exiting the deciding state, the state must reference the rolll state to have the roll state collect the suitable values
-        rollState Rolling = player.RollState.GetComponent<rollState>();
-        Rolling.CollectValue(minRoll, maxRoll, manaCost);
+        if (hasSelected) 
+        {
+            rollState Rolling = player.RollState.GetComponent<rollState>();
+            Rolling.CollectValue(minRoll, maxRoll, manaCost);
+        }
 
         //the inputs will need to be disabled once the state has been changed
         Controls.upPressed -= DecidingUp;

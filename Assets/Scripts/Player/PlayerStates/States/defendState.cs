@@ -27,6 +27,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
 
     private int defendValue;
     private int manaCost;
+    [SerializeField] private int lowestManaCost;
 
     private bool defendConfirm;
     private bool combatFinished;
@@ -35,6 +36,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
     {
         defendConfirm = false;
         combatFinished = false;
+        lowestManaCost = 99;
 
         controller = GetComponent<playerController>();
         controls = GetComponent<boardControls>();
@@ -46,9 +48,23 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
 
         defenceDeck = GetComponentInChildren<defenceDeckPile>();
         defenceDeck.DrawCards();
+        for (int i = 0; i < defenceDeck.SelectedCards.Length; i++)
+        {
+            defenceCard card = defenceDeck.SelectedCards[i].GetComponent<defenceCard>();
+            if (card.ManaCost < lowestManaCost)
+            {
+                lowestManaCost = card.ManaCost;
+            }
+        }
 
         combatSystem = combatManager.GetComponent<combatSystem>();
         combatSystem.combatComplete += DefendOver;
+
+        if (controller.GetModel.CurrentMana < lowestManaCost)
+        {
+            combatSystem.DefenderReady(this.gameObject, 0);
+            defendConfirm = true;
+        }
     }
 
 

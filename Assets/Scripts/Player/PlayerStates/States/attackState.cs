@@ -24,6 +24,7 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     }
 
     private GameObject selectedCard;
+    [SerializeField] int lowestManaCost;
 
     private bool attackConfirm;
     private bool combatFinished;
@@ -32,6 +33,7 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     {
         attackConfirm = false;
         combatFinished = false;
+        lowestManaCost = 99;
 
         controller = GetComponent<playerController>();
         controls = GetComponent<boardControls>();
@@ -44,8 +46,23 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         offenceDeck = GetComponentInChildren<offenceDeckPile>();
         offenceDeck.DrawCards();
 
+        for (int i = 0; i < offenceDeck.SelectedCards.Length; i++)
+        {
+            offenceCard card = offenceDeck.SelectedCards[i].GetComponent<offenceCard>();
+            if (card.ManaCost < lowestManaCost)
+            {
+                lowestManaCost = card.ManaCost;
+            }
+        }
+
         combatSystem = combatManager.GetComponent<combatSystem>();
         combatSystem.combatComplete += AttackOver;
+
+        if(controller.GetModel.CurrentMana < lowestManaCost)
+        {
+            combatSystem.AttackerReady(this.gameObject, 0);
+            attackConfirm = true;
+        }
     }
 
     public override void UpdateState(playerStateManager player)
