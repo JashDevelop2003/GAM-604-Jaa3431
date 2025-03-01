@@ -12,9 +12,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Character", menuName = "Create Character")]
 public class characterData : ScriptableObject
 {
-    public enum Character {Wielder, Reaper, Gambler, Superstar};
 
-    public Character character;
+    public characterEnum character;
     public int Health;
     public int Mana;
     public int startingCash;
@@ -36,4 +35,7 @@ public class characterData : ScriptableObject
     public List<offenceCardStats> possibleOffenceCards;
     public List<defenceCardStats> possibleDefenceCards;
     public List<movementCardStats> possibleMovementCards;
+
+    //This is the game object for the character in order to use passive and one use ability
+    public GameObject characterObject;
 }

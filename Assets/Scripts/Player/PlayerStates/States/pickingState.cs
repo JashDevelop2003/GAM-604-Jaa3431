@@ -22,9 +22,17 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     //the controller is used to provide the possible cards the player can obtain based on their character
     private playerController controller;
 
-    //this is for the movement cards and provides the possible movement card they can select
+    //this is for the movement cards and provides the possible movement card they can select from the character data
     [SerializeField] private List <movementCardStats> possibleMovementCards;
     private movementCardStats selectedMovementCard;
+
+    //This is for the offence cards and provides the possible offence card they can select from the character data
+    [SerializeField] private List<offenceCardStats> possibleOffenceCards;
+    private offenceCardStats selectedOffenceCard;
+
+    //This is for the defence cards and provides the possible defence card they can select from the character data
+    [SerializeField] private List<defenceCardStats> possibleDefenceCards;
+    private defenceCardStats selectedDefenceCard;
 
     //this selects the card out of the list and checks if this card is sutiable for the rarity
     private int selectedCard;
@@ -50,6 +58,8 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         //the controller is referenced to collect the character data of the possible card to obtain
         controller = GetComponent<playerController>();
         possibleMovementCards = controller.GetData.possibleMovementCards;
+        possibleOffenceCards = controller.GetData.possibleOffenceCards;
+        possibleDefenceCards = controller.GetData.possibleDefenceCards;
 
         //this enables to deciding events towards selecting a type of card
         controls = GetComponent<boardControls>();
@@ -111,13 +121,11 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     public void DecidingLeft(object sender, EventArgs e)
     {
         typeSelected = CardType.Offence;
-        Debug.LogWarning("Needs Offence Cards to be Implemented");
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
         typeSelected = CardType.Defence;
-        Debug.LogWarning("Needs Defence Cards to be Implemented");
 
     }
 
@@ -127,41 +135,105 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     public void ConfirmingChoice(object sender, EventArgs e)
     {
         //If the card type is still null then the player hasn't decided yet
-        if(typeSelected == CardType.Null)
+        if (typeSelected == CardType.Null)
         {
             Debug.LogError("You haven't selected a card yet");
         }
 
         //if the type selected is movement then the method needs to check for avaialble movement slots
-        else if(typeSelected == CardType.Movement) 
+        else if (typeSelected == CardType.Movement)
         {
             //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
             selectedCard = UnityEngine.Random.Range(0, possibleMovementCards.Count);
             selectedMovementCard = possibleMovementCards[selectedCard];
-            while (selectedMovementCard.cardRarity != rarity) 
+            while (selectedMovementCard.cardRarity != rarity)
             {
                 selectedCard = UnityEngine.Random.Range(0, possibleMovementCards.Count);
                 selectedMovementCard = possibleMovementCards[selectedCard];
             }
 
             //this part of the method collect the movement deck pool to check if there is any objects that are set to false
-            movementDeckPool pool = GetComponentInChildren<movementDeckPool>();
-            GameObject card = pool.GetAvailableMovement();
+            movementDeckPool movePool = GetComponentInChildren<movementDeckPool>();
+            GameObject moveCard = movePool.GetAvailableMovement();
             //if there is a object that is set to false then add the selected card into the deck
-            if (card != null)
+            if (moveCard != null)
             {
-                card.SetActive(true);
-                movementCard movement = card.AddComponent<movementCard>();
+                moveCard.SetActive(true);
+                movementCard movement = moveCard.AddComponent<movementCard>();
                 movement.CreateCard(selectedMovementCard);
                 cardCollected = true;
             }
 
             //else inform the player that there are no available slots to proivde
-            else if (card == null) 
+            else if (moveCard == null)
+            {
+                Debug.LogWarning("No Available Cards, Select a Different Deck");
+            }
+
+        }
+
+        //if the type selected is offence then the method needs to check for avaialble offence slots
+        else if (typeSelected == CardType.Offence)
+        {
+            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
+            selectedCard = UnityEngine.Random.Range(0, possibleOffenceCards.Count);
+            selectedOffenceCard = possibleOffenceCards[selectedCard];
+            while (selectedOffenceCard.cardRarity != rarity)
+            {
+                selectedCard = UnityEngine.Random.Range(0, possibleOffenceCards.Count);
+                selectedOffenceCard = possibleOffenceCards[selectedCard];
+            }
+
+            //this part of the method collect the movement deck pool to check if there is any objects that are set to false
+            offenceDeckPool offencePool = GetComponentInChildren<offenceDeckPool>();
+            GameObject offenceCard = offencePool.GetAvailableOffence();
+            //if there is a object that is set to false then add the selected card into the deck
+            if (offenceCard != null)
+            {
+                offenceCard.SetActive(true);
+                offenceCard offence = offenceCard.AddComponent<offenceCard>();
+                offence.CreateCard(selectedOffenceCard);
+                cardCollected = true;
+            }
+
+            //else inform the player that there are no available slots to proivde
+            else if (offenceCard == null)
             {
                 Debug.LogWarning("No Available Cards, Select a Different Deck");
             }
         }
+
+        //if the type selected is defence then the method needs to check for avaialble defence slots
+        else if (typeSelected == CardType.Defence)
+        {
+            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
+            selectedCard = UnityEngine.Random.Range(0, possibleDefenceCards.Count);
+            selectedDefenceCard = possibleDefenceCards[selectedCard];
+            while (selectedDefenceCard.cardRarity != rarity)
+            {
+                selectedCard = UnityEngine.Random.Range(0, possibleDefenceCards.Count);
+                selectedDefenceCard = possibleDefenceCards[selectedCard];
+            }
+
+            //this part of the method collect the movement deck pool to check if there is any objects that are set to false
+            defenceDeckPool defencePool = GetComponentInChildren<defenceDeckPool>();
+            GameObject defenceCard = defencePool.GetAvailableDefence();
+            //if there is a object that is set to false then add the selected card into the deck
+            if (defenceCard != null)
+            {
+                defenceCard.SetActive(true);
+                defenceCard defence = defenceCard.AddComponent<defenceCard>();
+                defence.CreateCard(selectedDefenceCard);
+                cardCollected = true;
+            }
+
+            //else inform the player that there are no available slots to proivde
+            else if (defenceCard == null)
+            {
+                Debug.LogWarning("No Available Cards, Select a Different Deck");
+            }
+        }
+
     }
 
     //the cancel interface method allows the player to decline obtaining a card

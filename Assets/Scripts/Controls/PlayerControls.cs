@@ -125,6 +125,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseAbility"",
+                    ""type"": ""Button"",
+                    ""id"": ""bcc2d9e1-5664-4e96-b178-7ddd1de9e283"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -248,6 +257,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""DefendConfirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0480b168-97f8-40ec-a99d-40488767d4ec"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -267,6 +287,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_boardControls_DefendLeft = m_boardControls.FindAction("DefendLeft", throwIfNotFound: true);
         m_boardControls_DefendRight = m_boardControls.FindAction("DefendRight", throwIfNotFound: true);
         m_boardControls_DefendConfirm = m_boardControls.FindAction("DefendConfirm", throwIfNotFound: true);
+        m_boardControls_UseAbility = m_boardControls.FindAction("UseAbility", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -344,6 +365,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_boardControls_DefendLeft;
     private readonly InputAction m_boardControls_DefendRight;
     private readonly InputAction m_boardControls_DefendConfirm;
+    private readonly InputAction m_boardControls_UseAbility;
     public struct BoardControlsActions
     {
         private @PlayerControls m_Wrapper;
@@ -359,6 +381,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @DefendLeft => m_Wrapper.m_boardControls_DefendLeft;
         public InputAction @DefendRight => m_Wrapper.m_boardControls_DefendRight;
         public InputAction @DefendConfirm => m_Wrapper.m_boardControls_DefendConfirm;
+        public InputAction @UseAbility => m_Wrapper.m_boardControls_UseAbility;
         public InputActionMap Get() { return m_Wrapper.m_boardControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -401,6 +424,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @DefendConfirm.started += instance.OnDefendConfirm;
             @DefendConfirm.performed += instance.OnDefendConfirm;
             @DefendConfirm.canceled += instance.OnDefendConfirm;
+            @UseAbility.started += instance.OnUseAbility;
+            @UseAbility.performed += instance.OnUseAbility;
+            @UseAbility.canceled += instance.OnUseAbility;
         }
 
         private void UnregisterCallbacks(IBoardControlsActions instance)
@@ -438,6 +464,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @DefendConfirm.started -= instance.OnDefendConfirm;
             @DefendConfirm.performed -= instance.OnDefendConfirm;
             @DefendConfirm.canceled -= instance.OnDefendConfirm;
+            @UseAbility.started -= instance.OnUseAbility;
+            @UseAbility.performed -= instance.OnUseAbility;
+            @UseAbility.canceled -= instance.OnUseAbility;
         }
 
         public void RemoveCallbacks(IBoardControlsActions instance)
@@ -468,5 +497,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDefendLeft(InputAction.CallbackContext context);
         void OnDefendRight(InputAction.CallbackContext context);
         void OnDefendConfirm(InputAction.CallbackContext context);
+        void OnUseAbility(InputAction.CallbackContext context);
     }
 }

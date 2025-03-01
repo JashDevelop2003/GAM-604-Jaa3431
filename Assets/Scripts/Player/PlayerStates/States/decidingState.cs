@@ -6,7 +6,7 @@ using UnityEngine;
 /// First Playable: The Deciding State is to have the player select a movement card to choose for rolling
 /// </summary>
 
-public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRight, IDecideLeft, IConfirm
+public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRight, IDecideLeft, IConfirm, IUseAbility
 
 {
     //This controls will be use for providing inputs of deciding the movement card
@@ -24,6 +24,9 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         get { return movementDeck; }
     }
 
+    //The controller is use to call the one use ability
+    private playerController controller;
+
     //this will be use to send to the roll state what card was selected to roll
     private GameObject selectedCard;
 
@@ -32,14 +35,18 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     private int maxRoll;
     private int manaCost;
 
-    //This boolean checks when the player has selected and can move onto the roll state
+    //This boolean checks when the player has selected a movement card and can move onto the roll state
     private bool hasSelected;
+
+    //This boolean checks when the player has selected the ability and can use their one use ability
+    private bool usingAbility;
 
     public override void EnterState(playerStateManager player)
     {
-        //The hasSelected boolean stays false when entering the state to be capable of returning to the state
+        //The hasSelected & usingAbility boolean stays false when entering the state to be capable of returning to the state
         //selectedCard becomes null to prevent a card being chosen despite not being the 1 of 3 cards drawn from the deck
         hasSelected = false;
+        usingAbility = false;
         selectedCard = null;
         
         //Each controls adds the event for each key to enable the correct input on choosing a specifc card
@@ -49,9 +56,13 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         Controls.leftPressed += DecidingLeft;
         Controls.rightPressed += DecidingRight;
         Controls.confirmPressed += ConfirmingChoice;
+        Controls.useAbilityPressed += UsingAbility;
 
         //This reference the movement deck pile inside of the child of the player object
         movementDeck = GetComponentInChildren<movementDeckPile>();
+
+        //This reference the player controller to use to invoke the one use ability
+        controller = GetComponent<playerController>();
         
         //This conditional statement checks if the previous state was start state to draw cards
         //If the previous state is not the start state then the cards stay the same
@@ -93,6 +104,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         Controls.leftPressed -= DecidingLeft;
         Controls.rightPressed -= DecidingRight;
         Controls.confirmPressed -= ConfirmingChoice;
+        Controls.useAbilityPressed -= UsingAbility;
     }
 
     //These are using the interfaces of deciding Up, Down, Left, Right & Confirm in order for the state
@@ -102,24 +114,28 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingUp(object sender, EventArgs e)
     {
         selectedCard = movementDeck.SelectedCards[1];
+        usingAbility = false;
         Debug.Log(selectedCard.name);
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
         selectedCard = null;
+        usingAbility = false;
         Debug.LogWarning("Needs to Implement Movement Card");
     }
 
     public void DecidingLeft(object sender, EventArgs e)
     {       
         selectedCard = movementDeck.SelectedCards[0];
+        usingAbility = false;
         Debug.Log(selectedCard.name);
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedCard = movementDeck.SelectedCards[2];
+        usingAbility = false;
         Debug.Log(selectedCard.name);
     }
 
@@ -130,10 +146,29 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         {
             hasSelected = true;
         }
-        //otherwise apply an error to inform that the player hasn't chosen a card yet
+        //otherwise check is the player is using an ability
         else
         {
-            Debug.LogError("The Card has not been selected");
+            //If the player is using an ability then invoke the one use ability from the controller
+            if (usingAbility)
+            {
+                controller.ActivateOneUse();
+                Debug.Log("Using Ability");
+            }
+            //otherwise apply an error to inform that the player hasn't chosen a card yet
+            else
+            {
+                Debug.LogError("The Card has not been selected nor Ability is selected");
+
+            }
+
         }
+    }
+
+    //This makes the player choose to use their one use ability
+    public void UsingAbility(object sender, EventArgs e)
+    {
+        selectedCard = null;
+        usingAbility = true;
     }
 }

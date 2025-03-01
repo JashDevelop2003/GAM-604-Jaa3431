@@ -16,7 +16,6 @@ MonoBehaviour:
   cardType: 1
   cardRarity: 1
   cardName: Careless Defence
-  cardDescription: Blocks 5 Damage. Increase Damage Dealt by 5% if Defend is Above
-    Attack
+  cardDescription: Blocks 5 Damage. Increase Thrust by 5% if Defend is Above Attack
   defendValue: 5
   manaCost: 2

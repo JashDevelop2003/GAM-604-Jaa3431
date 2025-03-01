@@ -14,7 +14,12 @@ public class playerController : MonoBehaviour
     //However the choosing state can set a new current path for the controller to collect and provide
     private playerModel playerModel;
     [SerializeField] private characterData Data;
+
+    //This is to provide the current path for the move state to use
     [SerializeField] private GameObject currentPath;
+
+    public event EventHandler passiveEvent;
+    public event EventHandler oneUseEvent;
 
     public playerModel GetModel { get { return playerModel; } }
     public characterData GetData {  get { return Data; } }
@@ -29,6 +34,8 @@ public class playerController : MonoBehaviour
         //this creates a new player model based on the character the player has chosen
         playerModel = new playerModel(Data);
         transform.position = new Vector3(startingSpace.SpaceOrder[1].transform.position.x, 2f, startingSpace.SpaceOrder[1].transform.position.z);
+
+        Instantiate(GetData.characterObject, this.transform);
     }
 
     //Regain mana is a method that during the start state will make the current mana equal to max mana
@@ -76,6 +83,18 @@ public class playerController : MonoBehaviour
             playerModel.CurrentHealth += value;
             Debug.Log("Health Changed " + playerModel.CurrentHealth + " to " + playerModel.MaxHealth);
         }
+    }
+
+    //This is activated when the passive ability is triggered from the player's specifc character
+    public void ActivatePassive()
+    {
+        passiveEvent?.Invoke(this, EventArgs.Empty);
+    }
+
+    //This is activated when the player wants to use their one use ability from the player's specifc character.
+    public void ActivateOneUse()
+    {
+        oneUseEvent?.Invoke(this, EventArgs.Empty);
     }
 
 

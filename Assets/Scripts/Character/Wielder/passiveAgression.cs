@@ -1,0 +1,89 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// Passive Agression is a passive ability that belongs to the Wielder Character
+/// The ability has 2 stances:
+/// - Passive which Doubles Guard, However Halves Thrust
+/// - Aggressive which Doubles Thrust, However Halves Guard
+/// The ability switches to the other stance once either these three conditions:
+/// - During 3 of the Player's Turn
+/// - The One Use Ability
+/// - TODO: Specifc Cards provide an effect onto the card
+/// </summary>
+
+public class passiveAgression : MonoBehaviour
+{
+    //This is the controller which will need to reference the player object into the parent
+    private playerController controller;
+
+    //This is the stance which will be use to identify which stance the character is currently on
+    //This will be use for the battle system to check which stance the character is on to double/half thrust or guard
+    private stanceEnum stance;
+    public stanceEnum Stance
+    {
+
+    get { return stance; } 
+    
+    }
+
+    //this is the starting stance which will make the character be on a random stance during the beginning of the game
+    private int startingStance;
+
+    //This is the cooldown to provide on the character
+    private int changeCooldown;
+
+    //When awake the class has to gather the controller component and then decide if the player starts their character of with being passive or aggressive
+    void Awake()
+    {
+        controller = GetComponentInParent<playerController>();
+        startingStance = UnityEngine.Random.Range(0, 2);
+        if(startingStance == 0)
+        {
+            stance = stanceEnum.Passive;
+        }
+        else
+        {
+            stance = stanceEnum.Aggressive;
+        }
+
+        controller.passiveEvent += DecrementCooldown;
+
+    }
+
+    //During the start state, the event will invoke this method which decrements the cooldown
+    //If the cooldown is equal to 0 then this will call change stance method
+    public void DecrementCooldown(object sender, EventArgs e)
+    {
+        changeCooldown--;
+        if (changeCooldown == 0) 
+        {
+            ChangeStance();
+        }
+    }
+
+    //This changes the current stance to the other stance and resets the cooldown to 3 turns.
+    public void ChangeStance()
+    {
+        if (stance == stanceEnum.Passive) 
+        {
+            stance = stanceEnum.Aggressive;
+        }
+        else if (stance == stanceEnum.Aggressive)
+        {
+            stance = stanceEnum.Passive;
+        }
+
+        changeCooldown = 3;
+    }
+
+    private void OnDisable()
+    {
+        controller.passiveEvent -= DecrementCooldown;
+    }
+
+
+
+}

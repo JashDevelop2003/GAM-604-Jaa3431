@@ -16,7 +16,6 @@ MonoBehaviour:
   cardType: 1
   cardRarity: 1
   cardName: Keep Composure
-  cardDescription: Blocks 9 Damage. Increase Damage Reduction by 5% if Defend is
-    Above Attack
+  cardDescription: Blocks 9 Damage. Increase Guard by 5% if Defend is Above Attack
   defendValue: 9
   manaCost: 3

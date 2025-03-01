@@ -489,6 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 0}
+  previousState: {fileID: 0}
 --- !u!114 &329044122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +627,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibleMovementCards: []
+  possibleOffenceCards: []
+  possibleDefenceCards: []
   rarity: 1
   typeSelected: 5
 --- !u!65 &329044131
@@ -689,9 +692,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatManager: {fileID: 1902622677}
-  combatSystem: {fileID: 0}
-  defenceDeck: {fileID: 0}
-  selectedCard: {fileID: 0}
 --- !u!114 &329044134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,9 +705,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatManager: {fileID: 1902622677}
-  combatSystem: {fileID: 0}
-  offenceDeck: {fileID: 0}
-  selectedCard: {fileID: 0}
 --- !u!1 &344353842
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,6 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 0}
+  previousState: {fileID: 0}
 --- !u!114 &344353851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,6 +932,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibleMovementCards: []
+  possibleOffenceCards: []
+  possibleDefenceCards: []
   rarity: 0
   typeSelected: 0
 --- !u!65 &344353856
@@ -997,9 +997,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatManager: {fileID: 1902622677}
-  combatSystem: {fileID: 0}
-  defenceDeck: {fileID: 0}
-  selectedCard: {fileID: 0}
 --- !u!114 &344353859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1013,9 +1010,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatManager: {fileID: 1902622677}
-  combatSystem: {fileID: 0}
-  offenceDeck: {fileID: 0}
-  selectedCard: {fileID: 0}
 --- !u!1 &375598503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8232674871198528104, guid: 1baa6731d589905489217cd1ab42e6c1, type: 3}
@@ -1111,6 +1105,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
+--- !u!1 &419623387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 419623388}
+  m_Layer: 0
+  m_Name: GrimReaper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &419623388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419623387}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.985233, y: -9.911295, z: -8.103947}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &467253454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3263,14 +3288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a12f025eeaa79941aa06f4348ab2f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackingPlayer: {fileID: 0}
-  attackingPlayerController: {fileID: 0}
-  attackValue: 0
-  thrustMultiplier: 0
-  defendingPlayer: {fileID: 0}
-  defendingPlayerController: {fileID: 0}
-  defendValue: 0
-  guardMultiplier: 0
 --- !u!1001 &1950636837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3663,3 +3680,4 @@ SceneRoots:
   - {fileID: 1699877340}
   - {fileID: 2012154419}
   - {fileID: 1902622678}
+  - {fileID: 419623388}

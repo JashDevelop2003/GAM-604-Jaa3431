@@ -24,6 +24,7 @@ public class boardControls : MonoBehaviour
     private InputAction defendLeft;
     private InputAction defendRight;
     private InputAction defendConfirm;
+    private InputAction useAbility;
 
     //These are the Event Handlers which will allow other scripts to become observers for specifc events
     public event EventHandler upPressed;
@@ -37,6 +38,7 @@ public class boardControls : MonoBehaviour
     public event EventHandler defendLeftPressed;
     public event EventHandler defendRightPressed;
     public event EventHandler defendConfirmPressed;
+    public event EventHandler useAbilityPressed;
 
     
     /// The Awake method creates a new player control and provides suitable inputs from the action map
@@ -57,6 +59,7 @@ public class boardControls : MonoBehaviour
         defendLeft = playerControls.boardControls.DefendLeft;
         defendRight = playerControls.boardControls.DefendRight;
         defendConfirm = playerControls.boardControls.DefendConfirm;
+        useAbility = playerControls.boardControls.UseAbility;
 
         //This calls the method once an input is performed
         selectUp.performed += OnUpPressed;
@@ -70,6 +73,7 @@ public class boardControls : MonoBehaviour
         defendLeft.performed += OnDefendLeftPressed;
         defendRight.performed += OnDefendRightPressed;
         defendConfirm.performed += OnDefendConfirmPressed;
+        useAbility.performed += OnUseAbilityPressed;
         
         
         //Each input action has to be enabled in order for the inputs to perform in game
@@ -84,6 +88,7 @@ public class boardControls : MonoBehaviour
         defendLeft.Enable();
         defendRight.Enable();
         defendConfirm.Enable();
+        useAbility.Enable();
     }
 
     //These methods check for the button to be performed in which provides the events to call onPressed
@@ -143,6 +148,11 @@ public class boardControls : MonoBehaviour
         OnPressed(EventArgs.Empty, defendConfirmPressed);
     }
 
+    private void OnUseAbilityPressed(InputAction.CallbackContext useAbility)
+    {
+        OnPressed(EventArgs.Empty, useAbilityPressed);
+    }
+
     //OnPressed identifies the events inside of the event handler and invokes all methods that are listening
     private void OnPressed(EventArgs e, EventHandler input)
     {
@@ -173,6 +183,7 @@ public class boardControls : MonoBehaviour
         defendLeft.Disable();
         defendRight.Disable();
         defendConfirm.Disable();
+        useAbility.Disable();
     }
 
 
