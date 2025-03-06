@@ -34,6 +34,7 @@ public class playerStateManager : MonoBehaviour
     private inactiveState inactiveState;
     private startState startState;
     private decidingState decidingState;
+    private targetState targetState;
     private rollState rollState;
     private moveState moveState;
     private choosingState choosingState;
@@ -60,6 +61,11 @@ public class playerStateManager : MonoBehaviour
     public decidingState DecidingState
     {
         get { return decidingState; }
+    }
+
+    public targetState TargetState 
+    { 
+        get { return targetState; } 
     }
 
     public rollState RollState
@@ -100,6 +106,7 @@ public class playerStateManager : MonoBehaviour
         inactiveState = GetComponent<inactiveState>();
         startState = GetComponent<startState>();
         decidingState = GetComponent<decidingState>();
+        targetState = GetComponent<targetState>();
         rollState = GetComponent<rollState>();
         moveState = GetComponent<moveState>();
         choosingState = GetComponent<choosingState>();

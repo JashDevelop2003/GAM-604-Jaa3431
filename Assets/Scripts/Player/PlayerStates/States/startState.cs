@@ -16,6 +16,7 @@ public class startState : playerStateBase
     public override void EnterState(playerStateManager player)
     {
         controller = GetComponent<playerController>();
+        controller.ActivateEffects();
     }
 
     public override void UpdateState(playerStateManager player)
@@ -33,6 +34,6 @@ public class startState : playerStateBase
         {
             controller.ActivatePassive();
         }
-        //TODO Next Stage: Apply Status Effects
+
     }
 }

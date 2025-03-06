@@ -31,6 +31,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be7ca579cf1d6454a937366531556f05, type: 2}
   - {fileID: 11400000, guid: edf6252555852a342a7b86c9d766684f, type: 2}
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
+  startingStatusCards:
+  - {fileID: 11400000, guid: ab1f429f7c2d6184daf1105829e3e5fd, type: 2}
   possibleOffenceCards:
   - {fileID: 11400000, guid: 869861b941fc7df4aa29e254fc3b3fad, type: 2}
   - {fileID: 11400000, guid: 7cf743db0d1a8f44cbdcf6d0451b9117, type: 2}
@@ -51,4 +53,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 968725c8e30534b4c9c41fafbca17941, type: 2}
   - {fileID: 11400000, guid: f10e5f3e5f496e44d8fdf8fe86d1c3c9, type: 2}
   - {fileID: 11400000, guid: 068a4d2c87d50f14788c24d14527285f, type: 2}
+  possibleStatusCards: []
   characterObject: {fileID: 2680251509015015823, guid: 2ee0e264335f77e4785483e98cfe75a6, type: 3}

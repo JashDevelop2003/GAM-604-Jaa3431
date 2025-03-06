@@ -20,6 +20,7 @@ public class playerController : MonoBehaviour
 
     public event EventHandler passiveEvent;
     public event EventHandler oneUseEvent;
+    public event EventHandler effectEvent;
 
     public playerModel GetModel { get { return playerModel; } }
     public characterData GetData {  get { return Data; } }
@@ -108,6 +109,11 @@ public class playerController : MonoBehaviour
     public void ActivateOneUse()
     {
         oneUseEvent?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void ActivateEffects()
+    {
+        effectEvent?.Invoke(this, EventArgs.Empty);
     }
 
 
