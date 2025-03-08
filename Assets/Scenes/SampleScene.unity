@@ -724,9 +724,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBurned: 0
-  burnCooldown: 0
   isSlowed: 0
-  slowCooldown: 0
+  isShocked: 0
+  isExposed: 0
+  isBleeding: 0
+  isPoisoned: 0
+  isBlistered: 0
+  isUnstabled: 0
+  isStunned: 0
+  isFeared: 0
+  isConfused: 0
+  isBlind: 0
 --- !u!114 &329044136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,9 +1097,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBurned: 0
-  burnCooldown: 0
   isSlowed: 0
-  slowCooldown: 0
+  isShocked: 0
+  isExposed: 0
+  isBleeding: 0
+  isPoisoned: 0
+  isBlistered: 0
+  isUnstabled: 0
+  isStunned: 0
+  isFeared: 0
+  isConfused: 0
+  isBlind: 0
 --- !u!1 &375598503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8232674871198528104, guid: 1baa6731d589905489217cd1ab42e6c1, type: 3}

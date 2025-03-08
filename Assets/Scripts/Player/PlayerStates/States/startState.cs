@@ -13,16 +13,27 @@ public class startState : playerStateBase
     //this is to collect the controller's Regain mana method inside the controller.
     private playerController controller;
 
+    //This gets the effects to see if player is stunned
+    private currentEffects effects;
+
     public override void EnterState(playerStateManager player)
     {
         controller = GetComponent<playerController>();
-        controller.ActivateEffects();
+        effects = GetComponent<currentEffects>();
+        controller.ActivateStartEffects();
     }
 
     public override void UpdateState(playerStateManager player)
     {
-        //This changes the state immediately to the deciding state
-        player.ChangeState(player.DecidingState);
+        if (effects.Stunned) 
+        {
+            player.ChangeState(player.InactiveState);
+        }
+        else
+        {
+            //This changes the state immediately to the deciding state
+            player.ChangeState(player.DecidingState);
+        }
     }
 
     public override void ExitState(playerStateManager player)

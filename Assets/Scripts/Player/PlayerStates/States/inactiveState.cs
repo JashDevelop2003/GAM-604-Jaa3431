@@ -45,6 +45,7 @@ public class inactiveState : playerStateBase
         //this checks if the previous state was an actual state (TODO: besides defend state) then end their turn
         if (player.PreviousState != null && player.PreviousState != player.DefendState)
         {
+            controller.ActivateEndEffect();
             player.EndTurn();
             Debug.Log("Turn Ended");
         }

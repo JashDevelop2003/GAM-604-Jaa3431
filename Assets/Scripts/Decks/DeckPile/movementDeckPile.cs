@@ -15,6 +15,12 @@ public class movementDeckPile : MonoBehaviour
 
     //the array game object provides all the cards selected from the integers
     [SerializeField] private GameObject[] selectedCards = new GameObject[3];
+
+    public List<GameObject> MovementCards
+    {
+        get { return movementCards; }
+    }
+
     public GameObject[] SelectedCards
     {
         get { return selectedCards; }

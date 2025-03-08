@@ -15,7 +15,9 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         set { controls = value; }
     }
 
-    playerController controller;
+    private playerController controller;
+
+    private currentEffects effects;
 
     private defenceDeckPile defenceDeck;
     public defenceDeckPile DefenceDeck
@@ -31,14 +33,17 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
 
     private bool defendConfirm;
     private bool combatFinished;
+    private bool unableDefend;
 
     public override void EnterState(playerStateManager player)
     {
         defendConfirm = false;
         combatFinished = false;
+        unableDefend = false;
         lowestManaCost = 99;
 
         controller = GetComponent<playerController>();
+        effects = GetComponent<currentEffects>();
         controls = GetComponent<boardControls>();
         Controls.defendUpPressed += DefendingUp;
         Controls.defendDownPressed += DefendingDown;
@@ -60,9 +65,29 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         combatSystem = combatManager.GetComponent<combatSystem>();
         combatSystem.combatComplete += DefendOver;
 
-        if (controller.GetModel.CurrentMana < lowestManaCost)
+        //If the player doesn't have enough mana for the lowest mana card or is stunned their defence becomes 0
+        if (controller.GetModel.CurrentMana < lowestManaCost || effects.Stunned)
         {
             combatSystem.DefenderReady(this.gameObject, 0);
+            defendConfirm = true;
+            unableDefend = true;
+        }
+
+        if (!unableDefend && effects.Confused)
+        {
+            int randomInt = UnityEngine.Random.Range(0, defenceDeck.SelectedCards.Length);
+            selectedCard = defenceDeck.SelectedCards[randomInt];
+            defenceCard defendCard = selectedCard.GetComponent<defenceCard>();
+
+            while (defendCard.ManaCost > controller.GetModel.CurrentMana)
+            {
+                randomInt = UnityEngine.Random.Range(0, defenceDeck.SelectedCards.Length);
+                selectedCard = defenceDeck.SelectedCards[randomInt];
+                defendCard = selectedCard.GetComponent<defenceCard>();
+            }
+
+            combatSystem.DefenderReady(this.gameObject, defendCard.DefendValue);
+            controller.ChangeMana(defendCard.ManaCost);
             defendConfirm = true;
         }
     }

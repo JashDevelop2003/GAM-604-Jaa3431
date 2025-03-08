@@ -52,6 +52,9 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     private bool usingAbility;
     private bool unableMove;
 
+    //This is to check if the player is confused
+    private currentEffects effects;
+
     public override void EnterState(playerStateManager player)
     {
         
@@ -82,6 +85,8 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
         //This reference the player controller to use to invoke the one use ability
         controller = GetComponent<playerController>();
+
+        effects = GetComponent<currentEffects>();
         
         //This conditional statement checks if the previous state was start state to draw cards
         //If the previous state is not the start state then the cards stay the same
@@ -108,6 +113,23 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             if(controller.GetModel.CurrentMana < lowestManaCost)
             {
                 unableMove = true;
+            }
+
+            if(!unableMove && effects.Confused)
+            {
+                int randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
+                selectedCard = movementDeck.SelectedCards[randomInt];
+                moveCard = selectedCard.GetComponent<movementCard>();
+
+                while (moveCard.ManaCost > controller.GetModel.CurrentMana)
+                {
+                    randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
+                    selectedCard = movementDeck.SelectedCards[randomInt];
+                    moveCard = selectedCard.GetComponent<movementCard>();
+                }
+
+                hasSelected = true;
+
             }
         }
 

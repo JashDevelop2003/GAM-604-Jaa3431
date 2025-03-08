@@ -10,6 +10,12 @@ public class offenceDeckPile : MonoBehaviour
     private List<GameObject> offenceCards = new List<GameObject>();
     [SerializeField] private int[] attackCards = new int[4];
     [SerializeField] private GameObject[] selectedCards = new GameObject[4];
+    
+    public List<GameObject> OffenceCards
+    {
+        get { return offenceCards; }     
+    }
+
     public GameObject[] SelectedCards
     {
         get { return selectedCards; }

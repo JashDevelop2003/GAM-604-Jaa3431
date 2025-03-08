@@ -33,6 +33,9 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
 
     //the controller is reference to apply the new path to follow once the path is selected
     private playerController controller;
+
+    //The current effects is reference to choose a random direction if they are blind
+    private currentEffects effects;
     
     //the boolean is use to ensure that when true the current state changes
     private bool hasSelected;
@@ -51,6 +54,7 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
         //the controller and controls are reference in the player object
         controller = GetComponent<playerController>();
         controls = GetComponent<boardControls>();
+        effects = GetComponent<currentEffects>();
 
         //The multi path calls the method to check if any paths are restricted due to the current direction type
         pathSelection.PathSelections(currentDirection);
@@ -66,6 +70,14 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
             hasSelected = true;
         }
 
+        //otherwise if the player is blind then choose a random path
+        else if (effects.Blind)
+        {
+            int randomPath = UnityEngine.Random.Range(0, pathList.Count);
+            controller.Path = pathList[randomPath];
+            hasSelected = true;
+        }
+        
         //otherwise the controls are enable depending on the type of direction the path is
         else
         {

@@ -15,7 +15,9 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         set { controls = value; }
     }
 
-    playerController controller;
+    private playerController controller;
+
+    private currentEffects effects;
     
     private offenceDeckPile offenceDeck;
     public offenceDeckPile OffenceDeck
@@ -28,15 +30,19 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     private bool attackConfirm;
     private bool combatFinished;
+    private bool unableAttack;
 
     public override void EnterState(playerStateManager player)
     {
         attackConfirm = false;
         combatFinished = false;
+        unableAttack = false;
         lowestManaCost = 99;
 
         controller = GetComponent<playerController>();
         controls = GetComponent<boardControls>();
+        effects = GetComponent<currentEffects>();
+
         Controls.upPressed += DecidingUp;
         Controls.downPressed += DecidingDown;
         Controls.leftPressed += DecidingLeft;
@@ -61,6 +67,25 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         if(controller.GetModel.CurrentMana < lowestManaCost)
         {
             combatSystem.AttackerReady(this.gameObject, 0);
+            attackConfirm = true;
+            unableAttack = true;
+        }
+
+        if (!unableAttack && effects.Confused)
+        {
+            int randomInt = UnityEngine.Random.Range(0, offenceDeck.SelectedCards.Length);
+            selectedCard = offenceDeck.SelectedCards[randomInt];
+            offenceCard offendCard = selectedCard.GetComponent<offenceCard>();
+
+            while (offendCard.ManaCost > controller.GetModel.CurrentMana)
+            {
+                randomInt = UnityEngine.Random.Range(0, offenceDeck.SelectedCards.Length);
+                selectedCard = offenceDeck.SelectedCards[randomInt];
+                offendCard = selectedCard.GetComponent<offenceCard>();
+            }
+
+            combatSystem.AttackerReady(this.gameObject, offendCard.AttackValue);
+            controller.ChangeMana(offendCard.ManaCost);
             attackConfirm = true;
         }
     }

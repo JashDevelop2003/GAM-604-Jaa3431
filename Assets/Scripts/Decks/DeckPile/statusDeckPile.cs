@@ -11,6 +11,11 @@ public class statusDeckPile : MonoBehaviour
     private List<GameObject> statusCards = new List<GameObject>();
     [SerializeField] private int statusCardInt;
     [SerializeField] private GameObject selectedCard;
+
+    public List<GameObject> StatusCards
+    {
+        get { return statusCards; }
+    }
     public GameObject SelectedCard
     {
         get { return selectedCard; }

@@ -18,9 +18,13 @@ public class playerController : MonoBehaviour
     //This is to provide the current path for the move state to use
     [SerializeField] private GameObject currentPath;
 
+    //These are the events to activate the passive and one use ability
     public event EventHandler passiveEvent;
     public event EventHandler oneUseEvent;
-    public event EventHandler effectEvent;
+
+    //These are the events to activate the effects that occur
+    public event EventHandler effectStartEvent;
+    public event EventHandler effectEndEvent;
 
     public playerModel GetModel { get { return playerModel; } }
     public characterData GetData {  get { return Data; } }
@@ -72,8 +76,13 @@ public class playerController : MonoBehaviour
     //Roll is a mathod that subtracts the mana based on mana cost (parameter is roll cost) and the value of the dice (parameter is value)
     public void Roll(int value) 
     { 
+        currentEffects shockEffect = GetComponent<currentEffects>();
+
         playerModel.RollValue = value;
-        Debug.Log(playerModel.CurrentMana + "/" + playerModel.MaxMana);
+        if (shockEffect.Shocked) 
+        { 
+            ChangeHealth(-value);
+        }
         Debug.Log(playerModel.RollValue);
     }
 
@@ -111,10 +120,13 @@ public class playerController : MonoBehaviour
         oneUseEvent?.Invoke(this, EventArgs.Empty);
     }
 
-    public void ActivateEffects()
+    public void ActivateStartEffects()
     {
-        effectEvent?.Invoke(this, EventArgs.Empty);
+        effectStartEvent?.Invoke(this, EventArgs.Empty);
     }
 
-
+    public void ActivateEndEffect()
+    {
+        effectEndEvent?.Invoke(this, EventArgs.Empty);
+    }
 }

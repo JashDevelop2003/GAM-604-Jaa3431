@@ -21,8 +21,10 @@ public class rollState : playerStateBase, IConfirm, ICancel
     private int manaCost;
 
     //The player controller is required to provide the roll value and decrease in mana for the player to move around
-    //TODO: This also checks if the player can even roll with that dice
     private playerController controller;
+
+    //The effect component is needed to prevent the player from going back to the deciding state
+    private currentEffects effects;
 
     //The controls are use to either confirm rolling the dice or cancelling the roll to choose a different card
     private boardControls controls;
@@ -42,8 +44,13 @@ public class rollState : playerStateBase, IConfirm, ICancel
         //the controls enable confirm and cancel and will need the interfaces to provide the events
         controls = GetComponent<boardControls>();
         controller = GetComponent<playerController>();
+        effects = GetComponent<currentEffects>();
         Controls.confirmPressed += ConfirmingChoice;
-        Controls.cancelPressed += Cancel;
+        if (!effects.Confused)
+        {
+            Controls.cancelPressed += Cancel;
+
+        }
     }
 
     public override void UpdateState(playerStateManager player)

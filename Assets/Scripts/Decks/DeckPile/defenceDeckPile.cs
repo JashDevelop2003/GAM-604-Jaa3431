@@ -11,6 +11,11 @@ public class defenceDeckPile : MonoBehaviour
     private List<GameObject> defenceCards = new List<GameObject>();
     [SerializeField] private int[] defendCards = new int[4];
     [SerializeField] private GameObject[] selectedCards = new GameObject[4];
+
+    public List<GameObject> DefenceCards
+    {
+        get { return defenceCards; }
+    }
     public GameObject[] SelectedCards
     {
         get { return selectedCards; }
