@@ -26,7 +26,6 @@ public class lastReapsort : MonoBehaviour
     private playerController controller;
     private playerStateManager stateManager;
 
-    [SerializeField] private GameObject combatManager;
     combatSystem combatSystem;
 
     private GameObject opponentObject;
@@ -39,8 +38,8 @@ public class lastReapsort : MonoBehaviour
 
         //The object is a prefab meaning that when instantiated won't have the combat system object
         //This means that the class requires to find the prefab of the combat system
-        combatManager = GameObject.Find("CombatSystem");
-        combatSystem = combatManager.GetComponent<combatSystem>();
+
+        combatSystem = combatSystem.instance;
 
         //The one use ability waits until the player uses their one use ability to begin the last reapsort
         controller.oneUseEvent += BeginReaping;

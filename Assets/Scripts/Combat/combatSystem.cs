@@ -12,6 +12,9 @@ using UnityEngine;
 
 public class combatSystem : MonoBehaviour
 {
+    //The combat system will need to reference itself to provide other abilities & additional effects to be used
+    public static combatSystem instance;
+
     //The attacker provides:
     // - Current Player's Turn Object
     // - Player's controller
@@ -50,6 +53,15 @@ public class combatSystem : MonoBehaviour
     public int DefendValue
     {
         get { return defendValue; }
+    }
+
+    //this is used to make this a singular instance of the component
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     public void AttackerReady(GameObject attacker, int value)
