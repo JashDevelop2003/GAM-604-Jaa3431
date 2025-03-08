@@ -26,6 +26,5 @@ public class statusCardStats : ScriptableObject
 
     public string cardName;
     public string cardDescription;
-    public GameObject effectPrefab;
     public int manaCost;
 }

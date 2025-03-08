@@ -19,3 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 10 Damage & Apply Confused to Both Players
   attackValue: 10
   manaCost: 2
+  additionalEffect: {fileID: 2671583686469014174, guid: 016fabbe8abc1f440af077a07536f847, type: 3}

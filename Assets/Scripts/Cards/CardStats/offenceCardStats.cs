@@ -20,5 +20,7 @@ public class offenceCardStats : ScriptableObject
     public string cardName;
     public string cardDescription;
     public int attackValue;
-    public int manaCost; 
+    public int manaCost;
+
+    public GameObject additionalEffect;
 }

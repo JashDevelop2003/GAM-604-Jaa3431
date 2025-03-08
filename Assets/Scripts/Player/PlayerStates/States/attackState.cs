@@ -140,6 +140,7 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         
         if(controller.GetModel.CurrentMana >= attackCard.ManaCost && !attackConfirm)
         {
+            attackCard.ApplyAdditionalEffect();
             combatSystem.AttackerReady(this.gameObject, attackCard.AttackValue);
             controller.ChangeMana(attackCard.ManaCost);
             attackConfirm = true;

@@ -38,21 +38,30 @@ public class combatSystem : MonoBehaviour
     private bool defenderReady;
 
     public event EventHandler combatComplete;
+    public event EventHandler beforeCombatEvent;
+    public event EventHandler duringCombatEvent;
+    public event EventHandler afterCombatEvent;
 
-    //These are essential for the grim reaper's passive ability Soul Steal
-    //This will allows the reaper to calculate how much health the player restores
+    //These are essential for additional effects and abilities
     public GameObject DefendingPlayer
     {
         get { return defendingPlayer; }
+    }
+
+    public GameObject AttackingPlayer
+    {
+        get { return attackingPlayer; }
     }
     
     public int AttackValue
     {
         get { return attackValue; }
+        set { attackValue = value; }
     }
     public int DefendValue
     {
         get { return defendValue; }
+        set { defendValue = value; }
     }
 
     //this is used to make this a singular instance of the component
@@ -136,6 +145,7 @@ public class combatSystem : MonoBehaviour
     {
         if (attackerReady && defenderReady) 
         {
+            beforeCombatEvent?.Invoke(this, EventArgs.Empty);
             StartCoroutine(Calculating());
         }
     }
@@ -175,6 +185,7 @@ public class combatSystem : MonoBehaviour
             }
         }
 
+        duringCombatEvent?.Invoke(this, EventArgs.Empty);
         StartCoroutine(BattleFinished());
     }
 
@@ -189,6 +200,7 @@ public class combatSystem : MonoBehaviour
     //The Attacker will return to the moving state & the Defender will return to the exit state
     private void BattleOver()
     {
+        afterCombatEvent?.Invoke(this, EventArgs.Empty);
         attackerReady = false;
         defenderReady = false;
         combatComplete?.Invoke(this, EventArgs.Empty);
