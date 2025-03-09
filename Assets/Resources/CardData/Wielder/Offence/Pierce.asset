@@ -16,7 +16,7 @@ MonoBehaviour:
   cardType: 0
   cardRarity: 1
   cardName: Pierce
-  cardDescription: 'If Stance is Aggressive: Deal 10 Damage & Apply Fade'
+  cardDescription: 'If Stance is Aggressive: Deal 10 Damage & Ignore Defence'
   attackValue: 10
   manaCost: 2
   additionalEffect: {fileID: 7575877158373398209, guid: 5bf17ca0aeb58354f8ace594c099d229, type: 3}
