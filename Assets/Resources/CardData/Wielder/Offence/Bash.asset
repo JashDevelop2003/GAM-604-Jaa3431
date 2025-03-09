@@ -19,3 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 8 Damage & Apply Stun to Opponent for 1 Turn
   attackValue: 8
   manaCost: 2
+  additionalEffect: {fileID: 2870985869498401210, guid: 24477bffdedddcb41a3e67968621dfc0, type: 3}

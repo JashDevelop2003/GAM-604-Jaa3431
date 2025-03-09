@@ -19,3 +19,4 @@ MonoBehaviour:
   cardDescription: 'If Stance is Aggressive: Deal 10 Damage & Apply Fade'
   attackValue: 10
   manaCost: 2
+  additionalEffect: {fileID: 7575877158373398209, guid: 5bf17ca0aeb58354f8ace594c099d229, type: 3}
