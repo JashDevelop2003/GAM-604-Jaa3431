@@ -22,7 +22,9 @@ public class statusCardStats : ScriptableObject
     public targetEnum target;
 
     public effectEnum effect;
+    public buffEnum buff;
     public int cooldown;
+    public float value;
 
     public string cardName;
     public string cardDescription;

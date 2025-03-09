@@ -15,5 +15,6 @@ public enum effectEnum
     Confused,
     Feared,
     Stunned,
-    Blind
+    Blind,
+    Null
 }

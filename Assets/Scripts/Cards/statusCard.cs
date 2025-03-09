@@ -23,6 +23,18 @@ public class statusCard : MonoBehaviour
         get { return effect; }
     }
 
+    private buffEnum buff;
+    public buffEnum Buff
+    {
+        get { return buff; }
+    }
+
+    private float value;
+    public float Value 
+    { 
+        get { return value; } 
+    }
+
     private int effectCooldown;
     public int EffectCooldown
     {
@@ -46,7 +58,9 @@ public class statusCard : MonoBehaviour
         gameObject.name = statCard.name;
         target = newCard.target;
         effect = newCard.effect;
+        buff = newCard.buff;
         effectCooldown = newCard.cooldown;
+        value = newCard.value;
         
 
         statusDeckPile deck = GetComponentInParent<statusDeckPile>();
@@ -55,8 +69,20 @@ public class statusCard : MonoBehaviour
 
     public void ActivateEffect(GameObject target)
     {
-        currentEffects targetEffect = target.GetComponent<currentEffects>();
-        targetEffect.AddEffect(effect, effectCooldown);
+        if (effect != effectEnum.Null) 
+        {
+            currentEffects targetEffect = target.GetComponent<currentEffects>();
+            targetEffect.AddEffect(effect, effectCooldown);
+        }
+
+        if(buff != buffEnum.Null)
+        {
+            currentBuffs targetBuff = target.GetComponent<currentBuffs>();
+            targetBuff.AddBuff(buff, effectCooldown, value);
+        }
+
+        //Add an event here for some non-status effects
+
         Debug.Log(target + " is " +  effect );
     }
 }

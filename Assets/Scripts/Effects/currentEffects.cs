@@ -301,8 +301,6 @@ public class currentEffects : MonoBehaviour
         }
         else
         {
-            controller.GetModel.RollMultiplier = 1;
-            Debug.Log("RollMultiplier = " + controller.GetModel.RollMultiplier);
             controller.effectStartEvent -= SlowPlayer;
         }
     }
@@ -333,8 +331,6 @@ public class currentEffects : MonoBehaviour
         }
         else
         {
-            controller.GetModel.GuardMultiplier = 1;
-            Debug.Log("GuardMultiplier = " + controller.GetModel.GuardMultiplier);
             controller.effectStartEvent -= ExposePlayer;
         }
     }
@@ -441,8 +437,6 @@ public class currentEffects : MonoBehaviour
         }
         else
         {
-            controller.GetModel.ThrustMultiplier = 1;
-            Debug.Log("ThrustMultiplier = " + controller.GetModel.ThrustMultiplier);
             controller.effectStartEvent -= FearPlayer;
         }
     }

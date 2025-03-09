@@ -20,6 +20,7 @@ public class startState : playerStateBase
     {
         controller = GetComponent<playerController>();
         effects = GetComponent<currentEffects>();
+        controller.ResetStats();
         controller.ActivateStartEffects();
     }
 
@@ -37,8 +38,7 @@ public class startState : playerStateBase
     }
 
     public override void ExitState(playerStateManager player)
-    {
-        controller.RegainMana();
+    { 
 
         //If the player's character is wielder then decrement the cooldown & see if the character changes state
         if (controller.GetModel.Character == characterEnum.Wielder) 

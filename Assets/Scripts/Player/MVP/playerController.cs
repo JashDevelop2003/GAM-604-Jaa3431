@@ -43,9 +43,13 @@ public class playerController : MonoBehaviour
         Instantiate(GetData.characterObject, this.transform);
     }
 
-    //Regain mana is a method that during the start state will make the current mana equal to max mana
-    public void RegainMana()
+    //This is to reset the multipliers from the effects of their previous turn
+    //Thus also regains the mana for the player to use cards
+    public void ResetStats()
     {
+        playerModel.RollMultiplier = 1;
+        playerModel.ThrustMultiplier = 1;
+        playerModel.GuardMultiplier = 1;
         playerModel.CurrentMana = playerModel.MaxMana;
         Debug.Log("Mana Regain");
     }
@@ -88,8 +92,19 @@ public class playerController : MonoBehaviour
 
     public void ChangeHealth(int value) 
     {
+        //This gets the current buff component to see if the player is invincble from taking any damage
+
+        currentBuffs buffs = GetComponent<currentBuffs>();
+        //If the player is invincle & would take and damage this turn
+        //Then turn the value to 0 to prevent any damage from occurring
+        if(buffs.IsInvincible && value < 0)
+        {
+            value = 0;
+            Debug.Log("You take no damage due to being invincible");
+        }
+
         //If the current health being subtracted from the value is less than 0, the player is defeated
-        if(playerModel.CurrentHealth + value <= 0)
+        if (playerModel.CurrentHealth + value <= 0)
         {
             playerModel.IsAlive = false;
             Debug.Log("Game Over");
@@ -104,7 +119,7 @@ public class playerController : MonoBehaviour
         else
         {
             playerModel.CurrentHealth += value;
-            Debug.Log("Health Changed " + playerModel.CurrentHealth + " to " + playerModel.MaxHealth);
+            Debug.Log("Health Changed " + playerModel.CurrentHealth + " / " + playerModel.MaxHealth);
         }
     }
 

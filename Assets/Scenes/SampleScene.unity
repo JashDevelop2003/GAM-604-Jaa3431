@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 329044126}
   - component: {fileID: 329044118}
   - component: {fileID: 329044135}
+  - component: {fileID: 329044137}
   - component: {fileID: 329044121}
   - component: {fileID: 329044120}
   - component: {fileID: 329044123}
@@ -754,6 +755,32 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   selectedPlayer: {fileID: 0}
+--- !u!114 &329044137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329044114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b085b61473b724bab38e64cbea61c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInvincible: 0
+  invincibleCooldown: 0
+  isHealthy: 0
+  healthyCooldown: 0
+  isHasty: 0
+  hastyCooldown: 0
+  isLucky: 0
+  luckyCooldown: 0
+  isResistant: 0
+  resistantCooldown: 0
+  resistantValue: 0
+  isImpactful: 0
+  impactfulCooldown: 0
+  impactfulValue: 0
 --- !u!1 &344353842
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +793,7 @@ GameObject:
   - component: {fileID: 344353853}
   - component: {fileID: 344353852}
   - component: {fileID: 344353851}
+  - component: {fileID: 344353862}
   - component: {fileID: 344353861}
   - component: {fileID: 344353850}
   - component: {fileID: 344353849}
@@ -1108,6 +1136,32 @@ MonoBehaviour:
   isFeared: 0
   isConfused: 0
   isBlind: 0
+--- !u!114 &344353862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344353842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b085b61473b724bab38e64cbea61c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInvincible: 0
+  invincibleCooldown: 0
+  isHealthy: 0
+  healthyCooldown: 0
+  isHasty: 0
+  hastyCooldown: 0
+  isLucky: 0
+  luckyCooldown: 0
+  isResistant: 0
+  resistantCooldown: 0
+  resistantValue: 0
+  isImpactful: 0
+  impactfulCooldown: 0
+  impactfulValue: 0
 --- !u!1 &375598503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8232674871198528104, guid: 1baa6731d589905489217cd1ab42e6c1, type: 3}
