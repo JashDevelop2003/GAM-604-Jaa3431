@@ -12,7 +12,7 @@ using UnityEngine;
 public class currentEffects : MonoBehaviour
 {
     private playerController controller;
-
+    private currentBuffs buffs;
 
     //Each effect has a bool to check if the effect is active on the player
     //Each effect also has a int for the cooldown that decrements either at the start or the end of their turn
@@ -72,197 +72,202 @@ public class currentEffects : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<playerController>();
+        buffs = GetComponent<currentBuffs>();
     }
 
     //When the current player has chosen this player
     //This method requires the type and cooldown of the status card that is effecting this player
     public void AddEffect(effectEnum type, int cooldown)
     {
-        //This is the procedure of how to apply status effects
-        //If the effect has a cooldown more than 0 then increase the cooldown
-        if(type == effectEnum.Burned)
+        if (buffs.IsHealthy)
         {
-            isBurned = true;
-            if(burnCooldown > 0)
-            {
-                burnCooldown += cooldown;
-            }
-            else
-            {
-                burnCooldown = cooldown;
-
-            }
-            controller.effectEndEvent += BurnPlayer;
-        }
-
-        else if (type == effectEnum.Slowed)
-        {
-            isSlowed = true;
-            if(slowCooldown > 0)
-            {
-                slowCooldown += cooldown;
-            }
-            else
-            {
-                slowCooldown = cooldown;
-
-            }
-            controller.effectStartEvent += SlowPlayer;
-        }
-
-        else if(type == effectEnum.Shocked)
-        {
-            isShocked = true;
-            if (shockCooldown > 0)
-            {
-                shockCooldown += cooldown;
-            }
-            else
-            {
-                shockCooldown = cooldown;
-
-            }
-            controller.effectEndEvent += ShockPlayer;
-        }
-
-        else if (type == effectEnum.Exposed)
-        {
-            isExposed = true;
-            if (exposeCooldown > 0)
-            {
-                exposeCooldown += cooldown;
-            }
-            else
-            {
-                exposeCooldown = cooldown;
-
-            }
-            controller.effectEndEvent += ExposePlayer;
-        }
-
-        else if (type == effectEnum.Bleeding)
-        {
-            isBleeding = true;
-            if (bleedCooldown > 0)
-            {
-                bleedCooldown += cooldown;
-            }
-            else
-            {
-                bleedCooldown = cooldown;
-
-            }
-            controller.effectEndEvent += BleedPlayer;
-        }
-
-        else if (type == effectEnum.Poison)
-        {
-            isPoisoned = true;
-            if (poisonCooldown > 0)
-            {
-                poisonCooldown += cooldown;
-            }
-            else
-            {
-                poisonCooldown = cooldown;
-
-            }
-            controller.effectEndEvent += PoisonPlayer;
-        }
-
-        else if (type == effectEnum.Blistered)
-        {
-            isBlistered = true;
-            if (blisterCooldown > 0)
-            {
-                blisterCooldown += cooldown;
-            }
-            else
-            {
-                blisterCooldown = cooldown;
-
-            }
-            controller.effectEndEvent += BlisterPlayer;
-        }
-
-        else if (type == effectEnum.Unstabled)
-        {
-            isUnstabled = true;
-            if (unstableCooldown > 0)
-            {
-                unstableCooldown += cooldown;
-            }
-            else
-            {
-                unstableCooldown = cooldown;
-
-            }
-            controller.effectEndEvent += UnstablePlayer;
-        }
-
-        else if (type == effectEnum.Stunned)
-        {
-            isStunned = true;
-            if (stunCooldown > 0)
-            {
-                stunCooldown += cooldown;
-            }
-            else
-            {
-                stunCooldown = cooldown;
-
-            }
-            controller.effectEndEvent += StunPlayer;
-        }
-
-        else if (type == effectEnum.Feared)
-        {
-            isFeared = true;
-            if (fearCooldown > 0)
-            {
-                fearCooldown += cooldown;
-            }
-            else
-            {
-                fearCooldown = cooldown;
-
-            }
-            controller.effectStartEvent += FearPlayer;
-        }
-
-        else if (type == effectEnum.Confused)
-        {
-            isConfused = true;
-            if (confusedCooldown > 0)
-            {
-                confusedCooldown += cooldown;
-            }
-            else
-            {
-                confusedCooldown = cooldown;
-
-            }
-            controller.effectEndEvent += ConfusePlayer;
-        }
-
-        else if (type == effectEnum.Blind)
-        {
-            isBlind = true;
-            if (blindCooldown > 0)
-            {
-                blindCooldown += cooldown;
-            }
-            else
-            {
-                blindCooldown = cooldown;
-
-            }
-            controller.effectEndEvent += BlindPlayer;
+            Debug.Log("Player is healthy so no debuff for them");
         }
 
         else
         {
-            Debug.LogError("This effect doesn't exist");
+            //This is the procedure of how to apply status effects
+            //If the effect has a cooldown more than 0 then increase the cooldown
+            if (type == effectEnum.Burned)
+            {
+                isBurned = true;
+                if (burnCooldown > 0)
+                {
+                    burnCooldown += cooldown;
+                }
+                else
+                {
+                    burnCooldown = cooldown;
+                    controller.effectEndEvent += BurnPlayer;
+
+                }
+            }
+
+            else if (type == effectEnum.Slowed)
+            {
+                isSlowed = true;
+                if (slowCooldown > 0)
+                {
+                    slowCooldown += cooldown;
+                }
+                else
+                {
+                    slowCooldown = cooldown;
+                    controller.effectStartEvent += SlowPlayer;
+
+                }
+            }
+
+            else if (type == effectEnum.Shocked)
+            {
+                isShocked = true;
+                if (shockCooldown > 0)
+                {
+                    shockCooldown += cooldown;
+                }
+                else
+                {
+                    shockCooldown = cooldown;
+                    controller.effectEndEvent += ShockPlayer;
+
+                }
+            }
+
+            else if (type == effectEnum.Exposed)
+            {
+                isExposed = true;
+                if (exposeCooldown > 0)
+                {
+                    exposeCooldown += cooldown;
+                }
+                else
+                {
+                    exposeCooldown = cooldown;
+                    controller.effectStartEvent += ExposePlayer;
+                }
+            }
+
+            else if (type == effectEnum.Bleeding)
+            {
+                isBleeding = true;
+                if (bleedCooldown > 0)
+                {
+                    bleedCooldown += cooldown;
+                }
+                else
+                {
+                    bleedCooldown = cooldown;
+                    controller.effectEndEvent += BleedPlayer;
+
+                }
+            }
+
+            else if (type == effectEnum.Poison)
+            {
+                isPoisoned = true;
+                if (poisonCooldown > 0)
+                {
+                    poisonCooldown += cooldown;
+                }
+                else
+                {
+                    poisonCooldown = cooldown;
+                    controller.effectEndEvent += PoisonPlayer;
+
+                }
+            }
+
+            else if (type == effectEnum.Blistered)
+            {
+                isBlistered = true;
+                if (blisterCooldown > 0)
+                {
+                    blisterCooldown += cooldown;
+                }
+                else
+                {
+                    blisterCooldown = cooldown;
+                    controller.effectEndEvent += BlisterPlayer;
+                }
+            }
+
+            else if (type == effectEnum.Unstabled)
+            {
+                isUnstabled = true;
+                if (unstableCooldown > 0)
+                {
+                    unstableCooldown += cooldown;
+                }
+                else
+                {
+                    unstableCooldown = cooldown;
+                    controller.effectEndEvent += UnstablePlayer;
+                }
+            }
+
+            else if (type == effectEnum.Stunned)
+            {
+                isStunned = true;
+                if (stunCooldown > 0)
+                {
+                    stunCooldown += cooldown;
+                }
+                else
+                {
+                    stunCooldown = cooldown;
+                    controller.effectEndEvent += StunPlayer;
+
+                }
+            }
+
+            else if (type == effectEnum.Feared)
+            {
+                isFeared = true;
+                if (fearCooldown > 0)
+                {
+                    fearCooldown += cooldown;
+                }
+                else
+                {
+                    fearCooldown = cooldown;
+                    controller.effectStartEvent += FearPlayer;
+                }
+            }
+
+            else if (type == effectEnum.Confused)
+            {
+                isConfused = true;
+                if (confusedCooldown > 0)
+                {
+                    confusedCooldown += cooldown;
+                }
+                else
+                {
+                    confusedCooldown = cooldown;
+                    controller.effectEndEvent += ConfusePlayer;
+
+                }
+            }
+
+            else if (type == effectEnum.Blind)
+            {
+                isBlind = true;
+                if (blindCooldown > 0)
+                {
+                    blindCooldown += cooldown;
+                }
+                else
+                {
+                    blindCooldown = cooldown;
+                    controller.effectEndEvent += BlindPlayer;
+                }
+            }
+
+            else
+            {
+                Debug.LogError("This effect doesn't exist");
+            }
+
         }
     }
 
@@ -289,19 +294,27 @@ public class currentEffects : MonoBehaviour
     //Slow decreases the roll value by 20%
     public void SlowPlayer(object sender, EventArgs e)
     {
-        if (isSlowed) 
+        //This checks if hasty is on, if it's not on then decrease roll value by 20%
+        if (isSlowed && !buffs.IsHasty) 
         {
-            controller.GetModel.RollMultiplier = 0.8f;
+            controller.GetModel.RollMultiplier -= 0.2f;
             Debug.Log("RollMultiplier = " + controller.GetModel.RollMultiplier);
             slowCooldown--;
             if(slowCooldown <= 0)
             {
                 isSlowed = false;
+                controller.effectStartEvent -= SlowPlayer;
             }
         }
-        else
+
+        //otherwise check if hasty is active
+        //If it is then remove the debuff on player
+        else if (buffs.IsHasty)
         {
+            isSlowed = false;
+            slowCooldown = 0;
             controller.effectStartEvent -= SlowPlayer;
+            Debug.Log("Player has Hasty so Slow is Removed");
         }
     }
 
@@ -319,19 +332,27 @@ public class currentEffects : MonoBehaviour
     //Expose Decrease Guard by 25%
     public void ExposePlayer(object sender, EventArgs e)
     {
-        if (isExposed)
+        if (isExposed && !buffs.IsResistant)
         {
-            controller.GetModel.GuardMultiplier = 0.75f;
+            controller.GetModel.GuardMultiplier -= 0.25f;
             Debug.Log("GuardMultiplier = " + controller.GetModel.GuardMultiplier);
             exposeCooldown--;
             if (exposeCooldown <= 0)
             {
                 isExposed = false;
+                controller.effectStartEvent -= ExposePlayer;
+
             }
         }
-        else
+
+        //otherwise check if resistant is active
+        //If it is then remove the debuff on player
+        else if (buffs.IsResistant)
         {
+            isExposed = false;
+            exposeCooldown = 0;
             controller.effectStartEvent -= ExposePlayer;
+            Debug.Log("Player has Resistant so Exposed is Removed");
         }
     }
 
@@ -425,19 +446,26 @@ public class currentEffects : MonoBehaviour
     //Fear Decreases Thrust by 25%
     public void FearPlayer(object sender, EventArgs e)
     {
-        if (isFeared)
+        if (isFeared && !buffs.IsImpactful)
         {
-            controller.GetModel.ThrustMultiplier = 0.75f;
+            controller.GetModel.ThrustMultiplier -= 0.25f;
             Debug.Log("ThrustMultiplier = " + controller.GetModel.ThrustMultiplier);
             fearCooldown--;
             if (fearCooldown <= 0)
             {
                 isFeared = false;
+                controller.effectStartEvent -= FearPlayer;
             }
         }
-        else
+
+        //otherwise check if impactful is active
+        //If it is then remove the debuff on player
+        else if (buffs.IsImpactful)
         {
+            isFeared = false;
+            fearCooldown = 0;
             controller.effectStartEvent -= FearPlayer;
+            Debug.Log("Player has Impactful so Fear is Removed");
         }
     }
 

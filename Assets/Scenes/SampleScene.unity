@@ -768,19 +768,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  invincibleCooldown: 0
   isHealthy: 0
-  healthyCooldown: 0
   isHasty: 0
-  hastyCooldown: 0
   isLucky: 0
-  luckyCooldown: 0
   isResistant: 0
-  resistantCooldown: 0
-  resistantValue: 0
   isImpactful: 0
-  impactfulCooldown: 0
-  impactfulValue: 0
 --- !u!1 &344353842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,19 +1141,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  invincibleCooldown: 0
   isHealthy: 0
-  healthyCooldown: 0
   isHasty: 0
-  hastyCooldown: 0
   isLucky: 0
-  luckyCooldown: 0
   isResistant: 0
-  resistantCooldown: 0
-  resistantValue: 0
   isImpactful: 0
-  impactfulCooldown: 0
-  impactfulValue: 0
 --- !u!1 &375598503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8232674871198528104, guid: 1baa6731d589905489217cd1ab42e6c1, type: 3}

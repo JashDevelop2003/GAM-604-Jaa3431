@@ -22,6 +22,9 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     //the controller is used to provide the possible cards the player can obtain based on their character
     private playerController controller;
 
+    //This is to see if the player has a lucky buff on them to change the possibilities
+    private currentBuffs buffs;
+
     //this is for the movement cards and provides the possible movement card they can select from the character data
     [SerializeField] private List <movementCardStats> possibleMovementCards;
     private movementCardStats selectedMovementCard;
@@ -61,6 +64,9 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         possibleOffenceCards = controller.GetData.possibleOffenceCards;
         possibleDefenceCards = controller.GetData.possibleDefenceCards;
 
+        //the buff is reference to change the likelihood to obtaining a rarer card
+        buffs = GetComponent<currentBuffs>();
+
         //this enables to deciding events towards selecting a type of card
         controls = GetComponent<boardControls>();
         Controls.upPressed += DecidingUp;
@@ -68,17 +74,31 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         Controls.leftPressed += DecidingLeft;
         Controls.rightPressed += DecidingRight;
         Controls.confirmPressed += ConfirmingChoice;
-       
+
         //this provides a random range to provide a 75% chance of being Uncommon & 25% of being Rare
-        //TODO Next Stage: Add Legendary & Change the probability to (60/30/10)
+        //However is 100% for rare card if the player is lucky
+        //TODO: Add Legendary & Change the probability to (50/40/10)
+        //TODO: Change the lucky probability to (20/50/30)
+
+        //Rarity Int should change to Random.Range(1, 11)
         rarityInt = UnityEngine.Random.Range(1, 5);
-        if (rarityInt <= 3) 
-        {
-            rarity = CardRarity.Uncommon;
-        }
-        else if(rarityInt == 4)
+
+        if (buffs.IsLucky)
         {
             rarity = CardRarity.Rare;
+            Debug.Log("Lucky Chance");
+        }        
+        else
+        {
+            if (rarityInt <= 3)
+            {
+                rarity = CardRarity.Uncommon;
+            }
+            else if (rarityInt == 4)
+            {
+                rarity = CardRarity.Rare;
+                Debug.Log("Lucky Chance");
+            }
         }
     }
 
