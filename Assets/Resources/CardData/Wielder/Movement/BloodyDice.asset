@@ -16,7 +16,8 @@ MonoBehaviour:
   cardType: 2
   cardRarity: 1
   cardName: BloodyDice
-  cardDescription: Rolls 5-10, Applies Bleeding = Roll Value / 2
+  cardDescription: Rolls 5-10, Applies Bleeding = Roll Value
   minimumMoveValue: 5
   maximumMoveValue: 10
   manaCost: 1
+  additionalEffect: {fileID: 8022670406879687040, guid: e76fa82d96a61ed468ee1e7b7beef562, type: 3}

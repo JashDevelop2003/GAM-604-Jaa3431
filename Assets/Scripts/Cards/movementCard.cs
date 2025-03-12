@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,9 @@ public class movementCard : MonoBehaviour
         set { manaCost = value; }
     }
 
+    //This is the additional event that will invoke if the card has any additional effects
+    public event EventHandler additionalEvent;
+
     //this method is called from either the picking state or the movement deck pool itself and provides the stats onto the object
     //This will then add the card into the movement deck to be used during the deciding state
     public void CreateCard(movementCardStats newCard)
@@ -46,8 +50,17 @@ public class movementCard : MonoBehaviour
         rollMaximumValue = MoveCard.maximumMoveValue;
         manaCost = moveCard.manaCost;
         gameObject.name = moveCard.name;
+        if (newCard.additionalEffect != null)
+        {
+            Instantiate(newCard.additionalEffect, this.transform);
+        }
 
         movementDeckPile deck = GetComponentInParent<movementDeckPile>();
         deck.AddCard(this.gameObject);
+    }
+
+    public void ApplyAdditionalEffect()
+    {
+        additionalEvent?.Invoke(this, EventArgs.Empty);
     }
 }

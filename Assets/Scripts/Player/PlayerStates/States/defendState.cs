@@ -143,6 +143,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
 
         if (controller.GetModel.CurrentMana >= defendCard.ManaCost && !defendConfirm)
         {
+            defendCard.ApplyAdditionalEffect();
             combatSystem.DefenderReady(this.gameObject, defendCard.DefendValue);
             controller.ChangeMana(defendCard.ManaCost);
             defendConfirm = true;

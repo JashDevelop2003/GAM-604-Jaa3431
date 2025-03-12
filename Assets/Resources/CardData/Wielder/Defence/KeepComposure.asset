@@ -19,3 +19,4 @@ MonoBehaviour:
   cardDescription: Blocks 9 Damage. Increase Guard by 5% if Defend is Above Attack
   defendValue: 9
   manaCost: 3
+  additionalEffect: {fileID: 3337976532406059665, guid: c1770963e84ab8d4f8cc7adb606a8f60, type: 3}

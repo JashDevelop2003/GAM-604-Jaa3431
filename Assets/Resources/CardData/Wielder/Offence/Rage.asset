@@ -19,3 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 15 Damage & Increase Thrust by 10%
   attackValue: 15
   manaCost: 3
+  additionalEffect: {fileID: 2596894492692724258, guid: aebf2d1b9df3a4040a1613e040ae9c1b, type: 3}

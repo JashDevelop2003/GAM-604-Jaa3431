@@ -21,4 +21,6 @@ public class defenceCardStats : ScriptableObject
     public string cardDescription;
     public int defendValue;
     public int manaCost;
+
+    public GameObject additionalEffect;
 }

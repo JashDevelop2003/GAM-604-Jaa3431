@@ -17,14 +17,14 @@ public class statusCard : MonoBehaviour
         get { return target; }
     }
 
-    private effectEnum effect;
-    public effectEnum Effect
+    private effectEnum[] effect;
+    public effectEnum[] Effect
     {
         get { return effect; }
     }
 
-    private buffEnum buff;
-    public buffEnum Buff
+    private buffEnum[] buff;
+    public buffEnum[] Buff
     {
         get { return buff; }
     }
@@ -39,6 +39,12 @@ public class statusCard : MonoBehaviour
     public int EffectCooldown
     {
         get { return effectCooldown; }
+    }
+
+    private int buffCooldown;
+    public int BuffCooldown
+    {
+        get { return buffCooldown; }
     }
 
     [SerializeField] private int manaCost;
@@ -59,7 +65,8 @@ public class statusCard : MonoBehaviour
         target = newCard.target;
         effect = newCard.effect;
         buff = newCard.buff;
-        effectCooldown = newCard.cooldown;
+        effectCooldown = newCard.cooldown[0];
+        buffCooldown = newCard.cooldown[1];
         value = newCard.value;
         
 
@@ -69,20 +76,27 @@ public class statusCard : MonoBehaviour
 
     public void ActivateEffect(GameObject target)
     {
-        if (effect != effectEnum.Null) 
+        
+        foreach(effectEnum addEffect in effect)
         {
-            currentEffects targetEffect = target.GetComponent<currentEffects>();
-            targetEffect.AddEffect(effect, effectCooldown);
+            if (addEffect != effectEnum.Null)
+            {
+                currentEffects targetEffect = target.GetComponent<currentEffects>();
+                targetEffect.AddEffect(addEffect, effectCooldown);
+                Debug.Log(target + " is " + addEffect);
+            }
         }
 
-        if(buff != buffEnum.Null)
+        foreach(buffEnum addBuff in buff)
         {
-            currentBuffs targetBuff = target.GetComponent<currentBuffs>();
-            targetBuff.AddBuff(buff, effectCooldown, value);
+            if (addBuff != buffEnum.Null)
+            {
+                currentBuffs targetBuff = target.GetComponent<currentBuffs>();
+                targetBuff.AddBuff(addBuff, effectCooldown, value);
+                Debug.Log(target + " is " + addBuff);
+            }
         }
 
         //Add an event here for some non-status effects
-
-        Debug.Log(target + " is " +  effect );
     }
 }

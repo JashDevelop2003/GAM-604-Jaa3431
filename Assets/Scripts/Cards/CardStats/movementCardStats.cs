@@ -22,4 +22,6 @@ public class movementCardStats : ScriptableObject
     public int minimumMoveValue;
     public int maximumMoveValue;
     public int manaCost;
+
+    public GameObject additionalEffect;
 }

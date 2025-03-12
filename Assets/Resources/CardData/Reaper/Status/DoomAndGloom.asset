@@ -16,9 +16,11 @@ MonoBehaviour:
   cardType: 3
   cardRarity: 0
   target: 1
-  effect: 7
-  cooldown: 2
+  effect: 07000000
+  buff: 
+  cooldown: 0200000000000000
+  value: 0
   cardName: Doom And Gloom
   cardDescription: Apply Slow to Opponent for 2 Turns
-  effectPrefab: {fileID: 6800145047330886074, guid: 845c58e6ffdf9e9479054ceeae87732e, type: 3}
   manaCost: 1
+  additionalEffect: {fileID: 0}

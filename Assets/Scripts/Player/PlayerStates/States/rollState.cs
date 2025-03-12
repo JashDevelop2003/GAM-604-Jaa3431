@@ -34,6 +34,10 @@ public class rollState : playerStateBase, IConfirm, ICancel
         set { controls = value; }
     }
 
+    //This event occurs once the player has roll
+    public event EventHandler rollEvent;
+    public event EventHandler rollCancelEvent;
+
 
     public override void EnterState(playerStateManager player)
     {
@@ -116,12 +120,14 @@ public class rollState : playerStateBase, IConfirm, ICancel
                 controller.Roll((int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * controller.GetModel.RollMultiplier));
             }
 
-            rollDice = true;
+        rollEvent?.Invoke(this, EventArgs.Empty);
+        rollDice = true;
     }
 
     //This interface method returns the player back to the deciding state
     public void Cancel(object sender, EventArgs e)
     {
-        rollCancel = true;
+        rollCancelEvent?.Invoke(this, EventArgs.Empty);
+        rollCancel = true;       
     }
 }

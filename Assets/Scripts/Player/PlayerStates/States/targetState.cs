@@ -31,10 +31,42 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
         statusCard = selectedCard.GetComponent<statusCard>();
         turnManager = Singleton<turnManager>.Instance;
-        for (int i = 0; i < turnManager.GetPlayers.Length; i++) 
+
+        if (statusCard.Target == targetEnum.Any)
         {
-                selectPlayers[i] = turnManager.GetPlayers[i];           
+            for (int i = 0; i < turnManager.GetPlayers.Length; i++)
+            {
+                selectPlayers[i] = turnManager.GetPlayers[i];
+            }
         }
+
+        else if (statusCard.Target == targetEnum.Self)
+        {
+            statusCard.ActivateEffect(this.gameObject);
+            playerSelected = true;
+        }
+
+        else if (statusCard.Target == targetEnum.All)
+        {
+            for (int i = 0; i < turnManager.GetPlayers.Length; i++)
+            {
+                statusCard.ActivateEffect(turnManager.GetPlayers[i]);
+            }
+            playerSelected = true;
+        }
+
+        else if (statusCard.Target == targetEnum.Random) 
+        {
+            int randomPlayer = UnityEngine.Random.Range(0, turnManager.GetPlayers.Length);
+            statusCard.ActivateEffect(turnManager.GetPlayers[randomPlayer]);
+            playerSelected = true;
+        }
+
+        else
+        {
+            Debug.LogWarning("Unsuitable Target is Set on Selected Card");
+        }
+
     }
 
     public override void UpdateState(playerStateManager player)

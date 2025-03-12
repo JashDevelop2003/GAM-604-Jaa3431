@@ -110,7 +110,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                 lowestManaCost= statcard.ManaCost;
             }
 
-            if(controller.GetModel.CurrentMana < lowestManaCost)
+            if(controller.GetModel.CurrentMana < lowestManaCost || effects.Stunned)
             {
                 unableMove = true;
             }
@@ -146,6 +146,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             minRoll = moveCard.RollMinimumValue;
             maxRoll = moveCard.RollMaximumValue;
             manaCost = moveCard.ManaCost;
+            moveCard.ApplyAdditionalEffect();
 
             //This is to change the state to roll state
             player.ChangeState(player.RollState);

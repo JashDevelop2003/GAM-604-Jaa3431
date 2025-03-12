@@ -22,9 +22,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e89b788ea6c1dfb41a91549988011f8f, type: 2}
   - {fileID: 11400000, guid: 6ead47396b107af469c3bf510c83aef4, type: 2}
   - {fileID: 11400000, guid: ab164468113c6d74190a9bd966b76087, type: 2}
-  - {fileID: 11400000, guid: be264c7ab85efb545a1e7db25af68bb4, type: 2}
-  - {fileID: 11400000, guid: 067c49b7eb161394580dc573179f3c78, type: 2}
-  - {fileID: 11400000, guid: 869861b941fc7df4aa29e254fc3b3fad, type: 2}
   startingDefenceCards:
   - {fileID: 11400000, guid: 3ad6be79d7d630944bc125818434aa73, type: 2}
   - {fileID: 11400000, guid: 9498b2ad99067424ba309e6318e81235, type: 2}

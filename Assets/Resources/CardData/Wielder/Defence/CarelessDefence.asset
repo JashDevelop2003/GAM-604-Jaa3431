@@ -19,3 +19,4 @@ MonoBehaviour:
   cardDescription: Blocks 5 Damage. Increase Thrust by 5% if Defend is Above Attack
   defendValue: 5
   manaCost: 2
+  additionalEffect: {fileID: 6248700320622783857, guid: 05e32979de3d2c1438b86c997b90d9be, type: 3}

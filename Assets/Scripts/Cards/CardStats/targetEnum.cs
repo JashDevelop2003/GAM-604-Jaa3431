@@ -5,5 +5,7 @@ using UnityEngine;
 public enum targetEnum
 {
     Self,
-    Any
+    Any,
+    All,
+    Random
 }

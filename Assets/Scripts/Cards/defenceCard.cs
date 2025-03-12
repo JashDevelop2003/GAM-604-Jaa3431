@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,9 @@ public class defenceCard : MonoBehaviour
         set { manaCost = value; }
     }
 
+    //This is the additional event that will invoke if the card has any additional effects
+    public event EventHandler additionalEvent;
+
     //this method is called from either the picking state or the defence deck pool itself and provides the stats onto the object
     //This will then add the card into the offence deck to be used during the defend state
     public void CreateCard(defenceCardStats newCard)
@@ -38,8 +42,17 @@ public class defenceCard : MonoBehaviour
         defendValue = defendCard.defendValue;
         manaCost = defendCard.manaCost;
         gameObject.name = defendCard.name;
+        if (newCard.additionalEffect != null)
+        {
+            Instantiate(newCard.additionalEffect, this.transform);
+        }
 
         defenceDeckPile deck = GetComponentInParent<defenceDeckPile>();
         deck.AddCard(this.gameObject);
+    }
+
+    public void ApplyAdditionalEffect()
+    {
+        additionalEvent?.Invoke(this, EventArgs.Empty);
     }
 }
