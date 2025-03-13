@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,6 +55,8 @@ public class statusCard : MonoBehaviour
         set { manaCost = value; }
     }
 
+    public event EventHandler additionalEvent;
+
     //this method is called from either the picking state or the offence deck pool itself and provides the stats onto the object
     //This will then add the card into the offence deck to be used during the attack state
     public void CreateCard(statusCardStats newCard)
@@ -68,7 +71,11 @@ public class statusCard : MonoBehaviour
         effectCooldown = newCard.cooldown[0];
         buffCooldown = newCard.cooldown[1];
         value = newCard.value;
-        
+        if (newCard.additionalEffect != null)
+        {
+            Instantiate(newCard.additionalEffect, this.transform);
+        }
+
 
         statusDeckPile deck = GetComponentInParent<statusDeckPile>();
         deck.AddCard(this.gameObject);
@@ -98,5 +105,6 @@ public class statusCard : MonoBehaviour
         }
 
         //Add an event here for some non-status effects
+        additionalEvent?.Invoke(this, EventArgs.Empty);
     }
 }
