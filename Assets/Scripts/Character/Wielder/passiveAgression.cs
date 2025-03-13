@@ -24,9 +24,8 @@ public class passiveAgression : MonoBehaviour
     [SerializeField] private stanceEnum stance;
     public stanceEnum Stance
     {
-
-    get { return stance; } 
-    
+        get { return stance; } 
+        set { stance = value; }   
     }
 
     //this is the starting stance which will make the character be on a random stance during the beginning of the game

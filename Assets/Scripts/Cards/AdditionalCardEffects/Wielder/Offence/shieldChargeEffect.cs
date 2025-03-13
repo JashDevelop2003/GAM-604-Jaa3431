@@ -3,13 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PierceEffect : MonoBehaviour
+public class shieldChargeEffect : MonoBehaviour
 {
     //This requires the offence card to apply the effect to the suitable combat system event
     private offenceCard offenceCard;
     private combatSystem combatSystem;
     private GameObject player;
-    private int pierced = 0;
 
     ///This should be used for all additional effects
     void Awake()
@@ -22,31 +21,32 @@ public class PierceEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        combatSystem.beforeCombatEvent += Pierce;
+        combatSystem.beforeCombatEvent += ShieldCharge;
         combatSystem.combatComplete += RemoveEffect;
     }
 
-    public void Pierce(object sender, EventArgs e)
+    public void ShieldCharge(object sender, EventArgs e)
     {
         player = combatSystem.AttackingPlayer;
         passiveAgression playerStance = player.GetComponentInChildren<passiveAgression>();
-        if(playerStance.Stance == stanceEnum.Aggressive)
+        if (playerStance.Stance == stanceEnum.Passive)
         {
-            combatSystem.DefendValue = pierced;
-            Debug.Log("Pierce Successful, Defend Value at: " + pierced);
-
+            currentBuffs playerBuff = player.GetComponent<currentBuffs>();
+            playerBuff.AddBuff(buffEnum.Resistant, 3, 0.1f);
+            Debug.Log("Apply Damage to Opponent");
         }
         else
         {
-            combatSystem.AttackValue = pierced;
-            Debug.Log("Pierce Failed, Attack value at: " + pierced);
-        }    
+            combatSystem.AttackValue = 0;
+            Debug.Log("Attack Value becomes " + combatSystem.AttackValue + " due to being in Aggressive Stance");
+        }
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        combatSystem.beforeCombatEvent -= Pierce;
+        combatSystem.beforeCombatEvent -= ShieldCharge;
         combatSystem.combatComplete -= RemoveEffect;
+
     }
 }
