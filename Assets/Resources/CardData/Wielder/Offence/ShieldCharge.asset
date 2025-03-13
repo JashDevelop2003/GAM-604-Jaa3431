@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 0
-  cardRarity: 0
-  cardName: 
-  cardDescription: 
-  attackValue: 0
-  manaCost: 0
-  additionalEffect: {fileID: 0}
+  cardRarity: 2
+  cardName: Shield Charge
+  cardDescription: Deals 30 Damage to Opponent & Increases Resistant by 10% for 3
+    Turns if Stance is Passive
+  attackValue: 30
+  manaCost: 3
+  additionalEffect: {fileID: 2815484646649317560, guid: 501aac945b61f8f4fb644927a1c61a57, type: 3}

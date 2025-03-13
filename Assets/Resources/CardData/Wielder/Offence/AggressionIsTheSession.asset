@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 0
-  cardRarity: 0
-  cardName: 
-  cardDescription: 
-  attackValue: 0
-  manaCost: 0
-  additionalEffect: {fileID: 0}
+  cardRarity: 3
+  cardName: Aggression is the Session
+  cardDescription: Deals 50 Damage & Changes Stance if Stance is Passive
+  attackValue: 50
+  manaCost: 5
+  additionalEffect: {fileID: 8103456742096927519, guid: 5907f634dec0ce1428e8923bab6b6857, type: 3}

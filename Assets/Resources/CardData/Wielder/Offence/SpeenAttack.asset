@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 0
-  cardRarity: 0
-  cardName: 
-  cardDescription: 
-  attackValue: 0
-  manaCost: 0
-  additionalEffect: {fileID: 0}
+  cardRarity: 3
+  cardName: Speen Attack
+  cardDescription: Deals 40 Damage & Apply Confused to Self for 3 Turns
+  attackValue: 40
+  manaCost: 5
+  additionalEffect: {fileID: 116156092995023253, guid: cca04cfbac8142a47a9e1cb31604b0b8, type: 3}

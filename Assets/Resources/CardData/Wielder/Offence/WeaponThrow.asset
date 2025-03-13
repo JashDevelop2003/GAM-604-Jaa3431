@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 0
-  cardRarity: 0
-  cardName: 
-  cardDescription: 
-  attackValue: 0
-  manaCost: 0
-  additionalEffect: {fileID: 0}
+  cardRarity: 2
+  cardName: Weapon Throw
+  cardDescription: Deals 10 Damage & Applies 5 Bleeding to Opponent if Stance is
+    Aggressive
+  attackValue: 10
+  manaCost: 4
+  additionalEffect: {fileID: 2584878969282202845, guid: d8f23165cd7a13349bb8c3aac221c0f5, type: 3}
