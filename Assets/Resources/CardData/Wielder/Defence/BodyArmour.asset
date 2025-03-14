@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fd66986e0053944abd21dc873f8cd15, type: 3}
-  m_Name: MadlyPassive
+  m_Name: BodyArmour
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 1
   cardRarity: 2
-  cardName: MadlyPassive
-  cardDescription: Blocks 20. Apply Confused to Self for 2 Turn
-  defendValue: 20
-  manaCost: 4
-  additionalEffect: {fileID: 5860692751193001985, guid: 78e26ce16e6fb7549b532baba9642792, type: 3}
+  cardName: Body Armour
+  cardDescription: Block Damage & Increase Resistant by 15% for 3 turns
+  defendValue: 7
+  manaCost: 3
+  additionalEffect: {fileID: 7705500126177966826, guid: 01d26e359afdcfc49a9b373350491f9d, type: 3}

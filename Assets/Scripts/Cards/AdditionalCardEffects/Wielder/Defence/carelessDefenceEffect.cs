@@ -35,7 +35,6 @@ public class carelessDefenceEffect : MonoBehaviour
         {
             currentBuffs addBuff = player.GetComponent<currentBuffs>();
             addBuff.AddBuff(buffEnum.Impactful, 2, 0.05f);
-            Debug.Log("Increase Impactful by 5%");
         }
         else
         {

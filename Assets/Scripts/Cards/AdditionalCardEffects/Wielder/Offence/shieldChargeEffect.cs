@@ -33,7 +33,7 @@ public class shieldChargeEffect : MonoBehaviour
         {
             currentBuffs playerBuff = player.GetComponent<currentBuffs>();
             playerBuff.AddBuff(buffEnum.Resistant, 3, 0.1f);
-            Debug.Log("Apply Damage to Opponent");
+            Debug.Log("Deal Damage to Opponent & Gain Resistant by 10%");
         }
         else
         {

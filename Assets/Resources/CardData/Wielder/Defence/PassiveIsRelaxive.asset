@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fd66986e0053944abd21dc873f8cd15, type: 3}
-  m_Name: MadlyPassive
+  m_Name: PassiveIsRelaxive
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 1
-  cardRarity: 2
-  cardName: MadlyPassive
-  cardDescription: Blocks 20. Apply Confused to Self for 2 Turn
-  defendValue: 20
-  manaCost: 4
-  additionalEffect: {fileID: 5860692751193001985, guid: 78e26ce16e6fb7549b532baba9642792, type: 3}
+  cardRarity: 3
+  cardName: Passive is Relaxive
+  cardDescription: Block 40 Damage & Changes Stance to Passive if Current Stance
+    is Aggressive
+  defendValue: 40
+  manaCost: 5
+  additionalEffect: {fileID: 8994750891324060064, guid: c48327a3daf550d4ba192e9b5a4ff6a6, type: 3}

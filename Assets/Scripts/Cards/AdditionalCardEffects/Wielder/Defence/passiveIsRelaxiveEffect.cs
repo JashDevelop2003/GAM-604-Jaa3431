@@ -3,50 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class aggressionIsTheSessionEffect : MonoBehaviour
+public class passiveIsRelaxiveEffect : MonoBehaviour
 {
     //This requires the offence card to apply the effect to the suitable combat system event
-    private offenceCard offenceCard;
+    private defenceCard defenceCard;
     private combatSystem combatSystem;
     private GameObject player;
 
     ///This should be used for all additional effects
     void Awake()
     {
-        offenceCard = GetComponentInParent<offenceCard>();
+        defenceCard = GetComponentInParent<defenceCard>();
         combatSystem = combatSystem.instance;
-        offenceCard.additionalEvent += AddEffect;
+        defenceCard.additionalEvent += AddEffect;
     }
 
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        combatSystem.beforeCombatEvent += AggressionIsTheSession;
+        combatSystem.beforeCombatEvent += PassiveIsRelaxive;
         combatSystem.combatComplete += RemoveEffect;
     }
 
-    public void AggressionIsTheSession(object sender, EventArgs e)
+    //Passive Is Relaxive Blocks 40 & Changes stance
+    //However the card only works if the player's stance is currently in aggressive
+    //Otherwise the card fails to defend
+    public void PassiveIsRelaxive(object sender, EventArgs e)
     {
-        player = combatSystem.AttackingPlayer;
+        player = combatSystem.DefendingPlayer;
         passiveAgression playerStance = player.GetComponentInChildren<passiveAgression>();
-        if (playerStance.Stance == stanceEnum.Passive)
+        if (playerStance.Stance == stanceEnum.Aggressive)
         {
-            playerStance.Stance = stanceEnum.Aggressive;
-            combatSystem.AttackValue *= 2;
+            playerStance.Stance = stanceEnum.Passive;
+            combatSystem.DefendValue *= 2;
             Debug.Log("Change Stance to " + playerStance.Stance);
         }
         else
         {
-            combatSystem.AttackValue = 0;
-            Debug.Log("Attack Value becomes " + combatSystem.AttackValue + " due to being in Aggressive Stance");
+            combatSystem.DefendValue = 0;
+            Debug.Log("Defend Value becomes " + combatSystem.DefendValue + " due to being in Aggressive Stance");
         }
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        combatSystem.beforeCombatEvent -= AggressionIsTheSession;
+        combatSystem.beforeCombatEvent -= PassiveIsRelaxive;
         combatSystem.combatComplete -= RemoveEffect;
-
     }
 }

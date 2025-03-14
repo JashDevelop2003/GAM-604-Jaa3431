@@ -73,6 +73,7 @@ public class currentBuffs : MonoBehaviour
                 invincibleCooldown = cooldown;
                 controller.effectEndEvent += InvinciblePlayer;
             }
+            Debug.Log("Player is Invincible for " + cooldown + " more turns. cooldown is now: " + invincibleCooldown);
         }
 
         else if (type == buffEnum.Healthy) 
@@ -87,6 +88,7 @@ public class currentBuffs : MonoBehaviour
                 healthyCooldown = cooldown;
                 controller.effectEndEvent += HealthyPlayer;
             }
+            Debug.Log("Player is Healthy for " + cooldown + " more turns. cooldown is now: " + healthyCooldown);
         }
 
         else if (type == buffEnum.Hasty)
@@ -101,6 +103,7 @@ public class currentBuffs : MonoBehaviour
                 hastyCooldown = cooldown;
                 controller.effectStartEvent += HastyPlayer;
             }
+            Debug.Log("Player is Hasty for " + cooldown + " more turns cooldown is now " + hastyCooldown);
         }
 
         if (type == buffEnum.Lucky)
@@ -115,11 +118,14 @@ public class currentBuffs : MonoBehaviour
                 luckyCooldown = cooldown;
                 controller.effectEndEvent += LuckyPlayer;
             }
+
+            Debug.Log("Player is Hasty for " + cooldown + " more turns cooldown is now " + hastyCooldown);
         }
 
         else if (type == buffEnum.Resistant)
         {
             isResistant = true;
+            Debug.Log("Previous Resistant Value & Cooldown: " + resistantValue + " value " + resistantCooldown + "cooldown");
             //If the new Resistant value is higher than the current buff OR If the current value is 0
             //Change both the cooldown & value to the new value & cooldown
             if (resistantValue < value || resistantValue == 0)
@@ -158,12 +164,16 @@ public class currentBuffs : MonoBehaviour
             {
                 Debug.LogWarning(value + " is less than current value");
             }
+
+            Debug.Log("Current Resistant Value & Cooldown: " + resistantValue + " value " + resistantCooldown + "cooldown");
+
         }
 
 
         else if (type == buffEnum.Impactful)
         {
             isImpactful = true;
+            Debug.Log("Previous Impactful Value & Cooldown: " + impactfulValue + " value " + impactfulCooldown + "cooldown");
             //If the new impact value is higher than the current buff OR If the current value is 0
             //Change both the cooldown & value to the new value & cooldown
             if (impactfulValue < value || impactfulValue == 0)
@@ -202,6 +212,8 @@ public class currentBuffs : MonoBehaviour
             {
                 Debug.LogWarning(value + " is less than current value");
             }
+
+            Debug.Log("Current Impactful Value & Cooldown: " + impactfulValue + " value " + impactfulCooldown + "cooldown");
         }
 
     }

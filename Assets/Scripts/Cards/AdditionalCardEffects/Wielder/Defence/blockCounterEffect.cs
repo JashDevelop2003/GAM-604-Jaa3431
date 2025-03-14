@@ -3,15 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class keepComposureEffect : MonoBehaviour
+public class blockCounterEffect : MonoBehaviour
 {
     //This requires the offence card to apply the effect to the suitable combat system event
     private defenceCard defenceCard;
     private combatSystem combatSystem;
-    [SerializeField] private GameObject player;
-    [SerializeField] private int attackValue;
-    [SerializeField] private int defendValue;
-    
+    [SerializeField] private GameObject opponent;
+
     private void Awake()
     {
         defenceCard = GetComponentInParent<defenceCard>();
@@ -22,30 +20,30 @@ public class keepComposureEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        combatSystem.duringCombatEvent += KeepComposure;
+        combatSystem.duringCombatEvent += BlockCounter;
         combatSystem.combatComplete += RemoveEffect;
     }
 
-    public void KeepComposure(object sender, EventArgs e)
+    //Block Counter Deals 10 Damage to the Attacker if the Defend Value is Higher than the Attack Value
+    public void BlockCounter(object sender, EventArgs e)
     {
-        player = combatSystem.DefendingPlayer;
-        attackValue = combatSystem.AttackValue;
-        defendValue = combatSystem.DefendValue;
-        if (defendValue > attackValue) 
-        { 
-            currentBuffs addBuff = player.GetComponent<currentBuffs>();
-            addBuff.AddBuff(buffEnum.Resistant, 2, 0.05f);
+        opponent = combatSystem.DefendingPlayer;
+        if(combatSystem.DefendValue >= combatSystem.AttackValue)
+        {
+            playerController controller = opponent.GetComponent<playerController>();
+            controller.ChangeHealth(-10);
+            Debug.Log("COUNTER!");
         }
         else
         {
-            Debug.Log("No Increase");
+            Debug.Log("No Counter? :(");
         }
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        combatSystem.duringCombatEvent -= KeepComposure;
+        combatSystem.duringCombatEvent -= BlockCounter;
         combatSystem.combatComplete -= RemoveEffect;
     }
 }

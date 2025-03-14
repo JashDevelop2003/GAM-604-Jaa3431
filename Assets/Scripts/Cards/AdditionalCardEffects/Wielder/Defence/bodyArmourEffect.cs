@@ -3,15 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class keepComposureEffect : MonoBehaviour
+public class bodyArmourEffect : MonoBehaviour
 {
     //This requires the offence card to apply the effect to the suitable combat system event
     private defenceCard defenceCard;
     private combatSystem combatSystem;
-    [SerializeField] private GameObject player;
-    [SerializeField] private int attackValue;
-    [SerializeField] private int defendValue;
-    
+    private GameObject player;
+
     private void Awake()
     {
         defenceCard = GetComponentInParent<defenceCard>();
@@ -22,30 +20,22 @@ public class keepComposureEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        combatSystem.duringCombatEvent += KeepComposure;
+        combatSystem.afterCombatEvent += BodyArmour;
         combatSystem.combatComplete += RemoveEffect;
     }
 
-    public void KeepComposure(object sender, EventArgs e)
+    //Body Armour Increase Resistant by 15% for 3 Turns
+    public void BodyArmour(object sender, EventArgs e)
     {
         player = combatSystem.DefendingPlayer;
-        attackValue = combatSystem.AttackValue;
-        defendValue = combatSystem.DefendValue;
-        if (defendValue > attackValue) 
-        { 
-            currentBuffs addBuff = player.GetComponent<currentBuffs>();
-            addBuff.AddBuff(buffEnum.Resistant, 2, 0.05f);
-        }
-        else
-        {
-            Debug.Log("No Increase");
-        }
+        currentBuffs buffPlayer = player.GetComponent<currentBuffs>();
+        buffPlayer.AddBuff(buffEnum.Resistant, 3, 0.15f);
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        combatSystem.duringCombatEvent -= KeepComposure;
+        combatSystem.afterCombatEvent -= BodyArmour;
         combatSystem.combatComplete -= RemoveEffect;
     }
 }

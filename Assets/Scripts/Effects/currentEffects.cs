@@ -99,8 +99,9 @@ public class currentEffects : MonoBehaviour
                 {
                     burnCooldown = cooldown;
                     controller.effectEndEvent += BurnPlayer;
-
                 }
+
+                Debug.Log("Player is Burned for " + cooldown + " more turns. cooldown is now: " + burnCooldown);
             }
 
             else if (type == effectEnum.Slowed)
@@ -116,6 +117,7 @@ public class currentEffects : MonoBehaviour
                     controller.effectStartEvent += SlowPlayer;
 
                 }
+                Debug.Log("Player is Slowed for " + cooldown + " more turns. cooldown is now: " + slowCooldown);
             }
 
             else if (type == effectEnum.Shocked)
@@ -131,6 +133,8 @@ public class currentEffects : MonoBehaviour
                     controller.effectEndEvent += ShockPlayer;
 
                 }
+
+                Debug.Log("Player is Shocked for " + cooldown + " more turns. cooldown is now: " + shockCooldown);
             }
 
             else if (type == effectEnum.Exposed)
@@ -145,6 +149,7 @@ public class currentEffects : MonoBehaviour
                     exposeCooldown = cooldown;
                     controller.effectStartEvent += ExposePlayer;
                 }
+                Debug.Log("Player is Exposed for " + cooldown + " more turns. cooldown is now: " + exposeCooldown);
             }
 
             else if (type == effectEnum.Bleeding)
@@ -160,6 +165,8 @@ public class currentEffects : MonoBehaviour
                     controller.effectEndEvent += BleedPlayer;
 
                 }
+
+                Debug.Log("Player is Bleeding for " + cooldown + " more turns. cooldown is now: " + bleedCooldown);
             }
 
             else if (type == effectEnum.Poison)
@@ -175,6 +182,9 @@ public class currentEffects : MonoBehaviour
                     controller.effectEndEvent += PoisonPlayer;
 
                 }
+
+                Debug.Log("Player is Poisoned for " + cooldown + " more turns. cooldown is now: " + poisonCooldown);
+
             }
 
             else if (type == effectEnum.Blistered)
@@ -189,6 +199,9 @@ public class currentEffects : MonoBehaviour
                     blisterCooldown = cooldown;
                     controller.effectEndEvent += BlisterPlayer;
                 }
+
+                Debug.Log("Player is Blistered for " + cooldown + " more turns. cooldown is now: " + blisterCooldown);
+
             }
 
             else if (type == effectEnum.Unstabled)
@@ -203,6 +216,9 @@ public class currentEffects : MonoBehaviour
                     unstableCooldown = cooldown;
                     controller.effectEndEvent += UnstablePlayer;
                 }
+
+                Debug.Log("Player is Unstabled for " + cooldown + " more turns. cooldown is now: " + unstableCooldown);
+
             }
 
             else if (type == effectEnum.Stunned)
@@ -218,6 +234,8 @@ public class currentEffects : MonoBehaviour
                     controller.effectEndEvent += StunPlayer;
 
                 }
+                Debug.Log("Player is stunned for " + cooldown + " more turns. cooldown is now: " + stunCooldown);
+
             }
 
             else if (type == effectEnum.Feared)
@@ -232,6 +250,8 @@ public class currentEffects : MonoBehaviour
                     fearCooldown = cooldown;
                     controller.effectStartEvent += FearPlayer;
                 }
+                Debug.Log("Player is Feared for " + cooldown + " more turns. cooldown is now: " + fearCooldown);
+
             }
 
             else if (type == effectEnum.Confused)
@@ -245,8 +265,9 @@ public class currentEffects : MonoBehaviour
                 {
                     confusedCooldown = cooldown;
                     controller.effectEndEvent += ConfusePlayer;
-
                 }
+                Debug.Log("Player is Confused for " + cooldown + " more turns. cooldown is now: " + confusedCooldown);
+
             }
 
             else if (type == effectEnum.Blind)
@@ -261,6 +282,8 @@ public class currentEffects : MonoBehaviour
                     blindCooldown = cooldown;
                     controller.effectEndEvent += BlindPlayer;
                 }
+                Debug.Log("Player is blinded for " + cooldown + " more turns. cooldown is now: " + blindCooldown);
+
             }
 
             else
