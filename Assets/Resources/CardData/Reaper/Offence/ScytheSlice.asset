@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fa44483c54aead46b4df830d7927cea, type: 3}
-  m_Name: VulnerableOne
+  m_Name: ScytheSlice
   m_EditorClassIdentifier: 
   characterCard: 1
   cardType: 0
-  cardRarity: 1
-  cardName: Vulnerable One
-  cardDescription: Deals 4 Damage & Apply Exposed for 2 Turns
-  attackValue: 4
-  manaCost: 2
-  additionalEffect: {fileID: 4016880274526541833, guid: 3b293a364188a2441b49ecaa13cf5c83, type: 3}
+  cardRarity: 3
+  cardName: ScytheSlice
+  cardDescription: Deals 40 Damage
+  attackValue: 40
+  manaCost: 8
+  additionalEffect: {fileID: 0}

@@ -18,6 +18,7 @@ public class lastReapsort : MonoBehaviour
     public bool LastReapsortActive
     {
         get { return lastReapsortActive; }
+        set { lastReapsortActive = value; }
     }
 
     private Coroutine abilityBegin;

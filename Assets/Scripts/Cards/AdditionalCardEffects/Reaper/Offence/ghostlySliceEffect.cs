@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PierceEffect : MonoBehaviour
+public class ghostlySliceEffect : MonoBehaviour
 {
     //This requires the offence card to apply the effect to the suitable combat system event
     private offenceCard offenceCard;
     private combatSystem combatSystem;
-    private GameObject player;
     private int pierced = 0;
 
     ///This should be used for all additional effects
@@ -22,33 +21,21 @@ public class PierceEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        combatSystem.beforeCombatEvent += Pierce;
+        combatSystem.beforeCombatEvent += GhostlySlice;
         combatSystem.combatComplete += RemoveEffect;
     }
 
-    //Pierce Only Deals Damage when Aggressive
-    //Pierce Ignores the Defend Value Entirely
-    public void Pierce(object sender, EventArgs e)
+    //Ghostly Slice Ignores the Defend Value Entirely
+    public void GhostlySlice(object sender, EventArgs e)
     {
-        player = combatSystem.AttackingPlayer;
-        passiveAgression playerStance = player.GetComponentInChildren<passiveAgression>();
-        if(playerStance.Stance == stanceEnum.Aggressive)
-        {
-            combatSystem.DefendValue = pierced;
-            Debug.Log("Pierce Successful, Defend Value at: " + pierced);
-
-        }
-        else
-        {
-            combatSystem.AttackValue = pierced;
-            Debug.Log("Pierce Failed, Attack value at: " + pierced);
-        }    
+        combatSystem.DefendValue = pierced;
+        Debug.Log("Pierce Successful, Defend Value at: " + pierced);
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        combatSystem.beforeCombatEvent -= Pierce;
+        combatSystem.beforeCombatEvent -= GhostlySlice;
         combatSystem.combatComplete -= RemoveEffect;
     }
 }

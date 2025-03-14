@@ -19,3 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 5 Damage & Apply Poison for 1 Turn
   attackValue: 5
   manaCost: 1
+  additionalEffect: {fileID: 8878604434373808896, guid: 6cf4e919c1e735d41821f72ec624d0c0, type: 3}

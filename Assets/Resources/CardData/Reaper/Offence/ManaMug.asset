@@ -19,3 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 8 Damage. Steal Mana = Damage Dealt
   attackValue: 8
   manaCost: 4
+  additionalEffect: {fileID: 8683689654066884827, guid: 12f4314f650306a4189d2b017e8417d8, type: 3}
