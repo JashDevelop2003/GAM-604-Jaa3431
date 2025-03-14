@@ -83,8 +83,20 @@ public class statusCard : MonoBehaviour
 
     public void ActivateEffect(GameObject target)
     {
-        
-        foreach(effectEnum addEffect in effect)
+        //Add an event here for some non-status effects
+        additionalEvent?.Invoke(this, EventArgs.Empty);
+
+        foreach (buffEnum addBuff in buff)
+        {
+            if (addBuff != buffEnum.Null)
+            {
+                currentBuffs targetBuff = target.GetComponent<currentBuffs>();
+                targetBuff.AddBuff(addBuff, buffCooldown, value);
+                Debug.Log(target + " is " + addBuff);
+            }
+        }
+
+        foreach (effectEnum addEffect in effect)
         {
             if (addEffect != effectEnum.Null)
             {
@@ -93,18 +105,5 @@ public class statusCard : MonoBehaviour
                 Debug.Log(target + " is " + addEffect);
             }
         }
-
-        foreach(buffEnum addBuff in buff)
-        {
-            if (addBuff != buffEnum.Null)
-            {
-                currentBuffs targetBuff = target.GetComponent<currentBuffs>();
-                targetBuff.AddBuff(addBuff, effectCooldown, value);
-                Debug.Log(target + " is " + addBuff);
-            }
-        }
-
-        //Add an event here for some non-status effects
-        additionalEvent?.Invoke(this, EventArgs.Empty);
     }
 }

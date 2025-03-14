@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 714d0a73057e30c458877542f2868006, type: 3}
-  m_Name: TomatoOnYourFace
+  m_Name: ISurrender
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 3
-  cardRarity: 0
-  target: 1
-  effect: 00000000
-  buff: 
-  cooldown: 0200000000000000
+  cardRarity: 1
+  target: 0
+  effect: 0a000000
+  buff: 00000000
+  cooldown: 0200000001000000
   value: 0
-  cardName: Tomato On Your Face!
-  cardDescription: Apply Burn to Someone for 2 Turns
-  manaCost: 1
+  cardName: I Surrender
+  cardDescription: Apply Invincible for 1 Turn, However Apply Stun for 2 Turns to
+    Self
+  manaCost: 5
   additionalEffect: {fileID: 0}

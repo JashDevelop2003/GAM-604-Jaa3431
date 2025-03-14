@@ -110,7 +110,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                 lowestManaCost= statcard.ManaCost;
             }
 
-            if(controller.GetModel.CurrentMana < lowestManaCost || effects.Stunned)
+            if(controller.GetModel.CurrentMana < lowestManaCost)
             {
                 unableMove = true;
             }
@@ -131,6 +131,11 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                 hasSelected = true;
 
             }
+        }
+
+        if (effects.Stunned) 
+        {
+            unableMove = true;
         }
 
     }

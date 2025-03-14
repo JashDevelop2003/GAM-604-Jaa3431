@@ -64,5 +64,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1870f6330ccb78148ab8c126836d9b3b, type: 2}
   - {fileID: 11400000, guid: fced852ae195e304f8fd2d4db1a35dde, type: 2}
   - {fileID: 11400000, guid: 43ebb9618526eeb43868a906e4e0ac08, type: 2}
-  possibleStatusCards: []
+  possibleStatusCards:
+  - {fileID: 11400000, guid: 0b08545af9a4f9043b5a82aae70f10bc, type: 2}
+  - {fileID: 11400000, guid: 80ee2c79697ff0c488692cab84aa28f1, type: 2}
+  - {fileID: 11400000, guid: c3cd9344f8ef8d248b247baeb1422236, type: 2}
+  - {fileID: 11400000, guid: 473f038fea347de449240d29bb607020, type: 2}
+  - {fileID: 11400000, guid: c823e363a6576ef40a84fba9c51bf540, type: 2}
+  - {fileID: 11400000, guid: 6c8124de22085094498ed6283068678f, type: 2}
+  - {fileID: 11400000, guid: de0f5d4f3f3327a47b4e7226c8534e74, type: 2}
+  - {fileID: 11400000, guid: e081b0715dd3ef74e83cb9ccb80ca3a2, type: 2}
+  - {fileID: 11400000, guid: ff64250520af704429fb2bdbd357e8f0, type: 2}
   characterObject: {fileID: 2680251509015015823, guid: 2ee0e264335f77e4785483e98cfe75a6, type: 3}

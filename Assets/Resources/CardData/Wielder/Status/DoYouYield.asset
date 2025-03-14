@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 714d0a73057e30c458877542f2868006, type: 3}
-  m_Name: TomatoOnYourFace
+  m_Name: DoYouYield
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 3
-  cardRarity: 0
-  target: 1
-  effect: 00000000
+  cardRarity: 3
+  target: 2
+  effect: 020000000900000007000000
   buff: 
-  cooldown: 0200000000000000
+  cooldown: 0300000000000000
   value: 0
-  cardName: Tomato On Your Face!
-  cardDescription: Apply Burn to Someone for 2 Turns
-  manaCost: 1
-  additionalEffect: {fileID: 0}
+  cardName: Do You Yield?
+  cardDescription: Apply Exposed, Feared & Slow to All Opponents for 3 Turns & Apply
+    Healthy for This turn
+  manaCost: 7
+  additionalEffect: {fileID: 7411191684024003422, guid: d318457fe7cc9df44931d5e24897bc5e, type: 3}

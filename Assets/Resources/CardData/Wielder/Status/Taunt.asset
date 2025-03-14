@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 714d0a73057e30c458877542f2868006, type: 3}
-  m_Name: TomatoOnYourFace
+  m_Name: Taunt
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 3
-  cardRarity: 0
-  target: 1
-  effect: 00000000
-  buff: 
-  cooldown: 0200000000000000
-  value: 0
-  cardName: Tomato On Your Face!
-  cardDescription: Apply Burn to Someone for 2 Turns
-  manaCost: 1
-  additionalEffect: {fileID: 0}
+  cardRarity: 1
+  target: 0
+  effect: 
+  buff: 04000000
+  cooldown: 0000000002000000
+  value: 0.2
+  cardName: Taunt
+  cardDescription: Increase Resistant by 20% for the next 2 Turns. However Decrease
+    Guard by 40% This Turn
+  manaCost: 2
+  additionalEffect: {fileID: 3915110113291004447, guid: a98baa031d6a5094bb1ed448ebf0812c, type: 3}
