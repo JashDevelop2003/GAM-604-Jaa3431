@@ -69,12 +69,13 @@ public class playerController : MonoBehaviour
 
         }
 
-        Debug.Log("Cash Changed to: " + playerModel.CurrentCash);
+        Debug.Log(this.gameObject + "'s Cash Changed to: " + playerModel.CurrentCash);
     }
 
     public void ChangeMana(int cost)
     {
         playerModel.CurrentMana -= cost;
+        Debug.Log(this.gameObject  + "'s Mana Changed to: " + playerModel.CurrentMana);
     }
 
     //Roll is a mathod that subtracts the mana based on mana cost (parameter is roll cost) and the value of the dice (parameter is value)
@@ -119,7 +120,7 @@ public class playerController : MonoBehaviour
         else
         {
             playerModel.CurrentHealth += value;
-            Debug.Log("Health Changed " + playerModel.CurrentHealth + " / " + playerModel.MaxHealth);
+            Debug.Log(this.gameObject + "'s Health Changed " + playerModel.CurrentHealth + " / " + playerModel.MaxHealth);
         }
     }
 

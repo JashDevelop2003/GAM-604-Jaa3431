@@ -29,7 +29,7 @@ public class ghostlySliceEffect : MonoBehaviour
     public void GhostlySlice(object sender, EventArgs e)
     {
         combatSystem.DefendValue = pierced;
-        Debug.Log("Pierce Successful, Defend Value at: " + pierced);
+        Debug.Log("Pierced Opponent, Defend Value at: " + pierced);
     }
 
     ///This should be used for all additional effects

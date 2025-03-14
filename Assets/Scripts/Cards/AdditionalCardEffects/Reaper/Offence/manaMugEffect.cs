@@ -38,8 +38,10 @@ public class manaMugEffect : MonoBehaviour
         if(combatSystem.AttackValue > combatSystem.DefendValue)
         {
             int difference = combatSystem.AttackValue - combatSystem.DefendValue;
-            playerController.ChangeMana(difference);
-            opponentController.ChangeMana(-difference);
+
+            //since change mana decreases the value double negative provide a positive value
+            playerController.ChangeMana(-difference);
+            opponentController.ChangeMana(difference);
 
             Debug.Log(difference + " Mana was Stolen:");
         }
