@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bloodyDiceEffect : MonoBehaviour
+public class strengthInNumbersEffect : MonoBehaviour
 {
     private movementCard movementCard;
     private Transform locatePlayer;
     private GameObject player;
     private rollState rollState;
-    
+
     void Awake()
     {
         movementCard = GetComponentInParent<movementCard>();
@@ -23,23 +23,25 @@ public class bloodyDiceEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        rollState.rollEvent += BloodyDice;
+        rollState.rollEvent += StrengthInNumbers;
         rollState.rollEvent += RemoveEffect;
         rollState.rollCancelEvent += RemoveEffect;
     }
 
-    //Bloody Dice Applies Bleeding to the player equal to the roll value
-    public void BloodyDice(object sender, EventArgs e)
+    //One Two Five Will Change the value of 3 to 5
+    public void StrengthInNumbers(object sender, EventArgs e)
     {
         playerController controller = player.GetComponent<playerController>();
-        currentEffects currentEffects = player.GetComponent<currentEffects>();
-        currentEffects.AddEffect(effectEnum.Bleeding, controller.GetModel.RollValue);
+        currentBuffs buffPlayer = player.GetComponent<currentBuffs>();
+        controller.GetModel.ThrustMultiplier += (float)(0.05 * controller.GetModel.RollValue);
+        buffPlayer.AddBuff(buffEnum.Impactful, controller.GetModel.RollValue, (float)(0.05 * controller.GetModel.RollValue));
+        Debug.Log(controller.GetModel.ThrustMultiplier);
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        rollState.rollEvent -= BloodyDice;
+        rollState.rollEvent -= StrengthInNumbers;
         rollState.rollEvent -= RemoveEffect;
         rollState.rollCancelEvent -= RemoveEffect;
     }

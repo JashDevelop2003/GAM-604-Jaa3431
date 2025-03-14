@@ -61,5 +61,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 968725c8e30534b4c9c41fafbca17941, type: 2}
   - {fileID: 11400000, guid: f10e5f3e5f496e44d8fdf8fe86d1c3c9, type: 2}
   - {fileID: 11400000, guid: 068a4d2c87d50f14788c24d14527285f, type: 2}
+  - {fileID: 11400000, guid: 1870f6330ccb78148ab8c126836d9b3b, type: 2}
+  - {fileID: 11400000, guid: fced852ae195e304f8fd2d4db1a35dde, type: 2}
+  - {fileID: 11400000, guid: 43ebb9618526eeb43868a906e4e0ac08, type: 2}
   possibleStatusCards: []
   characterObject: {fileID: 2680251509015015823, guid: 2ee0e264335f77e4785483e98cfe75a6, type: 3}

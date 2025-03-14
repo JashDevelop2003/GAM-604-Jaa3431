@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 520cd02742583cb449b5c21dac472603, type: 3}
-  m_Name: RunAway!
+  m_Name: StrengthInNumbers
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 2
-  cardRarity: 1
-  cardName: RunAway!
-  cardDescription: Roll 5-10, Lose Coins Equal to Roll Value
-  minimumMoveValue: 5
+  cardRarity: 3
+  cardName: Strength in Numbers
+  cardDescription: Rolls 1-10 & Increase Impactful by (5% x Roll Value) for (Roll
+    Value) Turns
+  minimumMoveValue: 1
   maximumMoveValue: 10
-  manaCost: 2
+  manaCost: 6
+  additionalEffect: {fileID: 1632852204090326585, guid: 7a4807bab0eabcc46bbd2b304f593927, type: 3}

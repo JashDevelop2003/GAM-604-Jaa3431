@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 520cd02742583cb449b5c21dac472603, type: 3}
-  m_Name: TankInDisguise
+  m_Name: OneTwoFive
   m_EditorClassIdentifier: 
   characterCard: 0
   cardType: 2
-  cardRarity: 1
-  cardName: TankInDisguise
-  cardDescription: Rolls 3-7, Applies Confused to Self
-  minimumMoveValue: 3
-  maximumMoveValue: 7
-  manaCost: 2
-  additionalEffect: {fileID: 7858519362768272985, guid: de5d5eb558b065f41b82110e2b001503, type: 3}
+  cardRarity: 2
+  cardName: 1.. 2.. 5!
+  cardDescription: Roll 1-3 (Rolling a 3 becomes 5)
+  minimumMoveValue: 1
+  maximumMoveValue: 3
+  manaCost: 3
+  additionalEffect: {fileID: 5785799472632042522, guid: 0083b17bf7ef1f14180eb4ee8f3b5ec1, type: 3}

@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bloodyDiceEffect : MonoBehaviour
+public class tankInDisguiseEffect : MonoBehaviour
 {
     private movementCard movementCard;
     private Transform locatePlayer;
     private GameObject player;
     private rollState rollState;
-    
+
     void Awake()
     {
         movementCard = GetComponentInParent<movementCard>();
@@ -23,23 +23,22 @@ public class bloodyDiceEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        rollState.rollEvent += BloodyDice;
+        rollState.rollEvent += TankInDisguise;
         rollState.rollEvent += RemoveEffect;
         rollState.rollCancelEvent += RemoveEffect;
     }
 
-    //Bloody Dice Applies Bleeding to the player equal to the roll value
-    public void BloodyDice(object sender, EventArgs e)
+    //Tank In Disguise Confuses the player for this turn & next turn
+    public void TankInDisguise(object sender, EventArgs e)
     {
-        playerController controller = player.GetComponent<playerController>();
         currentEffects currentEffects = player.GetComponent<currentEffects>();
-        currentEffects.AddEffect(effectEnum.Bleeding, controller.GetModel.RollValue);
+        currentEffects.AddEffect(effectEnum.Confused, 2);
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        rollState.rollEvent -= BloodyDice;
+        rollState.rollEvent -= TankInDisguise;
         rollState.rollEvent -= RemoveEffect;
         rollState.rollCancelEvent -= RemoveEffect;
     }
