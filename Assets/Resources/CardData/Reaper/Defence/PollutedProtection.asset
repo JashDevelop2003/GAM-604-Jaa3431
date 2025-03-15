@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd66986e0053944abd21dc873f8cd15, type: 3}
+  m_Name: PollutedProtection
+  m_EditorClassIdentifier: 
+  characterCard: 1
+  cardType: 1
+  cardRarity: 3
+  cardName: Polluted Protected
+  cardDescription: Blocks 12 Damage & Applies Poison to Opponent for 4 Turns
+  defendValue: 12
+  manaCost: 5
+  additionalEffect: {fileID: 3359323940145239261, guid: bb9d8e0078a961240bd61ca83a474ef7, type: 3}
