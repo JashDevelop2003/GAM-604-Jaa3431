@@ -49,9 +49,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8b4a3dd795f727d428da8947b4cce6d5, type: 2}
   possibleDefenceCards:
   - {fileID: 11400000, guid: 581a881777eb31748a5736aeebc55eca, type: 2}
-  - {fileID: 11400000, guid: 712cd044b396b874d94093f2fb4ee0d5, type: 2}
   - {fileID: 11400000, guid: 84f0149692b60bc4588837e638163071, type: 2}
+  - {fileID: 11400000, guid: 53d565a7e68c40a4d8058ea221d7850b, type: 2}
   - {fileID: 11400000, guid: 8634c800cc4d5a84eb508e943cd121e7, type: 2}
+  - {fileID: 11400000, guid: 090503fbe33451b43abe84d4add41748, type: 2}
+  - {fileID: 11400000, guid: 712cd044b396b874d94093f2fb4ee0d5, type: 2}
+  - {fileID: 11400000, guid: 6821b5baf13016c488d25a0e4e0f4d44, type: 2}
   possibleMovementCards:
   - {fileID: 11400000, guid: a895dd6d96cbc6f41ae84b43ec6b00b5, type: 2}
   - {fileID: 11400000, guid: 2081f099681b6fa4097e1ceaad3d278d, type: 2}

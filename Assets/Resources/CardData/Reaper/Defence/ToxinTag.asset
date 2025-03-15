@@ -19,3 +19,4 @@ MonoBehaviour:
   cardDescription: Blocks 4 damage & Apply Poison to Both Players for 2 Turns
   defendValue: 4
   manaCost: 1
+  additionalEffect: {fileID: 6709376136121042617, guid: 38f1dce793fced14985295b91471697d, type: 3}

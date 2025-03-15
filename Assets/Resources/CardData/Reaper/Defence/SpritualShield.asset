@@ -16,6 +16,7 @@ MonoBehaviour:
   cardType: 1
   cardRarity: 2
   cardName: Spiritual Shield
-  cardDescription: Blocks 8 Damage & Applies Fear to Opponent for 2 Turns
-  defendValue: 8
+  cardDescription: Blocks 10 Damage & Applies Fear to Opponent for 2 Turns
+  defendValue: 10
   manaCost: 4
+  additionalEffect: {fileID: 6661303721727495095, guid: c06e02511b416b04a874300cd4b1dc87, type: 3}

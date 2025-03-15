@@ -54,7 +54,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 04ddb3a7312de5a4ba32c65982b2f022, type: 2}
   - {fileID: 11400000, guid: 24689da8e810b9d4db11c0215e4cb9d6, type: 2}
   - {fileID: 11400000, guid: c2162d4094063de45aeef98814fc2cc2, type: 2}
-  - {fileID: 11400000, guid: 8f32eaf44170d3f4884d9d0f4c49f4b4, type: 2}
   possibleMovementCards:
   - {fileID: 11400000, guid: bed9d6d3a5c2f734581f2d865e335b99, type: 2}
   - {fileID: 11400000, guid: 99cbff2611d5a5f4d96630d311a717f7, type: 2}
