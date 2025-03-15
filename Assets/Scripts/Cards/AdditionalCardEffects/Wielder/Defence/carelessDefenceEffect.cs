@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class carelessDefenceEffect : MonoBehaviour
 {
-    //This requires the offence card to apply the effect to the suitable combat system event
+    //This requires the defence card to apply the effect to the suitable combat system event
     private defenceCard defenceCard;
     private combatSystem combatSystem;
     [SerializeField] private GameObject player;

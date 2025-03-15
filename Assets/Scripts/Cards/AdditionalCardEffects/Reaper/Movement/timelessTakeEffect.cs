@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class strengthInNumbersEffect : MonoBehaviour
+public class timelessTakeEffect : MonoBehaviour
 {
     private movementCard movementCard;
     private Transform locatePlayer;
     private GameObject player;
     private rollState rollState;
+    private moveState moveState;
 
     void Awake()
     {
@@ -18,32 +19,30 @@ public class strengthInNumbersEffect : MonoBehaviour
         locatePlayer = this.transform.parent.parent.parent;
         player = locatePlayer.gameObject;
         rollState = player.GetComponent<rollState>();
+        moveState = player.GetComponent<moveState>();
     }
 
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        rollState.rollEvent += StrengthInNumbers;
-        rollState.rollEvent += RemoveEffect;
+        moveState.endTurnEvent += TimelessTake;
+        moveState.endTurnEvent += RemoveEffect;
         rollState.rollCancelEvent += RemoveEffect;
     }
 
-    //Strength in Numbers Increases Thurst by 5% x [Roll Value]
-    //In Addition Applies Impactful by 5% x [Roll Value] for [Roll Value] turns
-    public void StrengthInNumbers(object sender, EventArgs e)
+    //Timeless Take stuns the player for 1 turn after completing their movement
+    public void TimelessTake(object sender, EventArgs e)
     {
-        playerController controller = player.GetComponent<playerController>();
-        currentBuffs buffPlayer = player.GetComponent<currentBuffs>();
-        controller.GetModel.ThrustMultiplier += (float)(0.05 * controller.GetModel.RollValue);
-        buffPlayer.AddBuff(buffEnum.Impactful, controller.GetModel.RollValue, (float)(0.05 * controller.GetModel.RollValue));
-        Debug.Log(controller.GetModel.ThrustMultiplier);
+        currentEffects playerEffect = player.GetComponent<currentEffects>();
+        //Needs to be 2 since the stun event is at the end and decrements the cooldown
+        playerEffect.AddEffect(effectEnum.Stunned, 2);
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        rollState.rollEvent -= StrengthInNumbers;
-        rollState.rollEvent -= RemoveEffect;
+        moveState.endTurnEvent -= TimelessTake;
+        moveState.endTurnEvent -= RemoveEffect;
         rollState.rollCancelEvent -= RemoveEffect;
     }
 }

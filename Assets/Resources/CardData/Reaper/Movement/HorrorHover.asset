@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 520cd02742583cb449b5c21dac472603, type: 3}
-  m_Name: TimelessTake
+  m_Name: HorrorHover
   m_EditorClassIdentifier: 
   characterCard: 1
   cardType: 2
-  cardRarity: 2
-  cardName: TimelessTake
-  cardDescription: Rolls 10-20, Applies Stun to Self for 1 Turn
-  minimumMoveValue: 10
-  maximumMoveValue: 20
-  manaCost: 5
-  additionalEffect: {fileID: 1391262118243688347, guid: fc056940dd39b264bb78d73394a5d3f3, type: 3}
+  cardRarity: 3
+  cardName: Horror Hover
+  cardDescription: Rolls 1-5 & Increase Thrust by 10% x Roll Value for this turn
+  minimumMoveValue: 1
+  maximumMoveValue: 5
+  manaCost: 6
+  additionalEffect: {fileID: 8772926274728047945, guid: 5043b442e94a13f45b5314f12601d20a, type: 3}

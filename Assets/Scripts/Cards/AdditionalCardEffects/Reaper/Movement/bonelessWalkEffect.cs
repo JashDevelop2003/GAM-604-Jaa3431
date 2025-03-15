@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class strengthInNumbersEffect : MonoBehaviour
+public class bonelessWalkEffect : MonoBehaviour
 {
     private movementCard movementCard;
     private Transform locatePlayer;
@@ -23,26 +23,22 @@ public class strengthInNumbersEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        rollState.rollEvent += StrengthInNumbers;
+        rollState.rollEvent += BonelessWalk;
         rollState.rollEvent += RemoveEffect;
         rollState.rollCancelEvent += RemoveEffect;
     }
 
-    //Strength in Numbers Increases Thurst by 5% x [Roll Value]
-    //In Addition Applies Impactful by 5% x [Roll Value] for [Roll Value] turns
-    public void StrengthInNumbers(object sender, EventArgs e)
+    //Boneless Walk Applies Healthy for 2 Turns (including this one)
+    public void BonelessWalk(object sender, EventArgs e)
     {
-        playerController controller = player.GetComponent<playerController>();
         currentBuffs buffPlayer = player.GetComponent<currentBuffs>();
-        controller.GetModel.ThrustMultiplier += (float)(0.05 * controller.GetModel.RollValue);
-        buffPlayer.AddBuff(buffEnum.Impactful, controller.GetModel.RollValue, (float)(0.05 * controller.GetModel.RollValue));
-        Debug.Log(controller.GetModel.ThrustMultiplier);
+        buffPlayer.AddBuff(buffEnum.Healthy, 2, 0);
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        rollState.rollEvent -= StrengthInNumbers;
+        rollState.rollEvent -= BonelessWalk;
         rollState.rollEvent -= RemoveEffect;
         rollState.rollCancelEvent -= RemoveEffect;
     }

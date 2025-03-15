@@ -63,6 +63,8 @@ public class moveState : playerStateBase
     private bool invincibleBattle;
 
     public event EventHandler combatEngage;
+
+    public event EventHandler endTurnEvent;
     
     public override void EnterState(playerStateManager player)
     {
@@ -216,9 +218,9 @@ public class moveState : playerStateBase
 
         //Once the loop is over (which is when movement reaches 0), apply the space effect based on the type of space the player is currently on
         yield return new WaitForSeconds(1);
+        endTurnEvent?.Invoke(this, EventArgs.Empty);
         spaceEffects.ActivateEffect(this.gameObject, currentSpaceType);
 
-       // movementEnd = true;
     }
 
     //This method uses a sphere collider to check if there's an opponent

@@ -5,8 +5,6 @@ using UnityEngine;
 /// <summary>
 /// First Playable: The Start State is use to regain mana for the player
 /// </summary>
-
-//TODO Tomorrow: Improve the States in order to be tested
 public class startState : playerStateBase
 
 {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class strengthInNumbersEffect : MonoBehaviour
+public class scurryEffect : MonoBehaviour
 {
     private movementCard movementCard;
     private Transform locatePlayer;
@@ -23,26 +23,22 @@ public class strengthInNumbersEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        rollState.rollEvent += StrengthInNumbers;
+        rollState.rollEvent += Scurry;
         rollState.rollEvent += RemoveEffect;
         rollState.rollCancelEvent += RemoveEffect;
     }
 
-    //Strength in Numbers Increases Thurst by 5% x [Roll Value]
-    //In Addition Applies Impactful by 5% x [Roll Value] for [Roll Value] turns
-    public void StrengthInNumbers(object sender, EventArgs e)
+    //Scurry applies Expose to the player for 1 turn (excluding this turn)
+    public void Scurry(object sender, EventArgs e)
     {
-        playerController controller = player.GetComponent<playerController>();
-        currentBuffs buffPlayer = player.GetComponent<currentBuffs>();
-        controller.GetModel.ThrustMultiplier += (float)(0.05 * controller.GetModel.RollValue);
-        buffPlayer.AddBuff(buffEnum.Impactful, controller.GetModel.RollValue, (float)(0.05 * controller.GetModel.RollValue));
-        Debug.Log(controller.GetModel.ThrustMultiplier);
+        currentEffects effectPlayer = player.GetComponent<currentEffects>();
+        effectPlayer.AddEffect(effectEnum.Exposed, 1);
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        rollState.rollEvent -= StrengthInNumbers;
+        rollState.rollEvent -= Scurry;
         rollState.rollEvent -= RemoveEffect;
         rollState.rollCancelEvent -= RemoveEffect;
     }

@@ -32,6 +32,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be7ca579cf1d6454a937366531556f05, type: 2}
   - {fileID: 11400000, guid: edf6252555852a342a7b86c9d766684f, type: 2}
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
+  - {fileID: 11400000, guid: e6fe59778ba83a84b85451ea8cb220dd, type: 2}
+  - {fileID: 11400000, guid: 0c70549511e36c44b99b885e78bdac68, type: 2}
+  - {fileID: 11400000, guid: 3ba500c11357d5a4bb22f10d7c39b25d, type: 2}
+  - {fileID: 11400000, guid: 2081f099681b6fa4097e1ceaad3d278d, type: 2}
+  - {fileID: 11400000, guid: 29184e6e300e57a44b3b073a2c0ee38f, type: 2}
   startingStatusCards:
   - {fileID: 11400000, guid: 3309c154d53ff3a45a936e4185b07b54, type: 2}
   possibleOffenceCards:
@@ -57,9 +62,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6821b5baf13016c488d25a0e4e0f4d44, type: 2}
   possibleMovementCards:
   - {fileID: 11400000, guid: a895dd6d96cbc6f41ae84b43ec6b00b5, type: 2}
-  - {fileID: 11400000, guid: 2081f099681b6fa4097e1ceaad3d278d, type: 2}
   - {fileID: 11400000, guid: fb858ab81bf224b48af31a53531b3011, type: 2}
   - {fileID: 11400000, guid: 482301308167eb24e80114d57f0c8001, type: 2}
-  - {fileID: 11400000, guid: 29184e6e300e57a44b3b073a2c0ee38f, type: 2}
   possibleStatusCards: []
   characterObject: {fileID: 4041446733811344979, guid: e08fcfe5dd961474ba73f5cb01afb1eb, type: 3}
