@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714d0a73057e30c458877542f2868006, type: 3}
+  m_Name: CursedCreation
+  m_EditorClassIdentifier: 
+  characterCard: 1
+  cardType: 3
+  cardRarity: 3
+  target: 1
+  effect: 0c0000000c0000000c000000
+  buff: 
+  cooldown: 0400000000000000
+  value: 0
+  cardName: Cursed Creation
+  cardDescription: Apply 3 Random Effects to any Player for 4 Turns
+  manaCost: 0
+  additionalEffect: {fileID: 2261181614867909992, guid: 37ba2a13ab41bf149a9bbdcf68775cba, type: 3}

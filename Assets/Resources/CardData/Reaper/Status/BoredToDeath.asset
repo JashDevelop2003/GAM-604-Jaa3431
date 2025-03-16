@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714d0a73057e30c458877542f2868006, type: 3}
+  m_Name: BoredToDeath
+  m_EditorClassIdentifier: 
+  characterCard: 1
+  cardType: 3
+  cardRarity: 2
+  target: 2
+  effect: 0a000000
+  buff: 
+  cooldown: 0200000000000000
+  value: 0
+  cardName: Bored To Death
+  cardDescription: Apply Healthy to Self & Apply Stun to Everyone Else. However Reduce
+    Thrust & Roll by 25%
+  manaCost: 4
+  additionalEffect: {fileID: 5026171683785105433, guid: 80a23f3f7c52a4746b72c0e3521d0efb, type: 3}

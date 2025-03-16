@@ -18,10 +18,11 @@ public class statusCard : MonoBehaviour
         get { return target; }
     }
 
-    private effectEnum[] effect;
+    [SerializeField] private effectEnum[] effect;
     public effectEnum[] Effect
     {
         get { return effect; }
+        set { effect = value; }
     }
 
     private buffEnum[] buff;
