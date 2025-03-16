@@ -8,5 +8,5 @@ public enum deckTypeEnum
     Defence,
     Movement,
     Status,
-    Curse
+    Item
 }

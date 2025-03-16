@@ -16,7 +16,7 @@ MonoBehaviour:
   Health: 100
   Mana: 10
   startingCash: 100
-  deckCapacity: 0f0000000f0000000700000003000000
+  deckCapacity: 0f0000000f000000070000000300000003000000
   startingOffenceCards:
   - {fileID: 11400000, guid: 3acd9698f3b99a2448ba8f973e1788f6, type: 2}
   - {fileID: 11400000, guid: e89b788ea6c1dfb41a91549988011f8f, type: 2}

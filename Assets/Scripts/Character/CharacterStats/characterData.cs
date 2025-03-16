@@ -24,7 +24,7 @@ public class characterData : ScriptableObject
     // - Defence is 1
     // - Movement is 2
     // - Status is 3
-    // - Curse is 4
+    // - Item is 4
 
     //These are the cards the player should start off with
     public List<offenceCardStats> startingOffenceCards;
