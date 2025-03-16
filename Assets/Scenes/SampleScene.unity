@@ -634,8 +634,11 @@ MonoBehaviour:
   possibleMovementCards: []
   possibleOffenceCards: []
   possibleDefenceCards: []
+  possibleStatusCards: []
   rarity: 1
   typeSelected: 5
+  checkingAvailability: []
+  numberOfNoSlots: 0
 --- !u!65 &329044131
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1007,8 +1010,11 @@ MonoBehaviour:
   possibleMovementCards: []
   possibleOffenceCards: []
   possibleDefenceCards: []
-  rarity: 0
-  typeSelected: 0
+  possibleStatusCards: []
+  rarity: 1
+  typeSelected: 5
+  checkingAvailability: []
+  numberOfNoSlots: 0
 --- !u!65 &344353856
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -37,6 +37,9 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     [SerializeField] private List<defenceCardStats> possibleDefenceCards;
     private defenceCardStats selectedDefenceCard;
 
+    [SerializeField] private List<statusCardStats> possibleStatusCards;
+    private statusCardStats selectedStatusCard;
+
     //this selects the card out of the list and checks if this card is sutiable for the rarity
     private int selectedCard;
 
@@ -52,17 +55,23 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     //this boolean is to change the state once the player has confirm or cancel obtaining a card
     private bool cardCollected;
 
+    [SerializeField] private GameObject[] checkingAvailability;
+    [SerializeField] private int numberOfNoSlots;
+
     public override void EnterState(playerStateManager player)
     {
         //the boolean is set to false and card type to null to ensure that the player doesn't instantly change state or confirm the choice immediately
         cardCollected = false;
         typeSelected = CardType.Null;
+        checkingAvailability = new GameObject[4];
+        numberOfNoSlots = 0;
         
         //the controller is referenced to collect the character data of the possible card to obtain
         controller = GetComponent<playerController>();
         possibleMovementCards = controller.GetData.possibleMovementCards;
         possibleOffenceCards = controller.GetData.possibleOffenceCards;
         possibleDefenceCards = controller.GetData.possibleDefenceCards;
+        possibleStatusCards = controller.GetData.possibleStatusCards;
 
         //the buff is reference to change the likelihood to obtaining a rarer card
         buffs = GetComponent<currentBuffs>();
@@ -75,29 +84,79 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         Controls.rightPressed += DecidingRight;
         Controls.confirmPressed += ConfirmingChoice;
 
+        //This checks if there is an avaialble slot for the player to create cards
+        offenceDeckPool offenceDeck = GetComponentInChildren<offenceDeckPool>();
+        checkingAvailability[0] = offenceDeck.GetAvailableOffence();
+
+        defenceDeckPool defenceDeck = GetComponentInChildren<defenceDeckPool>();
+        checkingAvailability[1] = defenceDeck.GetAvailableDefence();
+
+        movementDeckPool movementDeck = GetComponentInChildren<movementDeckPool>();
+        checkingAvailability[2] = movementDeck.GetAvailableMovement();
+
+        statusDeckPool statusDeck = GetComponentInChildren<statusDeckPool>();
+        checkingAvailability[3] = statusDeck.GetAvailableStatus();
+
+        for(int i = 0; i < checkingAvailability.Length; i++)
+        {
+            if(checkingAvailability[i] == null)
+            {
+                numberOfNoSlots++;
+            }
+        }
+
+        if(numberOfNoSlots == 4)
+        {
+            Debug.Log("Player Cannot Collect any more cards");
+            cardCollected = true;
+        }
+
         //this provides a random range to provide a 75% chance of being Uncommon & 25% of being Rare
         //However is 100% for rare card if the player is lucky
         //TODO: Add Legendary & Change the probability to (50/40/10)
-        //TODO: Change the lucky probability to (20/50/30)
-
-        //Rarity Int should change to Random.Range(1, 11)
-        rarityInt = UnityEngine.Random.Range(1, 5);
+        //TODO: Change the lucky probability to (20/50/30)       
+        rarityInt = UnityEngine.Random.Range(1, 11);
 
         if (buffs.IsLucky)
         {
-            rarity = CardRarity.Rare;
-            Debug.Log("Lucky Chance");
-        }        
-        else
-        {
-            if (rarityInt <= 3)
+            if (rarityInt <= 2)
             {
                 rarity = CardRarity.Uncommon;
             }
-            else if (rarityInt == 4)
+            else if (rarityInt >= 3 && rarityInt <= 7)
             {
                 rarity = CardRarity.Rare;
                 Debug.Log("Lucky Chance");
+            }
+            else if (rarityInt >= 8)
+            {
+                rarity = CardRarity.Legendary;
+                Debug.Log("Very Lucky Chance");
+            }
+            else
+            {
+                Debug.LogError("Something went wrong with the random range");
+            }
+        }        
+        else
+        {
+            if (rarityInt <= 5)
+            {
+                rarity = CardRarity.Uncommon;
+            }
+            else if (rarityInt >= 6 && rarityInt <= 9)
+            {
+                rarity = CardRarity.Rare;
+                Debug.Log("Lucky Chance");
+            }
+            else if(rarityInt == 10)
+            {
+                rarity = CardRarity.Legendary;
+                Debug.Log("Very Lucky Chance");
+            }
+            else
+            {
+                Debug.LogError("Something went wrong with the random range");
             }
         }
     }
@@ -123,33 +182,65 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
     //These deciding interface methods are used to provide unique card types to select
     // Up is selecting movement
-    // TODO Next Stage: Down is selecting status
-    // TODO: Left is selecting offence
-    // TODO: Right is selecting defence
+    // Down is selecting status
+    // Left is selecting offence
+    // Right is selecting defence
     public void DecidingUp(object sender, EventArgs e)
     {
-        typeSelected = CardType.Movement;
+        if (checkingAvailability[2] != null)
+        {
+            typeSelected = CardType.Movement;
+            Debug.Log(typeSelected);
+        }
+        else
+        {
+            typeSelected = CardType.Null;
+            Debug.LogWarning(typeSelected + " There isn't any room for a new movement card");
+        }
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
-        typeSelected = CardType.Status;
-        Debug.LogWarning("Needs Status Cards to be Implemented");
+        if (checkingAvailability[3] != null)
+        {
+            typeSelected = CardType.Status;
+            Debug.Log(typeSelected);
+        }
+        else
+        {
+            typeSelected = CardType.Null;
+            Debug.LogWarning(typeSelected + " There isn't any room for a new status card");
+        }
 
     }
 
     public void DecidingLeft(object sender, EventArgs e)
     {
-        typeSelected = CardType.Offence;
+        if (checkingAvailability[0] != null)
+        {
+            typeSelected = CardType.Offence;
+            Debug.Log(typeSelected);
+        }
+        else
+        {
+            typeSelected = CardType.Null;
+            Debug.LogWarning(typeSelected + " There isn't any room for a new offence card");
+        }
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
-        typeSelected = CardType.Defence;
-
+        if (checkingAvailability[1] != null)
+        {
+            typeSelected = CardType.Defence;
+            Debug.Log(typeSelected);
+        }
+        else
+        {
+            typeSelected = CardType.Null;
+            Debug.LogWarning(typeSelected + " There isn't any room for a new defence card");
+        }
     }
-
-    //TODO: Add Offence, Defence & Status
 
     //Once selected the card the confirm method must check if there's an availble card slot in the deck to set active
     public void ConfirmingChoice(object sender, EventArgs e)
@@ -249,6 +340,37 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
             //else inform the player that there are no available slots to proivde
             else if (defenceCard == null)
+            {
+                Debug.LogWarning("No Available Cards, Select a Different Deck");
+            }
+        }
+
+        //if the type selected is Status then the method needs to check for avaialble Status slots
+        else if (typeSelected == CardType.Status)
+        {
+            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
+            selectedCard = UnityEngine.Random.Range(0, possibleStatusCards.Count);
+            selectedStatusCard = possibleStatusCards[selectedCard];
+            while (selectedStatusCard.cardRarity != rarity)
+            {
+                selectedCard = UnityEngine.Random.Range(0, possibleStatusCards.Count);
+                selectedStatusCard = possibleStatusCards[selectedCard];
+            }
+
+            //this part of the method collect the movement deck pool to check if there is any objects that are set to false
+            statusDeckPool statusPool = GetComponentInChildren<statusDeckPool>();
+            GameObject statusCard = statusPool.GetAvailableStatus();
+            //if there is a object that is set to false then add the selected card into the deck
+            if (statusCard != null)
+            {
+                statusCard.SetActive(true);
+                statusCard defence = statusCard.AddComponent<statusCard>();
+                defence.CreateCard(selectedStatusCard);
+                cardCollected = true;
+            }
+
+            //else inform the player that there are no available slots to proivde
+            else if (statusCard == null)
             {
                 Debug.LogWarning("No Available Cards, Select a Different Deck");
             }

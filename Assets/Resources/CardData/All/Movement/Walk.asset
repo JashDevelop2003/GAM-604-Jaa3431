@@ -17,6 +17,7 @@ MonoBehaviour:
   cardRarity: 0
   cardName: Walk
   cardDescription: Moves 1 to 6 Spaces
-  minimumMoveValue: 1
-  maximumMoveValue: 6
+  minimumMoveValue: 4
+  maximumMoveValue: 4
   manaCost: 1
+  additionalEffect: {fileID: 0}

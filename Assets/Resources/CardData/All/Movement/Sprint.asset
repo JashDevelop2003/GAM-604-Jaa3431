@@ -17,7 +17,7 @@ MonoBehaviour:
   cardRarity: 0
   cardName: Sprint
   cardDescription: Moves 3 to 9 Spaces
-  minimumMoveValue: 9
+  minimumMoveValue: 3
   maximumMoveValue: 9
   manaCost: 3
   additionalEffect: {fileID: 0}
