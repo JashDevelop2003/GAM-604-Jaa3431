@@ -42,12 +42,15 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
         else if (statusCard.Target == targetEnum.Self)
         {
+            statusCard.ActivateAdditionalEffect();
+
             statusCard.ActivateEffect(this.gameObject);
             playerSelected = true;
         }
 
         else if (statusCard.Target == targetEnum.All)
         {
+            statusCard.ActivateAdditionalEffect();
             for (int i = 0; i < turnManager.GetPlayers.Length; i++)
             {
                 statusCard.ActivateEffect(turnManager.GetPlayers[i]);
@@ -58,6 +61,7 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         else if (statusCard.Target == targetEnum.Random) 
         {
             int randomPlayer = UnityEngine.Random.Range(0, turnManager.GetPlayers.Length);
+            statusCard.ActivateAdditionalEffect();
             statusCard.ActivateEffect(turnManager.GetPlayers[randomPlayer]);
             playerSelected = true;
         }
@@ -123,7 +127,8 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     public void ConfirmingChoice(object sender, EventArgs e)
     {
         if (selectedPlayer != null) 
-        { 
+        {
+            statusCard.ActivateAdditionalEffect();
             statusCard.ActivateEffect(selectedPlayer);
             playerSelected = true;
         }

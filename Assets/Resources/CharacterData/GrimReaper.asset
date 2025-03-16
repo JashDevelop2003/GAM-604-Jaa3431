@@ -16,7 +16,7 @@ MonoBehaviour:
   Health: 80
   Mana: 12
   startingCash: 75
-  deckCapacity: 0d000000070000000a0000000a000000
+  deckCapacity: 0a000000050000000a0000000a000000
   startingOffenceCards:
   - {fileID: 11400000, guid: e89b788ea6c1dfb41a91549988011f8f, type: 2}
   - {fileID: 11400000, guid: 6ead47396b107af469c3bf510c83aef4, type: 2}
@@ -64,5 +64,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c70549511e36c44b99b885e78bdac68, type: 2}
   - {fileID: 11400000, guid: 2081f099681b6fa4097e1ceaad3d278d, type: 2}
   - {fileID: 11400000, guid: 29184e6e300e57a44b3b073a2c0ee38f, type: 2}
-  possibleStatusCards: []
+  possibleStatusCards:
+  - {fileID: 11400000, guid: 707c07ab955d5324eab478113a987fd2, type: 2}
+  - {fileID: 11400000, guid: 29420743a537a104aa32a75ed2d1072e, type: 2}
+  - {fileID: 11400000, guid: 8505265659fbfc7409d3751d480f6470, type: 2}
+  - {fileID: 11400000, guid: 757936c727bf52c45978b3ddc7f1ce41, type: 2}
+  - {fileID: 11400000, guid: 421746d1c1581954b8fc3651951a5344, type: 2}
+  - {fileID: 11400000, guid: 7975c647bb1a6e741bef1e43c404ece6, type: 2}
+  - {fileID: 11400000, guid: 43af61b288d9c774f8c08573b0e1d3a6, type: 2}
+  - {fileID: 11400000, guid: bca316cf3445f304b8ccf96932ce1d10, type: 2}
+  - {fileID: 11400000, guid: 8bd0f7b87480c844bab27953c799060d, type: 2}
   characterObject: {fileID: 4041446733811344979, guid: e08fcfe5dd961474ba73f5cb01afb1eb, type: 3}

@@ -82,10 +82,14 @@ public class statusCard : MonoBehaviour
         deck.AddCard(this.gameObject);
     }
 
-    public void ActivateEffect(GameObject target)
+    public void ActivateAdditionalEffect()
     {
         //Add an event here for some non-status effects
         additionalEvent?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void ActivateEffect(GameObject target)
+    {
 
         foreach (buffEnum addBuff in buff)
         {
