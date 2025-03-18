@@ -16,7 +16,7 @@ MonoBehaviour:
   Health: 100
   Mana: 10
   startingCash: 100
-  deckCapacity: 0f0000000f000000070000000300000003000000
+  deckCapacity: 0f0000000f000000070000000300000005000000
   startingOffenceCards:
   - {fileID: 11400000, guid: 3acd9698f3b99a2448ba8f973e1788f6, type: 2}
   - {fileID: 11400000, guid: e89b788ea6c1dfb41a91549988011f8f, type: 2}
@@ -33,6 +33,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
   startingStatusCards:
   - {fileID: 11400000, guid: ab1f429f7c2d6184daf1105829e3e5fd, type: 2}
+  startingItems:
+  - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
+  - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
   possibleOffenceCards:
   - {fileID: 11400000, guid: 869861b941fc7df4aa29e254fc3b3fad, type: 2}
   - {fileID: 11400000, guid: 7cf743db0d1a8f44cbdcf6d0451b9117, type: 2}
@@ -73,4 +76,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: de0f5d4f3f3327a47b4e7226c8534e74, type: 2}
   - {fileID: 11400000, guid: e081b0715dd3ef74e83cb9ccb80ca3a2, type: 2}
   - {fileID: 11400000, guid: ff64250520af704429fb2bdbd357e8f0, type: 2}
+  possibleItems: []
   characterObject: {fileID: 2680251509015015823, guid: 2ee0e264335f77e4785483e98cfe75a6, type: 3}

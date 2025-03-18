@@ -45,7 +45,7 @@ public class playerController : MonoBehaviour
 
     //This is to reset the multipliers from the effects of their previous turn
     //Thus also regains the mana for the player to use cards
-    public void ResetStats()
+    public void ResetStats(object sender, EventArgs e)
     {
         playerModel.RollMultiplier = 1;
         playerModel.ThrustMultiplier = 1;
@@ -136,7 +136,7 @@ public class playerController : MonoBehaviour
         oneUseEvent?.Invoke(this, EventArgs.Empty);
     }
 
-    public void ActivateStartEffects()
+    public void ActivateStartEffects(object sender, EventArgs e)
     {
         effectStartEvent?.Invoke(this, EventArgs.Empty);
     }

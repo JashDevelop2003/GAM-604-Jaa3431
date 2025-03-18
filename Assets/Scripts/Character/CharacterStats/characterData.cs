@@ -31,12 +31,14 @@ public class characterData : ScriptableObject
     public List<defenceCardStats> startingDefenceCards;
     public List<movementCardStats> startingMovementCards;
     public List<statusCardStats> startingStatusCards;
+    public List<itemStats> startingItems;
 
     //These are the common cards that will appear when obtaining a uncommon card
     public List<offenceCardStats> possibleOffenceCards;
     public List<defenceCardStats> possibleDefenceCards;
     public List<movementCardStats> possibleMovementCards;
     public List <statusCardStats> possibleStatusCards;
+    public List<itemStats> possibleItems;
 
     //This is the game object for the character in order to use passive and one use ability
     public GameObject characterObject;

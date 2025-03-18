@@ -42,7 +42,7 @@ public class offenceCard : MonoBehaviour
         AttackCard = newCard;
         attackValue = attackCard.attackValue;
         manaCost = attackCard.manaCost;
-        gameObject.name = attackCard.name;
+        gameObject.name = attackCard.cardName;
         if (newCard.additionalEffect != null) 
         { 
             Instantiate(newCard.additionalEffect, this.transform);

@@ -14,12 +14,16 @@ public class startState : playerStateBase
     //This gets the effects to see if player is stunned
     private currentEffects effects;
 
+    public event EventHandler startEvent;
+
     public override void EnterState(playerStateManager player)
     {
         controller = GetComponent<playerController>();
         effects = GetComponent<currentEffects>();
-        controller.ResetStats();
-        controller.ActivateStartEffects();
+        startEvent += controller.ResetStats;
+        startEvent += controller.ActivateStartEffects;
+
+        startEvent?.Invoke(this, EventArgs.Empty);
     }
 
     public override void UpdateState(playerStateManager player)
@@ -36,7 +40,9 @@ public class startState : playerStateBase
     }
 
     public override void ExitState(playerStateManager player)
-    { 
+    {
+        startEvent -= controller.ResetStats;
+        startEvent -= controller.ActivateStartEffects;
 
         //If the player's character is wielder then decrement the cooldown & see if the character changes state
         if (controller.GetModel.Character == characterEnum.Wielder) 
