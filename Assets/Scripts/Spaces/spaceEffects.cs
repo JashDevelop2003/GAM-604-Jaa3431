@@ -53,5 +53,10 @@ public class spaceEffects : MonoBehaviour
         {
             state.ChangeState(state.PickingState);
         }
+
+        else if (type == spaceEnum.Item) 
+        { 
+            state.ChangeState(state.ItemState);
+        }
     }
 }

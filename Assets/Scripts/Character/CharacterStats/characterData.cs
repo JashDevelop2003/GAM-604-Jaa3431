@@ -38,7 +38,8 @@ public class characterData : ScriptableObject
     public List<defenceCardStats> possibleDefenceCards;
     public List<movementCardStats> possibleMovementCards;
     public List <statusCardStats> possibleStatusCards;
-    public List<itemStats> possibleItems;
+    public List<itemStats> possibleRelics;
+    public List<itemStats> possibleOmens;
 
     //This is the game object for the character in order to use passive and one use ability
     public GameObject characterObject;

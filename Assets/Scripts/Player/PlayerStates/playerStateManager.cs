@@ -41,6 +41,8 @@ public class playerStateManager : MonoBehaviour
     private pickingState pickingState;
     private attackState attackState;
     private defendState defendState;
+    private itemState itemState;
+    private cursingState cursingState;
 
     //These are to call the states in order for the states to change
     public playerStateBase PreviousState
@@ -98,6 +100,16 @@ public class playerStateManager : MonoBehaviour
         get { return defendState; } 
     }
 
+    public itemState ItemState
+    {
+        get { return itemState; }
+    }
+
+    public cursingState CursingState
+    {
+        get { return cursingState; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,6 +125,8 @@ public class playerStateManager : MonoBehaviour
         pickingState = GetComponent<pickingState>();
         attackState = GetComponent<attackState>();
         defendState = GetComponent<defendState>();
+        itemState = GetComponent<itemState>();
+        cursingState = GetComponent<cursingState>();
 
         //this begins the player in the inactive state where nothing happens until is the player's turn
         currentState = inactiveState;

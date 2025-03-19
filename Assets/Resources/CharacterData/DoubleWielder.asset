@@ -33,9 +33,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
   startingStatusCards:
   - {fileID: 11400000, guid: ab1f429f7c2d6184daf1105829e3e5fd, type: 2}
-  startingItems:
-  - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
-  - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
+  startingItems: []
   possibleOffenceCards:
   - {fileID: 11400000, guid: 869861b941fc7df4aa29e254fc3b3fad, type: 2}
   - {fileID: 11400000, guid: 7cf743db0d1a8f44cbdcf6d0451b9117, type: 2}
@@ -76,5 +74,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: de0f5d4f3f3327a47b4e7226c8534e74, type: 2}
   - {fileID: 11400000, guid: e081b0715dd3ef74e83cb9ccb80ca3a2, type: 2}
   - {fileID: 11400000, guid: ff64250520af704429fb2bdbd357e8f0, type: 2}
-  possibleItems: []
+  possibleRelics:
+  - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
+  possibleOmens:
+  - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
   characterObject: {fileID: 2680251509015015823, guid: 2ee0e264335f77e4785483e98cfe75a6, type: 3}

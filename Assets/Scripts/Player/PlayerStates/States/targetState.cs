@@ -104,24 +104,35 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     }
 
+
+    //For Controls:
+    // Left = Player One
+    // Up = Player Two
+    // Right = Player Three
+    // Down = Player Four
+
     public void DecidingUp(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[1];
+        Debug.Log(selectedPlayer);
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[3];
+        Debug.Log(selectedPlayer);
     }
 
     public void DecidingLeft(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[0];
+        Debug.Log(selectedPlayer);
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[2];
+        Debug.Log(selectedPlayer);
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)

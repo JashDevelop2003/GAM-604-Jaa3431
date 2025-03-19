@@ -5,5 +5,6 @@ using UnityEngine;
 public enum itemEnum
 {
     Relic,
-    Omen
+    Omen,
+    Null
 }

@@ -2,5 +2,8 @@ public enum spaceEnum
 {
     Blue,
     Red,
-    Card
+    Card,
+    Item,
+    Lucky,
+    Event
 }
