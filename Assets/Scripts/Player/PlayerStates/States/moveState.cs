@@ -50,8 +50,7 @@ public class moveState : playerStateBase
     private spaceEnum currentSpaceType;
 
     //The effect manager applies the space effect that the player is currently on when movement becomes 0
-    [SerializeField] private GameObject effectManager; //The effect manager is the board map
-    private spaceEffects spaceEffects;
+    private spaceManager spaceManager;
 
     //the target space is the next space after the currentSpace from the currentPath list
     private GameObject targetSpace;
@@ -91,7 +90,7 @@ public class moveState : playerStateBase
         targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
 
         //This is to call the space effects towards ending the turn with a space effect occurring
-        spaceEffects = effectManager.GetComponent<spaceEffects>();
+        spaceManager = spaceManager.instance;
 
         //This is to check if the previous state was the roll state
         //If the previous state was the roll state then the movement becomes the roll value of the controller
@@ -219,7 +218,7 @@ public class moveState : playerStateBase
         //Once the loop is over (which is when movement reaches 0), apply the space effect based on the type of space the player is currently on
         yield return new WaitForSeconds(1);
         endTurnEvent?.Invoke(this, EventArgs.Empty);
-        spaceEffects.ActivateEffect(this.gameObject, currentSpaceType);
+        spaceManager.ActivateEffect(this.gameObject, currentSpaceType);
 
     }
 

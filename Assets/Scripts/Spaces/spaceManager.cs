@@ -6,8 +6,23 @@ using UnityEngine;
 /// The space have their own behaiour and apply unique state changes for the player
 /// </summary>
 
-public class spaceEffects : MonoBehaviour
+public class spaceManager : MonoBehaviour
 {
+    public static spaceManager instance;
+    private luckySpace lucky;
+
+
+    //this is used to make this a singular instance of the component
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        lucky = GetComponent<luckySpace>();
+    }
+
     //this method is only used when the player has ended their turn
     //the parameters are the current player and the current type they landed on when their movement has ended
     public void ActivateEffect(GameObject player, spaceEnum type)
@@ -54,9 +69,17 @@ public class spaceEffects : MonoBehaviour
             state.ChangeState(state.PickingState);
         }
 
+        //if the type is item then change their state to item state
         else if (type == spaceEnum.Item) 
         { 
             state.ChangeState(state.ItemState);
+        }
+
+        //if the type is lucky then apply 1 of the random 10 outcomes for the player to obtain
+        else if(type == spaceEnum.Lucky)
+        {
+            //lucky.beginLucky(player, Random.Range(1, 11));
+            lucky.beginLucky(player, 1);
         }
     }
 }

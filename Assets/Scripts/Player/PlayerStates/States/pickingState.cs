@@ -295,7 +295,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 selectedOffenceCard = possibleOffenceCards[selectedCard];
             }
 
-            //this part of the method collect the movement deck pool to check if there is any objects that are set to false
+            //this part of the method collect the offence deck pool to check if there is any objects that are set to false
             offenceDeckPool offencePool = GetComponentInChildren<offenceDeckPool>();
             GameObject offenceCard = offencePool.GetAvailableOffence();
             //if there is a object that is set to false then add the selected card into the deck
@@ -326,7 +326,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 selectedDefenceCard = possibleDefenceCards[selectedCard];
             }
 
-            //this part of the method collect the movement deck pool to check if there is any objects that are set to false
+            //this part of the method collect the defence deck pool to check if there is any objects that are set to false
             defenceDeckPool defencePool = GetComponentInChildren<defenceDeckPool>();
             GameObject defenceCard = defencePool.GetAvailableDefence();
             //if there is a object that is set to false then add the selected card into the deck
@@ -357,15 +357,15 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 selectedStatusCard = possibleStatusCards[selectedCard];
             }
 
-            //this part of the method collect the movement deck pool to check if there is any objects that are set to false
+            //this part of the method collect the status deck pool to check if there is any objects that are set to false
             statusDeckPool statusPool = GetComponentInChildren<statusDeckPool>();
             GameObject statusCard = statusPool.GetAvailableStatus();
             //if there is a object that is set to false then add the selected card into the deck
             if (statusCard != null)
             {
                 statusCard.SetActive(true);
-                statusCard defence = statusCard.AddComponent<statusCard>();
-                defence.CreateCard(selectedStatusCard);
+                statusCard status = statusCard.AddComponent<statusCard>();
+                status.CreateCard(selectedStatusCard);
                 cardCollected = true;
             }
 
