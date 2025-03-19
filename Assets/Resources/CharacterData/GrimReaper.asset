@@ -22,7 +22,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6ead47396b107af469c3bf510c83aef4, type: 2}
   - {fileID: 11400000, guid: 3acd9698f3b99a2448ba8f973e1788f6, type: 2}
   - {fileID: 11400000, guid: ab164468113c6d74190a9bd966b76087, type: 2}
-  - {fileID: 11400000, guid: 8b4a3dd795f727d428da8947b4cce6d5, type: 2}
   startingDefenceCards:
   - {fileID: 11400000, guid: 3ad6be79d7d630944bc125818434aa73, type: 2}
   - {fileID: 11400000, guid: 9498b2ad99067424ba309e6318e81235, type: 2}
@@ -36,18 +35,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3309c154d53ff3a45a936e4185b07b54, type: 2}
   startingItems: []
   possibleOffenceCards:
+  - {fileID: 11400000, guid: 532f76d138c076743ad6c0315e8e79f7, type: 2}
+  - {fileID: 11400000, guid: 8b4a3dd795f727d428da8947b4cce6d5, type: 2}
+  - {fileID: 11400000, guid: 8f5ef9e9f236baf409e718fde726fe9d, type: 2}
+  - {fileID: 11400000, guid: bec314acd0e5044468727dfe56de188d, type: 2}
   - {fileID: 11400000, guid: b1756dd4b1df58d4687c7228e0e6065b, type: 2}
-  - {fileID: 11400000, guid: 3cb2f7daa597cbb408a23981edbc3016, type: 2}
-  - {fileID: 11400000, guid: 04a30d5c0ad8f0145aac627167393199, type: 2}
   - {fileID: 11400000, guid: 0d9889f2f8b0fcd449566245860e25ef, type: 2}
   - {fileID: 11400000, guid: bb9e26faa7682a8478e95b399e7f0d0c, type: 2}
-  - {fileID: 11400000, guid: 7bf8db7351a4ebe47ab6ad80450bf6c6, type: 2}
   - {fileID: 11400000, guid: 238e513d24853f84191a59617381f4f3, type: 2}
-  - {fileID: 11400000, guid: 8f5ef9e9f236baf409e718fde726fe9d, type: 2}
-  - {fileID: 11400000, guid: 532f76d138c076743ad6c0315e8e79f7, type: 2}
-  - {fileID: 11400000, guid: bec314acd0e5044468727dfe56de188d, type: 2}
+  - {fileID: 11400000, guid: 3cb2f7daa597cbb408a23981edbc3016, type: 2}
+  - {fileID: 11400000, guid: 04a30d5c0ad8f0145aac627167393199, type: 2}
+  - {fileID: 11400000, guid: 7bf8db7351a4ebe47ab6ad80450bf6c6, type: 2}
   - {fileID: 11400000, guid: b815a8f7a82c9f144859bb7700b3e931, type: 2}
-  - {fileID: 11400000, guid: 8b4a3dd795f727d428da8947b4cce6d5, type: 2}
   possibleDefenceCards:
   - {fileID: 11400000, guid: 581a881777eb31748a5736aeebc55eca, type: 2}
   - {fileID: 11400000, guid: 84f0149692b60bc4588837e638163071, type: 2}

@@ -79,7 +79,7 @@ public class spaceManager : MonoBehaviour
         else if(type == spaceEnum.Lucky)
         {
             //lucky.beginLucky(player, Random.Range(1, 11));
-            lucky.beginLucky(player, 1);
+            lucky.beginLucky(player, 3);
         }
     }
 }

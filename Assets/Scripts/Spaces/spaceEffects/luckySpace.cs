@@ -139,7 +139,7 @@ public class luckySpace : MonoBehaviour
         //This section checks if the player can obtain the offence card in the first place
         //If the method to get an available item slot turns out not to be null then they obtain the card
         //Otherwise they get nothing
-        offenceDeckPool offencePool = GetComponentInChildren<offenceDeckPool>();
+        offenceDeckPool offencePool = luckyPlayer.GetComponentInChildren<offenceDeckPool>();
         GameObject offenceCard = offencePool.GetAvailableOffence();
         if (offenceCard != null)
         {
@@ -178,7 +178,7 @@ public class luckySpace : MonoBehaviour
         //This section checks if the player can obtain the defence card in the first place
         //If the method to get an available item slot turns out not to be null then they obtain the card
         //Otherwise they get nothing
-        defenceDeckPool defencePool = GetComponentInChildren<defenceDeckPool>();
+        defenceDeckPool defencePool = luckyPlayer.GetComponentInChildren<defenceDeckPool>();
         GameObject defenceCard = defencePool.GetAvailableDefence();
         if (defenceCard != null)
         {
@@ -217,7 +217,7 @@ public class luckySpace : MonoBehaviour
         //This section checks if the player can obtain the movement card in the first place
         //If the method to get an available item slot turns out not to be null then they obtain the card
         //Otherwise they get nothing
-        movementDeckPool movePool = GetComponentInChildren<movementDeckPool>();
+        movementDeckPool movePool = luckyPlayer.GetComponentInChildren<movementDeckPool>();
         GameObject moveCard = movePool.GetAvailableMovement();
         if (moveCard != null)
         {
@@ -256,7 +256,7 @@ public class luckySpace : MonoBehaviour
         //This section checks if the player can obtain the status card in the first place
         //If the method to get an available item slot turns out not to be null then they obtain the card
         //Otherwise they get nothing
-        statusDeckPool statusPool = GetComponentInChildren<statusDeckPool>();
+        statusDeckPool statusPool = luckyPlayer.GetComponentInChildren<statusDeckPool>();
         GameObject statusCard = statusPool.GetAvailableStatus();
         if (statusCard != null)
         {
@@ -288,7 +288,7 @@ public class luckySpace : MonoBehaviour
         //This section checks if the player can obtain the relic in the first place
         //If the method to get an available item slot turns out not to be null then they obtain the relic
         //Otherwise they get nothing
-        itemDeckPool itemDeck = GetComponentInChildren<itemDeckPool>();
+        itemDeckPool itemDeck = luckyPlayer.GetComponentInChildren<itemDeckPool>();
         GameObject relic = itemDeck.GetAvailableItem();
         if(relic != null)
         {
