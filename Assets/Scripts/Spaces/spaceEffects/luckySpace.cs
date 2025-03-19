@@ -19,7 +19,7 @@ public class luckySpace : MonoBehaviour
     private List<offenceCardStats> possibleOffenceCards;
     private offenceCardStats selectedOffenceCard;
 
-    private List<defenceCardStats> possibleDefenceCards;
+    [SerializeField] private List<defenceCardStats> possibleDefenceCards;
     private defenceCardStats selectedDefenceCard;
 
     private List<statusCardStats> possibleStatusCards;
@@ -154,7 +154,7 @@ public class luckySpace : MonoBehaviour
         }
 
         //This then clears the list of possible cards and turns the selected card to null and ends the player's turn
-        possibleOffenceCards.Clear();
+        possibleOffenceCards = null;
         selectedOffenceCard = null;
         playerState.ChangeState(playerState.InactiveState);
     }
@@ -193,7 +193,7 @@ public class luckySpace : MonoBehaviour
         }
 
         //This then clears the list of possible cards and turns the selected card to null and ends the player's turn
-        possibleDefenceCards.Clear();
+        possibleDefenceCards = null;
         selectedDefenceCard = null;
         playerState.ChangeState(playerState.InactiveState);
     }
@@ -232,7 +232,7 @@ public class luckySpace : MonoBehaviour
         }
 
         //This then clears the list of possible cards and turns the selected card to null and ends the player's turn
-        possibleMovementCards.Clear();
+        possibleMovementCards = null;
         selectedMovementCard = null;
         playerState.ChangeState(playerState.InactiveState);
     }
@@ -271,7 +271,7 @@ public class luckySpace : MonoBehaviour
         }
 
         //This then clears the list of possible cards and turns the selected card to null and ends the player's turn
-        possibleStatusCards.Clear();
+        possibleStatusCards = null;
         selectedStatusCard = null;
         playerState.ChangeState(playerState.InactiveState);
     }
@@ -303,8 +303,8 @@ public class luckySpace : MonoBehaviour
         }
 
         //This then clears the list of possible relics and turns the selected relic to null and ends the player's turn
-        possibleRelics.Clear();
         selectedRelic = null;
+        possibleRelics = null;
         playerState.ChangeState(playerState.InactiveState);
     }
 }

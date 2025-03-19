@@ -33,7 +33,7 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
     public override void EnterState(playerStateManager player)
     {
-        possibleOmens.Clear();
+        possibleOmens = null;
         selectedOmen = null;
         playerSelected = false;
 
