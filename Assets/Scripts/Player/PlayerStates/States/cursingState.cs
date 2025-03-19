@@ -36,7 +36,6 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         possibleOmens.Clear();
         selectedOmen = null;
         playerSelected = false;
-        checkingAvailability = new GameObject[4];
 
         controls = GetComponent<boardControls>();
         Controls.upPressed += DecidingUp;
@@ -46,22 +45,22 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         Controls.confirmPressed += ConfirmingChoice;
 
         turnManager = Singleton<turnManager>.Instance;
+        checkingAvailability = new GameObject[turnManager.GetPlayers.Length];
 
-        for(int i = 0; i < turnManager.GetPlayers.Length; i++)
+        for (int i = 0; i < turnManager.GetPlayers.Length; i++)
         {
             selectPlayers[i] = turnManager.GetPlayers[i];
         }
 
         for (int i = 0; i < selectPlayers.Length; i++) 
-        { 
-            itemDeck = selectPlayers[i].GetComponentInChildren<itemDeckPool>();
-            if(itemDeck == null)
+        {
+            if (selectPlayers[i] == null)
             {
                 unavailablePlayers++;
             }
-
             else
             {
+                itemDeck = selectPlayers[i].GetComponentInChildren<itemDeckPool>();
                 checkingAvailability[i] = itemDeck.GetAvailableItem();
                 if (checkingAvailability[i] == null)
                 {
