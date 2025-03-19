@@ -58,7 +58,7 @@ public class playerController : MonoBehaviour
     public void ChangeCash(int value)
     {
 
-        if (value >= playerModel.CurrentCash)
+        if (playerModel.CurrentCash + value < 0)
         {
             playerModel.CurrentCash = 0;
         }

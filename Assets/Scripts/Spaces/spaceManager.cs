@@ -78,8 +78,7 @@ public class spaceManager : MonoBehaviour
         //if the type is lucky then apply 1 of the random 10 outcomes for the player to obtain
         else if(type == spaceEnum.Lucky)
         {
-            //lucky.beginLucky(player, Random.Range(1, 11));
-            lucky.beginLucky(player, 3);
+            lucky.beginLucky(player, Random.Range(1, 11));
         }
     }
 }

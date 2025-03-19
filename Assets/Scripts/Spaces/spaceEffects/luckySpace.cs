@@ -19,7 +19,7 @@ public class luckySpace : MonoBehaviour
     private List<offenceCardStats> possibleOffenceCards;
     private offenceCardStats selectedOffenceCard;
 
-    [SerializeField] private List<defenceCardStats> possibleDefenceCards;
+    private List<defenceCardStats> possibleDefenceCards;
     private defenceCardStats selectedDefenceCard;
 
     private List<statusCardStats> possibleStatusCards;
@@ -208,7 +208,7 @@ public class luckySpace : MonoBehaviour
         selectedMovementCard = possibleMovementCards[selectedInt];
 
         //This while loops keep changing the card until the rarity of the chosen card is Legendary
-        while (selectedDefenceCard.cardRarity != CardRarity.Legendary)
+        while (selectedMovementCard.cardRarity != CardRarity.Legendary)
         {
             selectedInt = Random.Range(0, possibleMovementCards.Count);
             selectedMovementCard = possibleMovementCards[selectedInt];
@@ -243,11 +243,11 @@ public class luckySpace : MonoBehaviour
         //Then a random int occurs to apply the specifc relic for the player to obtain
         playerController controller = luckyPlayer.GetComponent<playerController>();
         possibleStatusCards = controller.GetData.possibleStatusCards;
-        selectedInt = Random.Range(0, possibleMovementCards.Count);
+        selectedInt = Random.Range(0, possibleStatusCards.Count);
         selectedStatusCard = possibleStatusCards[selectedInt];
 
         //This while loops keep changing the card until the rarity of the chosen card is Legendary
-        while (selectedDefenceCard.cardRarity != CardRarity.Legendary)
+        while (selectedStatusCard.cardRarity != CardRarity.Legendary)
         {
             selectedInt = Random.Range(0, possibleStatusCards.Count);
             selectedStatusCard = possibleStatusCards[selectedInt];
