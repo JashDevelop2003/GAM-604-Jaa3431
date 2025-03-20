@@ -90,29 +90,36 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
             {
                 {
                     pathOrder path = pathList[i].GetComponent<pathOrder>();
-                    if (path.Direction == directionEnum.Up)
-                    {
-                        pathDirection[0] = pathList[i];
-                        Controls.upPressed += DecidingUp;
-                    }
-                    else if (path.Direction == directionEnum.Down)
-                    {
-                        pathDirection[1] = pathList[i];
-                        Controls.downPressed += DecidingDown;
-                    }
-                    else if (path.Direction == directionEnum.Left)
-                    {
-                        pathDirection[2] = pathList[i];
-                        Controls.leftPressed += DecidingLeft;
-                    }
-                    else if (path.Direction == directionEnum.Right)
-                    {
-                        pathDirection[3] = pathList[i];
-                        Controls.rightPressed += DecidingRight;
-                    }
-                }
-            }          
 
+                    pathDirection[i] = pathList[i];
+
+                    //if (path.Direction == directionEnum.Up)
+                    //{
+                    //    pathDirection[0] = pathList[i];
+                    //    Controls.upPressed += DecidingUp;
+                    //}
+                    //else if (path.Direction == directionEnum.Down)
+                    //{
+                    //    pathDirection[1] = pathList[i];
+                    //    Controls.downPressed += DecidingDown;
+                    //}
+                    //else if (path.Direction == directionEnum.Left)
+                    //{
+                    //    pathDirection[2] = pathList[i];
+                    //    Controls.leftPressed += DecidingLeft;
+                    //}
+                    //else if (path.Direction == directionEnum.Right)
+                    //{
+                    //    pathDirection[3] = pathList[i];
+                    //    Controls.rightPressed += DecidingRight;
+                    //}
+                }
+            }
+
+            Controls.upPressed += DecidingUp;
+            Controls.downPressed += DecidingDown;
+            Controls.leftPressed += DecidingLeft;
+            Controls.rightPressed += DecidingRight;
             Controls.confirmPressed += ConfirmingChoice;
         }
 
@@ -151,21 +158,25 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
     void DecidingUp(object sender, EventArgs e)
     {
         selectedPathway = pathDirection[0];
+        Debug.Log(pathDirection[0]);
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
         selectedPathway = pathDirection[1];
+        Debug.Log(pathDirection[1]);
     }
 
     public void DecidingLeft(object sender, EventArgs e)
     {
         selectedPathway = pathDirection[2];
+        Debug.Log(pathDirection[2]);
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedPathway = pathDirection[3];
+        Debug.Log(pathDirection[3]);
     }
 
     //When confirming the interface method must check if there is a path for the player to use

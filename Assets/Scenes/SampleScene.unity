@@ -286,7 +286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2199398643503440131, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: m_Name
-      value: Path1Left
+      value: Path2Left
       objectReference: {fileID: 0}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: direction
@@ -721,7 +721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b08341557cf4084ab303fe53efb4f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatManager: {fileID: 1902622677}
   lowestManaCost: 0
 --- !u!114 &329044134
 MonoBehaviour:
@@ -735,7 +734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80e4232c1ed8d34d891151d765bb488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatManager: {fileID: 1902622677}
   lowestManaCost: 0
 --- !u!114 &329044135
 MonoBehaviour:
@@ -1136,7 +1134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b08341557cf4084ab303fe53efb4f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatManager: {fileID: 1902622677}
   lowestManaCost: 0
 --- !u!114 &344353859
 MonoBehaviour:
@@ -1150,7 +1147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80e4232c1ed8d34d891151d765bb488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatManager: {fileID: 1902622677}
   lowestManaCost: 0
 --- !u!114 &344353860
 MonoBehaviour:
@@ -1310,7 +1306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2199398643503440131, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: m_Name
-      value: Path3Up
+      value: Path2Up
       objectReference: {fileID: 0}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: directionalSpace
@@ -2226,7 +2222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2199398643503440131, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: m_Name
-      value: Path3Down
+      value: Path1Down
       objectReference: {fileID: 0}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: direction
@@ -2421,7 +2417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2199398643503440131, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: m_Name
-      value: Path2Right
+      value: Path1Right
       objectReference: {fileID: 0}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: direction
@@ -3372,11 +3368,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7be1fc705d474e4ca9067b85790b012, type: 3}
---- !u!1 &1902622677 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6682032860993179926, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
-  m_PrefabInstance: {fileID: 8664046005879783782}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1950636837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3608,9 +3599,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1660694039}
   - {fileID: 150781654}
   - {fileID: 699712208}
+  - {fileID: 1660694039}
   - {fileID: 1687203596}
   - {fileID: 1689585881}
   - {fileID: 847038866}

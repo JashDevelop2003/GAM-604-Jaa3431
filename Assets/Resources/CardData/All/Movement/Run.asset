@@ -17,7 +17,7 @@ MonoBehaviour:
   cardRarity: 0
   cardName: Run
   cardDescription: Moves 1 to 8 Spaces
-  minimumMoveValue: 4
-  maximumMoveValue: 4
+  minimumMoveValue: 1
+  maximumMoveValue: 8
   manaCost: 2
   additionalEffect: {fileID: 0}

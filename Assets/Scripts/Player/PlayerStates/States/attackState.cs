@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm
 {
-    [SerializeField] private GameObject combatManager;
     private combatSystem combatSystem;
     
     private boardControls controls;
@@ -61,7 +60,7 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             }
         }
 
-        combatSystem = combatManager.GetComponent<combatSystem>();
+        combatSystem = combatSystem.instance;
         combatSystem.combatComplete += AttackOver;
 
         if(controller.GetModel.CurrentMana < lowestManaCost)

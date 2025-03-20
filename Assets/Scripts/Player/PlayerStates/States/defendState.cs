@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft, IDefendRight, IDefendConfirm
 {
-    [SerializeField] private GameObject combatManager;
     private combatSystem combatSystem;
 
     private boardControls controls;
@@ -62,7 +61,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
             }
         }
 
-        combatSystem = combatManager.GetComponent<combatSystem>();
+        combatSystem = combatSystem.instance;
         combatSystem.combatComplete += DefendOver;
 
         //If the player doesn't have enough mana for the lowest mana card or is stunned their defence becomes 0

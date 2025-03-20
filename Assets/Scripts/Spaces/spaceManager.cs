@@ -80,5 +80,12 @@ public class spaceManager : MonoBehaviour
         {
             lucky.beginLucky(player, Random.Range(1, 11));
         }
+
+        //if the type is event then currently it does nothing
+        //ToDo: Add Events to behave
+        else if(type == spaceEnum.Event)
+        {
+            state.ChangeState(state.InactiveState);
+        }
     }
 }
