@@ -290,7 +290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: direction
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: directionalSpace
@@ -542,6 +542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391142e2f8814624c87f6863714e6513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beginTurn: 0
+  beginCombat: 0
 --- !u!114 &329044124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,6 +946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391142e2f8814624c87f6863714e6513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beginTurn: 0
+  beginCombat: 0
 --- !u!114 &344353849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1428,7 +1432,7 @@ PrefabInstance:
       objectReference: {fileID: 699712207}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[0].directionRestriction
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[1].directionRestriction
@@ -1984,6 +1988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Players: []
+  currentPlayer: {fileID: 0}
   currentPlayerTurn: 0
 --- !u!1 &847038865 stripped
 GameObject:
@@ -2226,7 +2231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: direction
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: directionalSpace
@@ -2421,7 +2426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: direction
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: spaceOrder.Array.size
@@ -3216,6 +3221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580e6f9947ae9954a89a0e359d88dbcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  events: {fileID: 0}
 --- !u!114 &1699877342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3455,11 +3461,11 @@ PrefabInstance:
       objectReference: {fileID: 1687203594}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[0].directionRestriction
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[1].directionRestriction
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3038760821845371464, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: m_LocalPosition.x
