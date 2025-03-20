@@ -37,8 +37,15 @@ public class turnManager : Singleton<turnManager>
         //Arrays always start with [0] and since the max is excluded this only provide a value of 0 or max player
         //Example: If there's 3 players then the randomiser will pick an integer between 0 to 2 with 0 representing the first player and 2 representing the third player
         currentPlayerTurn = Random.Range(0, Players.Length);
-        StartTurn();
 
+        StartCoroutine(WaitForLoad());
+
+    }
+
+    IEnumerator WaitForLoad()
+    {
+        yield return new WaitForSeconds(2);
+        StartTurn();
     }
 
     //this provides starting the next player's turn on the array
