@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class firingBeamZ : eventSpace
+{
+    [SerializeField] private List<GameObject> targetPlayers;
+    [SerializeField] private GameObject beam;
+    private beamZ beamZ;
+    private spaceManager spaceManager;
+    private turnManager turnManager;
+
+    void Start()
+    {
+        beamZ = beam.GetComponent<beamZ>();
+        spaceManager = spaceManager.instance;
+        turnManager = Singleton<turnManager>.Instance;
+    }
+
+    public override void ActivateEvent()
+    {
+        Debug.Log("I'm firing my Laser at: " + beam.name);
+        targetPlayers = beamZ.Players;
+        foreach (GameObject player in targetPlayers)
+        { 
+            playerController controller = player.GetComponent<playerController>();
+            controller.ChangeHealth(-20);
+        }
+
+        targetPlayers.Clear();
+        StartCoroutine(EndTurn());
+    }
+
+    public IEnumerator EndTurn()
+    {
+        yield return new WaitForSeconds(2);
+        playerStateManager currentPlayer = turnManager.CurrentPlayer.GetComponent<playerStateManager>();
+        currentPlayer.ChangeState(currentPlayer.InactiveState);
+    }
+}

@@ -46,6 +46,11 @@ public class moveState : playerStateBase
     //the current space is the object that the raycast is detected last as the targeted object
     //the space enum checks which type of space the player is currently landed on
     private GameObject currentSpace;
+    public GameObject CurrentSpace
+    {
+        get { return currentSpace; } 
+    }
+
     private pathOrder pathOrder;
     private spaceEnum currentSpaceType;
 

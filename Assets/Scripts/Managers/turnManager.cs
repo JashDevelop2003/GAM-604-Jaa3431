@@ -18,7 +18,13 @@ public class turnManager : Singleton<turnManager>
         get { return Players; }
     }
 
-    [SerializeField] int currentPlayerTurn;
+    [SerializeField] private GameObject currentPlayer;
+    public GameObject CurrentPlayer
+    {
+        get { return currentPlayer; }
+    }
+
+    [SerializeField] private int currentPlayerTurn;
     
     // Start is called before the first frame update
     void Start()
@@ -44,6 +50,9 @@ public class turnManager : Singleton<turnManager>
             //If it does then go back to player one (which should be 0)
             currentPlayerTurn = 0;
         }
+
+        //This provides the current player game object
+        currentPlayer = Players[currentPlayerTurn];
 
         //This finds the state manager in the current player's turn to infrom the state manager to move to start state
         Players[currentPlayerTurn].GetComponent<playerStateManager>().StartPlayerTurn();

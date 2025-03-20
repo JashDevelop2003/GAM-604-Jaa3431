@@ -10,6 +10,8 @@ public class spaceManager : MonoBehaviour
 {
     public static spaceManager instance;
     private luckySpace lucky;
+    [SerializeField] private eventSpace events;
+
 
 
     //this is used to make this a singular instance of the component
@@ -85,7 +87,9 @@ public class spaceManager : MonoBehaviour
         //ToDo: Add Events to behave
         else if(type == spaceEnum.Event)
         {
-            state.ChangeState(state.InactiveState);
+            moveState findEvent = player.GetComponent<moveState>();
+            events = findEvent.CurrentSpace.GetComponent<eventSpace>();
+            events.ActivateEvent();
         }
     }
 }

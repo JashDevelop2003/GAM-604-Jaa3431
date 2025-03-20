@@ -14,8 +14,8 @@ public class inactiveState : playerStateBase
     //the booleans are used to change to a specfic state
     //beginTurn changes the current state to start state
     //TODO: beginCombat changes the current state to defend state
-    private bool beginTurn;
-    private bool beginCombat;
+    [SerializeField] private bool beginTurn;
+    [SerializeField] private bool beginCombat;
 
     //This is use in order to instant defeat the grim reaper if she's still in her last reapsort form
     playerController controller;
