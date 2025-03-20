@@ -1221,7 +1221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4314386524775887646, guid: 769e1548ec7533b46977aee588c9368a, type: 3}
       propertyPath: m_Name
-      value: EventSpace (2)
+      value: EventSpaceBeamZ (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4314386524775887646, guid: 769e1548ec7533b46977aee588c9368a, type: 3}
       propertyPath: m_TagString
@@ -1483,7 +1483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4314386524775887646, guid: 769e1548ec7533b46977aee588c9368a, type: 3}
       propertyPath: m_Name
-      value: EventSpace (3)
+      value: EventSpaceBeamX (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4314386524775887646, guid: 769e1548ec7533b46977aee588c9368a, type: 3}
       propertyPath: m_TagString
@@ -2206,12 +2206,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1986095463}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[0].directionInt
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[1].directionInt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[0].directionRestriction
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[1].directionRestriction
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3038760821845371464, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2293,12 +2301,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 54048264}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[0].directionInt
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[0].directionRestriction
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[1].directionRestriction
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3038760821845371464, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2543,7 +2555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4314386524775887646, guid: 769e1548ec7533b46977aee588c9368a, type: 3}
       propertyPath: m_Name
-      value: EventSpace (4)
+      value: EventSpaceBlessOrHex
       objectReference: {fileID: 0}
     - target: {fileID: 4314386524775887646, guid: 769e1548ec7533b46977aee588c9368a, type: 3}
       propertyPath: m_TagString
@@ -2585,12 +2597,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 235016057}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[0].directionInt
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[1].directionInt
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[0].directionRestriction
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[1].directionRestriction
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3038760821845371464, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4113,7 +4133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4314386524775887646, guid: 769e1548ec7533b46977aee588c9368a, type: 3}
       propertyPath: m_Name
-      value: EventSpace (1)
+      value: EventSpaceBeamX
       objectReference: {fileID: 0}
     - target: {fileID: 4314386524775887646, guid: 769e1548ec7533b46977aee588c9368a, type: 3}
       propertyPath: m_TagString
@@ -4187,8 +4207,8 @@ Transform:
   - {fileID: 1684589287}
   - {fileID: 1053224152}
   - {fileID: 4270103327250767441}
-  - {fileID: 1492980450}
   - {fileID: 367901691}
+  - {fileID: 1492980450}
   - {fileID: 500345424}
   - {fileID: 861746493}
   m_Father: {fileID: 0}
@@ -4419,8 +4439,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1485928020}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[0].directionInt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[1].directionInt
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[0].directionRestriction
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[1].directionRestriction
@@ -4850,30 +4878,46 @@ PrefabInstance:
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[0].pathChoice
       value: 
-      objectReference: {fileID: 1294239499}
+      objectReference: {fileID: 395616113}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[1].pathChoice
       value: 
-      objectReference: {fileID: 1964181347}
+      objectReference: {fileID: 382064971}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[2].pathChoice
       value: 
-      objectReference: {fileID: 395616113}
+      objectReference: {fileID: 1294239499}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: pathChoices.Array.data[3].pathChoice
       value: 
-      objectReference: {fileID: 382064971}
+      objectReference: {fileID: 1964181347}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
-      propertyPath: pathChoices.Array.data[1].directionRestriction
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
-      propertyPath: pathChoices.Array.data[2].directionRestriction
+      propertyPath: pathChoices.Array.data[1].directionInt
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
-      propertyPath: pathChoices.Array.data[3].directionRestriction
+      propertyPath: pathChoices.Array.data[2].directionInt
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[3].directionInt
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[0].directionRestriction
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[1].directionRestriction
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[2].directionRestriction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8340638664732597238, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
+      propertyPath: pathChoices.Array.data[3].directionRestriction
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3038760821845371464, guid: 99024f78c67c89a4eb66c4f46547fb8d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5651,7 +5695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4314386524775887646, guid: 769e1548ec7533b46977aee588c9368a, type: 3}
       propertyPath: m_Name
-      value: EventSpace
+      value: EventSpaceBeamZ
       objectReference: {fileID: 0}
     - target: {fileID: 4314386524775887646, guid: 769e1548ec7533b46977aee588c9368a, type: 3}
       propertyPath: m_TagString

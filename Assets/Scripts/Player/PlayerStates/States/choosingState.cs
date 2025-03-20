@@ -28,6 +28,7 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
 
     //The path has a struct inside of the pathSelection that is used to provide all the path choices available with the direction restriction and path object
     private List<GameObject> pathList;
+    private List<int> pathDirectionInt;
     private GameObject selectedPathway;
     private GameObject[] pathDirection;
 
@@ -61,6 +62,7 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
 
         //this creates all the available paths for the player to choose from
         pathList = pathSelection.PlayerChoices;
+        pathDirectionInt = pathSelection.DirectionInts;
 
         //this checks if there is only 1 path or more
         //if there is only one path then the player is forced to choose that path
@@ -81,45 +83,45 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
         //otherwise the controls are enable depending on the type of direction the path is
         else
         {
-            //if the direction is Up then upPressed in controls is enabled
-            //else if the direction is Down then downPressed in controls is enabled
-            //else if the direction is Left then leftPressed in controls is enabled
-            //else if the direction is Right then rightPressed in controls is enabled
+            //if the directionInt is 0 then upPressed in controls is enabled
+            //else if the directionInt is 2 then downPressed in controls is enabled
+            //else if the directionInt is 3 then leftPressed in controls is enabled
+            //else if the directionInt is 1 then rightPressed in controls is enabled
 
             for (int i = 0; i < pathList.Count; i++) 
             {
                 {
                     pathOrder path = pathList[i].GetComponent<pathOrder>();
 
-                    pathDirection[i] = pathList[i];
 
-                    //if (path.Direction == directionEnum.Up)
-                    //{
-                    //    pathDirection[0] = pathList[i];
-                    //    Controls.upPressed += DecidingUp;
-                    //}
-                    //else if (path.Direction == directionEnum.Down)
-                    //{
-                    //    pathDirection[1] = pathList[i];
-                    //    Controls.downPressed += DecidingDown;
-                    //}
-                    //else if (path.Direction == directionEnum.Left)
-                    //{
-                    //    pathDirection[2] = pathList[i];
-                    //    Controls.leftPressed += DecidingLeft;
-                    //}
-                    //else if (path.Direction == directionEnum.Right)
-                    //{
-                    //    pathDirection[3] = pathList[i];
-                    //    Controls.rightPressed += DecidingRight;
-                    //}
+                    if (pathDirectionInt[i] == 0)
+                    {
+                        pathDirection[0] = pathList[i];
+                        Controls.upPressed += DecidingUp;
+                    }
+                    else if (pathDirectionInt[i] == 2)
+                    {
+                        pathDirection[2] = pathList[i];
+                        Controls.downPressed += DecidingDown;
+                    }
+                    else if (pathDirectionInt[i] == 3)
+                    {
+                        pathDirection[3] = pathList[i];
+                        Controls.leftPressed += DecidingLeft;
+                    }
+                    else if (pathDirectionInt[i] == 1)
+                    {
+                        pathDirection[1] = pathList[i];
+                        Controls.rightPressed += DecidingRight;
+                    }
+
+                    else
+                    {
+                        Debug.LogError(pathList[i] + " has a int of " + pathDirectionInt[i] + " which is not suitable for the path struct. You'll need to change the int between 0 to 3");
+                    }
                 }
             }
 
-            Controls.upPressed += DecidingUp;
-            Controls.downPressed += DecidingDown;
-            Controls.leftPressed += DecidingLeft;
-            Controls.rightPressed += DecidingRight;
             Controls.confirmPressed += ConfirmingChoice;
         }
 
@@ -163,20 +165,20 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
 
     public void DecidingDown(object sender, EventArgs e)
     {
-        selectedPathway = pathDirection[1];
-        Debug.Log(pathDirection[1]);
-    }
-
-    public void DecidingLeft(object sender, EventArgs e)
-    {
         selectedPathway = pathDirection[2];
         Debug.Log(pathDirection[2]);
     }
 
-    public void DecidingRight(object sender, EventArgs e)
+    public void DecidingLeft(object sender, EventArgs e)
     {
         selectedPathway = pathDirection[3];
         Debug.Log(pathDirection[3]);
+    }
+
+    public void DecidingRight(object sender, EventArgs e)
+    {
+        selectedPathway = pathDirection[1];
+        Debug.Log(pathDirection[1]);
     }
 
     //When confirming the interface method must check if there is a path for the player to use

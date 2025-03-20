@@ -9,11 +9,18 @@ using System;
 
 //A struct is used to create multiple path that provide their own direction restriction from the direction enum
 //Along with the path that is available for the player to choose from
+//A Int is used to provide a suitable key press for the player to choose the path they want (e.g the player doesn't have to press down to move right)
+//Int must be between 0-3 in order to provide the suitable key, the ints for the suitable key are as followed:
+// Up = 0
+// Right = 1
+// Down = 2
+// Left = 3
 [System.Serializable]
 public struct Paths
 {
     public directionEnum directionRestriction;
     public GameObject pathChoice;
+    public int directionInt;
 }
 public class pathSelection : MonoBehaviour
 {
@@ -26,12 +33,19 @@ public class pathSelection : MonoBehaviour
         get { return playerChoices; } 
     
     }
+    
+    private List<int> directionInts = new List<int>();
+    public List<int> DirectionInts
+    {
+        get { return directionInts; }
+    }
 
     //This checks if the player direction is the same as the direction restriction which is excluded from the player's choice
     public void PathSelections(directionEnum playerDirection)
     {
         //this clears the player choices to prevent any incorrect paths to be selected
         playerChoices.Clear();
+        directionInts.Clear();
         
         //this checks for each path's direction restriction to see if it matches the player's current direction
         //if both the player direction and direction restriction aren't the same then add the path to the list
@@ -41,6 +55,7 @@ public class pathSelection : MonoBehaviour
             if (pathChoice.directionRestriction != playerDirection)
             {
                 playerChoices.Add(pathChoice.pathChoice);
+                directionInts.Add(pathChoice.directionInt);
             }
         }
     }
