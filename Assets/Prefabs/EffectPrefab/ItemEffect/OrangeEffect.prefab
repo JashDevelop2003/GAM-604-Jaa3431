@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4018505861754113447
+--- !u!1 &638121763684732509
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7935645815706546327}
-  - component: {fileID: 547522723898066085}
+  - component: {fileID: 1965039787772064452}
+  - component: {fileID: 5125106947179448834}
   m_Layer: 0
-  m_Name: CherriesEffect
+  m_Name: OrangeEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7935645815706546327
+--- !u!4 &1965039787772064452
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4018505861754113447}
+  m_GameObject: {fileID: 638121763684732509}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24350579, y: 2, z: -15.999993}
+  m_LocalPosition: {x: -0.74427205, y: 4.878042, z: 8.374374}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &547522723898066085
+--- !u!114 &5125106947179448834
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4018505861754113447}
+  m_GameObject: {fileID: 638121763684732509}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23b17943d54423c4389c47ef80fee3aa, type: 3}
@@ -47,4 +47,4 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   player: {fileID: 0}
   hasPickup: 0
-  healthValue: 3
+  healthValue: 7
