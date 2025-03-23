@@ -79,6 +79,41 @@ public class playerModel
         get { return character; }
     }
 
+    private int offenceCards;
+    public int OffenceCards
+    {
+        get { return offenceCards; }
+        set {  offenceCards = value; }
+    }
+
+    private int defenceCards;
+    public int DefenceCards
+    {
+        get { return defenceCards; }
+        set { defenceCards = value; }
+    }
+
+    private int movementCards;
+    public int MovementCards
+    {
+        get { return movementCards; }
+        set {  movementCards = value; }
+    }
+
+    private int statusCards;
+    public int StatusCards
+    {
+        get { return statusCards; }
+        set { statusCards = value; }
+    }
+
+    private int itemPile;
+    public int ItemPile
+    {
+        get { return itemPile; }
+        set { itemPile = value; }
+    }
+
     private bool isAlive;
     public bool IsAlive
     {
@@ -96,6 +131,11 @@ public class playerModel
         CurrentMana = characterData.Mana;
         MaxMana = characterData.Mana;
         currentCash = characterData.startingCash;
+        offenceCards = characterData.startingOffenceCards.Count;
+        defenceCards = characterData.startingDefenceCards.Count;
+        movementCards = characterData.startingMovementCards.Count;
+        statusCards = characterData.startingStatusCards.Count;
+        itemPile = characterData.startingItems.Count;
         rollValue = 0;
         thrustMultiplier = 1;
         guardMultiplier = 1;
