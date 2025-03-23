@@ -5,6 +5,7 @@ using UnityEngine;
 public class blessOrHex : eventSpace
 {
     private turnManager turnManager;
+    private playerController controller;
 
     private List<itemStats> possibleRelics;
     private itemStats selectedRelic;
@@ -44,7 +45,7 @@ public class blessOrHex : eventSpace
         
         //This obtains the character data of the possible relics the player can obtain
         //Then a random int occurs to apply the specifc relic for the player to obtain
-        playerController controller = turnManager.CurrentPlayer.GetComponent<playerController>();
+        controller = turnManager.CurrentPlayer.GetComponent<playerController>();
         possibleRelics = controller.GetData.possibleRelics;
         selectedInt = Random.Range(0, possibleRelics.Count);
         selectedRelic = possibleRelics[selectedInt];
@@ -59,6 +60,7 @@ public class blessOrHex : eventSpace
             relic.SetActive(true);
             itemBehaviour item = relic.AddComponent<itemBehaviour>();
             item.CreateItem(selectedRelic);
+            controller.IncrementDeck(deckTypeEnum.Item);
         }
 
         else if (relic == null)
@@ -78,7 +80,7 @@ public class blessOrHex : eventSpace
 
         //This obtains the character data of the possible relics the player can obtain
         //Then a random int occurs to apply the specifc relic for the player to obtain
-        playerController controller = turnManager.CurrentPlayer.GetComponent<playerController>();
+        controller = turnManager.CurrentPlayer.GetComponent<playerController>();
         possibleOmens = controller.GetData.possibleOmens;
         selectedInt = Random.Range(0, possibleOmens.Count);
         selectedOmens = possibleOmens[selectedInt];
@@ -93,6 +95,7 @@ public class blessOrHex : eventSpace
             omen.SetActive(true);
             itemBehaviour item = omen.AddComponent<itemBehaviour>();
             item.CreateItem(selectedOmens);
+            controller.IncrementDeck(deckTypeEnum.Item);
         }
 
         else if (omen == null)

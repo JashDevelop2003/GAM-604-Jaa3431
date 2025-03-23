@@ -28,13 +28,11 @@ public class wordsOfWisdomEffect : MonoBehaviour
         int RandomInt = UnityEngine.Random.Range(0, 2);
         if(RandomInt == 0)
         {
-            controller.GetModel.ThrustMultiplier += 0.1f;
-            Debug.Log("Increasing Thrust" + controller.GetModel.ThrustMultiplier);
+            controller.ChangeThrust(controller.GetModel.ThrustMultiplier + 0.1f);
         }
         else
         {
-            controller.GetModel.GuardMultiplier += 0.1f;
-            Debug.Log("Increasing Guard" + controller.GetModel.GuardMultiplier);
+            controller.ChangeGuard(controller.GetModel.GuardMultiplier + 0.1f);
         }
     }
 

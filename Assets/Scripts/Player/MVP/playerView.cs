@@ -44,14 +44,60 @@ public class playerView : MonoBehaviour
         healthPoints.SetText(controller.GetModel.CurrentHealth.ToString());
         manaPoints.SetText(controller.GetModel.CurrentMana.ToString());
         cashPoints.SetText(controller.GetModel.CurrentCash.ToString());
-        thrustPercentage.SetText(((controller.GetModel.ThrustMultiplier - 1) * 100).ToString() + " %" );
-        guardPercentage.SetText(((controller.GetModel.GuardMultiplier - 1) * 100).ToString() + " %");
-        rollPercentage.SetText(((controller.GetModel.RollMultiplier - 1) * 100).ToString() + " %");
+        thrustPercentage.SetText((controller.GetModel.ThrustMultiplier * 100).ToString() + "%" );
+        guardPercentage.SetText((controller.GetModel.GuardMultiplier * 100).ToString() + "%");
+        rollPercentage.SetText((controller.GetModel.RollMultiplier * 100).ToString() + "%");
     }
 
 
-    //public void ChangeOffenceUI()
-    //{
+    public void HealthUI()
+    {
+        healthPoints.SetText(controller.GetModel.CurrentHealth.ToString());
+    }
 
-    //}
+    public void ManaUI()
+    {
+        manaPoints.SetText(controller.GetModel.CurrentMana.ToString());
+    }
+
+    public void CashUI()
+    {
+        cashPoints.SetText(controller.GetModel.CurrentCash.ToString());
+    }
+
+    public void ThrustUI()
+    {
+        thrustPercentage.SetText((controller.GetModel.ThrustMultiplier * 100).ToString() + "%");
+    }
+
+    public void GuardUI()
+    {
+        guardPercentage.SetText((controller.GetModel.GuardMultiplier * 100).ToString() + "%");
+    }
+    public void RollUI()
+    {
+        rollPercentage.SetText((controller.GetModel.RollMultiplier * 100).ToString() + "%");
+    }
+
+    public void OffenceUI()
+    {
+        offenceValue.SetText(controller.GetModel.OffenceCards.ToString());
+    }
+    public void DefenceUI()
+    {
+        defenceValue.SetText(controller.GetModel.DefenceCards.ToString());
+    }
+    public void MovementUI()
+    {
+        movementValue.SetText(controller.GetModel.MovementCards.ToString());
+    }
+    public void StatusUI()
+    {
+        statusValue.SetText(controller.GetModel.StatusCards.ToString());
+    }
+
+    public void ItemUI()
+    {
+        itemValue.SetText(controller.GetModel.ItemPile.ToString());
+    }
 }

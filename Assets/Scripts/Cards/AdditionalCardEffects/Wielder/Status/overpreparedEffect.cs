@@ -25,8 +25,7 @@ public class overpreparedEffect : MonoBehaviour
     public void Overprepared(object sender, EventArgs e)
     {
         playerController controller = player.GetComponent<playerController>();
-        controller.GetModel.RollMultiplier /= 2;
-        Debug.Log("Roll Multiplier is Halved to: " + controller.GetModel.RollMultiplier);
+        controller.ChangeRoll(controller.GetModel.RollMultiplier / 2);
     }
 
     void OnDisable()

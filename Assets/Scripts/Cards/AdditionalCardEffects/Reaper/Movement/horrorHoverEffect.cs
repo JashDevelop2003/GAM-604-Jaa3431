@@ -32,8 +32,7 @@ public class horrorHoverEffect : MonoBehaviour
     public void HorrorHover(object sender, EventArgs e)
     {
         playerController controller = player.GetComponent<playerController>();
-        controller.GetModel.ThrustMultiplier += (float)(0.1 * controller.GetModel.RollValue);
-        Debug.Log(controller.GetModel.ThrustMultiplier);
+        controller.ChangeThrust(controller.GetModel.ThrustMultiplier + (float)(0.1 * controller.GetModel.RollValue));
     }
 
     ///This should be used for all additional effects

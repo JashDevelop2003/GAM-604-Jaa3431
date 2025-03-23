@@ -29,10 +29,8 @@ public class boredToDeathEffect : MonoBehaviour
         playerBuff.AddBuff(buffEnum.Healthy, 1, 0);
 
         playerController controller = player.GetComponent<playerController>();
-        controller.GetModel.ThrustMultiplier -= 0.25f;
-        Debug.Log("Thrust Multiplier has went down by 0.25f, new multiplier is: " + controller.GetModel.ThrustMultiplier);
-        controller.GetModel.RollMultiplier -= 0.25f;
-        Debug.Log("Roll Multiplier has went down by 0.25f, new multiplier is: " + controller.GetModel.RollMultiplier);
+        controller.ChangeThrust(controller.GetModel.ThrustMultiplier - 0.25f);
+        controller.ChangeRoll(controller.GetModel.RollMultiplier - 0.25f);
     }
 
     void OnDisable()

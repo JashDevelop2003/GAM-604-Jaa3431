@@ -242,8 +242,7 @@ public class currentBuffs : MonoBehaviour
     {
         if (isHasty)
         {
-            controller.GetModel.RollMultiplier *= 2;
-            Debug.Log("RollMultiplier = " + controller.GetModel.RollMultiplier);
+            controller.ChangeRoll(controller.GetModel.RollMultiplier * 2);
             hastyCooldown--;
             if (hastyCooldown <= 0)
             {
@@ -267,8 +266,7 @@ public class currentBuffs : MonoBehaviour
     {
         if (isResistant)
         {
-            controller.GetModel.GuardMultiplier += resistantValue;
-            Debug.Log(resistantValue + " 1 = " + controller.GetModel.GuardMultiplier);
+            controller.ChangeGuard(controller.GetModel.GuardMultiplier + resistantValue);
             resistantCooldown--;
             if (resistantCooldown <= 0)
             {
@@ -283,8 +281,7 @@ public class currentBuffs : MonoBehaviour
     {
         if (isImpactful)
         {
-            controller.GetModel.ThrustMultiplier += impactfulValue;
-            Debug.Log(impactfulValue + " 1.  Guard Value = " + controller.GetModel.ThrustMultiplier);
+            controller.ChangeThrust(controller.GetModel.ThrustMultiplier + impactfulValue);
             impactfulCooldown--;
             if (impactfulCooldown <= 0)
             {

@@ -114,6 +114,7 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
             relic.SetActive(true);
             itemBehaviour item = relic.AddComponent<itemBehaviour>();
             item.CreateItem(selectedRelic);
+            controller.IncrementDeck(deckTypeEnum.Item);
             itemDecided = true;
         }
         else if( typeSelected == itemEnum.Omen)

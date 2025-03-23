@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour
     //this allows other classes to reference these to return the data
     //However the choosing state can set a new current path for the controller to collect and provide
     private playerModel playerModel;
+    private playerView playerView;
     [SerializeField] private characterData Data;
 
     //This is to provide the current path for the move state to use
@@ -40,6 +41,9 @@ public class playerController : MonoBehaviour
         playerModel = new playerModel(Data);
         transform.position = new Vector3(startingSpace.SpaceOrder[1].transform.position.x, 2f, startingSpace.SpaceOrder[1].transform.position.z);
 
+        //this collects the view for providing the interface of the statistics
+        playerView = GetComponent<playerView>();
+
         Instantiate(GetData.characterObject, this.transform);
     }
 
@@ -47,11 +51,10 @@ public class playerController : MonoBehaviour
     //Thus also regains the mana for the player to use cards
     public void ResetStats(object sender, EventArgs e)
     {
-        playerModel.RollMultiplier = 1;
-        playerModel.ThrustMultiplier = 1;
-        playerModel.GuardMultiplier = 1;
-        playerModel.CurrentMana = playerModel.MaxMana;
-        Debug.Log("Mana Regain");
+        ChangeMana(-GetModel.MaxMana);
+        ChangeThrust(1);
+        ChangeGuard(1);
+        ChangeRoll(1);
     }
 
     //ChangeCash is a method that when landing on a blue or red space will change the current cash to certain value
@@ -69,13 +72,13 @@ public class playerController : MonoBehaviour
 
         }
 
-        Debug.Log(this.gameObject + "'s Cash Changed to: " + playerModel.CurrentCash);
+        playerView.CashUI();
     }
 
     public void ChangeMana(int cost)
     {
         playerModel.CurrentMana -= cost;
-        Debug.Log(this.gameObject  + "'s Mana Changed to: " + playerModel.CurrentMana);
+        playerView.ManaUI();
     }
 
     //Roll is a mathod that subtracts the mana based on mana cost (parameter is roll cost) and the value of the dice (parameter is value)
@@ -101,26 +104,105 @@ public class playerController : MonoBehaviour
         if(buffs.IsInvincible && value < 0)
         {
             value = 0;
-            Debug.Log("You take no damage due to being invincible");
         }
 
         //If the current health being subtracted from the value is less than 0, the player is defeated
         if (playerModel.CurrentHealth + value <= 0)
         {
             playerModel.IsAlive = false;
-            Debug.Log("Game Over");
         }
         //Else if the current health being added from the the value is greater than the max health, the current health will maximise to only the maximum health
         else if (playerModel.CurrentHealth + value > playerModel.MaxHealth)
         {
             playerModel.CurrentHealth = playerModel.MaxHealth;
-            Debug.Log("No Overhealth in this game, otherwise the game will be longer :-) ");
         }
         //otherwise the value adds (or subtract if the value is negative) to the new current health
         else
         {
             playerModel.CurrentHealth += value;
-            Debug.Log(this.gameObject + "'s Health Changed " + playerModel.CurrentHealth + " / " + playerModel.MaxHealth);
+        }
+
+        playerView.HealthUI();
+    }
+
+    //For any Multiplier Changes the procedure for the parameter must be:
+    //Collecting the Multiplier from the mutliplier
+    //Then Add/Substract/Divide/Multiply the multiplier
+    //That paremeter float value is now the new multiplier
+    public void ChangeThrust(float value)
+    {
+        if (value < 0) 
+        {
+            GetModel.ThrustMultiplier = 0;
+        }
+        else
+        {
+            GetModel.ThrustMultiplier = value;
+        }
+        playerView.ThrustUI();
+    }
+
+    public void ChangeGuard(float value)
+    {
+        if (value < 0)
+        {
+            GetModel.GuardMultiplier = 0;
+        }
+        else
+        {
+            GetModel.GuardMultiplier = value;
+        }
+        playerView.GuardUI();
+    }
+
+    public void ChangeRoll(float value)
+    {
+        if (value < 0)
+        {
+            GetModel.RollMultiplier = 0;
+        }
+        else
+        {
+            GetModel.RollMultiplier = value;
+        }
+        playerView.RollUI();
+    }
+
+    public void IncrementDeck(deckTypeEnum deck)
+    {
+        if (deck == deckTypeEnum.Offence) 
+        {
+            GetModel.OffenceCards++;
+            playerView.OffenceUI();
+        }
+
+        else if(deck == deckTypeEnum.Defence)
+        {
+            GetModel.DefenceCards++;
+            playerView.DefenceUI();
+        }
+
+        else if(deck == deckTypeEnum.Movement)
+        {
+            GetModel.MovementCards++;
+            playerView.MovementUI();
+        }
+
+        else if(deck == deckTypeEnum.Status)
+        {
+            GetModel.StatusCards++;
+            playerView.StatusUI();
+        }
+
+        else if(deck == deckTypeEnum.Item)
+        {
+            GetModel.ItemPile++;
+            playerView.ItemUI();
+        }
+
+        else
+        {
+            Debug.LogError("There's a possible chance that the type is not suitable");
         }
     }
 

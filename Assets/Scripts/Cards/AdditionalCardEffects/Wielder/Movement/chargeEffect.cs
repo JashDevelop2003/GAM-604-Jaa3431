@@ -28,13 +28,11 @@ public class chargeEffect : MonoBehaviour
         rollState.rollCancelEvent += RemoveEffect;
     }
 
-    //One Two Five Will Change the value of 3 to 5
+    //Charge Doubles the Thrust
     public void Charge(object sender, EventArgs e)
     {
         playerController controller = player.GetComponent<playerController>();
-        Debug.Log("Previous Multiplier" + controller.GetModel.ThrustMultiplier);
-        controller.GetModel.ThrustMultiplier *= 2;
-        Debug.Log("New Multiplier" + controller.GetModel.ThrustMultiplier);
+        controller.ChangeThrust(controller.GetModel.ThrustMultiplier);
 
     }
 

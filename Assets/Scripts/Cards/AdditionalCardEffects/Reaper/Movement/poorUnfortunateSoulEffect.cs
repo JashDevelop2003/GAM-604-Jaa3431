@@ -32,8 +32,7 @@ public class poorUnfortunateSoulEffect : MonoBehaviour
     public void PoorUnfortunateSoul(object sender, EventArgs e)
     {
         playerController controller = player.GetComponent<playerController>();
-        controller.GetModel.GuardMultiplier -= 0.13f;
-        Debug.Log(controller.GetModel.GuardMultiplier);
+        controller.ChangeGuard(controller.GetModel.GuardMultiplier - 0.13f);
     }
 
     ///This should be used for all additional effects

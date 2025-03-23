@@ -110,8 +110,6 @@ public class rollState : playerStateBase, IConfirm, ICancel
                     controller.Roll((int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * controller.GetModel.RollMultiplier));
                 }
 
-                //This decreases the mana based on the card's required mana
-                controller.ChangeMana(manaCost);
             }
 
             //This is for the rest of the players that are not playing as the reaper
@@ -119,6 +117,9 @@ public class rollState : playerStateBase, IConfirm, ICancel
             {
                 controller.Roll((int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * controller.GetModel.RollMultiplier));
             }
+
+        //This decreases the mana based on the card's required mana
+        controller.ChangeMana(manaCost);
 
         rollEvent?.Invoke(this, EventArgs.Empty);
         rollDice = true;

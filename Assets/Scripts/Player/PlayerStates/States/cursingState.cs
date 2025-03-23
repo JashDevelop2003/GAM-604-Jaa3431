@@ -144,6 +144,7 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 omen.SetActive(true);
                 itemBehaviour item = omen.AddComponent<itemBehaviour>();
                 item.CreateItem(selectedOmen);
+                controller.IncrementDeck(deckTypeEnum.Item);
                 playerSelected = true;
             }
 

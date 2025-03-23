@@ -34,9 +34,8 @@ public class strengthInNumbersEffect : MonoBehaviour
     {
         playerController controller = player.GetComponent<playerController>();
         currentBuffs buffPlayer = player.GetComponent<currentBuffs>();
-        controller.GetModel.ThrustMultiplier += (float)(0.05 * controller.GetModel.RollValue);
+        controller.ChangeThrust(controller.GetModel.ThrustMultiplier + (float)(0.05 * controller.GetModel.RollValue));
         buffPlayer.AddBuff(buffEnum.Impactful, controller.GetModel.RollValue, (float)(0.05 * controller.GetModel.RollValue));
-        Debug.Log(controller.GetModel.ThrustMultiplier);
     }
 
     ///This should be used for all additional effects

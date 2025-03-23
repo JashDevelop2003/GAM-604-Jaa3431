@@ -10,6 +10,7 @@ public class luckySpace : MonoBehaviour
     //this is to obtain the player and their state
     [SerializeField] private GameObject luckyPlayer;
     private playerStateManager playerState;
+    private playerController playerController;
 
     //The possible and selected card/relic are use to provide a random card/relic for the player to obtain
 
@@ -35,6 +36,7 @@ public class luckySpace : MonoBehaviour
         //lucky player turns to player in order to have the variable use for obtaining specific resources
         luckyPlayer = player;
         playerState = player.GetComponent<playerStateManager>();
+        playerController = player.GetComponent<playerController>();
 
         //If the outcome is 1 then obtain a relic
         if (outcome == 1)
@@ -74,8 +76,7 @@ public class luckySpace : MonoBehaviour
         //if the outcome is 6 then gain 100 cash
         else if (outcome == 6)
         {
-            playerController controller = player.GetComponent<playerController>();
-            controller.ChangeCash(100);
+            playerController.ChangeCash(100);
             Debug.Log("Outcome: Gain 100 Cash");
             playerState.ChangeState(playerState.InactiveState);
         }
@@ -83,8 +84,7 @@ public class luckySpace : MonoBehaviour
         //if the outcome is 7 then gain 25% Health
         else if(outcome == 7)
         {
-            playerController controller = player.GetComponent<playerController>();
-            controller.ChangeHealth((int)(controller.GetModel.MaxHealth * 0.25f));
+            playerController.ChangeHealth((int)(playerController.GetModel.MaxHealth * 0.25f));
             Debug.Log("Outcome: Heal 25% of Max Health");
             playerState.ChangeState(playerState.InactiveState);
         }
@@ -146,6 +146,7 @@ public class luckySpace : MonoBehaviour
             offenceCard.SetActive(true);
             offenceCard offence = offenceCard.AddComponent<offenceCard>();
             offence.CreateCard(selectedOffenceCard);
+            playerController.IncrementDeck(deckTypeEnum.Offence);
         }
 
         else if (offenceCard == null)
@@ -185,6 +186,7 @@ public class luckySpace : MonoBehaviour
             defenceCard.SetActive(true);
             defenceCard defence = defenceCard.AddComponent<defenceCard>();
             defence.CreateCard(selectedDefenceCard);
+            playerController.IncrementDeck(deckTypeEnum.Defence);
         }
 
         else if (defenceCard == null)
@@ -224,6 +226,7 @@ public class luckySpace : MonoBehaviour
             moveCard.SetActive(true);
             movementCard movement = moveCard.AddComponent<movementCard>();
             movement.CreateCard(selectedMovementCard);
+            playerController.IncrementDeck(deckTypeEnum.Movement);
         }
 
         else if (moveCard == null)
@@ -263,6 +266,7 @@ public class luckySpace : MonoBehaviour
             statusCard.SetActive(true);
             statusCard status = statusCard.AddComponent<statusCard>();
             status.CreateCard(selectedStatusCard);
+            playerController.IncrementDeck(deckTypeEnum.Status);
         }
 
         else if (statusCard == null)
@@ -295,6 +299,7 @@ public class luckySpace : MonoBehaviour
             relic.SetActive(true);
             itemBehaviour item = relic.AddComponent<itemBehaviour>();
             item.CreateItem(selectedRelic);
+            playerController.IncrementDeck(deckTypeEnum.Item);
         }
 
         else if(relic == null)

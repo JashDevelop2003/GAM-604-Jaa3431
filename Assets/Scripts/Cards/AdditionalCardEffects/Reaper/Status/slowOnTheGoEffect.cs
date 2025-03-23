@@ -25,8 +25,7 @@ public class slowOnTheGoEffect : MonoBehaviour
     public void SlowOnTheGo(object sender, EventArgs e)
     {
         playerController controller = player.GetComponent<playerController>();
-        controller.GetModel.GuardMultiplier += 0.1f;
-        Debug.Log("Guard Multiplier has went down by 0.1f, new multiplier is: " + controller.GetModel.GuardMultiplier);
+        controller.ChangeGuard(controller.GetModel.GuardMultiplier + 0.1f);
     }
 
     void OnDisable()

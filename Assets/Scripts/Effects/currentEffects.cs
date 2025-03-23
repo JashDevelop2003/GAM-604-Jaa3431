@@ -73,6 +73,7 @@ public class currentEffects : MonoBehaviour
     {
         controller = GetComponent<playerController>();
         buffs = GetComponent<currentBuffs>();
+
     }
 
     //When the current player has chosen this player
@@ -320,8 +321,7 @@ public class currentEffects : MonoBehaviour
         //This checks if hasty is on, if it's not on then decrease roll value by 20%
         if (isSlowed && !buffs.IsHasty) 
         {
-            controller.GetModel.RollMultiplier -= 0.2f;
-            Debug.Log("RollMultiplier = " + controller.GetModel.RollMultiplier);
+            controller.ChangeRoll(controller.GetModel.RollMultiplier - 0.2f);
             slowCooldown--;
             if(slowCooldown <= 0)
             {
@@ -357,8 +357,7 @@ public class currentEffects : MonoBehaviour
     {
         if (isExposed && !buffs.IsResistant)
         {
-            controller.GetModel.GuardMultiplier -= 0.25f;
-            Debug.Log("GuardMultiplier = " + controller.GetModel.GuardMultiplier);
+            controller.ChangeGuard(controller.GetModel.GuardMultiplier - 0.25f);
             exposeCooldown--;
             if (exposeCooldown <= 0)
             {
@@ -471,8 +470,7 @@ public class currentEffects : MonoBehaviour
     {
         if (isFeared && !buffs.IsImpactful)
         {
-            controller.GetModel.ThrustMultiplier -= 0.25f;
-            Debug.Log("ThrustMultiplier = " + controller.GetModel.ThrustMultiplier);
+            controller.ChangeThrust(controller.GetModel.ThrustMultiplier - 0.25f);
             fearCooldown--;
             if (fearCooldown <= 0)
             {

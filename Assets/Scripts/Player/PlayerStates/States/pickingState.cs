@@ -272,6 +272,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 moveCard.SetActive(true);
                 movementCard movement = moveCard.AddComponent<movementCard>();
                 movement.CreateCard(selectedMovementCard);
+                controller.IncrementDeck(deckTypeEnum.Movement);
                 cardCollected = true;
             }
 
@@ -304,6 +305,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 offenceCard.SetActive(true);
                 offenceCard offence = offenceCard.AddComponent<offenceCard>();
                 offence.CreateCard(selectedOffenceCard);
+                controller.IncrementDeck(deckTypeEnum.Offence);
                 cardCollected = true;
             }
 
@@ -335,6 +337,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 defenceCard.SetActive(true);
                 defenceCard defence = defenceCard.AddComponent<defenceCard>();
                 defence.CreateCard(selectedDefenceCard);
+                controller.IncrementDeck(deckTypeEnum.Defence);
                 cardCollected = true;
             }
 
@@ -366,6 +369,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 statusCard.SetActive(true);
                 statusCard status = statusCard.AddComponent<statusCard>();
                 status.CreateCard(selectedStatusCard);
+                controller.IncrementDeck(deckTypeEnum.Status);
                 cardCollected = true;
             }
 
