@@ -27,8 +27,7 @@ public class firingBeamX : eventSpace
             playerController controller = player.GetComponent<playerController>();
             controller.ChangeHealth(-20);
         }
-
-        targetPlayers.Clear();
+        targetPlayers = null;
         StartCoroutine(EndTurn());
     }
 

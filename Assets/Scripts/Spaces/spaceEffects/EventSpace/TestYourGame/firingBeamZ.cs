@@ -27,7 +27,7 @@ public class firingBeamZ : eventSpace
             controller.ChangeHealth(-20);
         }
 
-        targetPlayers.Clear();
+        targetPlayers = null;
         StartCoroutine(EndTurn());
     }
 

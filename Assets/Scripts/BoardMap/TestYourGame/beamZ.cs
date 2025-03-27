@@ -30,11 +30,19 @@ public class beamZ : MonoBehaviour
 
     private void OnTriggerExit(Collider player)
     {
-        foreach (GameObject removePlayer in players) 
+        //foreach (GameObject removePlayer in players)
+        //{
+        //   if (player.gameObject == removePlayer)
+        //   {
+        //       players.Remove(removePlayer);
+        //   }
+        //}
+
+        for (int i = 0; i < players.Count; i++)
         {
-            if (player.gameObject == removePlayer) 
-            { 
-                players.Remove(removePlayer);
+            if (player.gameObject == players[i])
+            {
+                players.Remove(players[i]);
             }
         }
     }
