@@ -76,6 +76,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8bd0f7b87480c844bab27953c799060d, type: 2}
   possibleRelics:
   - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
+  - {fileID: 11400000, guid: c18bea37bf726d344b46f4b03c26ccfb, type: 2}
+  - {fileID: 11400000, guid: 8277213bc67d60e49a3770421d2ebd64, type: 2}
+  - {fileID: 11400000, guid: 15a831f7718a6eb429db9da1f0e31431, type: 2}
+  - {fileID: 11400000, guid: e1ed6f90ee1d8214d99e601257fa756d, type: 2}
+  - {fileID: 11400000, guid: 18d429fa3994469459b58d2fc02e7926, type: 2}
   possibleOmens:
   - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
   characterObject: {fileID: 4041446733811344979, guid: e08fcfe5dd961474ba73f5cb01afb1eb, type: 3}
