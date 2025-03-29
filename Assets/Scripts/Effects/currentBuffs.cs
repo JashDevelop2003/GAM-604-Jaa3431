@@ -72,8 +72,8 @@ public class currentBuffs : MonoBehaviour
             {
                 invincibleCooldown = cooldown;
                 controller.effectEndEvent += InvinciblePlayer;
+                controller.DisplayBuff((int)type, true);
             }
-            Debug.Log("Player is Invincible for " + cooldown + " more turns. cooldown is now: " + invincibleCooldown);
         }
 
         else if (type == buffEnum.Healthy) 
@@ -87,8 +87,8 @@ public class currentBuffs : MonoBehaviour
             {
                 healthyCooldown = cooldown;
                 controller.effectEndEvent += HealthyPlayer;
+                controller.DisplayBuff((int)type, true);
             }
-            Debug.Log("Player is Healthy for " + cooldown + " more turns. cooldown is now: " + healthyCooldown);
         }
 
         else if (type == buffEnum.Hasty)
@@ -102,8 +102,8 @@ public class currentBuffs : MonoBehaviour
             {
                 hastyCooldown = cooldown;
                 controller.effectStartEvent += HastyPlayer;
+                controller.DisplayBuff((int)type, true);
             }
-            Debug.Log("Player is Hasty for " + cooldown + " more turns cooldown is now " + hastyCooldown);
         }
 
         if (type == buffEnum.Lucky)
@@ -117,15 +117,14 @@ public class currentBuffs : MonoBehaviour
             {
                 luckyCooldown = cooldown;
                 controller.effectEndEvent += LuckyPlayer;
+                controller.DisplayBuff((int)type, true);
             }
 
-            Debug.Log("Player is Hasty for " + cooldown + " more turns cooldown is now " + hastyCooldown);
         }
 
         else if (type == buffEnum.Resistant)
         {
             isResistant = true;
-            Debug.Log("Previous Resistant Value & Cooldown: " + resistantValue + " value " + resistantCooldown + "cooldown");
             //If the new Resistant value is higher than the current buff OR If the current value is 0
             //Change both the cooldown & value to the new value & cooldown
             if (resistantValue < value || resistantValue == 0)
@@ -141,6 +140,7 @@ public class currentBuffs : MonoBehaviour
                 {
                     resistantCooldown = cooldown;
                     controller.effectStartEvent += ResistantPlayer;
+                    controller.DisplayBuff((int)type, true);
                 }
             }
             //otherwise if the values are the same value then check the cooldown
@@ -157,6 +157,7 @@ public class currentBuffs : MonoBehaviour
                 {
                     resistantCooldown = cooldown;
                     controller.effectStartEvent += ResistantPlayer;
+                    controller.DisplayBuff((int)type, true);
                 }
             }
 
@@ -165,7 +166,6 @@ public class currentBuffs : MonoBehaviour
                 Debug.LogWarning(value + " is less than current value");
             }
 
-            Debug.Log("Current Resistant Value & Cooldown: " + resistantValue + " value " + resistantCooldown + "cooldown");
 
         }
 
@@ -173,7 +173,6 @@ public class currentBuffs : MonoBehaviour
         else if (type == buffEnum.Impactful)
         {
             isImpactful = true;
-            Debug.Log("Previous Impactful Value & Cooldown: " + impactfulValue + " value " + impactfulCooldown + "cooldown");
             //If the new impact value is higher than the current buff OR If the current value is 0
             //Change both the cooldown & value to the new value & cooldown
             if (impactfulValue < value || impactfulValue == 0)
@@ -189,6 +188,7 @@ public class currentBuffs : MonoBehaviour
                 {
                     impactfulCooldown = cooldown;
                     controller.effectStartEvent += ImpactfulPlayer;
+                    controller.DisplayBuff((int)type, true);
                 }
             }
             //otherwise if the values are the same value then check the cooldown
@@ -205,6 +205,7 @@ public class currentBuffs : MonoBehaviour
                 {
                     impactfulCooldown = cooldown;
                     controller.effectStartEvent += ImpactfulPlayer;
+                    controller.DisplayBuff((int)type, true);
                 }
             }
 
@@ -213,7 +214,6 @@ public class currentBuffs : MonoBehaviour
                 Debug.LogWarning(value + " is less than current value");
             }
 
-            Debug.Log("Current Impactful Value & Cooldown: " + impactfulValue + " value " + impactfulCooldown + "cooldown");
         }
 
     }
@@ -225,6 +225,7 @@ public class currentBuffs : MonoBehaviour
         {
             isInvincible = false;
             controller.effectEndEvent -= InvinciblePlayer;
+            controller.DisplayBuff((int)buffEnum.Invincible, false);
         }
     }
 
@@ -235,6 +236,7 @@ public class currentBuffs : MonoBehaviour
         {
             isHealthy = false;
             controller.effectEndEvent -= HealthyPlayer;
+            controller.DisplayBuff((int)buffEnum.Healthy, false);
         }
     }
 
@@ -248,6 +250,7 @@ public class currentBuffs : MonoBehaviour
             {
                 isHasty = false;
                 controller.effectStartEvent -= HastyPlayer;
+                controller.DisplayBuff((int)buffEnum.Hasty, false);
             }
         }
     }
@@ -259,6 +262,7 @@ public class currentBuffs : MonoBehaviour
         {
             isLucky = false;
             controller.effectEndEvent -= LuckyPlayer;
+            controller.DisplayBuff((int)buffEnum.Lucky, false);
         }
     }
 
@@ -273,6 +277,7 @@ public class currentBuffs : MonoBehaviour
                 isResistant = false;
                 resistantValue = 0;
                 controller.effectStartEvent -= ResistantPlayer;
+                controller.DisplayBuff((int)buffEnum.Resistant, false);
             }
         }
     }
@@ -288,6 +293,7 @@ public class currentBuffs : MonoBehaviour
                 isImpactful = false;
                 impactfulValue = 0;
                 controller.effectStartEvent -= ImpactfulPlayer;
+                controller.DisplayBuff((int)buffEnum.Impactful, false);
             }
         }
     }

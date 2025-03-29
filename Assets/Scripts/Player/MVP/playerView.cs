@@ -28,6 +28,9 @@ public class playerView : MonoBehaviour
     [SerializeField] private TMP_Text guardPercentage;
     [SerializeField] private TMP_Text rollPercentage;
 
+    [SerializeField] private List<GameObject> effectDisplay;
+    [SerializeField] private List<GameObject> buffDisplay;
+
 
 
     // Start is called before the first frame update
@@ -99,5 +102,15 @@ public class playerView : MonoBehaviour
     public void ItemUI()
     {
         itemValue.SetText(controller.GetModel.ItemPile.ToString());
+    }
+
+    public void EffectUI (int effectInt, bool setActive)
+    {
+        effectDisplay[effectInt].SetActive(setActive);
+    }
+
+    public void BuffUI(int buffInt, bool setActive)
+    {
+        buffDisplay[buffInt].SetActive(setActive);
     }
 }

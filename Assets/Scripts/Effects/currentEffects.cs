@@ -100,9 +100,9 @@ public class currentEffects : MonoBehaviour
                 {
                     burnCooldown = cooldown;
                     controller.effectEndEvent += BurnPlayer;
+                    controller.DisplayEffect((int)type, true);
                 }
 
-                Debug.Log("Player is Burned for " + cooldown + " more turns. cooldown is now: " + burnCooldown);
             }
 
             else if (type == effectEnum.Slowed)
@@ -116,9 +116,10 @@ public class currentEffects : MonoBehaviour
                 {
                     slowCooldown = cooldown;
                     controller.effectStartEvent += SlowPlayer;
+                    controller.DisplayEffect((int)type, true);
 
                 }
-                Debug.Log("Player is Slowed for " + cooldown + " more turns. cooldown is now: " + slowCooldown);
+
             }
 
             else if (type == effectEnum.Shocked)
@@ -132,10 +133,11 @@ public class currentEffects : MonoBehaviour
                 {
                     shockCooldown = cooldown;
                     controller.effectEndEvent += ShockPlayer;
+                    controller.DisplayEffect((int)type, true);
 
                 }
 
-                Debug.Log("Player is Shocked for " + cooldown + " more turns. cooldown is now: " + shockCooldown);
+
             }
 
             else if (type == effectEnum.Exposed)
@@ -149,8 +151,9 @@ public class currentEffects : MonoBehaviour
                 {
                     exposeCooldown = cooldown;
                     controller.effectStartEvent += ExposePlayer;
+                    controller.DisplayEffect((int)type, true);
                 }
-                Debug.Log("Player is Exposed for " + cooldown + " more turns. cooldown is now: " + exposeCooldown);
+
             }
 
             else if (type == effectEnum.Bleeding)
@@ -164,10 +167,11 @@ public class currentEffects : MonoBehaviour
                 {
                     bleedCooldown = cooldown;
                     controller.effectEndEvent += BleedPlayer;
+                    controller.DisplayEffect((int)type, true);
 
                 }
 
-                Debug.Log("Player is Bleeding for " + cooldown + " more turns. cooldown is now: " + bleedCooldown);
+
             }
 
             else if (type == effectEnum.Poison)
@@ -181,10 +185,11 @@ public class currentEffects : MonoBehaviour
                 {
                     poisonCooldown = cooldown;
                     controller.effectEndEvent += PoisonPlayer;
+                    controller.DisplayEffect((int)type, true);
 
                 }
 
-                Debug.Log("Player is Poisoned for " + cooldown + " more turns. cooldown is now: " + poisonCooldown);
+
 
             }
 
@@ -199,9 +204,10 @@ public class currentEffects : MonoBehaviour
                 {
                     blisterCooldown = cooldown;
                     controller.effectEndEvent += BlisterPlayer;
+                    controller.DisplayEffect((int)type, true);
                 }
 
-                Debug.Log("Player is Blistered for " + cooldown + " more turns. cooldown is now: " + blisterCooldown);
+
 
             }
 
@@ -216,9 +222,10 @@ public class currentEffects : MonoBehaviour
                 {
                     unstableCooldown = cooldown;
                     controller.effectEndEvent += UnstablePlayer;
+                    controller.DisplayEffect((int)type, true);
                 }
 
-                Debug.Log("Player is Unstabled for " + cooldown + " more turns. cooldown is now: " + unstableCooldown);
+
 
             }
 
@@ -233,9 +240,10 @@ public class currentEffects : MonoBehaviour
                 {
                     stunCooldown = cooldown;
                     controller.effectEndEvent += StunPlayer;
+                    controller.DisplayEffect((int)type, true);
 
                 }
-                Debug.Log("Player is stunned for " + cooldown + " more turns. cooldown is now: " + stunCooldown);
+
 
             }
 
@@ -250,8 +258,9 @@ public class currentEffects : MonoBehaviour
                 {
                     fearCooldown = cooldown;
                     controller.effectStartEvent += FearPlayer;
+                    controller.DisplayEffect((int)type, true);
                 }
-                Debug.Log("Player is Feared for " + cooldown + " more turns. cooldown is now: " + fearCooldown);
+
 
             }
 
@@ -266,8 +275,9 @@ public class currentEffects : MonoBehaviour
                 {
                     confusedCooldown = cooldown;
                     controller.effectEndEvent += ConfusePlayer;
+                    controller.DisplayEffect((int)type, true);
                 }
-                Debug.Log("Player is Confused for " + cooldown + " more turns. cooldown is now: " + confusedCooldown);
+
 
             }
 
@@ -282,8 +292,9 @@ public class currentEffects : MonoBehaviour
                 {
                     blindCooldown = cooldown;
                     controller.effectEndEvent += BlindPlayer;
+                    controller.DisplayEffect((int)type, true);
                 }
-                Debug.Log("Player is blinded for " + cooldown + " more turns. cooldown is now: " + blindCooldown);
+
 
             }
 
@@ -310,6 +321,7 @@ public class currentEffects : MonoBehaviour
             { 
                 isBurned = false;
                 controller.effectEndEvent -= BurnPlayer;
+                controller.DisplayEffect((int)effectEnum.Burned, false);
             }
 
         }
@@ -327,6 +339,7 @@ public class currentEffects : MonoBehaviour
             {
                 isSlowed = false;
                 controller.effectStartEvent -= SlowPlayer;
+                controller.DisplayEffect((int)effectEnum.Slowed, false);
             }
         }
 
@@ -337,6 +350,7 @@ public class currentEffects : MonoBehaviour
             isSlowed = false;
             slowCooldown = 0;
             controller.effectStartEvent -= SlowPlayer;
+            controller.DisplayEffect((int)effectEnum.Slowed, false);
             Debug.Log("Player has Hasty so Slow is Removed");
         }
     }
@@ -349,6 +363,7 @@ public class currentEffects : MonoBehaviour
         {
             isShocked = false;
             controller.effectEndEvent -= ShockPlayer;
+            controller.DisplayEffect((int)effectEnum.Shocked, false);
         }
     }
 
@@ -363,6 +378,7 @@ public class currentEffects : MonoBehaviour
             {
                 isExposed = false;
                 controller.effectStartEvent -= ExposePlayer;
+                controller.DisplayEffect((int)effectEnum.Exposed, false);
 
             }
         }
@@ -374,6 +390,7 @@ public class currentEffects : MonoBehaviour
             isExposed = false;
             exposeCooldown = 0;
             controller.effectStartEvent -= ExposePlayer;
+            controller.DisplayEffect((int)effectEnum.Exposed, false);
             Debug.Log("Player has Resistant so Exposed is Removed");
         }
     }
@@ -389,6 +406,7 @@ public class currentEffects : MonoBehaviour
             {
                 isBleeding = false;
                 controller.effectEndEvent -= BleedPlayer;
+                controller.DisplayEffect((int)effectEnum.Bleeding, false);
             }
         }
     }
@@ -408,6 +426,7 @@ public class currentEffects : MonoBehaviour
             {
                 isPoisoned = false;
                 controller.effectEndEvent -= PoisonPlayer;
+                controller.DisplayEffect((int)effectEnum.Poison, false);
             }
 
         }
@@ -426,8 +445,9 @@ public class currentEffects : MonoBehaviour
             blisterCooldown--;
             if (blisterCooldown <= 0)
             {
-                isBlistered = false;
+                isBlistered = false;               
                 controller.effectEndEvent -= BlisterPlayer;
+                controller.DisplayEffect((int)effectEnum.Blistered, false);
             }
 
         }
@@ -448,6 +468,7 @@ public class currentEffects : MonoBehaviour
             {
                 isUnstabled = false;
                 controller.effectEndEvent -= UnstablePlayer;
+                controller.DisplayEffect((int)effectEnum.Unstabled, false);
             }
 
         }
@@ -462,6 +483,7 @@ public class currentEffects : MonoBehaviour
         {
             isStunned = false;
             controller.effectEndEvent -= StunPlayer;
+            controller.DisplayEffect((int)effectEnum.Stunned, false);
         }
     }
 
@@ -476,6 +498,7 @@ public class currentEffects : MonoBehaviour
             {
                 isFeared = false;
                 controller.effectStartEvent -= FearPlayer;
+                controller.DisplayEffect((int)effectEnum.Feared, false);
             }
         }
 
@@ -486,6 +509,7 @@ public class currentEffects : MonoBehaviour
             isFeared = false;
             fearCooldown = 0;
             controller.effectStartEvent -= FearPlayer;
+            controller.DisplayEffect((int)effectEnum.Feared, false);
             Debug.Log("Player has Impactful so Fear is Removed");
         }
     }
@@ -499,6 +523,7 @@ public class currentEffects : MonoBehaviour
         {
             isConfused = false;
             controller.effectEndEvent -= ConfusePlayer;
+            controller.DisplayEffect((int)effectEnum.Confused, false);
         }
     }
 
@@ -510,6 +535,7 @@ public class currentEffects : MonoBehaviour
         {
             isBlind = false;
             controller.effectEndEvent -= BlindPlayer;
+            controller.DisplayEffect((int)effectEnum.Blind, false);
         }
     }
 }

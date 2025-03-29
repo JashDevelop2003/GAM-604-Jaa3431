@@ -51,7 +51,8 @@ public class playerController : MonoBehaviour
     //Thus also regains the mana for the player to use cards
     public void ResetStats(object sender, EventArgs e)
     {
-        ChangeMana(-GetModel.MaxMana);
+        playerModel.CurrentMana = playerModel.MaxMana;
+        playerView.ManaUI();
         ChangeThrust(1);
         ChangeGuard(1);
         ChangeRoll(1);
@@ -88,7 +89,7 @@ public class playerController : MonoBehaviour
 
         playerModel.RollValue = value;
         if (shockEffect.Shocked) 
-        { 
+        {
             ChangeHealth(-value);
         }
         Debug.Log(playerModel.RollValue);
@@ -226,5 +227,15 @@ public class playerController : MonoBehaviour
     public void ActivateEndEffect()
     {
         effectEndEvent?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void DisplayEffect(int enumInt, bool display)
+    {
+        playerView.EffectUI(enumInt, display);
+    }
+
+    public void DisplayBuff(int enumInt, bool display)
+    {
+        playerView.BuffUI(enumInt, display);
     }
 }
