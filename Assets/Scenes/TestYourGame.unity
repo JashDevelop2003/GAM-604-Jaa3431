@@ -1115,6 +1115,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lowestManaCost: 0
+  decidingDisplay: {fileID: 1538993689}
+  manaCostText:
+  - {fileID: 96748780}
+  - {fileID: 449289939}
+  - {fileID: 2091428441}
+  - {fileID: 1008294418}
+  cardNameText:
+  - {fileID: 297713749}
+  - {fileID: 1184952332}
+  - {fileID: 618624471}
+  - {fileID: 176983335}
+  cardDescriptionText:
+  - {fileID: 1822617604}
+  - {fileID: 347640428}
+  - {fileID: 620282616}
+  - {fileID: 164688529}
+  eventText: {fileID: 2116896888}
 --- !u!114 &83180100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8776,6 +8793,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lowestManaCost: 0
+  decidingDisplay: {fileID: 1044652630}
+  manaCostText:
+  - {fileID: 866837630}
+  - {fileID: 1755024803}
+  - {fileID: 2033047643}
+  - {fileID: 1766034606}
+  cardNameText:
+  - {fileID: 1909086235}
+  - {fileID: 359983117}
+  - {fileID: 1520445336}
+  - {fileID: 1917136727}
+  cardDescriptionText:
+  - {fileID: 1785342768}
+  - {fileID: 1589777107}
+  - {fileID: 1334786865}
+  - {fileID: 287157015}
+  eventText: {fileID: 2116896888}
 --- !u!114 &651103444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12944,7 +12978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1044652631
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17491,7 +17525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1538993690
 RectTransform:
   m_ObjectHideFlags: 0

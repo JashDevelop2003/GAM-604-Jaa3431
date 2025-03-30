@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 /// <summary>
 /// First Playable: The Deciding State is to have the player select a movement card to choose for rolling
 /// </summary>
@@ -55,6 +57,13 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     //This is to check if the player is confused
     private currentEffects effects;
 
+    //This is to add UI to the cards and add description of the card.
+    [SerializeField] private GameObject decidingDisplay;
+    [SerializeField] private TMP_Text[] manaCostText = new TMP_Text [4];
+    [SerializeField] private TMP_Text[] cardNameText = new TMP_Text[4];
+    [SerializeField] private TMP_Text[] cardDescriptionText = new TMP_Text[4];
+    [SerializeField] private TMP_Text eventText;
+
     public override void EnterState(playerStateManager player)
     {
         
@@ -87,17 +96,26 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         controller = GetComponent<playerController>();
 
         effects = GetComponent<currentEffects>();
-        
+
+        //This display the UI for the player to choose a card
+        decidingDisplay.SetActive(true);
+
         //This conditional statement checks if the previous state was start state to draw cards
         //If the previous state is not the start state then the cards stay the same
-        if(player.PreviousState == player.StartState)
+        if (player.PreviousState == player.StartState)
         {
             movementDeck.DrawCards();
             statusDeck.DrawCard();
+
+            eventText.SetText("Choose a Movement or Status Card");
+            
             //This for loop checks which card has the lowest maan cost which will be use to check if the player can use the card
             for (int i = 0; i < movementDeck.SelectedCards.Length; i++) 
             { 
                 movementCard movecard = movementDeck.SelectedCards[i].GetComponent<movementCard>();
+                manaCostText[i].SetText(movecard.MoveCard.manaCost.ToString());
+                cardNameText[i].SetText(movecard.MoveCard.name);
+                cardDescriptionText[i].SetText(moveCard.MoveCard.cardDescription);
                 if(movecard.ManaCost < lowestManaCost)
                 {
                     lowestManaCost = movecard.ManaCost;
@@ -105,7 +123,11 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             }
 
             statusCard statcard = statusDeck.SelectedCard.GetComponent<statusCard>();
-            if(statcard.ManaCost < lowestManaCost)
+            manaCostText[3].SetText(statcard.StatusCard.manaCost.ToString());
+            cardNameText[3].SetText(statcard.StatusCard.name);
+            cardDescriptionText[3].SetText(statcard.StatusCard.cardDescription);
+
+            if (statcard.ManaCost < lowestManaCost)
             {
                 lowestManaCost= statcard.ManaCost;
             }
@@ -113,6 +135,8 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             if(controller.GetModel.CurrentMana < lowestManaCost)
             {
                 unableMove = true;
+                eventText.SetText("Unable to Move due to low amount of Mana");
+
             }
 
             if(!unableMove && effects.Confused)
@@ -128,6 +152,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                     moveCard = selectedCard.GetComponent<movementCard>();
                 }
 
+                eventText.SetText("A Random Movement Card was chosen");
                 hasSelected = true;
 
             }
@@ -172,6 +197,8 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
     public override void ExitState(playerStateManager player)
     {
+        decidingDisplay.SetActive(false);
+
         //Before exiting the deciding state, the state must reference the rolll state to have the roll state collect the suitable values
         if (hasSelected) 
         {
@@ -203,6 +230,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingUp(object sender, EventArgs e)
     {
         selectedCard = movementDeck.SelectedCards[1];
+        eventText.SetText(cardDescriptionText[1].ToString());
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
@@ -215,6 +243,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         if(statusDeck.SelectedCard != null)
         {
             selectedCard = statusDeck.SelectedCard;
+            eventText.SetText(cardDescriptionText[3].ToString());
             statCard = selectedCard.GetComponent<statusCard>();
             moveCard = null;
             usingAbility = false;
@@ -230,6 +259,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingLeft(object sender, EventArgs e)
     {       
         selectedCard = movementDeck.SelectedCards[0];
+        eventText.SetText(cardDescriptionText[0].ToString());
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
