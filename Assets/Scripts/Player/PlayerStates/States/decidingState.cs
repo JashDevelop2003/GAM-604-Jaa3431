@@ -52,6 +52,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
     //This boolean checks when the player has selected the ability and can use their one use ability
     private bool usingAbility;
+    private bool availableAbility = true;
     private bool unableMove;
 
     //This is to check if the player is confused
@@ -99,6 +100,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
         //This display the UI for the player to choose a card
         decidingDisplay.SetActive(true);
+        eventText.SetText("Choose a Movement or Status Card");
 
         //This conditional statement checks if the previous state was start state to draw cards
         //If the previous state is not the start state then the cards stay the same
@@ -106,15 +108,13 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         {
             movementDeck.DrawCards();
             statusDeck.DrawCard();
-
-            eventText.SetText("Choose a Movement or Status Card");
             
             //This for loop checks which card has the lowest maan cost which will be use to check if the player can use the card
             for (int i = 0; i < movementDeck.SelectedCards.Length; i++) 
             { 
                 movementCard movecard = movementDeck.SelectedCards[i].GetComponent<movementCard>();
                 manaCostText[i].SetText(movecard.MoveCard.manaCost.ToString());
-                cardNameText[i].SetText(movecard.MoveCard.name);
+                cardNameText[i].SetText(movecard.MoveCard.cardName);
                 cardDescriptionText[i].SetText(movecard.MoveCard.cardDescription);
                 if(movecard.ManaCost < lowestManaCost)
                 {
@@ -124,7 +124,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
             statusCard statcard = statusDeck.SelectedCard.GetComponent<statusCard>();
             manaCostText[3].SetText(statcard.StatusCard.manaCost.ToString());
-            cardNameText[3].SetText(statcard.StatusCard.name);
+            cardNameText[3].SetText(statcard.StatusCard.cardName);
             cardDescriptionText[3].SetText(statcard.StatusCard.cardDescription);
 
             if (statcard.ManaCost < lowestManaCost)
@@ -161,6 +161,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         if (effects.Stunned) 
         {
             unableMove = true;
+            eventText.SetText("Player is Stunned");
         }
 
     }
@@ -171,7 +172,6 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
         if (hasSelected)
         {
-            Debug.Log(selectedCard.name);
             //This is to collect the reference of the card that was selected and provide the data of the roll values and mana cost
             minRoll = moveCard.RollMinimumValue;
             maxRoll = moveCard.RollMaximumValue;
@@ -184,7 +184,6 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
         if (isTargeting) 
         {
-            Debug.Log("Is Targeting a player");
             player.ChangeState(player.TargetState);
         }
 
@@ -202,13 +201,14 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         //Before exiting the deciding state, the state must reference the rolll state to have the roll state collect the suitable values
         if (hasSelected) 
         {
-            eventText.SetText("Card Selected: " + selectedCard.name);
+            eventText.SetText("Movement Card Selected: " + selectedCard.name + " Roll the Dice by pressing Space or Go Back by Pressing Cancel");
             rollState Rolling = player.RollState.GetComponent<rollState>();
             Rolling.CollectValue(minRoll, maxRoll, manaCost);
         }
 
         if (isTargeting) 
-        { 
+        {
+            eventText.SetText("Status Card Selected: " + selectedCard.name);
             targetState Targeting = player.TargetState.GetComponent<targetState>();
             Targeting.CollectStatusCard(selectedCard);
         }
@@ -231,11 +231,10 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingUp(object sender, EventArgs e)
     {
         selectedCard = movementDeck.SelectedCards[1];
-        eventText.SetText(cardDescriptionText[1].text);
+        eventText.SetText(cardNameText[1].text + " " + cardDescriptionText[1].text);
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
-        Debug.Log(selectedCard.name);
     }
 
     //For status card selected must empty moveCard and turn using ability to false to make sure that only the status card is used
@@ -244,15 +243,14 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         if(statusDeck.SelectedCard != null)
         {
             selectedCard = statusDeck.SelectedCard;
-            eventText.SetText(cardDescriptionText[3].text);
+            eventText.SetText(cardNameText[3].text + " " + cardDescriptionText[3].text);
             statCard = selectedCard.GetComponent<statusCard>();
             moveCard = null;
             usingAbility = false;
-            Debug.Log(selectedCard.name);
         }
         else
         {
-            Debug.LogWarning("You've used a status effect");
+            eventText.SetText("You've used a status effect");
 
         }
     }
@@ -260,21 +258,19 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingLeft(object sender, EventArgs e)
     {       
         selectedCard = movementDeck.SelectedCards[0];
-        eventText.SetText(cardDescriptionText[0].text);
+        eventText.SetText(cardNameText[0].text + " " + cardDescriptionText[0].text);
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
-        Debug.Log(selectedCard.name);
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedCard = movementDeck.SelectedCards[2];
-        eventText.SetText(cardDescriptionText[2].text);
+        eventText.SetText(cardNameText[2].text + " " + cardDescriptionText[2].text);
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
-        Debug.Log(selectedCard.name);
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
@@ -290,7 +286,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                 }
                 else
                 {
-                    Debug.LogWarning("You don't have enough mana to use that move card");
+                    eventText.SetText("You don't have enough mana to use that move card");
                 }
             }
             else if (statCard != null) 
@@ -302,28 +298,34 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                 }
                 else
                 {
-                    Debug.LogWarning("You don't have enough mana to use that status card");
+                    eventText.SetText("You don't have enough mana to use that status card");
                 }
             }
         }
 
         
         //otherwise check is the player is using an ability
-        else
+        else if(usingAbility)
         {
             //If the player is using an ability then invoke the one use ability from the controller
-            if (usingAbility)
+            if (availableAbility)
             {
                 controller.ActivateOneUse();
-                Debug.Log("Using Ability");
+                availableAbility = false;
+                eventText.SetText("Using One Use Ability");
             }
             //otherwise apply an error to inform that the player hasn't chosen a card yet
             else
             {
-                Debug.LogError("The Card has not been selected nor Ability is selected");
+                eventText.SetText("You already used your one use ability");
 
             }
 
+        }
+
+        else
+        {
+            eventText.SetText("You chosen nothing... Choose One with WASD or Q for One Use Ability");
         }
     }
 
@@ -331,6 +333,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     //This needs to empty both cards to prevent changing state
     public void UsingAbility(object sender, EventArgs e)
     {
+        eventText.SetText("One Use Ability");
         selectedCard = null;
         moveCard = null;
         statCard = null;
