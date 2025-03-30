@@ -115,7 +115,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                 movementCard movecard = movementDeck.SelectedCards[i].GetComponent<movementCard>();
                 manaCostText[i].SetText(movecard.MoveCard.manaCost.ToString());
                 cardNameText[i].SetText(movecard.MoveCard.name);
-                cardDescriptionText[i].SetText(moveCard.MoveCard.cardDescription);
+                cardDescriptionText[i].SetText(movecard.MoveCard.cardDescription);
                 if(movecard.ManaCost < lowestManaCost)
                 {
                     lowestManaCost = movecard.ManaCost;
@@ -202,6 +202,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         //Before exiting the deciding state, the state must reference the rolll state to have the roll state collect the suitable values
         if (hasSelected) 
         {
+            eventText.SetText("Card Selected: " + selectedCard.name);
             rollState Rolling = player.RollState.GetComponent<rollState>();
             Rolling.CollectValue(minRoll, maxRoll, manaCost);
         }
@@ -230,7 +231,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingUp(object sender, EventArgs e)
     {
         selectedCard = movementDeck.SelectedCards[1];
-        eventText.SetText(cardDescriptionText[1].ToString());
+        eventText.SetText(cardDescriptionText[1].text);
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
@@ -243,7 +244,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         if(statusDeck.SelectedCard != null)
         {
             selectedCard = statusDeck.SelectedCard;
-            eventText.SetText(cardDescriptionText[3].ToString());
+            eventText.SetText(cardDescriptionText[3].text);
             statCard = selectedCard.GetComponent<statusCard>();
             moveCard = null;
             usingAbility = false;
@@ -259,7 +260,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingLeft(object sender, EventArgs e)
     {       
         selectedCard = movementDeck.SelectedCards[0];
-        eventText.SetText(cardDescriptionText[0].ToString());
+        eventText.SetText(cardDescriptionText[0].text);
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
@@ -269,6 +270,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedCard = movementDeck.SelectedCards[2];
+        eventText.SetText(cardDescriptionText[2].text);
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
