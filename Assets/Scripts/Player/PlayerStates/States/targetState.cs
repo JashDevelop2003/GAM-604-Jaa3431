@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm
 {
@@ -20,8 +22,17 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     private bool playerSelected;
 
+    //This is used to display the choosing player UI
+    [SerializeField] private GameObject choosingPlayerUI;
+    [SerializeField] private Color[] colourDisplay = new Color [2];
+    [SerializeField] private Image[] sectionDisplay = new Image[4];
+    [SerializeField] private TMP_Text[] playerText = new TMP_Text[4];
+    [SerializeField] private TMP_Text eventText;
+
+
     public override void EnterState(playerStateManager player)
     {
+        selectedPlayer = null;
         controls = GetComponent<boardControls>();
         Controls.upPressed += DecidingUp;
         Controls.downPressed += DecidingDown;
@@ -34,9 +45,25 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
         if (statusCard.Target == targetEnum.Any)
         {
+            choosingPlayerUI.SetActive(true);
+
             for (int i = 0; i < turnManager.GetPlayers.Length; i++)
             {
                 selectPlayers[i] = turnManager.GetPlayers[i];
+                playerText[i].SetText(turnManager.GetPlayers[i].name);
+            }
+
+            for(int i = 0; i < selectPlayers.Length; i++)
+            {
+                if(selectPlayers[i] != null)
+                {
+                    sectionDisplay[i].color = colourDisplay[0];
+                }
+
+                else
+                {
+                    sectionDisplay[i].color = colourDisplay[1];
+                }
             }
         }
 
@@ -45,7 +72,8 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             statusCard.ActivateAdditionalEffect();
 
             statusCard.ActivateEffect(this.gameObject);
-            playerSelected = true;
+            eventText.SetText("The current Player is affected by: " + statusCard.StatusCard.cardName);
+            StartCoroutine(ActivateCard());
         }
 
         else if (statusCard.Target == targetEnum.All)
@@ -55,7 +83,8 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             {
                 statusCard.ActivateEffect(turnManager.GetPlayers[i]);
             }
-            playerSelected = true;
+            eventText.SetText("Everyone is affected by: " + statusCard.StatusCard.cardName);
+            StartCoroutine(ActivateCard());
         }
 
         else if (statusCard.Target == targetEnum.Random) 
@@ -63,12 +92,13 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             int randomPlayer = UnityEngine.Random.Range(0, turnManager.GetPlayers.Length);
             statusCard.ActivateAdditionalEffect();
             statusCard.ActivateEffect(turnManager.GetPlayers[randomPlayer]);
-            playerSelected = true;
+            eventText.SetText("The random player that is affected by: " + statusCard.StatusCard.cardName + "is : " + turnManager.GetPlayers[randomPlayer].name);
+            StartCoroutine(ActivateCard());
         }
 
         else
         {
-            Debug.LogWarning("Unsuitable Target is Set on Selected Card");
+            Debug.LogError("Unsuitable Target is Set on Selected Card");
         }
 
     }
@@ -91,11 +121,7 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             selectPlayers [i] = null;
         }
 
-        Controls.upPressed -= DecidingUp;
-        Controls.downPressed -= DecidingDown;
-        Controls.leftPressed -= DecidingLeft;
-        Controls.rightPressed -= DecidingRight;
-        Controls.confirmPressed -= ConfirmingChoice;
+        choosingPlayerUI.SetActive(false);
     }   
 
     public void CollectStatusCard(GameObject statCard)
@@ -114,25 +140,25 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     public void DecidingUp(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[1];
-        Debug.Log(selectedPlayer);
+        eventText.SetText("Target: " + selectedPlayer.name);
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[3];
-        Debug.Log(selectedPlayer);
+        eventText.SetText("Target: " + selectedPlayer.name);
     }
 
     public void DecidingLeft(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[0];
-        Debug.Log(selectedPlayer);
+        eventText.SetText("Target: " + selectedPlayer.name);
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[2];
-        Debug.Log(selectedPlayer);
+        eventText.SetText("Target: " + selectedPlayer.name);
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
@@ -141,12 +167,24 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         {
             statusCard.ActivateAdditionalEffect();
             statusCard.ActivateEffect(selectedPlayer);
-            playerSelected = true;
+            Controls.upPressed -= DecidingUp;
+            Controls.downPressed -= DecidingDown;
+            Controls.leftPressed -= DecidingLeft;
+            Controls.rightPressed -= DecidingRight;
+            Controls.confirmPressed -= ConfirmingChoice;
+            StartCoroutine(ActivateCard());
+            eventText.SetText("Player has chosen " + selectedPlayer.name + " to be affected by: " + statusCard.StatusCard.cardName);
         }
         else
         {
-            Debug.LogWarning("You haven't chosen a player");
+            eventText.SetText("You haven't chosen a player");
         }
+    }
+
+    IEnumerator ActivateCard()
+    {
+        yield return new WaitForSeconds(2);
+        playerSelected = true;
     }
 
 }

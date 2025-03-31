@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 /// <summary>
 /// First Playable: The Deciding State is to have the player select a movement card to choose for rolling
 /// </summary>
@@ -208,7 +207,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
         if (isTargeting) 
         {
-            eventText.SetText("Status Card Selected: " + selectedCard.name);
+            eventText.SetText("Status Card Selected: " + selectedCard.name + " Choose someone to be affected");
             targetState Targeting = player.TargetState.GetComponent<targetState>();
             Targeting.CollectStatusCard(selectedCard);
         }
