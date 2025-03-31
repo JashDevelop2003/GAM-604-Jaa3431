@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 /// <summary>
 /// First Playable: The choosing state occurs when the player is on a multi path object
 /// The state provides the options for the player to choose from and decide which path they want to take
@@ -41,10 +43,26 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
     //the boolean is use to ensure that when true the current state changes
     private bool hasSelected;
 
+    //This is used to display the choosing player UI
+    [SerializeField] private GameObject choosingPathUI;
+    [SerializeField] private Color[] colourDisplay = new Color[2];
+    [SerializeField] private Image[] sectionDisplay = new Image[4];
+    [SerializeField] private TMP_Text[] pathText = new TMP_Text[4];
+    [SerializeField] private TMP_Text eventText;
+
     public override void EnterState(playerStateManager player)
     {
         //the pathDirection creates 4 arrays for up, down, left and right choices
         pathDirection = new GameObject[4];
+        
+        //This blanks the choices in from the selection to ignore unavailable
+        for (int i = 0; i < sectionDisplay.Length; i++)
+        {
+            sectionDisplay[i].color = colourDisplay[0];
+            pathText[i].SetText("N/A");
+        }
+        
+        choosingPathUI.SetActive(true);
         
         //the selectedPathway is turn to empty to prevent players from deciding a direction that's not meant to be chosen
         selectedPathway = null;
@@ -98,21 +116,30 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
                     {
                         pathDirection[0] = pathList[i];
                         Controls.upPressed += DecidingUp;
+                        pathText[0].SetText("Up");
+                        sectionDisplay[0].color = colourDisplay[1];
+
                     }
                     else if (pathDirectionInt[i] == 2)
                     {
                         pathDirection[2] = pathList[i];
                         Controls.downPressed += DecidingDown;
+                        pathText[2].SetText("Down");
+                        sectionDisplay[2].color = colourDisplay[1];
                     }
                     else if (pathDirectionInt[i] == 3)
                     {
                         pathDirection[3] = pathList[i];
                         Controls.leftPressed += DecidingLeft;
+                        pathText[3].SetText("Left");
+                        sectionDisplay[3].color = colourDisplay[1];
                     }
                     else if (pathDirectionInt[i] == 1)
                     {
                         pathDirection[1] = pathList[i];
                         Controls.rightPressed += DecidingRight;
+                        pathText[1].SetText("Right");
+                        sectionDisplay[1].color = colourDisplay[1];
                     }
 
                     else
@@ -140,6 +167,7 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
     //all controls that have events from this state are disabled
     public override void ExitState(playerStateManager player) 
     {
+        choosingPathUI.SetActive(false);
         Controls.upPressed -= DecidingUp;
         Controls.downPressed -= DecidingDown;
         Controls.leftPressed -= DecidingLeft;
@@ -160,25 +188,26 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
     void DecidingUp(object sender, EventArgs e)
     {
         selectedPathway = pathDirection[0];
-        Debug.Log(pathDirection[0]);
+        eventText.SetText("Up");
+
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
         selectedPathway = pathDirection[2];
-        Debug.Log(pathDirection[2]);
+        eventText.SetText("Down");
     }
 
     public void DecidingLeft(object sender, EventArgs e)
     {
         selectedPathway = pathDirection[3];
-        Debug.Log(pathDirection[3]);
+        eventText.SetText("Left");
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedPathway = pathDirection[1];
-        Debug.Log(pathDirection[1]);
+        eventText.SetText("Right");
     }
 
     //When confirming the interface method must check if there is a path for the player to use
@@ -190,10 +219,10 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
             controller.Path = selectedPathway;
             hasSelected = true;
         }
-        //else this infroms the player to choose another path
+        //else this infroms the player to choose another path or hasn't chosen one
         else
         {
-            Debug.LogError("You cannot go that direction");
+            eventText.SetText("You either haven't chosen a path or chosen an empty path, select another path");
         }
     }
 

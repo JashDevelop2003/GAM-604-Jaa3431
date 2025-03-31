@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
 
 /// <summary>
 /// First Playable: The move state is to move around the spaces by providing a path and move around based on the order of the path
@@ -69,6 +70,8 @@ public class moveState : playerStateBase
     public event EventHandler combatEngage;
 
     public event EventHandler endTurnEvent;
+
+    [SerializeField] private TMP_Text eventText;
     
     public override void EnterState(playerStateManager player)
     {
@@ -104,6 +107,8 @@ public class moveState : playerStateBase
         {
             movement = controller.GetModel.RollValue;
         }
+
+        eventText.SetText(movement.ToString());
         
         //These are the booleans that require to become false when entering this state to prevent instantly movinhg to the next state
         movementEnd = false;
@@ -173,7 +178,7 @@ public class moveState : playerStateBase
 
         //The movement integer is decremented
         movement--;
-        Debug.Log("Target Reached, Current Movement: " + movement);
+        eventText.SetText(movement.ToString());
 
         if (invincibleBattle)
         {
@@ -221,7 +226,8 @@ public class moveState : playerStateBase
         }
 
         //Once the loop is over (which is when movement reaches 0), apply the space effect based on the type of space the player is currently on
-        yield return new WaitForSeconds(1);
+        eventText.SetText("Landed on: " + currentSpaceType + " space");
+        yield return new WaitForSeconds(2);
         endTurnEvent?.Invoke(this, EventArgs.Empty);
         spaceManager.ActivateEffect(this.gameObject, currentSpaceType);
 

@@ -1465,6 +1465,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04429b483b5743e42be84d48eb331c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choosingPathUI: {fileID: 539037562}
+  colourDisplay:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  sectionDisplay:
+  - {fileID: 782856160}
+  - {fileID: 1562014612}
+  - {fileID: 304533007}
+  - {fileID: 623677918}
+  pathText:
+  - {fileID: 2036897948}
+  - {fileID: 1405427686}
+  - {fileID: 1234384000}
+  - {fileID: 1488030152}
+  eventText: {fileID: 2116896888}
 --- !u!114 &83180096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,6 +1493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opponentDetected: {fileID: 0}
+  eventText: {fileID: 2116896888}
 --- !u!114 &83180097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9947,6 +9963,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04429b483b5743e42be84d48eb331c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choosingPathUI: {fileID: 111356482}
+  colourDisplay:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  sectionDisplay:
+  - {fileID: 234687446}
+  - {fileID: 1476101582}
+  - {fileID: 1992409153}
+  - {fileID: 913729215}
+  pathText:
+  - {fileID: 792950582}
+  - {fileID: 1929839574}
+  - {fileID: 503637464}
+  - {fileID: 489746350}
+  eventText: {fileID: 2116896888}
 --- !u!114 &651103440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9960,6 +9991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opponentDetected: {fileID: 0}
+  eventText: {fileID: 2116896888}
 --- !u!114 &651103441
 MonoBehaviour:
   m_ObjectHideFlags: 0
