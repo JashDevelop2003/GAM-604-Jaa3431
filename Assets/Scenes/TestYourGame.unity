@@ -1554,6 +1554,21 @@ MonoBehaviour:
   selectedOmen: {fileID: 0}
   checkingAvailability: []
   unavailablePlayers: 0
+  choosingPlayerUI: {fileID: 539037562}
+  colourDisplay:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  sectionDisplay:
+  - {fileID: 623677918}
+  - {fileID: 782856160}
+  - {fileID: 1562014612}
+  - {fileID: 304533007}
+  playerText:
+  - {fileID: 1488030152}
+  - {fileID: 2036897948}
+  - {fileID: 1405427686}
+  - {fileID: 1234384000}
+  eventText: {fileID: 2116896888}
 --- !u!114 &83180093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11792,6 +11807,21 @@ MonoBehaviour:
   selectedOmen: {fileID: 0}
   checkingAvailability: []
   unavailablePlayers: 0
+  choosingPlayerUI: {fileID: 111356482}
+  colourDisplay:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  sectionDisplay:
+  - {fileID: 913729215}
+  - {fileID: 234687446}
+  - {fileID: 1476101582}
+  - {fileID: 1992409153}
+  playerText:
+  - {fileID: 489746350}
+  - {fileID: 792950582}
+  - {fileID: 1929839574}
+  - {fileID: 503637464}
+  eventText: {fileID: 2116896888}
 --- !u!114 &651103437
 MonoBehaviour:
   m_ObjectHideFlags: 0

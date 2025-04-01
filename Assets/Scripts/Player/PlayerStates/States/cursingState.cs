@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 /// <summary>
 /// The cursing state allows the player to choose any player (including themselves) to obtain an omen
 /// </summary>
@@ -30,6 +32,13 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     [SerializeField] private GameObject[] checkingAvailability;
     [SerializeField] private int unavailablePlayers;
 
+    //This is used to display the choosing player UI
+    [SerializeField] private GameObject choosingPlayerUI;
+    [SerializeField] private Color[] colourDisplay = new Color[2];
+    [SerializeField] private Image[] sectionDisplay = new Image[4];
+    [SerializeField] private TMP_Text[] playerText = new TMP_Text[4];
+    [SerializeField] private TMP_Text eventText;
+
 
     public override void EnterState(playerStateManager player)
     {
@@ -46,10 +55,13 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
         turnManager = Singleton<turnManager>.Instance;
         checkingAvailability = new GameObject[turnManager.GetPlayers.Length];
-
+        
+        choosingPlayerUI.SetActive(true);
+        
         for (int i = 0; i < turnManager.GetPlayers.Length; i++)
         {
             selectPlayers[i] = turnManager.GetPlayers[i];
+            playerText[i].SetText(turnManager.GetPlayers[i].name);
         }
 
         for (int i = 0; i < selectPlayers.Length; i++) 
@@ -57,6 +69,7 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
             if (selectPlayers[i] == null)
             {
                 unavailablePlayers++;
+                sectionDisplay[i].color = colourDisplay[0];
             }
             else
             {
@@ -65,14 +78,20 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 if (checkingAvailability[i] == null)
                 {
                     unavailablePlayers++;
+                    sectionDisplay[i].color = colourDisplay[0];
+                }
+
+                else
+                {
+                    sectionDisplay[i].color = colourDisplay[1];
                 }
             }
         }
 
         if (unavailablePlayers == selectPlayers.Length) 
-        { 
-            playerSelected = true;
-            Debug.Log("Everyone has a full inventory");
+        {
+            StartCoroutine(CursingPlayer());
+            eventText.SetText("Everyone has a full inventory. Ending Turn");
         }
     }
 
@@ -89,13 +108,8 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     //Exit State will only play once and that's when the state is being swapped out
     public override void ExitState(playerStateManager player)
     {
-        itemDeck = null;
-        
-        Controls.upPressed -= DecidingUp;
-        Controls.downPressed -= DecidingDown;
-        Controls.leftPressed -= DecidingLeft;
-        Controls.rightPressed -= DecidingRight;
-        Controls.confirmPressed -= ConfirmingChoice;
+        itemDeck = null;       
+        choosingPlayerUI.SetActive(false);
     }
 
     //For Controls:
@@ -106,26 +120,26 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     public void DecidingUp(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[1];
-        Debug.Log(selectedPlayer);
+        eventText.SetText(selectedPlayer.name);
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[3];
-        Debug.Log(selectedPlayer);
+        eventText.SetText(selectedPlayer.name);
     }
 
 
     public void DecidingLeft(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[0];
-        Debug.Log(selectedPlayer);
+        eventText.SetText(selectedPlayer.name);
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedPlayer = selectPlayers[2];
-        Debug.Log(selectedPlayer);
+        eventText.SetText(selectedPlayer.name);
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
@@ -145,18 +159,30 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 itemBehaviour item = omen.AddComponent<itemBehaviour>();
                 item.CreateItem(selectedOmen);
                 controller.IncrementDeck(deckTypeEnum.Item);
-                playerSelected = true;
+                eventText.SetText(selectedPlayer.name + " has been selected. Omen obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
+                StartCoroutine(CursingPlayer());
             }
 
             else
             {
-                Debug.LogWarning("Target Failed due to Full Deck of Items");
+                eventText.SetText("Target Failed due to Full Deck of Items");
             }
         }
 
         else 
         {
-            Debug.LogWarning("You haven't chosen a player yet");
+            eventText.SetText("You haven't chosen a player yet");
         }
+    }
+
+    IEnumerator CursingPlayer()
+    {
+        Controls.upPressed -= DecidingUp;
+        Controls.downPressed -= DecidingDown;
+        Controls.leftPressed -= DecidingLeft;
+        Controls.rightPressed -= DecidingRight;
+        Controls.confirmPressed -= ConfirmingChoice;
+        yield return new WaitForSeconds(4);
+        playerSelected = true;
     }
 }
