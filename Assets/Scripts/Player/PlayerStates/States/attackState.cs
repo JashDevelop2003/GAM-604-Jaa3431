@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm
+public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm, IRevealOffence
 {
+    //This is to collect the combat system in the scene
     private combatSystem combatSystem;
     
+    //This collects the values of the control events and set a method to a suitable event
     private boardControls controls;
     public boardControls Controls
     {
@@ -14,28 +17,47 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         set { controls = value; }
     }
 
+    //this is used to check if the currnet mana can use one of the cards
     private playerController controller;
 
+    //This is used to check if the player is confused and chooses a random card
+    //This also checks if the player is stun in which will end their turn without using a card
     private currentEffects effects;
     
+    //This collects the decks
     private offenceDeckPile offenceDeck;
     public offenceDeckPile OffenceDeck
     {
         get { return offenceDeck; }
     }
 
+    //This is toidentify the selected card the player has chosen
     private GameObject selectedCard;
+    private offenceCard attackCard;
+
+    //This checks for the lowest mana cost card to see if the player can select the lowest cost card
     [SerializeField] int lowestManaCost;
 
     private bool attackConfirm;
     private bool combatFinished;
     private bool unableAttack;
 
+    private bool isRevealed;
+
+    //This is to add UI to the cards and add description of the card.
+    [SerializeField] private GameObject attackingDisplay;
+    [SerializeField] private TMP_Text[] manaCostText = new TMP_Text[4];
+    [SerializeField] private TMP_Text[] cardNameText = new TMP_Text[4];
+    [SerializeField] private GameObject attackPanel;
+    [SerializeField] private TMP_Text offenceCardDescription;
+
     public override void EnterState(playerStateManager player)
     {
         attackConfirm = false;
         combatFinished = false;
         unableAttack = false;
+        isRevealed = false;
+        selectedCard = null;
         lowestManaCost = 99;
 
         controller = GetComponent<playerController>();
@@ -47,16 +69,22 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         Controls.leftPressed += DecidingLeft;
         Controls.rightPressed += DecidingRight;
         Controls.confirmPressed += ConfirmingChoice;
+        Controls.revealOffencePressed += RevealOffence;
 
         offenceDeck = GetComponentInChildren<offenceDeckPile>();
         offenceDeck.DrawCards();
+        attackPanel.SetActive(true);
+        attackingDisplay.SetActive(true);
+        offenceCardDescription.SetText("Press R to Reveal the selected card's description & Press R again to Hide the description");
 
         for (int i = 0; i < offenceDeck.SelectedCards.Length; i++)
         {
-            offenceCard card = offenceDeck.SelectedCards[i].GetComponent<offenceCard>();
-            if (card.ManaCost < lowestManaCost)
+            attackCard = offenceDeck.SelectedCards[i].GetComponent<offenceCard>();
+            cardNameText[i].SetText(attackCard.AttackCard.cardName);
+            manaCostText[i].SetText(attackCard.AttackCard.manaCost.ToString());
+            if (attackCard.ManaCost < lowestManaCost)
             {
-                lowestManaCost = card.ManaCost;
+                lowestManaCost = attackCard.ManaCost;
             }
         }
 
@@ -66,7 +94,8 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         if(controller.GetModel.CurrentMana < lowestManaCost)
         {
             combatSystem.AttackerReady(this.gameObject, 0);
-            attackConfirm = true;
+            CardSelected();
+            offenceCardDescription.SetText("Attacker is Ready: Unable to Choose a Card");
             unableAttack = true;
         }
 
@@ -74,18 +103,19 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         {
             int randomInt = UnityEngine.Random.Range(0, offenceDeck.SelectedCards.Length);
             selectedCard = offenceDeck.SelectedCards[randomInt];
-            offenceCard offendCard = selectedCard.GetComponent<offenceCard>();
+            attackCard = selectedCard.GetComponent<offenceCard>();
 
-            while (offendCard.ManaCost > controller.GetModel.CurrentMana)
+            while (attackCard.ManaCost > controller.GetModel.CurrentMana)
             {
                 randomInt = UnityEngine.Random.Range(0, offenceDeck.SelectedCards.Length);
                 selectedCard = offenceDeck.SelectedCards[randomInt];
-                offendCard = selectedCard.GetComponent<offenceCard>();
+                attackCard = selectedCard.GetComponent<offenceCard>();
             }
 
-            combatSystem.AttackerReady(this.gameObject, offendCard.AttackValue);
-            controller.ChangeMana(offendCard.ManaCost);
-            attackConfirm = true;
+            combatSystem.AttackerReady(this.gameObject, attackCard.AttackValue);
+            controller.ChangeMana(attackCard.ManaCost);
+            CardSelected();
+            offenceCardDescription.SetText("Attacker is Ready: Random Card was Selected due to being Confused");
         }
     }
 
@@ -97,14 +127,10 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         }
     }
 
-
     public override void ExitState(playerStateManager player)
     {
-        Controls.upPressed -= DecidingUp;
-        Controls.downPressed -= DecidingDown;
-        Controls.leftPressed -= DecidingLeft;
-        Controls.rightPressed -= DecidingRight;
-        Controls.confirmPressed -= ConfirmingChoice;
+        attackPanel.SetActive(false);
+        attackingDisplay.SetActive(false);
 
         combatSystem.combatComplete -= AttackOver;
     }
@@ -112,42 +138,94 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     public void DecidingUp(object sender, EventArgs e)
     {
         selectedCard = offenceDeck.SelectedCards[1];
+        attackCard = selectedCard.GetComponent<offenceCard>();
+        if (isRevealed)
+        {
+            offenceCardDescription.SetText(attackCard.AttackCard.cardDescription);
+        }
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
         selectedCard = offenceDeck.SelectedCards[3];
+        attackCard = selectedCard.GetComponent<offenceCard>();
+        if (isRevealed)
+        {
+            offenceCardDescription.SetText(attackCard.AttackCard.cardDescription);
+        }
     }
 
     public void DecidingLeft(object sender, EventArgs e)
     {
         selectedCard = offenceDeck.SelectedCards[0];
+        attackCard = selectedCard.GetComponent<offenceCard>();
+        if (isRevealed)
+        {
+            offenceCardDescription.SetText(attackCard.AttackCard.cardDescription);
+        }
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedCard = offenceDeck.SelectedCards[2];
+        attackCard = selectedCard.GetComponent<offenceCard>();
+        if (isRevealed)
+        {
+            offenceCardDescription.SetText(attackCard.AttackCard.cardDescription);
+        }
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
     {
-        offenceCard attackCard = selectedCard.GetComponent<offenceCard>();
-        if (attackCard == null) 
+        if (selectedCard == null) 
         {
-            Debug.LogWarning("You haven't chosen a card yet");
+            offenceCardDescription.SetText("You haven't chosen a card yet");
         }
         
-        if(controller.GetModel.CurrentMana >= attackCard.ManaCost && !attackConfirm)
+        else if(controller.GetModel.CurrentMana >= attackCard.ManaCost && !attackConfirm)
         {
             attackCard.ApplyAdditionalEffect();
             combatSystem.AttackerReady(this.gameObject, attackCard.AttackValue);
             controller.ChangeMana(attackCard.ManaCost);
-            attackConfirm = true;
+            offenceCardDescription.SetText("Attacker is Ready");
+            CardSelected();
         }
         else
         {
-            Debug.LogWarning("You don't have enough Mana to use this attack card");
+            offenceCardDescription.SetText("You don't have enough Mana to use this attack card");
         }
+    }
+
+    public void RevealOffence(object sender, EventArgs e)
+    {
+        if (selectedCard != null) 
+        {
+            if (!isRevealed)
+            {
+                offenceCardDescription.SetText(attackCard.AttackCard.cardDescription);
+                isRevealed = true;
+            }
+            else
+            {
+                offenceCardDescription.SetText("Press R to Reveal the selected card's description & Press R again to Hide the description");
+                isRevealed = false;
+            }
+        }
+        else
+        {
+            offenceCardDescription.SetText("You haven't selected a card yet Press R to Reveal the selected card's description & Press R again to Hide the description once selected a card");
+        }
+    }
+
+    public void CardSelected()
+    {
+        attackConfirm = true;
+        Controls.upPressed -= DecidingUp;
+        Controls.downPressed -= DecidingDown;
+        Controls.leftPressed -= DecidingLeft;
+        Controls.rightPressed -= DecidingRight;
+        Controls.confirmPressed -= ConfirmingChoice;
+        Controls.revealOffencePressed -= RevealOffence;
     }
 
     public void AttackOver(object sender, EventArgs e)

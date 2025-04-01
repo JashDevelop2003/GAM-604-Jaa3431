@@ -112,6 +112,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RevealOffence",
+                    "type": "Button",
+                    "id": "861bf56d-4e4f-475c-95dc-0da87993779f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RevealDefence",
+                    "type": "Button",
+                    "id": "02b1aaa7-fbb2-4948-b2a1-f8f8dfe0cb29",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -244,6 +262,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "UseAbility",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "78ec119a-6982-4066-a0c5-db18e7b5a316",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RevealOffence",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79761b9f-528c-4741-a7bd-6f68c57e9dbb",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RevealDefence",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

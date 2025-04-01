@@ -134,6 +134,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RevealOffence"",
+                    ""type"": ""Button"",
+                    ""id"": ""861bf56d-4e4f-475c-95dc-0da87993779f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RevealDefence"",
+                    ""type"": ""Button"",
+                    ""id"": ""02b1aaa7-fbb2-4948-b2a1-f8f8dfe0cb29"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -268,6 +286,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""UseAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78ec119a-6982-4066-a0c5-db18e7b5a316"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RevealOffence"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79761b9f-528c-4741-a7bd-6f68c57e9dbb"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RevealDefence"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -288,6 +328,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_boardControls_DefendRight = m_boardControls.FindAction("DefendRight", throwIfNotFound: true);
         m_boardControls_DefendConfirm = m_boardControls.FindAction("DefendConfirm", throwIfNotFound: true);
         m_boardControls_UseAbility = m_boardControls.FindAction("UseAbility", throwIfNotFound: true);
+        m_boardControls_RevealOffence = m_boardControls.FindAction("RevealOffence", throwIfNotFound: true);
+        m_boardControls_RevealDefence = m_boardControls.FindAction("RevealDefence", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -366,6 +408,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_boardControls_DefendRight;
     private readonly InputAction m_boardControls_DefendConfirm;
     private readonly InputAction m_boardControls_UseAbility;
+    private readonly InputAction m_boardControls_RevealOffence;
+    private readonly InputAction m_boardControls_RevealDefence;
     public struct BoardControlsActions
     {
         private @PlayerControls m_Wrapper;
@@ -382,6 +426,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @DefendRight => m_Wrapper.m_boardControls_DefendRight;
         public InputAction @DefendConfirm => m_Wrapper.m_boardControls_DefendConfirm;
         public InputAction @UseAbility => m_Wrapper.m_boardControls_UseAbility;
+        public InputAction @RevealOffence => m_Wrapper.m_boardControls_RevealOffence;
+        public InputAction @RevealDefence => m_Wrapper.m_boardControls_RevealDefence;
         public InputActionMap Get() { return m_Wrapper.m_boardControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -427,6 +473,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseAbility.started += instance.OnUseAbility;
             @UseAbility.performed += instance.OnUseAbility;
             @UseAbility.canceled += instance.OnUseAbility;
+            @RevealOffence.started += instance.OnRevealOffence;
+            @RevealOffence.performed += instance.OnRevealOffence;
+            @RevealOffence.canceled += instance.OnRevealOffence;
+            @RevealDefence.started += instance.OnRevealDefence;
+            @RevealDefence.performed += instance.OnRevealDefence;
+            @RevealDefence.canceled += instance.OnRevealDefence;
         }
 
         private void UnregisterCallbacks(IBoardControlsActions instance)
@@ -467,6 +519,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseAbility.started -= instance.OnUseAbility;
             @UseAbility.performed -= instance.OnUseAbility;
             @UseAbility.canceled -= instance.OnUseAbility;
+            @RevealOffence.started -= instance.OnRevealOffence;
+            @RevealOffence.performed -= instance.OnRevealOffence;
+            @RevealOffence.canceled -= instance.OnRevealOffence;
+            @RevealDefence.started -= instance.OnRevealDefence;
+            @RevealDefence.performed -= instance.OnRevealDefence;
+            @RevealDefence.canceled -= instance.OnRevealDefence;
         }
 
         public void RemoveCallbacks(IBoardControlsActions instance)
@@ -498,5 +556,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDefendRight(InputAction.CallbackContext context);
         void OnDefendConfirm(InputAction.CallbackContext context);
         void OnUseAbility(InputAction.CallbackContext context);
+        void OnRevealOffence(InputAction.CallbackContext context);
+        void OnRevealDefence(InputAction.CallbackContext context);
     }
 }

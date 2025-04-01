@@ -25,6 +25,8 @@ public class boardControls : MonoBehaviour
     private InputAction defendRight;
     private InputAction defendConfirm;
     private InputAction useAbility;
+    private InputAction revealOffence;
+    private InputAction revealDefence;
 
     //These are the Event Handlers which will allow other scripts to become observers for specifc events
     public event EventHandler upPressed;
@@ -39,6 +41,8 @@ public class boardControls : MonoBehaviour
     public event EventHandler defendRightPressed;
     public event EventHandler defendConfirmPressed;
     public event EventHandler useAbilityPressed;
+    public event EventHandler revealOffencePressed;
+    public event EventHandler revealDefencePressed;
 
     
     /// The Awake method creates a new player control and provides suitable inputs from the action map
@@ -60,6 +64,8 @@ public class boardControls : MonoBehaviour
         defendRight = playerControls.boardControls.DefendRight;
         defendConfirm = playerControls.boardControls.DefendConfirm;
         useAbility = playerControls.boardControls.UseAbility;
+        revealOffence = playerControls.boardControls.RevealOffence;
+        revealDefence = playerControls.boardControls.RevealDefence;
 
         //This calls the method once an input is performed
         selectUp.performed += OnUpPressed;
@@ -74,6 +80,8 @@ public class boardControls : MonoBehaviour
         defendRight.performed += OnDefendRightPressed;
         defendConfirm.performed += OnDefendConfirmPressed;
         useAbility.performed += OnUseAbilityPressed;
+        revealOffence.performed += OnRevealOffencePressed;
+        revealDefence.performed += OnRevealDefencePressed;
         
         
         //Each input action has to be enabled in order for the inputs to perform in game
@@ -89,6 +97,8 @@ public class boardControls : MonoBehaviour
         defendRight.Enable();
         defendConfirm.Enable();
         useAbility.Enable();
+        revealOffence.Enable();
+        revealDefence.Enable();
     }
 
     //These methods check for the button to be performed in which provides the events to call onPressed
@@ -153,6 +163,16 @@ public class boardControls : MonoBehaviour
         OnPressed(EventArgs.Empty, useAbilityPressed);
     }
 
+    private void OnRevealOffencePressed(InputAction.CallbackContext revealOffence)
+    {
+        OnPressed(EventArgs.Empty, revealOffencePressed);
+    }
+
+    private void OnRevealDefencePressed(InputAction.CallbackContext revealDefence)
+    {
+        OnPressed(EventArgs.Empty, revealDefencePressed);
+    }
+
     //OnPressed identifies the events inside of the event handler and invokes all methods that are listening
     private void OnPressed(EventArgs e, EventHandler input)
     {
@@ -184,6 +204,8 @@ public class boardControls : MonoBehaviour
         defendRight.Disable();
         defendConfirm.Disable();
         useAbility.Disable();
+        revealOffence.Disable();
+        revealDefence.Disable();
     }
 
 
