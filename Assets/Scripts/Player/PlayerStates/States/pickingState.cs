@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 /// <summary>
 /// First Playable: This state allows the player to select a type of card they want to use and add a new card to their deck
 /// This includes Movement cards for the player to choose from and collect
@@ -58,6 +60,13 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     [SerializeField] private GameObject[] checkingAvailability;
     [SerializeField] private int numberOfNoSlots;
 
+    //This is used to display picking one of the cards.
+    [SerializeField] private GameObject pickingCardUI;
+    [SerializeField] private Color setBlank;
+    [SerializeField] private Image[] sectionDisplay = new Image[4];
+    [SerializeField] private GameObject[] cardUI = new GameObject[4];
+    [SerializeField] private TMP_Text eventText;
+
     public override void EnterState(playerStateManager player)
     {
         //the boolean is set to false and card type to null to ensure that the player doesn't instantly change state or confirm the choice immediately
@@ -65,6 +74,8 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         typeSelected = CardType.Null;
         checkingAvailability = new GameObject[4];
         numberOfNoSlots = 0;
+
+        pickingCardUI.SetActive(true);
         
         //the controller is referenced to collect the character data of the possible card to obtain
         controller = GetComponent<playerController>();
@@ -97,18 +108,22 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         statusDeckPool statusDeck = GetComponentInChildren<statusDeckPool>();
         checkingAvailability[3] = statusDeck.GetAvailableStatus();
 
+        //If the game object is null it means that there are no available slots to create a card of that type
         for(int i = 0; i < checkingAvailability.Length; i++)
         {
             if(checkingAvailability[i] == null)
             {
                 numberOfNoSlots++;
+                sectionDisplay[i].color = setBlank;
+                cardUI[i].SetActive(false);
             }
         }
 
+        //If the player cannot obtain any type of card then end their turn with nothing >:)
         if(numberOfNoSlots == 4)
         {
-            Debug.Log("Player Cannot Collect any more cards");
-            cardCollected = true;
+            eventText.SetText("Player Cannot Collect any more cards");
+            StartCoroutine(CardObtained());
         }
 
         //this provides a random range to provide a 75% chance of being Uncommon & 25% of being Rare
@@ -122,16 +137,17 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
             if (rarityInt <= 2)
             {
                 rarity = CardRarity.Uncommon;
+                eventText.SetText("Select a card type you want to obtain");
             }
             else if (rarityInt >= 3 && rarityInt <= 7)
             {
                 rarity = CardRarity.Rare;
-                Debug.Log("Lucky Chance");
+                eventText.SetText("Lucky Chance! Select a card type you want to obtain.");
             }
             else if (rarityInt >= 8)
             {
                 rarity = CardRarity.Legendary;
-                Debug.Log("Very Lucky Chance");
+                eventText.SetText("Very Lucky Chance!! Select a card type you want to obtain.");
             }
             else
             {
@@ -143,16 +159,17 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
             if (rarityInt <= 5)
             {
                 rarity = CardRarity.Uncommon;
+                eventText.SetText("Select a card type you want to obtain");
             }
             else if (rarityInt >= 6 && rarityInt <= 9)
             {
                 rarity = CardRarity.Rare;
-                Debug.Log("Lucky Chance");
+                eventText.SetText("Lucky Chance! Select a card type you want to obtain.");
             }
             else if(rarityInt == 10)
             {
                 rarity = CardRarity.Legendary;
-                Debug.Log("Very Lucky Chance");
+                eventText.SetText("Very Lucky Chance!! Select a card type you want to obtain.");
             }
             else
             {
@@ -173,11 +190,8 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     //When exiting this state, all methods should be disabled from listening to the controls subject
     public override void ExitState(playerStateManager player)
     {
-        Controls.upPressed -= DecidingUp;
-        Controls.downPressed -= DecidingDown;
-        Controls.leftPressed -= DecidingLeft;
-        Controls.rightPressed -= DecidingRight;
-        Controls.confirmPressed -= ConfirmingChoice;
+        pickingCardUI.SetActive(false);
+       
     }
 
     //These deciding interface methods are used to provide unique card types to select
@@ -190,12 +204,12 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[2] != null)
         {
             typeSelected = CardType.Movement;
-            Debug.Log(typeSelected);
+            eventText.SetText(typeSelected.ToString());
         }
         else
         {
             typeSelected = CardType.Null;
-            Debug.LogWarning(typeSelected + " There isn't any room for a new movement card");
+            eventText.SetText( "There isn't any room for a new movement card");
         }
     }
 
@@ -204,12 +218,12 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[3] != null)
         {
             typeSelected = CardType.Status;
-            Debug.Log(typeSelected);
+            eventText.SetText(typeSelected.ToString());
         }
         else
         {
             typeSelected = CardType.Null;
-            Debug.LogWarning(typeSelected + " There isn't any room for a new status card");
+            eventText.SetText("There isn't any room for a new status card");
         }
 
     }
@@ -219,12 +233,12 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[0] != null)
         {
             typeSelected = CardType.Offence;
-            Debug.Log(typeSelected);
+            eventText.SetText(typeSelected.ToString());
         }
         else
         {
             typeSelected = CardType.Null;
-            Debug.LogWarning(typeSelected + " There isn't any room for a new offence card");
+            eventText.SetText("There isn't any room for a new offence card");
         }
     }
 
@@ -233,12 +247,12 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[1] != null)
         {
             typeSelected = CardType.Defence;
-            Debug.Log(typeSelected);
+            eventText.SetText(typeSelected.ToString());
         }
         else
         {
             typeSelected = CardType.Null;
-            Debug.LogWarning(typeSelected + " There isn't any room for a new defence card");
+            eventText.SetText("There isn't any room for a new defence card");
         }
     }
 
@@ -248,7 +262,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         //If the card type is still null then the player hasn't decided yet
         if (typeSelected == CardType.Null)
         {
-            Debug.LogError("You haven't selected a card yet");
+            eventText.SetText("You haven't selected a card yet");
         }
 
         //if the type selected is movement then the method needs to check for avaialble movement slots
@@ -273,7 +287,8 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 movementCard movement = moveCard.AddComponent<movementCard>();
                 movement.CreateCard(selectedMovementCard);
                 controller.IncrementDeck(deckTypeEnum.Movement);
-                cardCollected = true;
+                eventText.SetText(typeSelected.ToString() + " Card Obtained: " + movement.MoveCard.cardName);
+                StartCoroutine(CardObtained());
             }
 
             //else inform the player that there are no available slots to proivde
@@ -306,7 +321,8 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 offenceCard offence = offenceCard.AddComponent<offenceCard>();
                 offence.CreateCard(selectedOffenceCard);
                 controller.IncrementDeck(deckTypeEnum.Offence);
-                cardCollected = true;
+                eventText.SetText(typeSelected.ToString() + " Card Obtained: " + offence.AttackCard.cardName);
+                StartCoroutine(CardObtained()); 
             }
 
             //else inform the player that there are no available slots to proivde
@@ -338,7 +354,8 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 defenceCard defence = defenceCard.AddComponent<defenceCard>();
                 defence.CreateCard(selectedDefenceCard);
                 controller.IncrementDeck(deckTypeEnum.Defence);
-                cardCollected = true;
+                eventText.SetText(typeSelected.ToString() + " Card Obtained: " + defence.DefendCard.cardName);
+                StartCoroutine(CardObtained());
             }
 
             //else inform the player that there are no available slots to proivde
@@ -370,7 +387,8 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 statusCard status = statusCard.AddComponent<statusCard>();
                 status.CreateCard(selectedStatusCard);
                 controller.IncrementDeck(deckTypeEnum.Status);
-                cardCollected = true;
+                eventText.SetText(typeSelected.ToString() + " Card Obtained: " + status.StatusCard.cardName);
+                StartCoroutine(CardObtained());
             }
 
             //else inform the player that there are no available slots to proivde
@@ -382,10 +400,22 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
     }
 
+    IEnumerator CardObtained()
+    {
+        Controls.upPressed -= DecidingUp;
+        Controls.downPressed -= DecidingDown;
+        Controls.leftPressed -= DecidingLeft;
+        Controls.rightPressed -= DecidingRight;
+        Controls.confirmPressed -= ConfirmingChoice;
+        yield return new WaitForSeconds(3);
+        cardCollected = true;
+    }
+
     //the cancel interface method allows the player to decline obtaining a card
     public void Cancel(object sender, EventArgs e)
     {
-        cardCollected = true;
+        eventText.SetText("You decided to Cancel your choices");
+        StartCoroutine(CardObtained());
     }
 
 }

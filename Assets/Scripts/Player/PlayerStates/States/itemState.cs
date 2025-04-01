@@ -2,6 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using static UnityEditor.Progress;
+
 /// <summary>
 /// This state allows the player to either obtain a relic or move to the cursing state to select an player to obtain a omen item
 /// If the player chooses relic then they obtain a relice
@@ -32,7 +36,14 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
     //this boolean is to change the state once the player has confirm the type they want to provide
     private bool itemDecided;
 
-    [SerializeField] private GameObject checkingAvailability;
+    private GameObject checkingAvailability;
+
+    //This is used to display picking either an relic or omen.
+    [SerializeField] private GameObject pickingItemUI;
+    [SerializeField] private Color[] setColour = new Color [3];
+    [SerializeField] private Image[] sectionDisplay = new Image[4];
+    [SerializeField] private TMP_Text[] itemText = new TMP_Text[2];
+    [SerializeField] private TMP_Text eventText;
 
     public override void EnterState(playerStateManager player)
     {
@@ -41,6 +52,18 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
         itemDecided = false;
         checkingAvailability = null;
         selectedRelic = null;
+
+        pickingItemUI.SetActive(true);
+        //This display the options for the player to either obtain a relic or make someone obtain a omen
+        sectionDisplay[0].color = setColour[0];
+        itemText[0].SetText("Relic");
+        sectionDisplay[1].color = setColour[1];
+        itemText[1].SetText("Omen");
+
+        //prevent more than 2 options for showing up
+        sectionDisplay[2].color = setColour[2];
+        sectionDisplay[3].color = setColour[2];
+        eventText.SetText("Do you want to obtain a relic or give someone a omen?");
 
         //The controller references the possible relic cards from the character data
         controller = GetComponent<playerController>();
@@ -61,8 +84,8 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
         if (checkingAvailability == null) 
         {
             typeSelected = itemEnum.Omen;
-            itemDecided = true;
-            Debug.Log("You have to play omens");
+            StartCoroutine(WaitingforItem());
+            eventText.SetText("You have to play omens since you don't have any space for a relic. Select a player (Except for yourself) to obtain a omen");
         }
 
     }
@@ -85,23 +108,21 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
 
     public override void ExitState(playerStateManager player) 
     {
-        Controls.leftPressed -= DecidingLeft;
-        Controls.rightPressed -= DecidingRight;
-        Controls.confirmPressed -= ConfirmingChoice;
+        pickingItemUI.SetActive(false);
     }
 
     //Choosing Left will make the selected type to relic
     public void DecidingLeft(object sender, EventArgs e)
     {
         typeSelected = itemEnum.Relic;
-        Debug.Log(typeSelected);
+        eventText.SetText(typeSelected.ToString());
     }
 
     //choosing Right will make the selected type to Omen
     public void DecidingRight(object sender, EventArgs e)
     {
         typeSelected = itemEnum.Omen;
-        Debug.Log(typeSelected);
+        eventText.SetText(typeSelected.ToString());
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
@@ -115,15 +136,26 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
             itemBehaviour item = relic.AddComponent<itemBehaviour>();
             item.CreateItem(selectedRelic);
             controller.IncrementDeck(deckTypeEnum.Item);
-            itemDecided = true;
+            eventText.SetText(typeSelected.ToString() + " was selected. Player Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
+            StartCoroutine(WaitingforItem());
         }
         else if( typeSelected == itemEnum.Omen)
         {
-            itemDecided = true;
+            eventText.SetText(typeSelected.ToString() + " was selected. Select a player to obtain a omen");
+            StartCoroutine(WaitingforItem());
         }
         else
         {
             Debug.LogWarning("You haven't selected anything yet");
         }
+    }
+
+    IEnumerator WaitingforItem()
+    {
+        Controls.leftPressed -= DecidingLeft;
+        Controls.rightPressed -= DecidingRight;
+        Controls.confirmPressed -= ConfirmingChoice;
+        yield return new WaitForSeconds(4);
+        itemDecided = true;
     }
 }

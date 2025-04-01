@@ -167,11 +167,6 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         {
             statusCard.ActivateAdditionalEffect();
             statusCard.ActivateEffect(selectedPlayer);
-            Controls.upPressed -= DecidingUp;
-            Controls.downPressed -= DecidingDown;
-            Controls.leftPressed -= DecidingLeft;
-            Controls.rightPressed -= DecidingRight;
-            Controls.confirmPressed -= ConfirmingChoice;
             StartCoroutine(ActivateCard());
             eventText.SetText("Player has chosen " + selectedPlayer.name + " to be affected by: " + statusCard.StatusCard.cardName);
         }
@@ -183,6 +178,11 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     IEnumerator ActivateCard()
     {
+        Controls.upPressed -= DecidingUp;
+        Controls.downPressed -= DecidingDown;
+        Controls.leftPressed -= DecidingLeft;
+        Controls.rightPressed -= DecidingRight;
+        Controls.confirmPressed -= ConfirmingChoice;
         yield return new WaitForSeconds(2);
         playerSelected = true;
     }
