@@ -43,18 +43,18 @@ public class yourSoulIsMineEffect : MonoBehaviour
             {
                 opponentController.GetModel.IsAlive = false;
                 playerAbility.LastReapsortActive = false;
-                Debug.Log("You dealt Damage. Opponent is Defeated");
+                combatSystem.OffenceValue.SetText("You dealt Damage. Opponent is Defeated");
             }
 
             else
             {
-                Debug.Log("You didn't dealt damage. Opponent is Alive");
+                combatSystem.OffenceValue.SetText("You didn't dealt damage. Opponent is Alive");
             }
         }
 
         else
         {
-            Debug.Log("You weren't in Last Reapsort Status. Opponent is Alive");
+            combatSystem.OffenceValue.SetText("You weren't in Last Reapsort Status. Opponent is Alive");
         }
 
     }

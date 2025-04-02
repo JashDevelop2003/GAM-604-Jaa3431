@@ -32,11 +32,11 @@ public class blockCounterEffect : MonoBehaviour
         {
             playerController controller = opponent.GetComponent<playerController>();
             controller.ChangeHealth(-10);
-            Debug.Log("COUNTER!");
+            combatSystem.DefenceValue.SetText("COUNTER! Deal 10 Damage to Attacker");
         }
         else
         {
-            Debug.Log("No Counter? :(");
+            combatSystem.DefenceValue.SetText("No Counter? :(");
         }
     }
 

@@ -35,13 +35,13 @@ public class PierceEffect : MonoBehaviour
         if(playerStance.Stance == stanceEnum.Aggressive)
         {
             combatSystem.DefendValue = pierced;
-            Debug.Log("Pierce Successful, Defend Value at: " + pierced);
+            combatSystem.OffenceValue.SetText("Pierce Successful, Defend Value at: " + pierced);
 
         }
         else
         {
             combatSystem.AttackValue = pierced;
-            Debug.Log("Pierce Failed, Attack value at: " + pierced);
+            combatSystem.OffenceValue.SetText("Pierce Failed, Attack value at: " + pierced);
         }    
     }
 

@@ -35,10 +35,11 @@ public class carelessDefenceEffect : MonoBehaviour
         {
             currentBuffs addBuff = player.GetComponent<currentBuffs>();
             addBuff.AddBuff(buffEnum.Impactful, 2, 0.05f);
+            combatSystem.DefenceValue.SetText("Apply Impactful to Self with a 5% Increase for 2 turns");
         }
         else
         {
-            Debug.Log("No Increase");
+            combatSystem.DefenceValue.SetText("No Increase Bonus :(");
         }
     }
 

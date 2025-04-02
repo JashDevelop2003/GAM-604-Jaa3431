@@ -31,6 +31,7 @@ public class gloomyGuardEffect : MonoBehaviour
         player = combatSystem.DefendingPlayer;
         currentEffects playerEffects = player.GetComponent<currentEffects>();
         playerEffects.AddEffect(effectEnum.Slowed, 2);
+        combatSystem.DefenceValue.SetText("Player is Applied with Slow for 2 Turns");
     }
 
     ///This should be used for all additional effects

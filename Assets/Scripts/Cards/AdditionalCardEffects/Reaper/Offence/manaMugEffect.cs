@@ -43,12 +43,12 @@ public class manaMugEffect : MonoBehaviour
             playerController.ChangeMana(-difference);
             opponentController.ChangeMana(difference);
 
-            Debug.Log(difference + " Mana was Stolen:");
+            combatSystem.OffenceValue.SetText(difference + " Mana was Stolen:");
         }
 
         else
         {
-            Debug.Log("No Mana were stolen");
+            combatSystem.OffenceValue.SetText("No Mana were stolen");
         }
     }
 

@@ -35,11 +35,11 @@ public class weaponThrowEffect : MonoBehaviour
         {
             currentEffects opponentEffect = opponent.GetComponent<currentEffects>();
             opponentEffect.AddEffect(effectEnum.Bleeding, 5);
-            Debug.Log(opponent + "is bleeding for 5 turns");
+            combatSystem.OffenceValue.SetText("Defender is bleeding for 5 turns");
         }
         else
         {
-            Debug.Log("No Bleeding due to being Passive");
+            combatSystem.OffenceValue.SetText("No Bleeding Bonus due to being Passive");
         }
     }
 

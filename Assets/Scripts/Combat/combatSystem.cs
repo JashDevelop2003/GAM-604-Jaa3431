@@ -46,7 +46,18 @@ public class combatSystem : MonoBehaviour
 
     //This is the UI texts that are require to identify the value and outcome of the combat
     [SerializeField] private TMP_Text offenceValue;
+    public TMP_Text OffenceValue
+    {
+        get { return offenceValue; }
+        set { offenceValue.SetText(value.ToString());}
+    }
     [SerializeField] private TMP_Text defenceValue;
+    public TMP_Text DefenceValue
+    {
+        get { return defenceValue; }
+        set { defenceValue.SetText(value.ToString());}
+    }
+
     [SerializeField] private TMP_Text eventText;
 
 
@@ -162,11 +173,11 @@ public class combatSystem : MonoBehaviour
     IEnumerator Calculating()
     {
         eventText.SetText("Combat Begin!");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         offenceValue.SetText("Offence Value: " + attackValue.ToString());
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         defenceValue.SetText("Defence Value: " + defendValue.ToString());
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         BattleCalculation();
     }
 
@@ -176,7 +187,7 @@ public class combatSystem : MonoBehaviour
         //If it is then have the defender recieve the difference between the value as damage
         if(attackValue > defendValue)
         {
-            eventText.SetText("Defender Recieved " + (defendValue - attackValue).ToString() + " Damage");
+            eventText.SetText("Defender Recieved " + (-defendValue - -attackValue).ToString() + " Damage");
             defendingPlayerController.ChangeHealth(defendValue - attackValue);
             
             //this checks if the attacker's character is reaper which allows the reaper to heal 25% damage
@@ -211,7 +222,7 @@ public class combatSystem : MonoBehaviour
     IEnumerator DuringCombat()
     {
         duringCombatEvent?.Invoke(this, EventArgs.Empty);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         StartCoroutine(BattleFinished());
     }
 
@@ -219,7 +230,7 @@ public class combatSystem : MonoBehaviour
     IEnumerator BattleFinished()
     {
         afterCombatEvent?.Invoke(this, EventArgs.Empty);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         BattleOver();
     }
 

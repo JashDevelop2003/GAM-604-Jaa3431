@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class blessOrHex : eventSpace
 {
@@ -14,6 +15,10 @@ public class blessOrHex : eventSpace
     private itemStats selectedOmens;
 
     private int selectedInt;
+
+    [SerializeField] private TMP_Text eventText;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +46,6 @@ public class blessOrHex : eventSpace
 
     void ObtainRelic()
     {
-        Debug.Log("Obtaining a Relic");
         
         //This obtains the character data of the possible relics the player can obtain
         //Then a random int occurs to apply the specifc relic for the player to obtain
@@ -61,11 +65,12 @@ public class blessOrHex : eventSpace
             itemBehaviour item = relic.AddComponent<itemBehaviour>();
             item.CreateItem(selectedRelic);
             controller.IncrementDeck(deckTypeEnum.Item);
+            eventText.SetText("Congratulations! you recieved a relic. You Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
         }
 
         else if (relic == null)
         {
-            Debug.Log("Unlucky, You don't have any room for more relics");
+            eventText.SetText("Congratulations! you recieved a relic. However, You don't have any room for more relics so unlucky.");
         }
 
         //This then clears the list of possible relics and turns the selected relic to null and ends the player's turn
@@ -96,11 +101,12 @@ public class blessOrHex : eventSpace
             itemBehaviour item = omen.AddComponent<itemBehaviour>();
             item.CreateItem(selectedOmens);
             controller.IncrementDeck(deckTypeEnum.Item);
+            eventText.SetText("How unfortunate! You recieved a omen. You Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
         }
 
         else if (omen == null)
         {
-            Debug.Log("Luckily You don't have any room for more omens");
+            eventText.SetText("How unfortunate! you recieved a omen. However, You don't have any room for more omens so quite lucky I supposed.");
         }
 
         //This then clears the list of possible relics and turns the selected relic to null and ends the player's turn
@@ -110,7 +116,7 @@ public class blessOrHex : eventSpace
 
     public IEnumerator EndTurn()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(4);
         playerStateManager currentPlayer = turnManager.CurrentPlayer.GetComponent<playerStateManager>();
         currentPlayer.ChangeState(currentPlayer.InactiveState);
     }

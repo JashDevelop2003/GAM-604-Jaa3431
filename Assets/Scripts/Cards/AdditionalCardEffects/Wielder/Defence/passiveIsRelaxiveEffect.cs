@@ -36,12 +36,12 @@ public class passiveIsRelaxiveEffect : MonoBehaviour
         {
             playerStance.Stance = stanceEnum.Passive;
             combatSystem.DefendValue *= 2;
-            Debug.Log("Change Stance to " + playerStance.Stance);
+            combatSystem.DefenceValue.SetText("Change Stance to " + playerStance.Stance);
         }
         else
         {
             combatSystem.DefendValue = 0;
-            Debug.Log("Defend Value becomes " + combatSystem.DefendValue + " due to being in Aggressive Stance");
+            combatSystem.DefenceValue.SetText("Defend Value becomes " + combatSystem.DefendValue + " due to being in Aggressive Stance");
         }
     }
 

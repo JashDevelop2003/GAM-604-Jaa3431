@@ -31,7 +31,7 @@ public class mirroredMadnessEffect : MonoBehaviour
         opponent = combatSystem.AttackingPlayer;
         playerController opponentController = opponent.GetComponent<playerController>();
         opponentController.ChangeHealth(-combatSystem.AttackValue);
-
+        combatSystem.DefenceValue.SetText("The Attacker is also recieving: " + combatSystem.AttackValue.ToString() + " damage");
     }
 
     ///This should be used for all additional effects

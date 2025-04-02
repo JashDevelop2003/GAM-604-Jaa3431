@@ -30,6 +30,7 @@ public class madlyPassive : MonoBehaviour
         player = combatSystem.DefendingPlayer;
         currentEffects effectPlayer = player.GetComponent<currentEffects>();
         effectPlayer.AddEffect(effectEnum.Confused, 2);
+        combatSystem.DefenceValue.SetText("Apply Confuse to Self for 2 Turns");
     }
 
     ///This should be used for all additional effects

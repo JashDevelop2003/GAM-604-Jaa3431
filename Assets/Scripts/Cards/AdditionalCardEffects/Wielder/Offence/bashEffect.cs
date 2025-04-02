@@ -29,7 +29,7 @@ public class BashEffect : MonoBehaviour
         opponent = combatSystem.DefendingPlayer;
         currentEffects opponentEffect = opponent.GetComponent<currentEffects>();
         opponentEffect.AddEffect(effectEnum.Stunned, 1);
-        Debug.Log("Opponent is Stunned");
+        combatSystem.OffenceValue.SetText("Opponent is Stunned");
     }
 
     ///This should be used for all additional effects

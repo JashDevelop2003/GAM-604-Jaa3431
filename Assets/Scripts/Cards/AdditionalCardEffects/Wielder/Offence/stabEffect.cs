@@ -29,7 +29,7 @@ public class stabEffect : MonoBehaviour
         opponent = combatSystem.DefendingPlayer;
         currentEffects opponentEffect = opponent.GetComponent<currentEffects>();
         opponentEffect.AddEffect(effectEnum.Bleeding, 3);
-        Debug.Log("Opponent is Bleeding for 3 Turns");
+        combatSystem.OffenceValue.SetText("Defender is Bleeding for 3 Turns");
     }
 
     ///This should be used for all additional effects

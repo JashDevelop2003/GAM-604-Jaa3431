@@ -30,6 +30,7 @@ public class bodyArmourEffect : MonoBehaviour
         player = combatSystem.DefendingPlayer;
         currentBuffs buffPlayer = player.GetComponent<currentBuffs>();
         buffPlayer.AddBuff(buffEnum.Resistant, 3, 0.15f);
+        combatSystem.DefenceValue.SetText("Apply Resistant to Self with a 15% Increase for 3 turns");
     }
 
     ///This should be used for all additional effects

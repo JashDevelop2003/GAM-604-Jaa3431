@@ -33,12 +33,12 @@ public class aggressionIsTheSessionEffect : MonoBehaviour
         {
             playerStance.Stance = stanceEnum.Aggressive;
             combatSystem.AttackValue *= 2;
-            Debug.Log("Change Stance to " + playerStance.Stance);
+            combatSystem.OffenceValue.SetText("Change Stance to " + playerStance.Stance);
         }
         else
         {
             combatSystem.AttackValue = 0;
-            Debug.Log("Attack Value becomes " + combatSystem.AttackValue + " due to being in Aggressive Stance");
+            combatSystem.OffenceValue.SetText("Attack Value becomes " + combatSystem.AttackValue + " due to being in Aggressive Stance");
         }
     }
 

@@ -31,6 +31,7 @@ public class spiritualShieldEffect : MonoBehaviour
         opponent = combatSystem.AttackingPlayer;
         currentEffects opponentEffects = opponent.GetComponent<currentEffects>();
         opponentEffects.AddEffect(effectEnum.Feared, 2);
+        combatSystem.DefenceValue.SetText("Attacker is Applied with Feared for 2 turns");
     }
 
     ///This should be used for all additional effects

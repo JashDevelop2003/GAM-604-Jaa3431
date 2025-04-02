@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class firingBeamX : eventSpace
 {
@@ -9,6 +10,7 @@ public class firingBeamX : eventSpace
     private beamX beamX;
     private spaceManager spaceManager;
     private turnManager turnManager;
+    [SerializeField] private TMP_Text eventText;
 
 
     void Start()
@@ -20,7 +22,7 @@ public class firingBeamX : eventSpace
 
     public override void ActivateEvent()
     {
-        Debug.Log("I'm firing my Laser at: " + beam.name);
+        eventText.SetText("I'm firing my Laser at: " + beam.name + " Anyone there loses 20 Health");
         targetPlayers = beamX.Players;
         foreach (GameObject player in targetPlayers)
         {

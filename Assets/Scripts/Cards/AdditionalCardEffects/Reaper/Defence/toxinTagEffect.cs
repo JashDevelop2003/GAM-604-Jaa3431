@@ -35,6 +35,7 @@ public class toxinTagEffect : MonoBehaviour
         currentEffects playerEffects = player.GetComponent<currentEffects>();
         opponentEffects.AddEffect(effectEnum.Poison, 2);
         playerEffects.AddEffect(effectEnum.Poison, 2);
+        combatSystem.DefenceValue.SetText("Both Players are Applied with Poison for 2 turns");
     }
 
     ///This should be used for all additional effects

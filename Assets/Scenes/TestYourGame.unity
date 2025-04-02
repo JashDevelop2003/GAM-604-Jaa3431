@@ -9315,6 +9315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPlayers: []
   beam: {fileID: 407797159}
+  eventText: {fileID: 2116896888}
 --- !u!1 &373725447
 GameObject:
   m_ObjectHideFlags: 0
@@ -11766,6 +11767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPlayers: []
   beam: {fileID: 893313761}
+  eventText: {fileID: 2116896888}
 --- !u!1 &503637462
 GameObject:
   m_ObjectHideFlags: 0
@@ -16675,6 +16677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   luckyPlayer: {fileID: 0}
+  eventText: {fileID: 2116896888}
 --- !u!114 &701431769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19410,6 +19413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba846f6ee24d1614f93b03477c25cb3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventText: {fileID: 2116896888}
 --- !u!1 &862160035
 GameObject:
   m_ObjectHideFlags: 0
@@ -30843,6 +30847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPlayers: []
   beam: {fileID: 893313761}
+  eventText: {fileID: 2116896888}
 --- !u!1 &1500249204
 GameObject:
   m_ObjectHideFlags: 0
@@ -42095,6 +42100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPlayers: []
   beam: {fileID: 407797159}
+  eventText: {fileID: 2116896888}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

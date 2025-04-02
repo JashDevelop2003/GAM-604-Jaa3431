@@ -33,12 +33,12 @@ public class shieldChargeEffect : MonoBehaviour
         {
             currentBuffs playerBuff = player.GetComponent<currentBuffs>();
             playerBuff.AddBuff(buffEnum.Resistant, 3, 0.1f);
-            Debug.Log("Deal Damage to Opponent & Gain Resistant by 10%");
+            combatSystem.OffenceValue.SetText("Deal Damage to Opponent & Gain Resistant by 10%");
         }
         else
         {
             combatSystem.AttackValue = 0;
-            Debug.Log("Attack Value becomes " + combatSystem.AttackValue + " due to being in Aggressive Stance");
+            combatSystem.OffenceValue.SetText("Attack Value becomes " + combatSystem.AttackValue + " due to being in Aggressive Stance");
         }
     }
 

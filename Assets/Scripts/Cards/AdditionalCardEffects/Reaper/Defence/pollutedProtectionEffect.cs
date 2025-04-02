@@ -31,6 +31,7 @@ public class pollutedProtectionEffect : MonoBehaviour
         opponent = combatSystem.AttackingPlayer;
         currentEffects opponentEffects = opponent.GetComponent<currentEffects>();
         opponentEffects.AddEffect(effectEnum.Poison, 4);
+        combatSystem.DefenceValue.SetText("Attacker is Applied with Poison for 4 turns");
     }
 
     ///This should be used for all additional effects

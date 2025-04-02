@@ -45,7 +45,7 @@ public class HeadbuttEffect : MonoBehaviour
         playerEffect.AddEffect(effectEnum.Confused, 2);
         opponentEffect.AddEffect(effectEnum.Confused, 1);
 
-        Debug.Log("Both Players are Confused");
+        combatSystem.OffenceValue.SetText("Both Players are Confused");
     }
 
     ///This should be used for all additional effects

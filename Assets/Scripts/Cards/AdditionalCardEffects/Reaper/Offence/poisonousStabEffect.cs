@@ -31,6 +31,7 @@ public class poisonousStabEffect : MonoBehaviour
         opponent = combatSystem.DefendingPlayer;
         currentEffects addEffects = opponent.GetComponent<currentEffects>();
         addEffects.AddEffect(effectEnum.Poison, 2);
+        combatSystem.OffenceValue.SetText("Apply Poison to Defender for 2 turns");
     }
 
     ///This should be used for all additional effects

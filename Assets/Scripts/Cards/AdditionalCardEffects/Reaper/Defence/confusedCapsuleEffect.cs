@@ -31,6 +31,7 @@ public class confusedCapsuleEffect : MonoBehaviour
         player = combatSystem.DefendingPlayer;
         currentEffects playerEffects = player.GetComponent<currentEffects>();
         playerEffects.AddEffect(effectEnum.Confused, 2);
+        combatSystem.DefenceValue.SetText("Player is Confused for 2 turns");
     }
 
     ///This should be used for all additional effects

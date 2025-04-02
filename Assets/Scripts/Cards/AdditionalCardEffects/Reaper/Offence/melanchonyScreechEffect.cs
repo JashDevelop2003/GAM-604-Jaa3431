@@ -31,6 +31,7 @@ public class melanchonyScreechEffect : MonoBehaviour
         opponent = combatSystem.DefendingPlayer;
         currentEffects addEffects = opponent.GetComponent<currentEffects>();
         addEffects.AddEffect(effectEnum.Feared, 2);
+        combatSystem.OffenceValue.SetText("Apply Fear on Defender for 2 Turns");
     }
 
     ///This should be used for all additional effects

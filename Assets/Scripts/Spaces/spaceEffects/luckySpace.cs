@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 /// <summary>
 /// This is the lucky space component that once called
 /// </summary>
@@ -31,6 +32,8 @@ public class luckySpace : MonoBehaviour
 
     private int selectedInt;
 
+    [SerializeField] private TMP_Text eventText;
+
     public void beginLucky(GameObject player, int outcome)
     {
         //lucky player turns to player in order to have the variable use for obtaining specific resources
@@ -41,52 +44,52 @@ public class luckySpace : MonoBehaviour
         //If the outcome is 1 then obtain a relic
         if (outcome == 1)
         {
-            ObtainRelic();
-            Debug.Log("Outcome: Obtain Relic");
+            StartCoroutine(ObtainingResource(deckTypeEnum.Item));
+            eventText.SetText("Outcome: Obtain Relic");
         }
 
         //if the outcome is 2 then obtain a legendary offence card
         else if (outcome == 2)
         {
-            ObtainOffence();
-            Debug.Log("Outcome: Obtain Legendary Offence Card");
+            StartCoroutine(ObtainingResource(deckTypeEnum.Offence));
+            eventText.SetText("Outcome: Obtain Legendary Offence Card");
         }
 
         //if the outcome is 3 then obtain a legendary defence card
         else if (outcome == 3) 
-        { 
-            ObtainDefence();
-            Debug.Log("Outcome: Obtain Legendary Defence Card");
+        {
+            StartCoroutine(ObtainingResource(deckTypeEnum.Defence));
+            eventText.SetText("Outcome: Obtain Legendary Defence Card");
         }
 
         //if the outcome is 4 then obtain a legendary movement card
         else if(outcome == 4)
         {
-            ObtainMovement();
-            Debug.Log("Outcome: Obtain Legendary Movement Card");
+            StartCoroutine(ObtainingResource(deckTypeEnum.Movement));
+            eventText.SetText("Outcome: Obtain Legendary Movement Card");
         }
 
         //if the outcome is 5 then obtain a legendary status card
         else if (outcome == 5)
         {
-            ObtainStatus();
-            Debug.Log("Outcome: Obtain Legendary Status Card");
+            StartCoroutine(ObtainingResource(deckTypeEnum.Status));
+            eventText.SetText("Outcome: Obtain Legendary Status Card");
         }
 
         //if the outcome is 6 then gain 100 cash
         else if (outcome == 6)
         {
             playerController.ChangeCash(100);
-            Debug.Log("Outcome: Gain 100 Cash");
-            playerState.ChangeState(playerState.InactiveState);
+            eventText.SetText("Outcome: Gain 100 Cash");
+            StartCoroutine(EndLucky());
         }
 
         //if the outcome is 7 then gain 25% Health
         else if(outcome == 7)
         {
             playerController.ChangeHealth((int)(playerController.GetModel.MaxHealth * 0.25f));
-            Debug.Log("Outcome: Heal 25% of Max Health");
-            playerState.ChangeState(playerState.InactiveState);
+            eventText.SetText("Outcome: Heal 25% of Max Health");
+            StartCoroutine(EndLucky());
         }
 
 
@@ -97,8 +100,8 @@ public class luckySpace : MonoBehaviour
         {
             currentBuffs buffs = player.GetComponent<currentBuffs>();
             buffs.AddBuff(buffEnum.Invincible, 4, 0);
-            Debug.Log("Outcome: Gain Invincibility for 3 turns");
-            playerState.ChangeState(playerState.InactiveState);
+            eventText.SetText("Outcome: Gain Invincibility for 3 turns");
+            StartCoroutine(EndLucky());
         }
 
         //if the outcome is 9 then gain lucky for 3 turns
@@ -106,8 +109,8 @@ public class luckySpace : MonoBehaviour
         {
             currentBuffs buffs = player.GetComponent<currentBuffs>();
             buffs.AddBuff(buffEnum.Lucky, 4, 0);
-            Debug.Log("Outcome: Gain Lucky for 3 turns");
-            playerState.ChangeState(playerState.InactiveState);
+            eventText.SetText("Outcome: Gain Lucky for 3 turns");
+            StartCoroutine(EndLucky());
         }
 
         //if the outcome is 10 then gain hasty for 3 turns
@@ -115,8 +118,37 @@ public class luckySpace : MonoBehaviour
         {
             currentBuffs buffs = player.GetComponent<currentBuffs>();
             buffs.AddBuff(buffEnum.Hasty, 3, 0);
-            Debug.Log("Outcome: Gain Hasty for 3 turns");
-            playerState.ChangeState(playerState.InactiveState);
+            eventText.SetText("Outcome: Gain Hasty for 3 turns");
+            StartCoroutine(EndLucky());
+        }
+    }
+
+    IEnumerator ObtainingResource(deckTypeEnum type)
+    {
+        yield return new WaitForSeconds(2);
+        if (type == deckTypeEnum.Offence)
+        {
+            ObtainOffence();
+        }
+        else if (type == deckTypeEnum.Defence)
+        {
+            ObtainDefence();
+        }
+        else if (type == deckTypeEnum.Movement)
+        {
+            ObtainMovement();
+        }
+        else if (type == deckTypeEnum.Status) 
+        { 
+            ObtainStatus();
+        }
+        else if(type == deckTypeEnum.Item)
+        {
+            ObtainRelic();
+        }
+        else
+        {
+            Debug.LogError("Something went wrong with the Obtaining Resource Coroutine");
         }
     }
 
@@ -146,18 +178,19 @@ public class luckySpace : MonoBehaviour
             offenceCard.SetActive(true);
             offenceCard offence = offenceCard.AddComponent<offenceCard>();
             offence.CreateCard(selectedOffenceCard);
+            eventText.SetText("Card Obtained: " + offence.AttackCard.cardName);
             playerController.IncrementDeck(deckTypeEnum.Offence);
         }
 
         else if (offenceCard == null)
         {
-            Debug.LogWarning("Unlucky, You don't have enough Offence cards");
+            eventText.SetText("Unlucky, You don't have enough Offence cards");
         }
 
         //This then clears the list of possible cards and turns the selected card to null and ends the player's turn
         possibleOffenceCards = null;
         selectedOffenceCard = null;
-        playerState.ChangeState(playerState.InactiveState);
+        StartCoroutine(EndLucky());
     }
 
     private void ObtainDefence()
@@ -186,18 +219,19 @@ public class luckySpace : MonoBehaviour
             defenceCard.SetActive(true);
             defenceCard defence = defenceCard.AddComponent<defenceCard>();
             defence.CreateCard(selectedDefenceCard);
+            eventText.SetText("Card Obtained: " + defence.DefendCard.cardName);
             playerController.IncrementDeck(deckTypeEnum.Defence);
         }
 
         else if (defenceCard == null)
         {
-            Debug.LogWarning("Unlucky, You don't have enough Defence cards");
+            eventText.SetText("Unlucky, You don't have enough Defence cards");
         }
 
         //This then clears the list of possible cards and turns the selected card to null and ends the player's turn
         possibleDefenceCards = null;
         selectedDefenceCard = null;
-        playerState.ChangeState(playerState.InactiveState);
+        StartCoroutine(EndLucky());
     }
 
     private void ObtainMovement()
@@ -226,18 +260,19 @@ public class luckySpace : MonoBehaviour
             moveCard.SetActive(true);
             movementCard movement = moveCard.AddComponent<movementCard>();
             movement.CreateCard(selectedMovementCard);
+            eventText.SetText("Card Obtained: " + movement.MoveCard.cardName);
             playerController.IncrementDeck(deckTypeEnum.Movement);
         }
 
         else if (moveCard == null)
         {
-            Debug.LogWarning("Unlucky, You don't have enough Movement cards");
+            eventText.SetText("Unlucky, You don't have enough Movement cards");
         }
 
         //This then clears the list of possible cards and turns the selected card to null and ends the player's turn
         possibleMovementCards = null;
         selectedMovementCard = null;
-        playerState.ChangeState(playerState.InactiveState);
+        StartCoroutine(EndLucky());
     }
 
     private void ObtainStatus()
@@ -266,18 +301,19 @@ public class luckySpace : MonoBehaviour
             statusCard.SetActive(true);
             statusCard status = statusCard.AddComponent<statusCard>();
             status.CreateCard(selectedStatusCard);
+            eventText.SetText("Card Obtained: " + status.StatusCard.cardName);
             playerController.IncrementDeck(deckTypeEnum.Status);
         }
 
         else if (statusCard == null)
         {
-            Debug.LogWarning("Unlucky, You don't have enough Status cards");
+            eventText.SetText("Unlucky, You don't have enough Status cards");
         }
 
         //This then clears the list of possible cards and turns the selected card to null and ends the player's turn
         possibleStatusCards = null;
         selectedStatusCard = null;
-        playerState.ChangeState(playerState.InactiveState);
+        StartCoroutine(EndLucky());
     }
 
     private void ObtainRelic()
@@ -304,12 +340,19 @@ public class luckySpace : MonoBehaviour
 
         else if(relic == null)
         {
-            Debug.Log("Unlucky, You don't have any room for more relics");
+            eventText.SetText("Unlucky, You don't have any room for more relics");
         }
 
         //This then clears the list of possible relics and turns the selected relic to null and ends the player's turn
         selectedRelic = null;
         possibleRelics = null;
+        StartCoroutine(EndLucky());
+    }
+
+    IEnumerator EndLucky()
+    {
+        yield return new WaitForSeconds(2);
         playerState.ChangeState(playerState.InactiveState);
+        
     }
 }

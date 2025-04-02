@@ -31,6 +31,7 @@ public class sickSickleEffect : MonoBehaviour
         opponent = combatSystem.DefendingPlayer;
         currentEffects addEffects = opponent.GetComponent<currentEffects>();
         addEffects.AddEffect(effectEnum.Poison, 3);
+        combatSystem.OffenceValue.SetText("Apply Poison to Defender for 3 Turns");
     }
 
     ///This should be used for all additional effects

@@ -29,7 +29,7 @@ public class speenAttack : MonoBehaviour
         player = combatSystem.AttackingPlayer;
         currentEffects playerEffect = player.GetComponent<currentEffects>();
         playerEffect.AddEffect(effectEnum.Stunned, 1);
-        Debug.Log("Player is Confused for 3 Turns");
+        combatSystem.OffenceValue.SetText("Player is Confused for 3 Turns");
     }
 
     ///This should be used for all additional effects

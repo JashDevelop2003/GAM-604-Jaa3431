@@ -35,10 +35,11 @@ public class keepComposureEffect : MonoBehaviour
         { 
             currentBuffs addBuff = player.GetComponent<currentBuffs>();
             addBuff.AddBuff(buffEnum.Resistant, 2, 0.05f);
+            combatSystem.DefenceValue.SetText("Apply Resistant to Self with a 5% increase for 2 turns");
         }
         else
         {
-            Debug.Log("No Increase");
+            combatSystem.DefenceValue.SetText("No Increase Bonus");
         }
     }
 

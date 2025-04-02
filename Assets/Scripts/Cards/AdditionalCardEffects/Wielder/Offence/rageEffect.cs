@@ -31,7 +31,7 @@ public class rageEffect : MonoBehaviour
         player = combatSystem.AttackingPlayer;
         currentBuffs playerbuff = player.GetComponentInParent<currentBuffs>();
         playerbuff.AddBuff(buffEnum.Impactful, 2, 0.1f);
-        Debug.Log("Buff Player's Impactful by 10% for 1 Turn (Excluding this turn)");
+        combatSystem.OffenceValue.SetText("Buff Player's Impactful by 10% for 1 Turn (Excluding this turn)");
 
     }
 
