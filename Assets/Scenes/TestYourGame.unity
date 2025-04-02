@@ -16688,6 +16688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   events: {fileID: 0}
+  eventText: {fileID: 2116896888}
 --- !u!4 &701431770
 Transform:
   m_ObjectHideFlags: 0
@@ -41541,6 +41542,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 49361836109843382, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
+      propertyPath: eventText
+      value: 
+      objectReference: {fileID: 2116896888}
+    - target: {fileID: 49361836109843382, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
+      propertyPath: defenceValue
+      value: 
+      objectReference: {fileID: 2056914919}
+    - target: {fileID: 49361836109843382, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
+      propertyPath: offenceValue
+      value: 
+      objectReference: {fileID: 493387908}
     - target: {fileID: 6682032860993179926, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
       propertyPath: m_Name
       value: CombatSystem

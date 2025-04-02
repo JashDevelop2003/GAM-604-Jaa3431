@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 /// <summary>
 /// This is the combat system that provides the outcome of the battle
 /// This checks the attack and defend values and then calculates the damage
@@ -37,10 +38,17 @@ public class combatSystem : MonoBehaviour
     private float guardMultiplier;
     private bool defenderReady;
 
+    //These events handle to additional card effects that occur in the game.
     public event EventHandler combatComplete;
     public event EventHandler beforeCombatEvent;
     public event EventHandler duringCombatEvent;
     public event EventHandler afterCombatEvent;
+
+    //This is the UI texts that are require to identify the value and outcome of the combat
+    [SerializeField] private TMP_Text offenceValue;
+    [SerializeField] private TMP_Text defenceValue;
+    [SerializeField] private TMP_Text eventText;
+
 
     //These are essential for additional effects and abilities
     public GameObject DefendingPlayer
@@ -153,7 +161,12 @@ public class combatSystem : MonoBehaviour
     //This Coroutine provides time for other methods to call and finish their coding to ready the combat
     IEnumerator Calculating()
     {
+        eventText.SetText("Combat Begin!");
         yield return new WaitForSeconds(1);
+        offenceValue.SetText("Offence Value: " + attackValue.ToString());
+        yield return new WaitForSeconds(2);
+        defenceValue.SetText("Defence Value: " + defendValue.ToString());
+        yield return new WaitForSeconds(2);
         BattleCalculation();
     }
 
@@ -163,6 +176,7 @@ public class combatSystem : MonoBehaviour
         //If it is then have the defender recieve the difference between the value as damage
         if(attackValue > defendValue)
         {
+            eventText.SetText("Defender Recieved " + (defendValue - attackValue).ToString() + " Damage");
             defendingPlayerController.ChangeHealth(defendValue - attackValue);
             
             //this checks if the attacker's character is reaper which allows the reaper to heal 25% damage
@@ -185,14 +199,27 @@ public class combatSystem : MonoBehaviour
             }
         }
 
+        else
+        {
+            eventText.SetText("Defender Didn't Recieved Any Damage");
+        }
+
+        StartCoroutine(DuringCombat());
+    }
+
+    //This Coroutine is used to provide time during battle calculation
+    IEnumerator DuringCombat()
+    {
         duringCombatEvent?.Invoke(this, EventArgs.Empty);
+        yield return new WaitForSeconds(4);
         StartCoroutine(BattleFinished());
     }
 
-    //This Coroutine is used to provide time for battle calculation to be complete towards other abilities being used.
+    //This Coroutine is used to provide time for applying additional effect that occur.
     IEnumerator BattleFinished()
     {
-        yield return new WaitForSeconds(1);
+        afterCombatEvent?.Invoke(this, EventArgs.Empty);
+        yield return new WaitForSeconds(4);
         BattleOver();
     }
 
@@ -200,7 +227,6 @@ public class combatSystem : MonoBehaviour
     //The Attacker will return to the moving state & the Defender will return to the exit state
     private void BattleOver()
     {
-        afterCombatEvent?.Invoke(this, EventArgs.Empty);
         attackerReady = false;
         defenderReady = false;
         combatComplete?.Invoke(this, EventArgs.Empty);

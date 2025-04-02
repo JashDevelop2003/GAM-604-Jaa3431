@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 /// <summary>
 /// The space effect occurs when the player has ended their movement
 /// The space have their own behaiour and apply unique state changes for the player
@@ -11,6 +12,11 @@ public class spaceManager : MonoBehaviour
     public static spaceManager instance;
     private luckySpace lucky;
     [SerializeField] private eventSpace events;
+
+    private GameObject player;
+    private playerStateManager state;
+
+    [SerializeField] private TMP_Text eventText;
 
 
 
@@ -27,10 +33,12 @@ public class spaceManager : MonoBehaviour
 
     //this method is only used when the player has ended their turn
     //the parameters are the current player and the current type they landed on when their movement has ended
-    public void ActivateEffect(GameObject player, spaceEnum type)
+    public void ActivateEffect(GameObject currentPlayer, spaceEnum type)
     {
         //this reference the player's state manager and checks if the reference occurred
-        playerStateManager state = player.GetComponent<playerStateManager>();
+        player = currentPlayer;
+        state = player.GetComponent<playerStateManager>();
+
         if (state == null)
         {
             Debug.LogError("There is no player state manager to be called up, Check what the method's parameters or the game object's components");
@@ -48,7 +56,8 @@ public class spaceManager : MonoBehaviour
             }
 
             controller.ChangeCash(3);
-            state.ChangeState(state.InactiveState);
+            eventText.SetText(player.name + " gain 3 cash");
+            StartCoroutine(ChangePlayerState(state.InactiveState, 2));
         }
 
         //if the type is red then subtract 3 cash to the current cash in the player controller
@@ -62,19 +71,22 @@ public class spaceManager : MonoBehaviour
             }
 
             controller.ChangeCash(-3);
-            state.ChangeState(state.InactiveState);
+            eventText.SetText(player.name + " lose 3 cash");
+            StartCoroutine(ChangePlayerState(state.InactiveState, 2));
         }
 
         //if the type is card then change their state to picking state
         else if (type == spaceEnum.Card)
         {
-            state.ChangeState(state.PickingState);
+            eventText.SetText(player.name + " is obtaining a card of their preferred type");
+            StartCoroutine(ChangePlayerState(state.PickingState, 3f));
         }
 
         //if the type is item then change their state to item state
         else if (type == spaceEnum.Item) 
-        { 
-            state.ChangeState(state.ItemState);
+        {
+            eventText.SetText(player.name + " can choose to obtain a relic or give someone a omen");
+            StartCoroutine(ChangePlayerState(state.ItemState, 3));
         }
 
         //if the type is lucky then apply 1 of the random 10 outcomes for the player to obtain
@@ -91,5 +103,11 @@ public class spaceManager : MonoBehaviour
             events = findEvent.CurrentSpace.GetComponent<eventSpace>();
             events.ActivateEvent();
         }
+    }
+
+    IEnumerator ChangePlayerState(playerStateBase changeState, float time)
+    {
+        yield return new WaitForSeconds(time);
+        state.ChangeState(changeState);
     }
 }
