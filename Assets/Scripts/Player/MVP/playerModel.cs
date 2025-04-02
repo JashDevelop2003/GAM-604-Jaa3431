@@ -114,6 +114,14 @@ public class playerModel
         set { itemPile = value; }
     }
 
+    private bool abilityUsed;
+    public bool AbilityUsed
+    {
+        get { return abilityUsed; }
+        set { abilityUsed = value; }
+    }
+
+
     private bool isAlive;
     public bool IsAlive
     {
@@ -141,6 +149,7 @@ public class playerModel
         guardMultiplier = 1;
         rollMultiplier = 1;
         character = characterData.character;
+        abilityUsed = true;
         isAlive = true;
     }
 }

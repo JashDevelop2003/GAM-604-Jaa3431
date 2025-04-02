@@ -57,6 +57,7 @@ public class lastReapsort : MonoBehaviour
             lastReapsortActive = true;
             controller.oneUseEvent += CheckOpponentHealth;
             controller.oneUseEvent -= BeginReaping;
+            controller.DisplayAbility(controller.GetData.abilityIcon[1], controller.GetData.abilityColour[1]);
         }
         else
         {
@@ -75,9 +76,10 @@ public class lastReapsort : MonoBehaviour
         if (!opponentController.GetModel.IsAlive)
         {
             lastReapsortActive = false;
-            controller.ChangeHealth(controller.GetModel.MaxHealth / 2);
+            controller.ChangeHealth(controller.GetModel.MaxHealth / 4);
             controller.GetModel.MaxHealth *= (int)1.25;
             Debug.Log("Reaper has Defeated Someone");
+            controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
         }
         //otherwise the player is still in last reapsort
         else

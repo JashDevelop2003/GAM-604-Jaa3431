@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Passive Agression is a passive ability that belongs to the Wielder Character
@@ -42,10 +43,12 @@ public class passiveAgression : MonoBehaviour
         if(startingStance == 0)
         {
             stance = stanceEnum.Passive;
+            controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
         }
         else
         {
             stance = stanceEnum.Aggressive;
+            controller.DisplayAbility(controller.GetData.abilityIcon[1], controller.GetData.abilityColour[1]);
         }
 
         changeCooldown = 3;
@@ -70,10 +73,12 @@ public class passiveAgression : MonoBehaviour
         if (stance == stanceEnum.Passive) 
         {
             stance = stanceEnum.Aggressive;
+            controller.DisplayAbility(controller.GetData.abilityIcon[1], controller.GetData.abilityColour[1]);
         }
         else if (stance == stanceEnum.Aggressive)
         {
             stance = stanceEnum.Passive;
+            controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
         }
 
         changeCooldown = 3;

@@ -84,3 +84,12 @@ MonoBehaviour:
   possibleOmens:
   - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
   characterObject: {fileID: 4041446733811344979, guid: e08fcfe5dd961474ba73f5cb01afb1eb, type: 3}
+  oneUseDescription: Last Reapsort - Triples Movement & Thrust. Defeating an Opponent
+    Gains 25% Health & Max Health. Instant Defeat if failed to defeat an opponent
+    once you turn has ended.
+  abilityIcon:
+  - {fileID: 21300000, guid: 74494454d478aaa469e5def843519050, type: 3}
+  - {fileID: 21300000, guid: 41c6f94d80f9e034a9c63dcf97d30f5c, type: 3}
+  abilityColour:
+  - {r: 0.16829003, g: 0.8627451, b: 0.028301716, a: 1}
+  - {r: 0.5773585, g: 0.042484805, b: 0.09667631, a: 1}

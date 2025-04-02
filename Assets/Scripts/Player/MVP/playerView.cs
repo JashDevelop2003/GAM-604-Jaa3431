@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerView : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class playerView : MonoBehaviour
     [SerializeField] private List<GameObject> effectDisplay;
     [SerializeField] private List<GameObject> buffDisplay;
 
+    //These stats are towards character's ability
+    [SerializeField] private GameObject oneUseAbility;
+    [SerializeField] private Image abilityIcon;
+
 
 
     // Start is called before the first frame update
@@ -49,6 +54,11 @@ public class playerView : MonoBehaviour
         thrustPercentage.SetText((controller.GetModel.ThrustMultiplier * 100).ToString() + "%" );
         guardPercentage.SetText((controller.GetModel.GuardMultiplier * 100).ToString() + "%");
         rollPercentage.SetText((controller.GetModel.RollMultiplier * 100).ToString() + "%");
+
+        if (controller.GetModel.AbilityUsed)
+        {
+            oneUseAbility.SetActive(true);
+        }
     }
 
 
@@ -111,5 +121,16 @@ public class playerView : MonoBehaviour
     public void BuffUI(int buffInt, bool setActive)
     {
         buffDisplay[buffInt].SetActive(setActive);
+    }
+
+    public void AbilityUI(Sprite icon, Color colour)
+    {
+        abilityIcon.sprite = icon;
+        abilityIcon.color = colour;
+    }
+
+    public void OneUseAbilityUI()
+    {
+        oneUseAbility.SetActive(false);
     }
 }

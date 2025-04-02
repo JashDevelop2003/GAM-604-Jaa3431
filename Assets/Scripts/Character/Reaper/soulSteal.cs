@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class soulSteal : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class soulSteal : MonoBehaviour
     private playerController controller;
 
     //This reference the combat system in order to gain health from the difference * 0.25
-    private GameObject combatManager;
     combatSystem combatSystem;
 
     //This is use to provide the player gaining health based on the differece * 25%
@@ -22,12 +22,13 @@ public class soulSteal : MonoBehaviour
     void Awake()
     {
         controller = GetComponentInParent<playerController>();
-        
+
         //The object is a prefab meaning that when instantiated won't have the combat system object
         //This means that the class requires to find the prefab of the combat system
-        combatManager = GameObject.Find("CombatSystem");
-        combatSystem = combatManager.GetComponent<combatSystem>();
+        combatSystem = combatSystem.instance;
         controller.passiveEvent += GainHealth;
+
+        controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
     }
 
     //This method is called when the passive ability in the controller is invoked

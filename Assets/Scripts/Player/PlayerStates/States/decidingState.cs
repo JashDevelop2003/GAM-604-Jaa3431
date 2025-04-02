@@ -51,7 +51,6 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
     //This boolean checks when the player has selected the ability and can use their one use ability
     private bool usingAbility;
-    private bool availableAbility = true;
     private bool unableMove;
 
     //This is to check if the player is confused
@@ -307,10 +306,10 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         else if(usingAbility)
         {
             //If the player is using an ability then invoke the one use ability from the controller
-            if (availableAbility)
+            if (controller.GetModel.AbilityUsed)
             {
                 controller.ActivateOneUse();
-                availableAbility = false;
+                controller.GetModel.AbilityUsed = false;
                 eventText.SetText("Using One Use Ability");
             }
             //otherwise apply an error to inform that the player hasn't chosen a card yet
@@ -332,7 +331,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     //This needs to empty both cards to prevent changing state
     public void UsingAbility(object sender, EventArgs e)
     {
-        eventText.SetText("One Use Ability");
+        eventText.SetText("One Use Ability: " + controller.GetData.oneUseDescription);
         selectedCard = null;
         moveCard = null;
         statCard = null;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// This script is the data of the character
@@ -43,4 +44,11 @@ public class characterData : ScriptableObject
 
     //This is the game object for the character in order to use passive and one use ability
     public GameObject characterObject;
+    public string oneUseDescription;
+
+    //This is the icon and colour used to present in the player view
+    public Sprite[] abilityIcon;
+    public Color[] abilityColour;
+
+
 }

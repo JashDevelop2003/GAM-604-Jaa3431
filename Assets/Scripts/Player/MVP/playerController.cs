@@ -217,6 +217,8 @@ public class playerController : MonoBehaviour
     public void ActivateOneUse()
     {
         oneUseEvent?.Invoke(this, EventArgs.Empty);
+        GetModel.AbilityUsed = false;
+        playerView.OneUseAbilityUI();
     }
 
     public void ActivateStartEffects(object sender, EventArgs e)
@@ -237,5 +239,10 @@ public class playerController : MonoBehaviour
     public void DisplayBuff(int enumInt, bool display)
     {
         playerView.BuffUI(enumInt, display);
+    }
+
+    public void DisplayAbility(Sprite icon, Color colour)
+    {
+        playerView.AbilityUI(icon, colour);
     }
 }
