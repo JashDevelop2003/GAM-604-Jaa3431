@@ -96,7 +96,6 @@ public class spaceManager : MonoBehaviour
         }
 
         //if the type is event then currently it does nothing
-        //ToDo: Add Events to behave
         else if(type == spaceEnum.Event)
         {
             moveState findEvent = player.GetComponent<moveState>();

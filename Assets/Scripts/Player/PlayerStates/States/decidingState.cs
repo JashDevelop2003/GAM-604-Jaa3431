@@ -150,7 +150,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                     moveCard = selectedCard.GetComponent<movementCard>();
                 }
 
-                eventText.SetText("A Random Movement Card was chosen");
+                eventText.SetText("A Random Movement Card was chosen: " + moveCard.MoveCard.cardName + " Roll the Dice by pressing Space");
                 hasSelected = true;
 
             }
@@ -199,14 +199,13 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         //Before exiting the deciding state, the state must reference the rolll state to have the roll state collect the suitable values
         if (hasSelected) 
         {
-            eventText.SetText("Movement Card Selected: " + selectedCard.name + " Roll the Dice by pressing Space or Go Back by Pressing Cancel");
             rollState Rolling = player.RollState.GetComponent<rollState>();
             Rolling.CollectValue(minRoll, maxRoll, manaCost);
         }
 
         if (isTargeting) 
         {
-            eventText.SetText("Status Card Selected: " + selectedCard.name + " Choose someone to be affected");
+            eventText.SetText("Status Card Selected: " + statCard.StatusCard.cardName + " Choose someone to be affected");
             targetState Targeting = player.TargetState.GetComponent<targetState>();
             Targeting.CollectStatusCard(selectedCard);
         }
@@ -281,6 +280,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                 if (controller.GetModel.CurrentMana >= moveCard.ManaCost)
                 {
                     hasSelected = true;
+                    eventText.SetText("Movement Card Selected: " + moveCard.MoveCard.cardName + " Roll the Dice by pressing Space or Go Back by Pressing Cancel");
                 }
                 else
                 {
