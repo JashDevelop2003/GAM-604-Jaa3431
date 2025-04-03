@@ -86,8 +86,8 @@ MonoBehaviour:
   characterObject: {fileID: 2680251509015015823, guid: 2ee0e264335f77e4785483e98cfe75a6, type: 3}
   oneUseDescription: Stance Swap - Changes the Current Stance to the Other Stance
   abilityIcon:
-  - {fileID: 21300000, guid: 2d6c18889d4c4034d9740940e69ccf7f, type: 3}
   - {fileID: 21300000, guid: 8c013fbd1dde7bc4db457cfd3b7b7ffa, type: 3}
+  - {fileID: 21300000, guid: 2d6c18889d4c4034d9740940e69ccf7f, type: 3}
   abilityColour:
-  - {r: 0.96981126, g: 0.3638416, b: 0.15187603, a: 1}
   - {r: 0.276161, g: 0.2104306, b: 0.96981126, a: 1}
+  - {r: 0.96981126, g: 0.3638416, b: 0.15187603, a: 1}
