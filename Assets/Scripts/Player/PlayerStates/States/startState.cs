@@ -15,6 +15,7 @@ public class startState : playerStateBase
     private currentEffects effects;
 
     public event EventHandler startEvent;
+    public event EventHandler startItemEvents;
 
     public override void EnterState(playerStateManager player)
     {
@@ -24,6 +25,7 @@ public class startState : playerStateBase
         startEvent += controller.ActivateStartEffects;
 
         startEvent?.Invoke(this, EventArgs.Empty);
+        startItemEvents?.Invoke(this, EventArgs.Empty);
     }
 
     public override void UpdateState(playerStateManager player)

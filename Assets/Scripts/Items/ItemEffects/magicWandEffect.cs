@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fruitEffect : MonoBehaviour
+public class magicWandEffect : MonoBehaviour
 {
     [SerializeField] private Transform playerTransform;
     [SerializeField] private GameObject player;
     private itemBehaviour item;
     private playerController controller;
-    [SerializeField] int healthValue;
+    int manaValue = 7;
 
-    // Fruit will increase their health only being picked up
+    // Magic Wand will increase their max mana by 7 only being picked up
     void Awake()
     {
         playerTransform = this.transform.parent.parent.parent;
@@ -24,9 +24,13 @@ public class fruitEffect : MonoBehaviour
 
     public void UponPickup(object sender, EventArgs e)
     {
-        controller.GetModel.MaxHealth += healthValue;
-        controller.ChangeHealth(healthValue);
-        item.pickupEvent -= UponPickup;
+        controller.GetModel.MaxMana += manaValue;
+        //Double Negative = Positive
+        controller.ChangeMana(-manaValue);
     }
 
+    private void OnDestroy()
+    {
+        item.pickupEvent -= UponPickup;
+    }
 }

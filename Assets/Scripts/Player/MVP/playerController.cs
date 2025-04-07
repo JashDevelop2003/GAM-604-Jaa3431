@@ -127,7 +127,7 @@ public class playerController : MonoBehaviour
     }
 
     //For any Multiplier Changes the procedure for the parameter must be:
-    //Collecting the Multiplier from the mutliplier
+    //Collecting the Multiplier from the controller's model
     //Then Add/Substract/Divide/Multiply the multiplier
     //That paremeter float value is now the new multiplier
     public void ChangeThrust(float value)

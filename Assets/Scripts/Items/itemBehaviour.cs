@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,8 @@ public class itemBehaviour : MonoBehaviour
         get { return item; }
         set { item = value; }
     }
-    
+
+    public event EventHandler pickupEvent;
 
     public void CreateItem(itemStats newItem)
     {
@@ -23,6 +25,24 @@ public class itemBehaviour : MonoBehaviour
         if (item.itemEffects != null) 
         { 
             Instantiate(newItem.itemEffects, this.transform);
+            PickUp();
         }
     }
+
+    public void LoadItem(itemStats newItem)
+    {
+        item = newItem;
+        gameObject.name = item.itemName;
+        if (item.itemEffects != null)
+        {
+            Instantiate(newItem.itemEffects, this.transform);
+        }
+        pickupEvent = null;
+    }
+
+    public void PickUp()
+    {
+        pickupEvent?.Invoke(this, EventArgs.Empty);
+    }
+
 }

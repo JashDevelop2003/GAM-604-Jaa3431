@@ -45,7 +45,7 @@ public class itemDeckPool : MonoBehaviour
         }
 
         //At the start of the game there needs to be a call for collecting the starting items
-        CreateStartingItems();
+        LoadItems();
     }
 
     public GameObject GetAvailableItem()
@@ -65,20 +65,20 @@ public class itemDeckPool : MonoBehaviour
 
 
     //this method creates all of the starting items and will be useful loading back the items in the game
-    private void CreateStartingItems()
+    private void LoadItems()
     {
         //This loop creates every starting item until all of the starting items are made
         for (int i = 0; i < startingItems.Count; i++)
         {
             //This checks if there is any available items to be use
             //If there is then this will set the item to active and enable in the hierarchy
-            GameObject card = GetAvailableItem();
-            if (card != null)
+            GameObject item = GetAvailableItem();
+            if (item != null)
             {
-                card.SetActive(true);
+                item.SetActive(true);
                 //this will then add the items component into the deck & add the items data in the items object
-                itemBehaviour offence = card.AddComponent<itemBehaviour>();
-                offence.CreateItem(startingItems[i]);
+                itemBehaviour loadItem = item.AddComponent<itemBehaviour>();
+                loadItem.LoadItem(startingItems[i]);
             }
 
         }

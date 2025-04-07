@@ -3,29 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class crowEffect : MonoBehaviour
+public class blueSevenEffect : MonoBehaviour
 {
     [SerializeField] private Transform playerTransform;
     [SerializeField] private GameObject player;
+    private playerController controller;
     private startState state;
 
-    // Upon pickup crow does nothing
+    // Upon pickup Blue 7 does nothing
     void Awake()
     {
         playerTransform = this.transform.parent.parent.parent;
         player = playerTransform.gameObject;
+        controller = player.GetComponent<playerController>();
         state = player.GetComponent<startState>();
-        state.startItemEvents += Crow;
+        state.startItemEvents += BlueSeven;
     }
 
-    // At the start of the player's turn the crow does nothing but it will start making sound
-    public void Crow(object sender, EventArgs e)
+    // At the start of the player's turn guard increases by 7%
+    public void BlueSeven(object sender, EventArgs e)
     {
-        Debug.Log("caw");
+        controller.ChangeGuard(controller.GetModel.GuardMultiplier + 0.07f);
     }
 
     private void OnDestroy()
     {
-        state.startItemEvents -= Crow;
+        state.startItemEvents -= BlueSeven;
     }
+
 }
