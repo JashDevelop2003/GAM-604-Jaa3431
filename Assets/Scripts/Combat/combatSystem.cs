@@ -164,7 +164,6 @@ public class combatSystem : MonoBehaviour
     {
         if (attackerReady && defenderReady) 
         {
-            beforeCombatEvent?.Invoke(this, EventArgs.Empty);
             StartCoroutine(Calculating());
         }
     }
@@ -173,7 +172,9 @@ public class combatSystem : MonoBehaviour
     IEnumerator Calculating()
     {
         eventText.SetText("Combat Begin!");
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
+        beforeCombatEvent?.Invoke(this, EventArgs.Empty);
+        yield return new WaitForSeconds(1);
         offenceValue.SetText("Offence Value: " + attackValue.ToString());
         yield return new WaitForSeconds(1);
         defenceValue.SetText("Defence Value: " + defendValue.ToString());

@@ -33,9 +33,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
   startingStatusCards:
   - {fileID: 11400000, guid: ab1f429f7c2d6184daf1105829e3e5fd, type: 2}
-  startingItems:
-  - {fileID: 11400000, guid: e8cf34f31c370494f83acd383cb761a5, type: 2}
-  - {fileID: 11400000, guid: 941400446c139c848946def31e60b81d, type: 2}
+  startingItems: []
   possibleOffenceCards:
   - {fileID: 11400000, guid: 869861b941fc7df4aa29e254fc3b3fad, type: 2}
   - {fileID: 11400000, guid: 7cf743db0d1a8f44cbdcf6d0451b9117, type: 2}
@@ -91,9 +89,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c344aff57b2a2e646a6ae3681f41557c, type: 2}
   - {fileID: 11400000, guid: a168ed6f4814f1444bf222dfcdce5f78, type: 2}
   - {fileID: 11400000, guid: d60b1a68cd3ce7a4ca013a86cb5c9775, type: 2}
+  - {fileID: 11400000, guid: e8cf34f31c370494f83acd383cb761a5, type: 2}
+  - {fileID: 11400000, guid: 46f2b1ba237f9f644acb8fb455d3299c, type: 2}
+  - {fileID: 11400000, guid: 2bd2e494532469e4a83f564615e7ed1c, type: 2}
+  - {fileID: 11400000, guid: a56b75c2e727829418704599897564f5, type: 2}
+  - {fileID: 11400000, guid: 4c61a4dd89c7eec47b21cd7b3267e91b, type: 2}
+  - {fileID: 11400000, guid: e8e545e683227ac44a3ffd7845e51cc1, type: 2}
+  - {fileID: 11400000, guid: 29511a52f9c20f64a884b38edd3fdb16, type: 2}
   possibleOmens:
   - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
   - {fileID: 11400000, guid: 92093ba90cca2a24ba1ff8793918fa42, type: 2}
+  - {fileID: 11400000, guid: fc4be129a0ab5c244bb428e0532a4b51, type: 2}
+  - {fileID: 11400000, guid: d2ed38564e5a8b74eba24d846a5400c9, type: 2}
+  - {fileID: 11400000, guid: 941400446c139c848946def31e60b81d, type: 2}
+  - {fileID: 11400000, guid: dde48cbb9566b8d45aafcadcf9d28a09, type: 2}
+  - {fileID: 11400000, guid: 0c9e2acf53b950142b8658a8111dcebb, type: 2}
   characterObject: {fileID: 2680251509015015823, guid: 2ee0e264335f77e4785483e98cfe75a6, type: 3}
   oneUseDescription: Stance Swap - Changes the Current Stance to the Other Stance
   abilityIcon:

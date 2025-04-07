@@ -16,4 +16,4 @@ MonoBehaviour:
   itemType: 1
   itemName: Big Bug
   itemDescription: Prevents the Player From Obtaining Rare Cards
-  itemEffects: {fileID: 0}
+  itemEffects: {fileID: 3832915925405538466, guid: 7a51fca1c18ffb64f8afd12397ce2141, type: 3}

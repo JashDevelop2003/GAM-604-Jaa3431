@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de72c26fc3a1cf94799c825123cf3ef8, type: 3}
-  m_Name: PentagramNeckless
+  m_Name: CardPrinter
   m_EditorClassIdentifier: 
   character: 4
   itemType: 0
-  itemName: Pentagram Neckless
-  itemDescription: Increase Thrust by 10% per Omen Obtained
-  itemEffects: {fileID: 2816119973177283559, guid: 462923d16ae9bf8438d90de881726cdb, type: 3}
+  itemName: Card Printer
+  itemDescription: 25% Chance of obtaining a random type of rare (20%) or legendary
+    (5%) card
+  itemEffects: {fileID: 5985057405153013069, guid: 50a43c4e57c32fc4c9611d28958440da, type: 3}

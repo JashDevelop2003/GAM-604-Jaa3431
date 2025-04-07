@@ -16,4 +16,4 @@ MonoBehaviour:
   itemType: 1
   itemName: Trick of Treat Bag
   itemDescription: Apply Lucky. However 50% Chance of Not Obtaining a Card
-  itemEffects: {fileID: 0}
+  itemEffects: {fileID: 40911887101959384, guid: 365993fe1e59a9d4ba519ce0fc2a92e4, type: 3}

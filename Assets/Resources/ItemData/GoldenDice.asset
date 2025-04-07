@@ -16,4 +16,4 @@ MonoBehaviour:
   itemType: 0
   itemName: Golden Dice
   itemDescription: Gain Cash Equal to Your Roll Value
-  itemEffects: {fileID: 0}
+  itemEffects: {fileID: 4274167039244164177, guid: 20d35b198f73d58488b7c61063f36467, type: 3}

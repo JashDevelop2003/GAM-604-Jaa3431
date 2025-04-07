@@ -16,4 +16,4 @@ MonoBehaviour:
   itemType: 0
   itemName: Heal C
   itemDescription: Heal 5 Health when Landing on a Card Space
-  itemEffects: {fileID: 0}
+  itemEffects: {fileID: 8809460621686725274, guid: 6b241910e6220ea49acda38ff49e3832, type: 3}

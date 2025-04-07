@@ -16,4 +16,4 @@ MonoBehaviour:
   itemType: 0
   itemName: God Pack
   itemDescription: Obtain a Random Legendary Card for Each Deck Type
-  itemEffects: {fileID: 0}
+  itemEffects: {fileID: 5713713663607613612, guid: 16ae3e2a0dfb5d54fa592230199cf0ce, type: 3}

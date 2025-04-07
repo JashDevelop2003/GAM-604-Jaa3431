@@ -46,13 +46,17 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     private int selectedCard;
 
     //The type of rarity indicates the rarity card the player will obtain from this card space
-    public CardRarity rarity;
+    [SerializeField] private CardRarity rarity;
+    public CardRarity Rarity
+    {
+        get { return rarity; }
+    }
 
     //The rarity int will provide a random range when entering to provide unique rarities
     private int rarityInt;
 
     //the card type is the selected type of card the player wants to obtain
-    public CardType typeSelected;
+    [SerializeField] private CardType typeSelected;
 
     //this boolean is to change the state once the player has confirm or cancel obtaining a card
     private bool cardCollected;
@@ -66,6 +70,14 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     [SerializeField] private Image[] sectionDisplay = new Image[4];
     [SerializeField] private GameObject[] cardUI = new GameObject[4];
     [SerializeField] private TMP_Text eventText;
+    public TMP_Text EventText
+    {
+        get { return eventText; }
+        set { eventText.SetText(value.ToString()); }
+    }
+
+    //This is used for the event
+    public event EventHandler pickingItemEvents;
 
     public override void EnterState(playerStateManager player)
     {
@@ -176,6 +188,8 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 Debug.LogError("Something went wrong with the random range");
             }
         }
+
+        pickingItemEvents?.Invoke(this, EventArgs.Empty);
     }
 
     //the state changes in the update state of the picking state once cardCollect becomes true
@@ -400,7 +414,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
     }
 
-    IEnumerator CardObtained()
+    public IEnumerator CardObtained()
     {
         Controls.upPressed -= DecidingUp;
         Controls.downPressed -= DecidingDown;
