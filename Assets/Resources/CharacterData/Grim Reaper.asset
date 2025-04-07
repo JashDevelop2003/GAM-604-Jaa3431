@@ -33,7 +33,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
   startingStatusCards:
   - {fileID: 11400000, guid: 3309c154d53ff3a45a936e4185b07b54, type: 2}
-  startingItems: []
+  startingItems:
+  - {fileID: 11400000, guid: 941400446c139c848946def31e60b81d, type: 2}
+  - {fileID: 11400000, guid: e8cf34f31c370494f83acd383cb761a5, type: 2}
   possibleOffenceCards:
   - {fileID: 11400000, guid: 532f76d138c076743ad6c0315e8e79f7, type: 2}
   - {fileID: 11400000, guid: 8b4a3dd795f727d428da8947b4cce6d5, type: 2}

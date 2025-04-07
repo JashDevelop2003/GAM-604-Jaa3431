@@ -46,6 +46,9 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
     [SerializeField] private GameObject defendPanel;
     [SerializeField] private TMP_Text defenceCardDescription;
 
+    //This is to Add Item Events when Defending
+    public event EventHandler defendItemEvents;
+
 
 
     public override void EnterState(playerStateManager player)
@@ -219,6 +222,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
     public void CardSelected()
     {
         defendConfirm = true;
+        defendItemEvents?.Invoke(this, EventArgs.Empty);
         Controls.defendUpPressed -= DefendingUp;
         Controls.defendDownPressed -= DefendingDown;
         Controls.defendLeftPressed -= DefendingLeft;

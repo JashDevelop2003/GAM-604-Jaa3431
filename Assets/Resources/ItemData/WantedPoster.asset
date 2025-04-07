@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de72c26fc3a1cf94799c825123cf3ef8, type: 3}
+  m_Name: WantedPoster
+  m_EditorClassIdentifier: 
+  character: 4
+  itemType: 1
+  itemName: Wanted Poster
+  itemDescription: When Defending, 80% Chance to Decrease Defend Value by 50%. However
+    20% Chance to Decrease Attack Value by 30%
+  itemEffects: {fileID: 8278885688971796716, guid: be20846d3bd49c549bcfd2e7e998fca1, type: 3}

@@ -19,7 +19,6 @@ public class chocolateBarEffect : MonoBehaviour
         buffs = player.GetComponent<currentBuffs>();
         item = GetComponentInParent<itemBehaviour>();
         item.pickupEvent += UponPickup;
-        TestUponPickup();
     }
 
     public void UponPickup(object sender, EventArgs e)
@@ -56,39 +55,5 @@ public class chocolateBarEffect : MonoBehaviour
         }
 
         item.pickupEvent -= UponPickup;
-    }
-
-    public void TestUponPickup()
-    {
-        int randomBuff = UnityEngine.Random.Range(0, (int)buffEnum.Null);
-        while (randomBuff == (int)buffEnum.Impactful || randomBuff == (int)buffEnum.Resistant)
-        {
-            randomBuff = UnityEngine.Random.Range(0, (int)buffEnum.Null);
-        }
-
-        if (randomBuff == (int)buffEnum.Invincible)
-        {
-            buffs.AddBuff(buffEnum.Invincible, 10, 0);
-        }
-
-        else if (randomBuff == (int)buffEnum.Healthy)
-        {
-            buffs.AddBuff(buffEnum.Healthy, 10, 0);
-        }
-
-        else if (randomBuff == (int)buffEnum.Hasty)
-        {
-            buffs.AddBuff(buffEnum.Hasty, 10, 0);
-        }
-
-        else if (randomBuff == (int)buffEnum.Lucky)
-        {
-            buffs.AddBuff(buffEnum.Lucky, 10, 0);
-        }
-
-        else
-        {
-            Debug.LogError("The value was insufficient");
-        }
     }
 }

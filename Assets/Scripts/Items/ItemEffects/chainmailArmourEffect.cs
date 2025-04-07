@@ -24,7 +24,6 @@ public class chainmailArmourEffect : MonoBehaviour
             item = GetComponentInParent<itemBehaviour>();
             item.pickupEvent += UponPickup;
             state.startItemEvents += ChainmailArmour;
-            TestUponPickup();
             
         }
 
@@ -32,12 +31,6 @@ public class chainmailArmourEffect : MonoBehaviour
         {
             effects.AddEffect(effectEnum.Slowed, 2);
             item.pickupEvent -= UponPickup;
-        }
-
-
-        public void TestUponPickup()
-        {
-            effects.AddEffect(effectEnum.Slowed, 2);
         }
 
         // At the start of the player's turn guard increases by 10%

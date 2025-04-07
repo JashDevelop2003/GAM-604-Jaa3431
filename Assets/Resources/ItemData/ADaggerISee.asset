@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de72c26fc3a1cf94799c825123cf3ef8, type: 3}
+  m_Name: ADaggerISee
+  m_EditorClassIdentifier: 
+  character: 4
+  itemType: 1
+  itemName: A Dagger I See
+  itemDescription: Increase Thrust by 10%. However 50% Chance of Applying Blind for
+    this turn
+  itemEffects: {fileID: 2812585219715771668, guid: 569398f66ce8bb349a95b7a6ed6d6528, type: 3}

@@ -18,7 +18,9 @@ public class inactiveState : playerStateBase
     [SerializeField] private bool beginCombat;
 
     //This is use in order to instant defeat the grim reaper if she's still in her last reapsort form
-    playerController controller;
+    private playerController controller;
+
+    ///public event EventHandler endItemEvents;
 
     //the enter state checks whether if the player ends their turn or their combat
     public override void EnterState(playerStateManager player)
@@ -46,8 +48,8 @@ public class inactiveState : playerStateBase
         if (player.PreviousState != null && player.PreviousState != player.DefendState)
         {
             controller.ActivateEndEffect();
+            //endItemEvents?.Invoke(this, EventArgs.Empty);
             player.EndTurn();
-            Debug.Log("Turn Ended");
         }
     }
 
