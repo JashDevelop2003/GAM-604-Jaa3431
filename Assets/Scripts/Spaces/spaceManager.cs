@@ -102,6 +102,13 @@ public class spaceManager : MonoBehaviour
             events = findEvent.CurrentSpace.GetComponent<eventSpace>();
             events.ActivateEvent();
         }
+
+        //if the type is event then currently it does nothing
+        else if (type == spaceEnum.Market)
+        {
+            eventText.SetText(player.name + " is entering the market to gain items and cards");
+            StartCoroutine(ChangePlayerState(state.MarketState, 3));
+        }
     }
 
     IEnumerator ChangePlayerState(playerStateBase changeState, float time)

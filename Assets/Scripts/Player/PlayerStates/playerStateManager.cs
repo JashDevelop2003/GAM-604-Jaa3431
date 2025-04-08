@@ -43,6 +43,7 @@ public class playerStateManager : MonoBehaviour
     private defendState defendState;
     private itemState itemState;
     private cursingState cursingState;
+    private marketState marketState;
 
     //These are to call the states in order for the states to change
     public playerStateBase PreviousState
@@ -110,11 +111,15 @@ public class playerStateManager : MonoBehaviour
         get { return cursingState; }
     }
 
+    public marketState MarketState
+    {
+        get { return marketState; } 
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         //This collect the component required to start the turn and each of the states
-        //TODO: Add Choosing, Selecting, Attack & Defend States
         inactiveState = GetComponent<inactiveState>();
         startState = GetComponent<startState>();
         decidingState = GetComponent<decidingState>();
@@ -127,6 +132,7 @@ public class playerStateManager : MonoBehaviour
         defendState = GetComponent<defendState>();
         itemState = GetComponent<itemState>();
         cursingState = GetComponent<cursingState>();
+        marketState = GetComponent<marketState>();
 
         //this begins the player in the inactive state where nothing happens until is the player's turn
         currentState = inactiveState;
@@ -172,9 +178,6 @@ public class playerStateManager : MonoBehaviour
     //This ends the turn of the player by calling the turn manager instance to change to the next turn
     public void EndTurn()
     {
-        //GameObject manager = GameObject.FindGameObjectWithTag("Manager");
-        //turnManager turnManager = manager.GetComponent<turnManager>();
-        //turnManager.StartTurn();
 
         turnManager turnManager = Singleton<turnManager>.Instance;
         turnManager.StartTurn();
