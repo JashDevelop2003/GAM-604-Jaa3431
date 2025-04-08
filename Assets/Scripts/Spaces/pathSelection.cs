@@ -15,6 +15,7 @@ using System;
 // Right = 1
 // Down = 2
 // Left = 3
+
 [System.Serializable]
 public struct Paths
 {

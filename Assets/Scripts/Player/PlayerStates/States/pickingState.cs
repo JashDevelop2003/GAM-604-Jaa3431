@@ -39,6 +39,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     [SerializeField] private List<defenceCardStats> possibleDefenceCards;
     private defenceCardStats selectedDefenceCard;
 
+    //this is for the status cards and provide the possible stauts card they can select from the character data
     [SerializeField] private List<statusCardStats> possibleStatusCards;
     private statusCardStats selectedStatusCard;
 

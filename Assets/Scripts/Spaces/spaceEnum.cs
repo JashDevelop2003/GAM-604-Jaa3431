@@ -5,5 +5,7 @@ public enum spaceEnum
     Card,
     Item,
     Lucky,
-    Event
+    Event,
+    Market,
+    FruitMachine
 }
