@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 /// <summary>
 /// The market state is when the player access the market and decide to spend their cash onto cards & items
 /// The chances and prices of these should include:
@@ -60,17 +62,33 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     //this selects the card out of the list and checks if this card is sutiable for the rarity
     private int selectedResource;
 
-    [SerializeField] private GameObject[] checkingAvailability = new GameObject[5];
+    private GameObject[] checkingAvailability = new GameObject[5];
 
     //These lists will be use for the retail stocks for the player to obtain either a card or item
-    [SerializeField] private int[] outcomeResource = new int[4];
-    [SerializeField] private int[] outcomeType = new int[4];
+    private int[] outcomeResource = new int[4];
+    private int[] outcomeType = new int[4];
     [SerializeField] private InMarket[] inMarket = new InMarket[4];
 
     [SerializeField] private InMarket selectedStock;
     private int boughtStock;
 
     private bool endShopping;
+
+    [Header("User Interface")]
+    [SerializeField] private GameObject marketUI;
+    [SerializeField] private Color[] setColour = new Color[5];
+    [SerializeField] private Image[] sectionDisplay = new Image[4];
+
+    [SerializeField] private GameObject[] cardUI = new GameObject[4];
+    [SerializeField] private Image[] cardImage = new Image[4];
+    [SerializeField] private Sprite[] typeImage = new Sprite[4];
+    [SerializeField] private TMP_Text[] cardTypeName = new TMP_Text[4];
+    [SerializeField] private TMP_Text[] cardPrice = new TMP_Text[4];
+
+    [SerializeField] private GameObject[] itemUI = new GameObject[4];
+    [SerializeField] private TMP_Text[] itemPrice = new TMP_Text[4];
+    [SerializeField] private TMP_Text eventText;
+
     
     public override void EnterState(playerStateManager player)
     {
@@ -115,13 +133,16 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         for (int i = 0; i < outcomeResource.Length; i++)
         {
             outcomeResource[i] = UnityEngine.Random.Range(1, 11);
-            outcomeType[i] = UnityEngine.Random.Range(0, 5);
+            outcomeType[i] = UnityEngine.Random.Range(0, 4);
             while (checkingAvailability[outcomeType[i]] == null)
             {
+                Debug.LogWarning("Resource type is too full, changing resource type");
                 outcomeResource[i] = UnityEngine.Random.Range(1, 11);
-                outcomeType[i] = UnityEngine.Random.Range(0, 5);
+                outcomeType[i] = UnityEngine.Random.Range(0, 4);
             }
         }
+
+        marketUI.SetActive(true);
 
         for (int i = 0; i < inMarket.Length; i++)
         {
@@ -129,21 +150,37 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             {
                 inMarket[i].retailObject = marketEnum.UncommonCard;
                 inMarket[i].price = 25;
+                sectionDisplay[i].color = setColour[0];
+                cardUI[i].SetActive(true);
+                itemUI[i].SetActive(false);
+                cardPrice[i].SetText("Price: 25");
             }
             else if(outcomeResource[i] >= 5 || outcomeResource[i] <= 7)
             {
                 inMarket[i].retailObject = marketEnum.RareCard;
                 inMarket[i].price = 50;
+                sectionDisplay[i].color = setColour[1];
+                cardUI[i].SetActive(true);
+                itemUI[i].SetActive(false);
+                cardPrice[i].SetText("Price: 50");
             }
             else if (outcomeResource[i] == 8 ||  outcomeResource[i] == 9)
             {
                 inMarket[i].retailObject = marketEnum.LegendaryCard;
                 inMarket[i].price = 75;
+                sectionDisplay[i].color = setColour[2];
+                cardUI[i].SetActive(true);
+                itemUI[i].SetActive(false);
+                cardPrice[i].SetText("Price: 75");
             }
             else if (outcomeResource[i] == 10)
             {
                 inMarket[i].retailObject = marketEnum.Item;
                 inMarket[i].price = 100;
+                sectionDisplay[i].color = setColour[3];
+                cardUI[i].SetActive(false);
+                itemUI[i].SetActive(true);
+                itemPrice[i].SetText("Price: 100");
             }
             else
             {
@@ -153,18 +190,26 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             if (outcomeType[i] == (int)deckTypeEnum.Offence) 
             {
                 inMarket[i].retailType = deckTypeEnum.Offence;
+                cardTypeName[i].SetText("Offence");
+                cardImage[i].sprite = typeImage[0];
             }
             else if (outcomeType[i] == (int)deckTypeEnum.Defence)
             {
                 inMarket[i].retailType = deckTypeEnum.Defence;
+                cardTypeName[i].SetText("Defence");
+                cardImage[i].sprite = typeImage[1];
             }
             else if (outcomeType[i] == (int)deckTypeEnum.Movement)
             {
                 inMarket[i].retailType = deckTypeEnum.Movement;
+                cardTypeName[i].SetText("Movement");
+                cardImage[i].sprite = typeImage[2];
             }
             else if (outcomeType[i] == (int)deckTypeEnum.Status)
             {
                 inMarket[i].retailType = deckTypeEnum.Status;
+                cardTypeName[i].SetText("Status");
+                cardImage[i].sprite = typeImage[3];
             }
             else if (outcomeType[i] == (int)deckTypeEnum.Item)
             {
@@ -172,7 +217,7 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             }
 
             inMarket[i].hasBought = false;
-
+            eventText.SetText("Select a Resource to buy, Confirm with Spacebar & Finish Shopping with Backspace");
         }
     }
 
@@ -187,7 +232,6 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     public override void ExitState(playerStateManager player) 
     {
         endShopping = false;
-        Debug.Log("Finished Shopping");
     }
 
     public void DecidingUp(object sender, EventArgs e)
@@ -218,19 +262,19 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     {
         if (selectedStock.retailObject == marketEnum.Null)
         {
-            Debug.LogWarning("You didn't choose an item yet");
+            eventText.SetText("You didn't choose an item yet");
         }
         else if (selectedStock.hasBought)
         {
-            Debug.Log("Stock has been sold out");
+            eventText.SetText("Stock has been sold out");
         }
         else if (selectedStock.price > controller.GetModel.CurrentCash)
         {
-            Debug.LogWarning("You cannot afford to obtain that resource");
+            eventText.SetText("You cannot afford to obtain that resource");
         }
         else
         {
-            if (selectedStock.retailObject != marketEnum.Item)
+            if (selectedStock.retailObject == marketEnum.Item)
             {
                 ObtainItem();
             }
@@ -249,9 +293,6 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                     ObtainCard(CardRarity.Uncommon);
                 }
             }
-
-            controller.ChangeCash(-selectedStock.price);
-            inMarket[boughtStock].hasBought = true;
         }
     }
 
@@ -264,11 +305,26 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     {
         int selectedInt = UnityEngine.Random.Range(0, possibleItems.Count);
         selectedItem = possibleItems[selectedInt];
+
+        checkingAvailability[4] = itemDeck.GetAvailableItem();
         GameObject relic = checkingAvailability[4];
-        relic.SetActive(true);
-        itemBehaviour item = relic.AddComponent<itemBehaviour>();
-        item.CreateItem(selectedItem);
-        controller.IncrementDeck(deckTypeEnum.Item);
+        if (relic != null)
+        {
+            relic.SetActive(true);
+            itemBehaviour item = relic.AddComponent<itemBehaviour>();
+            item.CreateItem(selectedItem);
+            controller.IncrementDeck(deckTypeEnum.Item);
+            controller.ChangeCash(-selectedStock.price);
+            selectedStock.hasBought = true;
+            inMarket[boughtStock].hasBought = true;
+            sectionDisplay[boughtStock].color = setColour[4];
+            eventText.SetText("item Obtained: " + item.Item.itemName + " :" + item.Item.itemDescription + "Press Backspace once you're done shopping");
+        }
+        else
+        {
+            eventText.SetText("There is no Available Slot for Items");
+        }
+
     }
 
     void ObtainCard(CardRarity rarity)
@@ -285,11 +341,24 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 selectedOffenceCard = possibleOffenceCards[selectedCard];
             }
 
+            checkingAvailability[0] = offenceDeck.GetAvailableOffence();
             GameObject offenceCard = checkingAvailability[0];
-            offenceCard.SetActive(true);
-            offenceCard offence = offenceCard.AddComponent<offenceCard>();
-            offence.CreateCard(selectedOffenceCard);
-            controller.IncrementDeck(deckTypeEnum.Offence);
+            if (offenceCard != null)
+            {
+                offenceCard.SetActive(true);
+                offenceCard offence = offenceCard.AddComponent<offenceCard>();
+                offence.CreateCard(selectedOffenceCard);
+                controller.IncrementDeck(deckTypeEnum.Offence);
+                controller.ChangeCash(-selectedStock.price);
+                selectedStock.hasBought = true;
+                inMarket[boughtStock].hasBought = true;
+                sectionDisplay[boughtStock].color = setColour[4];
+                eventText.SetText("Offence Card Obtained: " + offence.AttackCard.cardName + " :" + offence.AttackCard.cardDescription + "Press Backspace once you're done shopping");
+            }
+            else
+            {
+                eventText.SetText("There is no Available Slot for Offence Cards");
+            }
         }
 
         else if (selectedStock.retailType == deckTypeEnum.Defence)
@@ -303,11 +372,24 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 selectedDefenceCard = possibleDefenceCards[selectedCard];
             }
 
+            checkingAvailability[1] = defenceDeck.GetAvailableDefence();
             GameObject defenceCard = checkingAvailability[1];
-            defenceCard.SetActive(true);
-            defenceCard defence = defenceCard.AddComponent<defenceCard>();
-            defence.CreateCard(selectedDefenceCard);
-            controller.IncrementDeck(deckTypeEnum.Defence);
+            if (defenceCard != null)
+            {
+                defenceCard.SetActive(true);
+                defenceCard defence = defenceCard.AddComponent<defenceCard>();
+                defence.CreateCard(selectedDefenceCard);
+                controller.IncrementDeck(deckTypeEnum.Defence);
+                controller.ChangeCash(-selectedStock.price);
+                selectedStock.hasBought = true;
+                inMarket[boughtStock].hasBought = true;
+                sectionDisplay[boughtStock].color = setColour[4];
+                eventText.SetText("Defence Card Obtained: " + defence.DefendCard.cardName + " :" + defence.DefendCard.cardDescription + "Press Backspace once you're done shopping");
+            }
+            else
+            {
+                eventText.SetText("There is no Available Slot for Defence Cards");
+            }
         }
 
         else if (selectedStock.retailType == deckTypeEnum.Movement)
@@ -321,11 +403,25 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 selectedMovementCard = possibleMovementCards[selectedCard];
             }
 
+            checkingAvailability[2] = movementDeck.GetAvailableMovement();
             GameObject moveCard = checkingAvailability[2];
-            moveCard.SetActive(true);
-            movementCard move = moveCard.AddComponent<movementCard>();
-            move.CreateCard(selectedMovementCard);
-            controller.IncrementDeck(deckTypeEnum.Movement);
+            if (moveCard != null)
+            {
+                moveCard.SetActive(true);
+                movementCard move = moveCard.AddComponent<movementCard>();
+                move.CreateCard(selectedMovementCard);
+                controller.IncrementDeck(deckTypeEnum.Movement);
+                controller.ChangeCash(-selectedStock.price);
+                selectedStock.hasBought = true;
+                inMarket[boughtStock].hasBought = true;
+                sectionDisplay[boughtStock].color = setColour[4];
+                eventText.SetText("Movement Card Obtained: " + move.MoveCard.cardName + " :" + move.MoveCard.cardDescription + "Press Backspace once you're done shopping");
+            }
+            else
+            {
+                eventText.SetText("There is no Available Slot for Movement Cards");
+            }
+
         }
 
         else if (selectedStock.retailType == deckTypeEnum.Status)
@@ -339,17 +435,31 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 selectedStatusCard = possibleStatusCards[selectedCard];
             }
 
+            checkingAvailability[3] = statusDeck.GetAvailableStatus();
             GameObject statCard = checkingAvailability[3];
-            statCard.SetActive(true);
-            statusCard stat = statCard.AddComponent<statusCard>();
-            stat.CreateCard(selectedStatusCard);
-            controller.IncrementDeck(deckTypeEnum.Status);
+            if (statCard != null)
+            {
+                statCard.SetActive(true);
+                statusCard stat = statCard.AddComponent<statusCard>();
+                stat.CreateCard(selectedStatusCard);
+                controller.IncrementDeck(deckTypeEnum.Status);
+                controller.ChangeCash(-selectedStock.price);
+                selectedStock.hasBought = true;
+                inMarket[boughtStock].hasBought = true;
+                sectionDisplay[boughtStock].color = setColour[4];
+                eventText.SetText("Status Card Obtained: " + stat.StatusCard.cardName + " :" + stat.StatusCard.cardDescription + "Press Backspace once you're done shopping");
+            }
+            else
+            {
+                eventText.SetText("There is no Available Slot for Status Cards");
+            }
         }
+
     }
 
     IEnumerator EndShopping()
     {
-        Debug.Log("Ending Shopping");
+        eventText.SetText("Ending Shopping");
         Controls.upPressed -= DecidingUp;
         Controls.downPressed -= DecidingDown;
         Controls.leftPressed -= DecidingLeft;
