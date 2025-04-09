@@ -84,7 +84,7 @@ public class spinState : playerStateBase, IConfirm, ICancel
 
     public override void ExitState(playerStateManager player) 
     {
-        fruitMachineUI.SetActive(true);
+        fruitMachineUI.SetActive(false);
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
