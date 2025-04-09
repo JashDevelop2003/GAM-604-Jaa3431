@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public struct PossibleWinnings
@@ -9,6 +11,7 @@ public struct PossibleWinnings
     public outcomeEnum outcome;
     public int cashPrize;
     public int bonusChance;
+    public Sprite[] symbol;
 }
 
 public class spinState : playerStateBase, IConfirm, ICancel
@@ -29,10 +32,16 @@ public class spinState : playerStateBase, IConfirm, ICancel
     private GameObject checkingAvailability;
 
     private bool spinEnded;
-    private PossibleWinnings spinOutcome;
+    [SerializeField] private PossibleWinnings spinOutcome;
 
     [Header("Possible Winnings Struct")]
     [SerializeField] private PossibleWinnings[] winnings = new PossibleWinnings[10];
+
+    [Header("User Interface")]
+    [SerializeField] private GameObject fruitMachineUI;
+    [SerializeField] private GameObject[] dialSymbols = new GameObject[3];
+    [SerializeField] private Image[] symbolIcon = new Image[3];
+    [SerializeField] private TMP_Text eventText;
 
     public override void EnterState(playerStateManager player)
     {
@@ -54,7 +63,14 @@ public class spinState : playerStateBase, IConfirm, ICancel
         if(controller.GetModel.CurrentCash < 20)
         {
             StartCoroutine(SpinEnded(3));
-            Debug.LogWarning("You don't have enough cash");
+            eventText.SetText("You don't have enough cash");
+        }
+
+        fruitMachineUI.SetActive(true);
+        for (int i = 0; i < dialSymbols.Length; i++) 
+        {
+            dialSymbols[i].SetActive(false);
+            symbolIcon[i].sprite = null;
         }
     }
 
@@ -68,7 +84,7 @@ public class spinState : playerStateBase, IConfirm, ICancel
 
     public override void ExitState(playerStateManager player) 
     {
-        Debug.Log("Spin is Complete");
+        fruitMachineUI.SetActive(true);
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
@@ -142,30 +158,39 @@ public class spinState : playerStateBase, IConfirm, ICancel
             Debug.LogError("Probability was off. Check the coding in when Confirming");
         }
 
+        controller.ChangeCash(-20);
         StartCoroutine(Spin());
     }
 
     public void Cancel(object sender, EventArgs e)
     {
         StartCoroutine(SpinEnded(2));
-        Debug.Log("You decided to not spin");
+        eventText.SetText("You decided to not spin");
     }
 
     IEnumerator Spin()
     {
         Controls.confirmPressed -= ConfirmingChoice;
         Controls.cancelPressed -= Cancel;
-        yield return new WaitForSeconds(5);
+
+        for(int i = 0; i < spinOutcome.symbol.Length; i++)
+        {
+            yield return new WaitForSeconds(i);
+            dialSymbols[i].SetActive(true);
+            symbolIcon[i].sprite = spinOutcome.symbol[i];
+        }
+
+        yield return new WaitForSeconds(1);
         if(spinOutcome.outcome == outcomeEnum.Jumbled)
         {
             StartCoroutine(SpinEnded(2));
-            Debug.Log("Unfortunate, You got Jumbled");
+            eventText.SetText("Unfortunate, You got Jumbled");
         }
         else
         {
             controller.ChangeCash(spinOutcome.cashPrize);
             StartCoroutine(BonusChance(spinOutcome.bonusChance));
-            Debug.Log("Congratulations, you got: " + spinOutcome.outcome.ToString() + " Gain: " + spinOutcome.cashPrize.ToString() + " Cash. Bonus Chance: " + spinOutcome.bonusChance.ToString() + "% Chance");
+            eventText.SetText("Congratulations, you got: " + spinOutcome.outcome.ToString() + " Gain: " + spinOutcome.cashPrize.ToString() + " Cash. Bonus Chance: " + spinOutcome.bonusChance.ToString() + "% Chance");
         }
     }
 
@@ -180,7 +205,7 @@ public class spinState : playerStateBase, IConfirm, ICancel
         else
         {
             StartCoroutine(SpinEnded(2));
-            Debug.Log("Unlucky, No Bonus.");
+            eventText.SetText("Unlucky, No Bonus.");
         }
     }
 
@@ -198,11 +223,11 @@ public class spinState : playerStateBase, IConfirm, ICancel
             item.CreateItem(selectedItem);
             controller.IncrementDeck(deckTypeEnum.Item);
 
-            Debug.Log("Bonus Item: " + item.Item.itemName + " : " + item.Item.itemDescription + " Press Backspace once you're done shopping");
+            eventText.SetText("Bonus Item: " + item.Item.itemName + " : " + item.Item.itemDescription + " Press Backspace once you're done shopping");
         }
         else
         {
-            Debug.LogWarning("Despite Bonus, There is no Available Slot for Items so here's an extra 100 Cash");
+            eventText.SetText("Despite Bonus, There is no Available Slot for Items so here's an extra 100 Cash");
             controller.ChangeCash(100);
         }
 
