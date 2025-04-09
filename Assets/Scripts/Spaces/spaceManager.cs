@@ -83,31 +83,37 @@ public class spaceManager : MonoBehaviour
         }
 
         //if the type is item then change their state to item state
-        else if (type == spaceEnum.Item) 
+        else if (type == spaceEnum.Item)
         {
             eventText.SetText(player.name + " can choose to obtain a relic or give someone a omen");
             StartCoroutine(ChangePlayerState(state.ItemState, 3));
         }
 
         //if the type is lucky then apply 1 of the random 10 outcomes for the player to obtain
-        else if(type == spaceEnum.Lucky)
+        else if (type == spaceEnum.Lucky)
         {
             lucky.beginLucky(player, Random.Range(1, 11));
         }
 
         //if the type is event then currently it does nothing
-        else if(type == spaceEnum.Event)
+        else if (type == spaceEnum.Event)
         {
             moveState findEvent = player.GetComponent<moveState>();
             events = findEvent.CurrentSpace.GetComponent<eventSpace>();
             events.ActivateEvent();
         }
 
-        //if the type is event then currently it does nothing
+        //if the type is market then changes the state to the market state
         else if (type == spaceEnum.Market)
         {
             eventText.SetText(player.name + " is entering the market to gain items and cards");
             StartCoroutine(ChangePlayerState(state.MarketState, 3));
+        }
+
+        else if (type == spaceEnum.FruitMachine) 
+        {
+            eventText.SetText(player.name + " is entering the Fruit Machine, they can confirm with spacebar to pay 20 cash to spin or cancel with backspace to ignore");
+            StartCoroutine(ChangePlayerState(state.SpinState, 3));
         }
     }
 

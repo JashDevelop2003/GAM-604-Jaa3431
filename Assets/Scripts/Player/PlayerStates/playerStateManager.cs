@@ -44,6 +44,7 @@ public class playerStateManager : MonoBehaviour
     private itemState itemState;
     private cursingState cursingState;
     private marketState marketState;
+    private spinState spinState;
 
     //These are to call the states in order for the states to change
     public playerStateBase PreviousState
@@ -115,6 +116,11 @@ public class playerStateManager : MonoBehaviour
     {
         get { return marketState; } 
     }
+    
+    public spinState SpinState
+    {
+        get { return spinState; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -133,6 +139,7 @@ public class playerStateManager : MonoBehaviour
         itemState = GetComponent<itemState>();
         cursingState = GetComponent<cursingState>();
         marketState = GetComponent<marketState>();
+        spinState = GetComponent<spinState>();
 
         //this begins the player in the inactive state where nothing happens until is the player's turn
         currentState = inactiveState;

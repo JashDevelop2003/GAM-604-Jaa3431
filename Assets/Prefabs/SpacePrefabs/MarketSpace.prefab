@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7254769084559826893}
   m_Layer: 0
   m_Name: MarketSpace
-  m_TagString: Untagged
+  m_TagString: Space
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
