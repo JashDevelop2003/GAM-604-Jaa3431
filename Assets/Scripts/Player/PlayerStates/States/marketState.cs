@@ -232,30 +232,35 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     public override void ExitState(playerStateManager player) 
     {
         endShopping = false;
+        marketUI.SetActive(false);
     }
 
     public void DecidingUp(object sender, EventArgs e)
     {
         selectedStock = inMarket[0];
         boughtStock = 0;
+        eventText.SetText(selectedStock.retailObject.ToString() + " " + selectedStock.retailType.ToString() + " :" + selectedStock.price.ToString());
     }
     
     public void DecidingDown(object sender, EventArgs e)
     {
         selectedStock = inMarket[2];
         boughtStock = 2;
+        eventText.SetText(selectedStock.retailObject.ToString() + " " + selectedStock.retailType.ToString() + " :" + selectedStock.price.ToString());
     }
     
     public void DecidingLeft(object sender, EventArgs e)
     {
         selectedStock = inMarket[3];
         boughtStock = 3;
+        eventText.SetText(selectedStock.retailObject.ToString() + " " + selectedStock.retailType.ToString() + " :" + selectedStock.price.ToString());
     }
     
     public void DecidingRight(object sender, EventArgs e)
     {
         selectedStock = inMarket[1];
         boughtStock = 1;
+        eventText.SetText(selectedStock.retailObject.ToString() + " " + selectedStock.retailType.ToString() + " :" + selectedStock.price.ToString());
     }
     
     public void ConfirmingChoice(object sender, EventArgs e)
@@ -318,7 +323,8 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             selectedStock.hasBought = true;
             inMarket[boughtStock].hasBought = true;
             sectionDisplay[boughtStock].color = setColour[4];
-            eventText.SetText("item Obtained: " + item.Item.itemName + " :" + item.Item.itemDescription + "Press Backspace once you're done shopping");
+            itemUI[boughtStock].SetActive(false);
+            eventText.SetText("item Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription + " Press Backspace once you're done shopping");
         }
         else
         {
@@ -353,7 +359,8 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 selectedStock.hasBought = true;
                 inMarket[boughtStock].hasBought = true;
                 sectionDisplay[boughtStock].color = setColour[4];
-                eventText.SetText("Offence Card Obtained: " + offence.AttackCard.cardName + " :" + offence.AttackCard.cardDescription + "Press Backspace once you're done shopping");
+                cardUI[boughtStock].SetActive(false);
+                eventText.SetText("Offence Card Obtained: " + offence.AttackCard.cardName + " : " + offence.AttackCard.cardDescription + " Press Backspace once you're done shopping");
             }
             else
             {
@@ -384,7 +391,8 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 selectedStock.hasBought = true;
                 inMarket[boughtStock].hasBought = true;
                 sectionDisplay[boughtStock].color = setColour[4];
-                eventText.SetText("Defence Card Obtained: " + defence.DefendCard.cardName + " :" + defence.DefendCard.cardDescription + "Press Backspace once you're done shopping");
+                cardUI[boughtStock].SetActive(false);
+                eventText.SetText("Defence Card Obtained: " + defence.DefendCard.cardName + " : " + defence.DefendCard.cardDescription + " Press Backspace once you're done shopping");
             }
             else
             {
@@ -415,7 +423,8 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 selectedStock.hasBought = true;
                 inMarket[boughtStock].hasBought = true;
                 sectionDisplay[boughtStock].color = setColour[4];
-                eventText.SetText("Movement Card Obtained: " + move.MoveCard.cardName + " :" + move.MoveCard.cardDescription + "Press Backspace once you're done shopping");
+                cardUI[boughtStock].SetActive(false);
+                eventText.SetText("Movement Card Obtained: " + move.MoveCard.cardName + " : " + move.MoveCard.cardDescription + " Press Backspace once you're done shopping");
             }
             else
             {
@@ -447,7 +456,8 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 selectedStock.hasBought = true;
                 inMarket[boughtStock].hasBought = true;
                 sectionDisplay[boughtStock].color = setColour[4];
-                eventText.SetText("Status Card Obtained: " + stat.StatusCard.cardName + " :" + stat.StatusCard.cardDescription + "Press Backspace once you're done shopping");
+                cardUI[boughtStock].SetActive(false);
+                eventText.SetText("Status Card Obtained: " + stat.StatusCard.cardName + " : " + stat.StatusCard.cardDescription + " Press Backspace once you're done shopping");
             }
             else
             {
