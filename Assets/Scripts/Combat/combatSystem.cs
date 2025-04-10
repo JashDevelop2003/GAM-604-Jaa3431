@@ -99,15 +99,6 @@ public class combatSystem : MonoBehaviour
         attackingPlayerController = attackingPlayer.GetComponent<playerController>();
         thrustMultiplier = attackingPlayerController.GetModel.ThrustMultiplier;
 
-        if (attackingPlayerController.GetModel.Character == characterEnum.Reaper)
-        {
-            lastReapsort abilityActive = attackingPlayerController.GetComponentInChildren<lastReapsort>();
-            if (abilityActive.LastReapsortActive)
-            {
-                thrustMultiplier *= 3;
-            }
-        }
-
         //This calculates the defend value in an integer on the value multiplied by the thrust
         attackValue = (int)(value * thrustMultiplier);
         attackerReady = true;
@@ -158,25 +149,6 @@ public class combatSystem : MonoBehaviour
         {
             eventText.SetText("Defender Recieved " + (-defendValue - -attackValue).ToString() + " Damage");
             defendingPlayerController.ChangeHealth(defendValue - attackValue);
-            
-            //this checks if the attacker's character is reaper which allows the reaper to heal 25% damage
-            //if(attackingPlayerController.GetModel.Character == characterEnum.Reaper)
-            //{
-                //This only allows the reaper to heal if the value is above 4
-                //This is because the value will be an int and healing 0 is unecessary
-            //    if(attackValue - defendValue >= 4)
-            //    {
-            //        attackingPlayerController.ActivatePassive();
-            //    }
-
-                //This checks if the reaper is in her last reapsort form
-                //If she is then invoke the new event to check if the opponent is defeated
-            //    lastReapsort abilityActive = attackingPlayerController.GetComponentInChildren<lastReapsort>();
-            //    if (abilityActive.LastReapsortActive)
-            //    {
-            //        attackingPlayerController.ActivateOneUse();
-            //    }
-            //}
         }
 
         else

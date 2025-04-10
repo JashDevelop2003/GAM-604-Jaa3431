@@ -65,6 +65,7 @@ public class lastReapsort : MonoBehaviour
             controller.oneUseEvent -= BeginReaping;
             moveState.beginMoveEvent += Chase;
             inactiveState.endEvents += FailedReaping;
+            combatSystem.beforeCombatEvent += Reap;
             combatSystem.duringCombatEvent += DefeatedOpponent;
             controller.DisplayAbility(controller.GetData.abilityIcon[1], controller.GetData.abilityColour[1]);
         }
@@ -79,6 +80,10 @@ public class lastReapsort : MonoBehaviour
         controller.GetModel.RollValue *= 3;
     }
     
+    public void Reap(object sender, EventArgs e)
+    {
+        combatSystem.AttackValue *= 3;
+    }
     
     //This method is invoked when the player has dealt damage to an opponent
     //This checks if they have defeated the opponent
@@ -90,8 +95,6 @@ public class lastReapsort : MonoBehaviour
         //If the opponent is defeated then set the form to false, heal 50% of Max Health & Gain 25% Max Health
         if (!opponentController.GetModel.IsAlive)
         {
-            controller.ChangeHealth(controller.GetModel.MaxHealth / 4);
-            controller.GetModel.MaxHealth *= (int)1.25;
             Debug.Log("Reaper has Defeated Someone");
             controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
             EndReaping();
@@ -109,6 +112,7 @@ public class lastReapsort : MonoBehaviour
         Debug.Log("Player cannot defeat opponent successfully");
         moveState.beginMoveEvent -= Chase;
         inactiveState.endEvents -= FailedReaping;
+        combatSystem.beforeCombatEvent -= Reap;
         combatSystem.duringCombatEvent -= DefeatedOpponent;
     }
 
@@ -119,6 +123,7 @@ public class lastReapsort : MonoBehaviour
         lastReapsortActive = false;
         moveState.beginMoveEvent -= Chase;
         inactiveState.endEvents -= FailedReaping;
+        combatSystem.beforeCombatEvent -= Reap;
         combatSystem.duringCombatEvent -= DefeatedOpponent;
 
     }
@@ -128,6 +133,7 @@ public class lastReapsort : MonoBehaviour
         controller.oneUseEvent -= BeginReaping;
         moveState.beginMoveEvent -= Chase;
         inactiveState.endEvents -= FailedReaping;
+        combatSystem.beforeCombatEvent -= Reap;
         combatSystem.duringCombatEvent -= DefeatedOpponent;
     }
 }

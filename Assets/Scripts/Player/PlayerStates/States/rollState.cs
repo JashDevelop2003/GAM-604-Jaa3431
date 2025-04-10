@@ -94,29 +94,7 @@ public class rollState : playerStateBase, IConfirm, ICancel
     {
         //the roll a dice value between the minimum and maximum roll value
         //This is then multiplied by the roll multiplier & converts the value to an int (rounding down)
-
-            //This checks if the player playing as the reaper has activated their one use ability
-            //if (controller.GetModel.Character == characterEnum.Reaper) 
-            //{
-                //if the ability is active then multiply the movement by 3
-             //   lastReapsort abilityActive = controller.GetComponentInChildren<lastReapsort>();
-             //   if (abilityActive.LastReapsortActive)
-             //   {
-             //       controller.Roll((int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * (controller.GetModel.RollMultiplier * 3)));
-             //   }
-                //otherwise is just normal movement
-             //   else
-             //   {
-             //       controller.Roll((int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * controller.GetModel.RollMultiplier));
-             //   }
-
-            //}
-
-            //This is for the rest of the players that are not playing as the reaper
-            //else
-            //{
-                controller.Roll((int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * controller.GetModel.RollMultiplier));
-            //}
+        controller.Roll((int)(UnityEngine.Random.Range(minimumRoll, maximumRoll + 1) * controller.GetModel.RollMultiplier));
 
         //This decreases the mana based on the card's required mana
         controller.ChangeMana(manaCost);
