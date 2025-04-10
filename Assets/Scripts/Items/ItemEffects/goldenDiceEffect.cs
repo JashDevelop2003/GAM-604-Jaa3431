@@ -17,7 +17,7 @@ public class goldenDiceEffect : MonoBehaviour
         player = playerTransform.gameObject;
         controller = player.GetComponent<playerController>();
         state = player.GetComponent<moveState>();
-        state.beginMoveEvent += GoldenDice;
+        state.beginItemMoveEvent += GoldenDice;
     }
 
     // When the player has rolled the dice they will incrase cash equal to the roll value
@@ -28,6 +28,6 @@ public class goldenDiceEffect : MonoBehaviour
 
     private void OnDestroy()
     {
-        state.beginMoveEvent -= GoldenDice;
+        state.beginItemMoveEvent -= GoldenDice;
     }
 }

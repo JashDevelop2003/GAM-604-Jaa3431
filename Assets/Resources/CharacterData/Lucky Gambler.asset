@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c375e87832ae3488cdc34a6afa6170, type: 3}
+  m_Name: Lucky Gambler
+  m_EditorClassIdentifier: 
+  character: 2
+  Health: 90
+  Mana: 1
+  startingCash: 150
+  deckCapacity: 07000000070000000f0000000700000009000000
+  startingOffenceCards:
+  - {fileID: 11400000, guid: e89b788ea6c1dfb41a91549988011f8f, type: 2}
+  - {fileID: 11400000, guid: 6ead47396b107af469c3bf510c83aef4, type: 2}
+  - {fileID: 11400000, guid: 3acd9698f3b99a2448ba8f973e1788f6, type: 2}
+  - {fileID: 11400000, guid: ab164468113c6d74190a9bd966b76087, type: 2}
+  startingDefenceCards:
+  - {fileID: 11400000, guid: 3ad6be79d7d630944bc125818434aa73, type: 2}
+  - {fileID: 11400000, guid: 9498b2ad99067424ba309e6318e81235, type: 2}
+  - {fileID: 11400000, guid: 50df1451d3b7af54aa134be55ae031ea, type: 2}
+  - {fileID: 11400000, guid: ca422b2ff046a1b4f9d56ec911327417, type: 2}
+  startingMovementCards:
+  - {fileID: 11400000, guid: be7ca579cf1d6454a937366531556f05, type: 2}
+  - {fileID: 11400000, guid: edf6252555852a342a7b86c9d766684f, type: 2}
+  - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
+  startingStatusCards: []
+  startingItems: []
+  possibleOffenceCards: []
+  possibleDefenceCards: []
+  possibleMovementCards: []
+  possibleStatusCards: []
+  possibleRelics: []
+  possibleOmens: []
+  characterObject: {fileID: 0}
+  oneUseDescription: Luck of Your Life - Anything Goes, Who knows?
+  abilityIcon:
+  - {fileID: 21300000, guid: ba8cd0336f2b5e74f8e532fcc4504412, type: 3}
+  abilityColour:
+  - {r: 0.028301716, g: 1, b: 0.10995576, a: 1}

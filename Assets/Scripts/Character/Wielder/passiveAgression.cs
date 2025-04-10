@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,13 @@ public class passiveAgression : MonoBehaviour
 {
     //This is the controller which will need to reference the player object into the parent
     private playerController controller;
+
+    //This checks the state of the player
+    private playerStateManager stateManager;
+
+    //These are required to add the methods to suitable events
+    private combatSystem combatSystem;
+    private startState state;
 
     //This is the stance which will be use to identify which stance the character is currently on
     //This will be use for the battle system to check which stance the character is on to double/half thrust or guard
@@ -39,6 +47,9 @@ public class passiveAgression : MonoBehaviour
     void Awake()
     {
         controller = GetComponentInParent<playerController>();
+        state = GetComponentInParent<startState>();
+        stateManager = GetComponentInParent<playerStateManager>();
+        combatSystem = combatSystem.instance;
         startingStance = UnityEngine.Random.Range(0, 2);
         if(startingStance == 0)
         {
@@ -52,7 +63,9 @@ public class passiveAgression : MonoBehaviour
         }
 
         changeCooldown = 3;
-        controller.passiveEvent += DecrementCooldown;
+
+        combatSystem.beforeCombatEvent += BattleStance;
+        state.startEvent += DecrementCooldown;
 
     }
 
@@ -85,9 +98,45 @@ public class passiveAgression : MonoBehaviour
         Debug.Log("Change to " + stance);
     }
 
+    //Before Combat, the value doubles or half depending on the player's state and the stance they're currently in
+    //Attack Doubles if stance is Agressive, however Defend Halves in that stance
+    //Defend Dobules if stance is Passive, howeveder Attack halves in that stance
+    public void BattleStance(object sender, EventArgs e)
+    {
+        if (stateManager.CurrentState == stateManager.AttackState) 
+        {
+            if (stance == stanceEnum.Passive) 
+            {
+                combatSystem.AttackValue /= 2;
+                Debug.Log("Attack when passive, half the attack");
+            }
+
+            else if(stance == stanceEnum.Aggressive)
+            {
+                combatSystem.AttackValue *= 2;
+                Debug.Log("Attack when aggressive, double the attack");
+            }
+        }
+
+        else if(stateManager.CurrentState == stateManager.DefendState)
+        {
+            if (stance == stanceEnum.Aggressive)
+            {
+                combatSystem.DefendValue /= 2;
+                Debug.Log("Defend when aggressive, half the attack");
+            }
+
+            else if (stance == stanceEnum.Passive)
+            {
+                combatSystem.DefendValue *= 2;
+                Debug.Log("Defend when passive, double the attack");
+            }
+        }
+    }
+
     private void OnDisable()
     {
-        controller.passiveEvent -= DecrementCooldown;
+        state.startEvent -= DecrementCooldown;
     }
 
 

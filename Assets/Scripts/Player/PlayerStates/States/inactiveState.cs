@@ -20,7 +20,7 @@ public class inactiveState : playerStateBase
     //This is use in order to instant defeat the grim reaper if she's still in her last reapsort form
     private playerController controller;
 
-    ///public event EventHandler endItemEvents;
+    public event EventHandler endEvents;
 
     //the enter state checks whether if the player ends their turn or their combat
     public override void EnterState(playerStateManager player)
@@ -28,15 +28,15 @@ public class inactiveState : playerStateBase
         //This is called to check if the player is the reaper and is on their last reapsort form
         //If it turns out the boolean is ture then the player is instantly defeated
         controller = GetComponent<playerController>();
-        if(controller.GetModel.Character == characterEnum.Reaper)
-        {
-            lastReapsort instantDefeat = GetComponentInChildren<lastReapsort>();
-            if (instantDefeat.LastReapsortActive)
-            {
-                controller.GetModel.IsAlive = false;
-                Debug.Log("Player cannot defeat opponent successfully");
-            }
-        }
+        //if(controller.GetModel.Character == characterEnum.Reaper)
+        //{
+        //    lastReapsort instantDefeat = GetComponentInChildren<lastReapsort>();
+        //    if (instantDefeat.LastReapsortActive)
+        //    {
+        //        controller.GetModel.IsAlive = false;
+        //        Debug.Log("Player cannot defeat opponent successfully");
+        //    }
+        //}
 
         //this enables the player turn method to start the player turn once their turn is over
         player.startTurn += PlayerTurn;
@@ -48,7 +48,7 @@ public class inactiveState : playerStateBase
         if (player.PreviousState != null && player.PreviousState != player.DefendState)
         {
             controller.ActivateEndEffect();
-            //endItemEvents?.Invoke(this, EventArgs.Empty);
+            endEvents?.Invoke(this, EventArgs.Empty);
             player.EndTurn();
         }
     }

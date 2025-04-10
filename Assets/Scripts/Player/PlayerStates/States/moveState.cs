@@ -74,6 +74,7 @@ public class moveState : playerStateBase
     [SerializeField] private TMP_Text eventText;
 
     public event EventHandler beginMoveEvent;
+    public event EventHandler beginItemMoveEvent;
     
     public override void EnterState(playerStateManager player)
     {
@@ -107,8 +108,9 @@ public class moveState : playerStateBase
         //otherwise the movement's integer stays as it is
         if (player.PreviousState == player.RollState)
         {
-            movement = controller.GetModel.RollValue;
             beginMoveEvent?.Invoke(this, EventArgs.Empty);
+            beginItemMoveEvent?.Invoke(this, EventArgs.Empty);
+            movement = controller.GetModel.RollValue;
         }
 
         eventText.SetText(movement.ToString());

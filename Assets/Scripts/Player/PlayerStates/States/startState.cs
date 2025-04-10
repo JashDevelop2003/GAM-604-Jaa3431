@@ -47,10 +47,10 @@ public class startState : playerStateBase
         startEvent -= controller.ActivateStartEffects;
 
         //If the player's character is wielder then decrement the cooldown & see if the character changes state
-        if (controller.GetModel.Character == characterEnum.Wielder) 
-        {
-            controller.ActivatePassive();
-        }
+        //if (controller.GetModel.Character == characterEnum.Wielder) 
+        //{
+        //    controller.ActivatePassive();
+        //}
 
     }
 }

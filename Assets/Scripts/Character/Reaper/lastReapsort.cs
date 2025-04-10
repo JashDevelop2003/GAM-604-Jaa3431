@@ -25,7 +25,8 @@ public class lastReapsort : MonoBehaviour
 
     //This is the controller which will need to reference the player object into the parent
     private playerController controller;
-    private playerStateManager stateManager;
+    private moveState moveState;
+    private inactiveState inactiveState;
 
     combatSystem combatSystem;
 
@@ -35,15 +36,20 @@ public class lastReapsort : MonoBehaviour
     void Awake()
     {
         controller = GetComponentInParent<playerController>();
-        stateManager = GetComponentInParent<playerStateManager>();
+        //This will be used for events
+        moveState = GetComponentInParent<moveState>();
+        inactiveState = GetComponentInParent<inactiveState>();
 
         //The object is a prefab meaning that when instantiated won't have the combat system object
         //This means that the class requires to find the prefab of the combat system
-
+        //The combat system  will be used for events
         combatSystem = combatSystem.instance;
 
         //The one use ability waits until the player uses their one use ability to begin the last reapsort
-        controller.oneUseEvent += BeginReaping;
+        if (!passiveUsed)
+        {
+            controller.oneUseEvent += BeginReaping;
+        }
     }
 
     //This method is invoked when using the ability
@@ -55,8 +61,11 @@ public class lastReapsort : MonoBehaviour
         {
             passiveUsed = true;
             lastReapsortActive = true;
-            controller.oneUseEvent += CheckOpponentHealth;
+            //controller.oneUseEvent += CheckOpponentHealth;
             controller.oneUseEvent -= BeginReaping;
+            moveState.beginMoveEvent += Chase;
+            inactiveState.endEvents += FailedReaping;
+            combatSystem.duringCombatEvent += DefeatedOpponent;
             controller.DisplayAbility(controller.GetData.abilityIcon[1], controller.GetData.abilityColour[1]);
         }
         else
@@ -65,9 +74,15 @@ public class lastReapsort : MonoBehaviour
         }
     }
 
+    public void Chase(object sender, EventArgs e)
+    {
+        controller.GetModel.RollValue *= 3;
+    }
+    
+    
     //This method is invoked when the player has dealt damage to an opponent
     //This checks if they have defeated the opponent
-    public void CheckOpponentHealth(object sender, EventArgs e)
+    public void DefeatedOpponent(object sender, EventArgs e)
     {
         //This reference the opponent object from the combat system to see if the IsAlive boolean is false
         playerController opponentController = combatSystem.DefendingPlayer.GetComponent<playerController>();
@@ -75,11 +90,11 @@ public class lastReapsort : MonoBehaviour
         //If the opponent is defeated then set the form to false, heal 50% of Max Health & Gain 25% Max Health
         if (!opponentController.GetModel.IsAlive)
         {
-            lastReapsortActive = false;
             controller.ChangeHealth(controller.GetModel.MaxHealth / 4);
             controller.GetModel.MaxHealth *= (int)1.25;
             Debug.Log("Reaper has Defeated Someone");
             controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
+            EndReaping();
         }
         //otherwise the player is still in last reapsort
         else
@@ -88,9 +103,31 @@ public class lastReapsort : MonoBehaviour
         }
     }
 
+    public void FailedReaping(object sender, EventArgs e) 
+    {
+        controller.GetModel.IsAlive = false;
+        Debug.Log("Player cannot defeat opponent successfully");
+        moveState.beginMoveEvent -= Chase;
+        inactiveState.endEvents -= FailedReaping;
+        combatSystem.duringCombatEvent -= DefeatedOpponent;
+    }
+
+    public void EndReaping()
+    {
+        controller.ChangeHealth(controller.GetModel.MaxHealth / 4);
+        controller.GetModel.MaxHealth *= (int)1.25;
+        lastReapsortActive = false;
+        moveState.beginMoveEvent -= Chase;
+        inactiveState.endEvents -= FailedReaping;
+        combatSystem.duringCombatEvent -= DefeatedOpponent;
+
+    }
+
     private void OnDisable()
     {
         controller.oneUseEvent -= BeginReaping;
-        controller.oneUseEvent -= CheckOpponentHealth;
+        moveState.beginMoveEvent -= Chase;
+        inactiveState.endEvents -= FailedReaping;
+        combatSystem.duringCombatEvent -= DefeatedOpponent;
     }
 }

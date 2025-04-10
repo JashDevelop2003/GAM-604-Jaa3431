@@ -26,7 +26,8 @@ public class soulSteal : MonoBehaviour
         //The object is a prefab meaning that when instantiated won't have the combat system object
         //This means that the class requires to find the prefab of the combat system
         combatSystem = combatSystem.instance;
-        controller.passiveEvent += GainHealth;
+        combatSystem.duringCombatEvent += GainHealth;
+        //controller.passiveEvent += GainHealth;
 
         controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
     }
@@ -39,15 +40,16 @@ public class soulSteal : MonoBehaviour
         //Except this then multiply by the health percentage
         //e.g if Attack Value is 12 & Defend Value is 4, then this will heal the player to 2 health
         //int values always round any float value down
-        attackValue = combatSystem.AttackValue;
-        defendValue = combatSystem.DefendValue;
-        healthValue = (int)((attackValue - defendValue) * healthPercentage);
-        controller.ChangeHealth(healthValue);
-        Debug.Log("Heal Value: " + healthValue);
+        if (combatSystem.AttackValue > combatSystem.DefendValue) 
+        {
+            healthValue = (int)((combatSystem.AttackValue - combatSystem.DefendValue) * healthPercentage);
+            controller.ChangeHealth(healthValue);
+            Debug.Log("Heal Value: " + healthValue);
+        }
     }
 
     private void OnDisable()
     {
-        controller.passiveEvent -= GainHealth;
+        combatSystem.duringCombatEvent -= GainHealth;
     }
 }

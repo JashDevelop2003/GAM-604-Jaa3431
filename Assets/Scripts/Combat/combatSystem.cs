@@ -99,22 +99,6 @@ public class combatSystem : MonoBehaviour
         attackingPlayerController = attackingPlayer.GetComponent<playerController>();
         thrustMultiplier = attackingPlayerController.GetModel.ThrustMultiplier;
 
-        //This is the passive ability that either doubles or halves the wielder's thrust depending on the stance
-        //This instance the ability will doulbe the thrust when in aggressive stance
-        //And the ability will half the thrust when in passive stance
-        if (attackingPlayerController.GetModel.Character == characterEnum.Wielder) 
-        { 
-            passiveAgression wielderStance = attackingPlayer.GetComponentInChildren<passiveAgression>();
-            if(wielderStance.Stance == stanceEnum.Aggressive)
-            {
-                thrustMultiplier *= 2;
-            }
-            else
-            {
-                thrustMultiplier /= 2;
-            }
-        }
-
         if (attackingPlayerController.GetModel.Character == characterEnum.Reaper)
         {
             lastReapsort abilityActive = attackingPlayerController.GetComponentInChildren<lastReapsort>();
@@ -137,22 +121,6 @@ public class combatSystem : MonoBehaviour
         defendingPlayer = defender;
         defendingPlayerController = defendingPlayer.GetComponent<playerController>();
         guardMultiplier = defendingPlayerController.GetModel.GuardMultiplier;
-
-        //This is the passive ability that either doubles or halves the wielder's thrust depending on the stance
-        //This instance the ability will doulbe the thrust when in aggressive stance
-        //And the ability will half the thrust when in passive stance
-        if (defendingPlayerController.GetModel.Character == characterEnum.Wielder)
-        {
-            passiveAgression wielderStance = defendingPlayer.GetComponentInChildren<passiveAgression>();
-            if (wielderStance.Stance == stanceEnum.Passive)
-            {
-                guardMultiplier *= 2;
-            }
-            else
-            {
-                guardMultiplier /= 2;
-            }
-        }
 
         //This calculates the defend value in an integer on the value multiplied by the guard
         defendValue = (int)(value * guardMultiplier);
@@ -192,23 +160,23 @@ public class combatSystem : MonoBehaviour
             defendingPlayerController.ChangeHealth(defendValue - attackValue);
             
             //this checks if the attacker's character is reaper which allows the reaper to heal 25% damage
-            if(attackingPlayerController.GetModel.Character == characterEnum.Reaper)
-            {
+            //if(attackingPlayerController.GetModel.Character == characterEnum.Reaper)
+            //{
                 //This only allows the reaper to heal if the value is above 4
                 //This is because the value will be an int and healing 0 is unecessary
-                if(attackValue - defendValue >= 4)
-                {
-                    attackingPlayerController.ActivatePassive();
-                }
+            //    if(attackValue - defendValue >= 4)
+            //    {
+            //        attackingPlayerController.ActivatePassive();
+            //    }
 
                 //This checks if the reaper is in her last reapsort form
                 //If she is then invoke the new event to check if the opponent is defeated
-                lastReapsort abilityActive = attackingPlayerController.GetComponentInChildren<lastReapsort>();
-                if (abilityActive.LastReapsortActive)
-                {
-                    attackingPlayerController.ActivateOneUse();
-                }
-            }
+            //    lastReapsort abilityActive = attackingPlayerController.GetComponentInChildren<lastReapsort>();
+            //    if (abilityActive.LastReapsortActive)
+            //    {
+            //        attackingPlayerController.ActivateOneUse();
+            //    }
+            //}
         }
 
         else

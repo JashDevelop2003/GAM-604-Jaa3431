@@ -20,7 +20,6 @@ public class playerController : MonoBehaviour
     [SerializeField] private GameObject currentPath;
 
     //These are the events to activate the passive and one use ability
-    public event EventHandler passiveEvent;
     public event EventHandler oneUseEvent;
 
     //These are the events to activate the effects that occur
@@ -205,12 +204,6 @@ public class playerController : MonoBehaviour
         {
             Debug.LogError("There's a possible chance that the type is not suitable");
         }
-    }
-
-    //This is activated when the passive ability is triggered from the player's specifc character
-    public void ActivatePassive()
-    {
-        passiveEvent?.Invoke(this, EventArgs.Empty);
     }
 
     //This is activated when the player wants to use their one use ability from the player's specifc character.
