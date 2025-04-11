@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa44483c54aead46b4df830d7927cea, type: 3}
   m_Name: BlackJacked
   m_EditorClassIdentifier: 
-  characterCard: 0
+  characterCard: 2
   cardType: 0
-  cardRarity: 0
-  cardName: 
-  cardDescription: 
-  attackValue: 0
-  manaCost: 0
+  cardRarity: 3
+  cardName: Blackjacked!
+  cardDescription: Deals 21 Damage
+  attackValue: 21
+  manaCost: 3
   additionalEffect: {fileID: 0}

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa44483c54aead46b4df830d7927cea, type: 3}
   m_Name: SnakeBites
   m_EditorClassIdentifier: 
-  characterCard: 0
+  characterCard: 2
   cardType: 0
-  cardRarity: 0
-  cardName: 
-  cardDescription: 
-  attackValue: 0
-  manaCost: 0
+  cardRarity: 1
+  cardName: Snake Bites
+  cardDescription: Deals 2 Damage & Apply Poison for 4 turns
+  attackValue: 2
+  manaCost: 2
   additionalEffect: {fileID: 0}

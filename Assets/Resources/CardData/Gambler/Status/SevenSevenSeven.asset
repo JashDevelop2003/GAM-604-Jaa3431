@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714d0a73057e30c458877542f2868006, type: 3}
+  m_Name: SevenSevenSeven
+  m_EditorClassIdentifier: 
+  characterCard: 2
+  cardType: 3
+  cardRarity: 3
+  target: 0
+  effect: 
+  buff: 
+  cooldown: 0000000000000000
+  value: 0
+  cardName: 777
+  cardDescription: Gains 777 Cash. Apply Resistant & Impactful by 77% for 7 Turns
+    If Obtained "Miss Fortunate", "Godmother's Finale" & "Money Dice"
+  manaCost: 7
+  additionalEffect: {fileID: 0}
