@@ -65,7 +65,7 @@ public class statusCard : MonoBehaviour
         StatusCard = newCard;
         target = newCard.target;
         manaCost = statCard.manaCost;
-        gameObject.name = statCard.name;
+        gameObject.name = statCard.cardName;
         target = newCard.target;
         effect = newCard.effect;
         buff = newCard.buff;

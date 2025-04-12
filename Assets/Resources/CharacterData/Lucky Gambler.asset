@@ -22,9 +22,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6ead47396b107af469c3bf510c83aef4, type: 2}
   - {fileID: 11400000, guid: 3acd9698f3b99a2448ba8f973e1788f6, type: 2}
   - {fileID: 11400000, guid: ab164468113c6d74190a9bd966b76087, type: 2}
-  - {fileID: 11400000, guid: baa044b23e48f9c4bbb797f9c1090e7b, type: 2}
   - {fileID: 11400000, guid: fac1d28936de0864e9b11ab80ec0bfd6, type: 2}
   - {fileID: 11400000, guid: 47c46ff21a91a0c4aa6bbeb8fd85c72f, type: 2}
+  - {fileID: 11400000, guid: 8a39c7bb0e59d4b4dae0f0521d506558, type: 2}
   startingDefenceCards:
   - {fileID: 11400000, guid: 3ad6be79d7d630944bc125818434aa73, type: 2}
   - {fileID: 11400000, guid: 9498b2ad99067424ba309e6318e81235, type: 2}
@@ -60,6 +60,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 47c46ff21a91a0c4aa6bbeb8fd85c72f, type: 2}
   - {fileID: 11400000, guid: d7ed19db82f041a47a5e4418dbce74fc, type: 2}
   - {fileID: 11400000, guid: f9d9c344f2067c34494f11ff79c79b53, type: 2}
+  - {fileID: 11400000, guid: baa044b23e48f9c4bbb797f9c1090e7b, type: 2}
   possibleDefenceCards: []
   possibleMovementCards:
   - {fileID: 11400000, guid: 725044606975ab94f8bf3a62eaecbf4d, type: 2}

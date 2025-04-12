@@ -49,7 +49,7 @@ public class movementCard : MonoBehaviour
         rollMinimumValue = MoveCard.minimumMoveValue;
         rollMaximumValue = MoveCard.maximumMoveValue;
         manaCost = moveCard.manaCost;
-        gameObject.name = moveCard.name;
+        gameObject.name = moveCard.cardName;
         if (newCard.additionalEffect != null)
         {
             Instantiate(newCard.additionalEffect, this.transform);

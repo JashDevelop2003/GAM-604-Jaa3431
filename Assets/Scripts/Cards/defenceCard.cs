@@ -41,7 +41,7 @@ public class defenceCard : MonoBehaviour
         DefendCard = newCard;
         defendValue = defendCard.defendValue;
         manaCost = defendCard.manaCost;
-        gameObject.name = defendCard.name;
+        gameObject.name = defendCard.cardName;
         if (newCard.additionalEffect != null)
         {
             Instantiate(newCard.additionalEffect, this.transform);
