@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Blocks 20 Damage & Gains 20 Cash
   defendValue: 20
   manaCost: 9
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 524879529017028835, guid: 95ee3f90f2288af4b9be4783f654f5e7, type: 3}

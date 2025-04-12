@@ -20,4 +20,4 @@ MonoBehaviour:
     one)
   defendValue: 0
   manaCost: 7
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 1574858051366745353, guid: 54edc76b8bef65b4fb512d4193b5a0a4, type: 3}

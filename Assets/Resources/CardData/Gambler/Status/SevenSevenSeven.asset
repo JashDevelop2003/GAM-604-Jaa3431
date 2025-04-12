@@ -24,4 +24,4 @@ MonoBehaviour:
   cardDescription: Gains 777 Cash. Apply Resistant & Impactful by 77% for 7 Turns
     If Obtained "Miss Fortunate", "Godmother's Finale" & "Money Dice"
   manaCost: 7
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 6645818907890856722, guid: ecb114b5b8420fb44986e4e15f1cb858, type: 3}

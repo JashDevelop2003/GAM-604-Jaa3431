@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Blocks 15 Damage. However, 50% Chance of Making Defend = 0
   defendValue: 15
   manaCost: 2
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 4078689753690058637, guid: 3ddf645fce287d148a944615be46c7fc, type: 3}

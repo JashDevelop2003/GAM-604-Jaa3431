@@ -23,4 +23,4 @@ MonoBehaviour:
   cardName: Green & WHealthy
   cardDescription: Heals 10% of Current Cash
   manaCost: 2
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 1245480153516915207, guid: 9e64a62a5a7b5b44fb64ee1abb6df377, type: 3}

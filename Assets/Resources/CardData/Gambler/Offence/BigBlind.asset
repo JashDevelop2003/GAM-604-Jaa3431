@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 10 Damage & Apply Blind to Opponent for 4 turns
   attackValue: 10
   manaCost: 4
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 5295447320707805252, guid: 340363855e246894994695183b71d301, type: 3}

@@ -23,4 +23,4 @@ MonoBehaviour:
   cardName: Money, Money, Money
   cardDescription: Gains Cash = Amount of Cards Obtain
   manaCost: 3
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 3815104000818283205, guid: 762b140b24774f34899d1fbaa43d3645, type: 3}

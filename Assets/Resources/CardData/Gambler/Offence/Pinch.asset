@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 1 Damage & Apply Exposed to Opponent for 3 turns
   attackValue: 1
   manaCost: 2
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 8138372996283743941, guid: 83f4e37446c34e741b748cbc9b3017c5, type: 3}

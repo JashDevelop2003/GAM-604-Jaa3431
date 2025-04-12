@@ -23,4 +23,4 @@ MonoBehaviour:
   cardName: Cost a Arm & a Leg
   cardDescription: Deals 10 Damage to Self & Gains 50 Cash
   manaCost: 2
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 6810314098823925982, guid: e9092fa173dfaa6429b5c9d179119729, type: 3}

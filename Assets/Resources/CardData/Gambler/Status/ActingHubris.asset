@@ -23,4 +23,4 @@ MonoBehaviour:
   cardName: Acting Hubris
   cardDescription: Doubles Cash. However Apply Exposed & Slow to Self for 3 Turns
   manaCost: 0
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 2532464467756230111, guid: f5034b202d641e54495282c49dec0771, type: 3}

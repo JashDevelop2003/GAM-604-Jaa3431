@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Gains Cash = Damage Recieved
   defendValue: 0
   manaCost: 0
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 4804982122835114691, guid: d9ad93c039b47214382301895dbc2179, type: 3}

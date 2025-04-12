@@ -23,4 +23,4 @@ MonoBehaviour:
   cardName: Bet on Red
   cardDescription: 50% Chance to Double Cash. However 50% Chance to Half Cash
   manaCost: 2
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 4017686016576209719, guid: d282fd5294a81c943b6ed2d20a30eb03, type: 3}

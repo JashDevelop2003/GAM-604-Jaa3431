@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Negates any Damage
   defendValue: 0
   manaCost: 7
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 6711965608026980181, guid: 5b39b084e900019469a93436c3ffe716, type: 3}

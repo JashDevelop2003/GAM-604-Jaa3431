@@ -23,4 +23,4 @@ MonoBehaviour:
   cardName: Bad Karma Somehow Pays Off
   cardDescription: Gain Cash = Amount of Omens Obtain x 10
   manaCost: 0
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 7933903175591720258, guid: 9717e9da945c7924eac76340ef83ef5f, type: 3}

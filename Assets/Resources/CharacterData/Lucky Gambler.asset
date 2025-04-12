@@ -22,20 +22,39 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6ead47396b107af469c3bf510c83aef4, type: 2}
   - {fileID: 11400000, guid: 3acd9698f3b99a2448ba8f973e1788f6, type: 2}
   - {fileID: 11400000, guid: ab164468113c6d74190a9bd966b76087, type: 2}
+  - {fileID: 11400000, guid: baa044b23e48f9c4bbb797f9c1090e7b, type: 2}
+  - {fileID: 11400000, guid: fac1d28936de0864e9b11ab80ec0bfd6, type: 2}
+  - {fileID: 11400000, guid: 47c46ff21a91a0c4aa6bbeb8fd85c72f, type: 2}
   startingDefenceCards:
   - {fileID: 11400000, guid: 3ad6be79d7d630944bc125818434aa73, type: 2}
   - {fileID: 11400000, guid: 9498b2ad99067424ba309e6318e81235, type: 2}
   - {fileID: 11400000, guid: 50df1451d3b7af54aa134be55ae031ea, type: 2}
   - {fileID: 11400000, guid: ca422b2ff046a1b4f9d56ec911327417, type: 2}
+  - {fileID: 11400000, guid: 9cf61d8ace5d3c544a0c1ab08858b559, type: 2}
+  - {fileID: 11400000, guid: fca989fb2c07dfd4d94ee5ae6f6869f3, type: 2}
+  - {fileID: 11400000, guid: 50ef033a877fc8f4481565e1e07a53db, type: 2}
   startingMovementCards:
   - {fileID: 11400000, guid: be7ca579cf1d6454a937366531556f05, type: 2}
   - {fileID: 11400000, guid: edf6252555852a342a7b86c9d766684f, type: 2}
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
+  - {fileID: 11400000, guid: 7a4948f55133c3040830b68d00fded35, type: 2}
+  - {fileID: 11400000, guid: edab06d7d69a51b459c043c722498466, type: 2}
+  - {fileID: 11400000, guid: 6ff2e03c21af6ce43a9440dcb6266ae6, type: 2}
+  - {fileID: 11400000, guid: fb8e4ba84d4421b41a19485b25f77c0b, type: 2}
+  - {fileID: 11400000, guid: 7ba2c876f561cbd4eb738ce844868c30, type: 2}
   startingStatusCards:
   - {fileID: 11400000, guid: d2fac6472099de24585b4291f3d6be13, type: 2}
   - {fileID: 11400000, guid: 205b668a148cdb24983728f44701be51, type: 2}
   - {fileID: 11400000, guid: 38faf6bf7c0b56a4f9bbf7db1a81be6c, type: 2}
-  startingItems: []
+  - {fileID: 11400000, guid: 107f85435dfd14b48907b4b69afef866, type: 2}
+  - {fileID: 11400000, guid: b5bcf09ef37c5fd49bd3fca443d3478d, type: 2}
+  - {fileID: 11400000, guid: f3da7df4c176f8a48a06baa7e5dc0fe6, type: 2}
+  - {fileID: 11400000, guid: 5f4f45aeee1d31b4d97a4a3e537d49c4, type: 2}
+  startingItems:
+  - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
+  - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
+  - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
+  - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
   possibleOffenceCards:
   - {fileID: 11400000, guid: 16fb9ef5e88cc9240bf168a89c34e757, type: 2}
   - {fileID: 11400000, guid: 47c46ff21a91a0c4aa6bbeb8fd85c72f, type: 2}

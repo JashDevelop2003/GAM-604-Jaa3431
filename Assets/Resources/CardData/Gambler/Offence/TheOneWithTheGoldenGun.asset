@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 10 Damage & Apply Bleeding for 5 turns
   attackValue: 10
   manaCost: 4
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 8303234257388592681, guid: 67111451a9feb4149b7fdd690b38d549, type: 3}

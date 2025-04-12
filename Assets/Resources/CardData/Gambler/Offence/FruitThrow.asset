@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 5 Damage & Heals Equal to Damage Dealt
   attackValue: 5
   manaCost: 3
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 579438313751342882, guid: ff0128eb009297244884708337984a85, type: 3}
