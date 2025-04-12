@@ -30,6 +30,7 @@ public class luckOfYourLife : MonoBehaviour
     {
         controller = GetComponentInParent<playerController>();
         buffs = GetComponentInParent<currentBuffs>();
+        itemDeck = transform.parent.GetComponentInChildren<itemDeckPool>();
         turnManager = Singleton<turnManager>.Instance;
         controller.oneUseEvent += LuckOfYourLife;
         possibleRelics = controller.GetData.possibleRelics;
