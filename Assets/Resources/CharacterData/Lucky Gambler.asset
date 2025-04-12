@@ -31,11 +31,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be7ca579cf1d6454a937366531556f05, type: 2}
   - {fileID: 11400000, guid: edf6252555852a342a7b86c9d766684f, type: 2}
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
-  startingStatusCards: []
+  startingStatusCards:
+  - {fileID: 11400000, guid: d2fac6472099de24585b4291f3d6be13, type: 2}
+  - {fileID: 11400000, guid: 205b668a148cdb24983728f44701be51, type: 2}
+  - {fileID: 11400000, guid: 38faf6bf7c0b56a4f9bbf7db1a81be6c, type: 2}
   startingItems: []
-  possibleOffenceCards: []
+  possibleOffenceCards:
+  - {fileID: 11400000, guid: 16fb9ef5e88cc9240bf168a89c34e757, type: 2}
+  - {fileID: 11400000, guid: 47c46ff21a91a0c4aa6bbeb8fd85c72f, type: 2}
+  - {fileID: 11400000, guid: d7ed19db82f041a47a5e4418dbce74fc, type: 2}
+  - {fileID: 11400000, guid: f9d9c344f2067c34494f11ff79c79b53, type: 2}
   possibleDefenceCards: []
-  possibleMovementCards: []
+  possibleMovementCards:
+  - {fileID: 11400000, guid: 725044606975ab94f8bf3a62eaecbf4d, type: 2}
+  - {fileID: 11400000, guid: 9a3614ac2c8ef0848a183de954e2e571, type: 2}
+  - {fileID: 11400000, guid: 31d2c9f65b8c97f4aa61fc6e25805b94, type: 2}
   possibleStatusCards: []
   possibleRelics:
   - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
@@ -67,7 +77,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 941400446c139c848946def31e60b81d, type: 2}
   - {fileID: 11400000, guid: dde48cbb9566b8d45aafcadcf9d28a09, type: 2}
   - {fileID: 11400000, guid: 0c9e2acf53b950142b8658a8111dcebb, type: 2}
-  characterObject: {fileID: 0}
+  characterObject: {fileID: 6102860727308924570, guid: b6c31829391600748a90fe70b636616e, type: 3}
   oneUseDescription: Luck of Your Life - Anything Goes, Who knows?
   abilityIcon:
   - {fileID: 21300000, guid: ba8cd0336f2b5e74f8e532fcc4504412, type: 3}
