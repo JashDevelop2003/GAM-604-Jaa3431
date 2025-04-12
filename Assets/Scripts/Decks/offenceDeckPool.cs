@@ -23,6 +23,10 @@ public class offenceDeckPool : MonoBehaviour
     //this list provides all the starting cards that the player should have
     //this is based upon the character data from the player controller (that has the model for the data)
     private List<offenceCardStats> startingOffenceCards;
+    public List<GameObject> OffenceCard
+    {
+        get { return emptyOffenceCards; }
+    }
 
     //this integer is used to pool a certain amount of empty cards
     private int amountToPool;

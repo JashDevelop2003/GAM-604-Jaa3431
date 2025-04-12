@@ -15,6 +15,10 @@ public class statusDeckPool : MonoBehaviour
 
     //The list is used to collect all of the pooled objects from this deck pool manager
     private List<GameObject> emptyStatusCards = new List<GameObject>();
+    public List<GameObject> StatusCard
+    {
+        get { return emptyStatusCards; }
+    }
 
     //this list provides all the starting cards that the player should have
     //this is based upon the character data from the player controller (that has the model for the data)

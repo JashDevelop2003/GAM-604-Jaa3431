@@ -60,6 +60,8 @@ public class goldSevenEffect : MonoBehaviour
             {
                 hasAllSevens = true;
             }
+
+            allItems = null;
         }
 
         if (hasAllSevens) 
