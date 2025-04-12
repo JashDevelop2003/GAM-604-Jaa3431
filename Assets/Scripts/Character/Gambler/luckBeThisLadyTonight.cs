@@ -18,9 +18,9 @@ public class luckBeThisLadyTonight : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        controller = GetComponentInChildren<playerController>();
-        view = GetComponentInChildren<playerView>();
-        state = GetComponentInChildren<startState>();
+        controller = GetComponentInParent<playerController>();
+        view = GetComponentInParent<playerView>();
+        state = GetComponentInParent<startState>();
         //This has to go in the item events because placing it inside the start events with the stat reset will always set the mana to 0
         state.startItemEvents += LuckInThisLadyTonight;
     }
@@ -31,5 +31,10 @@ public class luckBeThisLadyTonight : MonoBehaviour
         controller.GetModel.CurrentMana = randomMana;
         view.ManaUI();
         controller.ChangeCash(randomMana);
+    }
+
+    private void OnDisable()
+    {
+        state.startItemEvents -= LuckInThisLadyTonight;
     }
 }

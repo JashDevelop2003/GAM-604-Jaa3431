@@ -28,8 +28,8 @@ public class luckOfYourLife : MonoBehaviour
 
     void Awake()
     {
-        controller = GetComponentInChildren<playerController>();
-        buffs = GetComponentInChildren<currentBuffs>();
+        controller = GetComponentInParent<playerController>();
+        buffs = GetComponentInParent<currentBuffs>();
         turnManager = Singleton<turnManager>.Instance;
         controller.oneUseEvent += LuckOfYourLife;
         possibleRelics = controller.GetData.possibleRelics;
