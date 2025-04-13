@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: 2
   Health: 90
-  Mana: 1
+  Mana: 10
   startingCash: 150
   deckCapacity: 07000000070000000f0000000700000009000000
   startingOffenceCards:
@@ -22,26 +22,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6ead47396b107af469c3bf510c83aef4, type: 2}
   - {fileID: 11400000, guid: 3acd9698f3b99a2448ba8f973e1788f6, type: 2}
   - {fileID: 11400000, guid: ab164468113c6d74190a9bd966b76087, type: 2}
-  - {fileID: 11400000, guid: b49cbc5f03097404e8e9d20f1d4f4d4d, type: 2}
   startingDefenceCards:
   - {fileID: 11400000, guid: 3ad6be79d7d630944bc125818434aa73, type: 2}
   - {fileID: 11400000, guid: 9498b2ad99067424ba309e6318e81235, type: 2}
   - {fileID: 11400000, guid: 50df1451d3b7af54aa134be55ae031ea, type: 2}
   - {fileID: 11400000, guid: ca422b2ff046a1b4f9d56ec911327417, type: 2}
-  - {fileID: 11400000, guid: 9cf61d8ace5d3c544a0c1ab08858b559, type: 2}
-  - {fileID: 11400000, guid: fca989fb2c07dfd4d94ee5ae6f6869f3, type: 2}
-  - {fileID: 11400000, guid: 50ef033a877fc8f4481565e1e07a53db, type: 2}
   startingMovementCards:
   - {fileID: 11400000, guid: be7ca579cf1d6454a937366531556f05, type: 2}
   - {fileID: 11400000, guid: edf6252555852a342a7b86c9d766684f, type: 2}
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
   startingStatusCards:
   - {fileID: 11400000, guid: d2fac6472099de24585b4291f3d6be13, type: 2}
-  startingItems:
-  - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
-  - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
-  - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
-  - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
+  startingItems: []
   possibleOffenceCards:
   - {fileID: 11400000, guid: 16fb9ef5e88cc9240bf168a89c34e757, type: 2}
   - {fileID: 11400000, guid: 47c46ff21a91a0c4aa6bbeb8fd85c72f, type: 2}
@@ -54,7 +46,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 11bef9b5b420d944fb395d3c48af950b, type: 2}
   - {fileID: 11400000, guid: fac1d28936de0864e9b11ab80ec0bfd6, type: 2}
   - {fileID: 11400000, guid: d17cd71c6f544894ca7dc944d9e39a6b, type: 2}
-  possibleDefenceCards: []
+  - {fileID: 11400000, guid: b49cbc5f03097404e8e9d20f1d4f4d4d, type: 2}
+  possibleDefenceCards:
+  - {fileID: 11400000, guid: 50ef033a877fc8f4481565e1e07a53db, type: 2}
+  - {fileID: 11400000, guid: 638694ee897cf4a46bc5ddf8948f423c, type: 2}
+  - {fileID: 11400000, guid: fca989fb2c07dfd4d94ee5ae6f6869f3, type: 2}
+  - {fileID: 11400000, guid: 9cf61d8ace5d3c544a0c1ab08858b559, type: 2}
+  - {fileID: 11400000, guid: fe9f61530aa19cf4d82462446eddaddf, type: 2}
+  - {fileID: 11400000, guid: 3888623ab5b205847a087e119826f052, type: 2}
+  - {fileID: 11400000, guid: 983951ad570642843aee2868264ee81d, type: 2}
   possibleMovementCards:
   - {fileID: 11400000, guid: 725044606975ab94f8bf3a62eaecbf4d, type: 2}
   - {fileID: 11400000, guid: 9a3614ac2c8ef0848a183de954e2e571, type: 2}
@@ -71,6 +71,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 38faf6bf7c0b56a4f9bbf7db1a81be6c, type: 2}
   - {fileID: 11400000, guid: 205b668a148cdb24983728f44701be51, type: 2}
   - {fileID: 11400000, guid: d0992d1be79652244966b3f6c919e87c, type: 2}
+  - {fileID: 11400000, guid: d0ba7ad2ffb2a3443b71fa1b1b5a9a30, type: 2}
+  - {fileID: 11400000, guid: e2e0554c6a506fd45a1627ca89c60b01, type: 2}
+  - {fileID: 11400000, guid: b5bcf09ef37c5fd49bd3fca443d3478d, type: 2}
   possibleRelics:
   - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
   - {fileID: 11400000, guid: c18bea37bf726d344b46f4b03c26ccfb, type: 2}

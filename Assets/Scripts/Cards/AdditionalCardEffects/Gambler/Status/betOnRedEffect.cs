@@ -27,7 +27,6 @@ public class betOnRedEffect : MonoBehaviour
         int outcome = UnityEngine.Random.Range(0, 2);
 
         playerController controller = player.GetComponent<playerController>();
-        controller.ChangeCash(controller.GetModel.CurrentCash);
         if (outcome == 0)
         {
             controller.ChangeCash(controller.GetModel.CurrentCash);

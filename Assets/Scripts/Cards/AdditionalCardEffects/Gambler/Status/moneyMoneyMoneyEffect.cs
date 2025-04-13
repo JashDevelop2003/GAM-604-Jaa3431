@@ -35,7 +35,7 @@ public class moneyMoneyMoneyEffect : MonoBehaviour
 
         for (int i = 0; i < offenceDeck.OffenceCard.Count; i++)
         {
-            if (offenceDeck.OffenceCard[i].activeSelf)
+            if (offenceDeck.OffenceCard[i].activeInHierarchy)
             {
                 amountOfCards++;
             }
@@ -65,7 +65,7 @@ public class moneyMoneyMoneyEffect : MonoBehaviour
             }
         }
 
-        controller.ChangeHealth(amountOfCards);
+        controller.ChangeCash(amountOfCards);
     }
 
     void OnDisable()

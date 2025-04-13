@@ -16,8 +16,8 @@ MonoBehaviour:
   cardType: 1
   cardRarity: 1
   cardName: Snooze You Lose
-  cardDescription: Blocks 4 Damage. Applies Stun to Opponent for 1 turn if Defend
-    is greater than Attack)
+  cardDescription: Blocks 4 Damage. Applies Stun to Opponent for 1 turn If Taken
+    No Damage
   defendValue: 4
   manaCost: 3
   additionalEffect: {fileID: 2746233455527976440, guid: d0cade95a867f1044bb1fe3a9690643c, type: 3}

@@ -9,6 +9,10 @@ public class itemDeckPool : MonoBehaviour
 
     //The list is used to collect all of the pooled objects from this deck pool manager
     private List<GameObject> emptyItems = new List<GameObject>();
+    public List<GameObject> Items
+    {
+        get { return emptyItems; }
+    }
 
     //this list provides all the starting items that the player should have
     //this is based upon the character data from the player controller (that has the model for the data)

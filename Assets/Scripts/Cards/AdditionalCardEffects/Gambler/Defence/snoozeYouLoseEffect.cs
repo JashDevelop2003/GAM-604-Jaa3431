@@ -21,23 +21,26 @@ public class snoozeYouLoseEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        combatSystem.afterCombatEvent += SnoozeYouLose;
+        combatSystem.duringCombatEvent += SnoozeYouLose;
         combatSystem.combatComplete += RemoveEffect;
     }
 
     // Snooze You Lose Stuns the Attacker for 1 turn
     public void SnoozeYouLose(object sender, EventArgs e)
     {
-        opponent = combatSystem.AttackingPlayer;
-        currentEffects opponentEffects = opponent.GetComponent<currentEffects>();
-        opponentEffects.AddEffect(effectEnum.Stunned, 1);
-        combatSystem.DefenceValue.SetText("Attacker is Stunned for 1 turn (the next turn)");
+        if (combatSystem.DefendValue >= combatSystem.AttackValue) 
+        {
+            opponent = combatSystem.AttackingPlayer;
+            currentEffects opponentEffects = opponent.GetComponent<currentEffects>();
+            opponentEffects.AddEffect(effectEnum.Stunned, 1);
+            combatSystem.DefenceValue.SetText("Attacker is Stunned for 1 turn (the next turn)");
+        }
     }
 
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        combatSystem.afterCombatEvent -= SnoozeYouLose;
+        combatSystem.duringCombatEvent -= SnoozeYouLose;
         combatSystem.combatComplete -= RemoveEffect;
     }
 }

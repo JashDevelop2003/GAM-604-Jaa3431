@@ -2690,7 +2690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854ac4d527ec5bc4b9651916eae4b682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: 82a5a4f9001c2ae4c88a27b80d187815, type: 2}
+  Data: {fileID: 11400000, guid: 624c2f9d5091ec64b906997f8362575c, type: 2}
   currentPath: {fileID: 91498251}
 --- !u!23 &83180107
 MeshRenderer:
