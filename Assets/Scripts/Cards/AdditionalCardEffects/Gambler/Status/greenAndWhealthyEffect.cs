@@ -25,6 +25,7 @@ public class greenAndWhealthyEffect : MonoBehaviour
     public void GreenAndWhealthy(object sender, EventArgs e)
     {
         playerController controller = player.GetComponent<playerController>();
+        Debug.Log("Heals: " + (int)(controller.GetModel.CurrentCash * 0.1f));
         controller.ChangeHealth((int)(controller.GetModel.CurrentCash * 0.1f));
     }
 
