@@ -115,6 +115,7 @@ public class playerController : MonoBehaviour
         else if (playerModel.CurrentHealth + value > playerModel.MaxHealth)
         {
             playerModel.CurrentHealth = playerModel.MaxHealth;
+            Debug.Log(this.gameObject.name + " is Defeated");
         }
         //otherwise the value adds (or subtract if the value is negative) to the new current health
         else

@@ -70,7 +70,7 @@ public class lastReapsort : MonoBehaviour
             moveState.beginMoveEvent += Chase;
             inactiveState.endEvents += FailedReaping;
             combatSystem.beforeCombatEvent += Reap;
-            combatSystem.duringCombatEvent += DefeatedOpponent;
+            combatSystem.afterCombatEvent += DefeatedOpponent;
             controller.DisplayAbility(controller.GetData.abilityIcon[1], controller.GetData.abilityColour[1]);
             stateUI.EventText.SetText("Ability Used - Last Reapsort: Triple Thrust & Roll. You must defeat someone to stay in the game");
         }
@@ -100,21 +100,21 @@ public class lastReapsort : MonoBehaviour
         //If the opponent is defeated then set the form to false, heal 50% of Max Health & Gain 25% Max Health
         if (!opponentController.GetModel.IsAlive)
         {
-            Debug.Log("Reaper has Defeated Someone");
+            combatSystem.OffenceValue.SetText("Reaper has Defeated Someone");
             controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
             EndReaping();
         }
         //otherwise the player is still in last reapsort
         else
         {
-            Debug.Log("Still alive");
+            combatSystem.OffenceValue.SetText("Still alive");
         }
     }
 
     public void FailedReaping(object sender, EventArgs e) 
     {
+        controller.ChangeHealth(-999);
         controller.GetModel.IsAlive = false;
-        Debug.Log("Player cannot defeat opponent successfully");
         moveState.beginMoveEvent -= Chase;
         inactiveState.endEvents -= FailedReaping;
         combatSystem.beforeCombatEvent -= Reap;
@@ -139,6 +139,6 @@ public class lastReapsort : MonoBehaviour
         moveState.beginMoveEvent -= Chase;
         inactiveState.endEvents -= FailedReaping;
         combatSystem.beforeCombatEvent -= Reap;
-        combatSystem.duringCombatEvent -= DefeatedOpponent;
+        combatSystem.afterCombatEvent -= DefeatedOpponent;
     }
 }

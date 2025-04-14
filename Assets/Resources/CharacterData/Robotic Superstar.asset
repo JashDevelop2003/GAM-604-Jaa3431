@@ -67,11 +67,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 941400446c139c848946def31e60b81d, type: 2}
   - {fileID: 11400000, guid: dde48cbb9566b8d45aafcadcf9d28a09, type: 2}
   - {fileID: 11400000, guid: 0c9e2acf53b950142b8658a8111dcebb, type: 2}
-  characterObject: {fileID: 0}
+  characterObject: {fileID: 7080741822765582310, guid: 0875af0a2b5945f449fe8cf643684ae3, type: 3}
   oneUseDescription: Ruthless Retaliation - Becomes Prepared. When being attacked
     deal 50 Damage to Opponent. However failed to be attack results halfing Thrust
     & Guard.
   abilityIcon:
   - {fileID: 21300000, guid: 41c6f94d80f9e034a9c63dcf97d30f5c, type: 3}
+  - {fileID: 21300000, guid: dd5f969b183ff134cab371e3d2148d59, type: 3}
   abilityColour:
   - {r: 0.4356046, g: 0.12912063, b: 0.4415095, a: 1}
+  - {r: 1, g: 0.85346556, b: 0.020754695, a: 1}

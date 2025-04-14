@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// This state is about ending the player's turn
@@ -22,6 +23,7 @@ public class inactiveState : playerStateBase
 
     public event EventHandler endEvents;
 
+
     //the enter state checks whether if the player ends their turn or their combat
     public override void EnterState(playerStateManager player)
     {
@@ -29,7 +31,6 @@ public class inactiveState : playerStateBase
 
         //this enables the player turn method to start the player turn once their turn is over
         player.startTurn += PlayerTurn;
-
 
         beginCombat = false;
 
