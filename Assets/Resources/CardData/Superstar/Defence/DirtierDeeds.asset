@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 20 Damage to Attacker & Halves Attack Value
   defendValue: 0
   manaCost: 5
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 4231656930913773254, guid: 8817e25726a864c4ba6a57a8057dab0c, type: 3}

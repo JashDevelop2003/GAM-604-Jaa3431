@@ -20,4 +20,4 @@ MonoBehaviour:
   minimumMoveValue: 6
   maximumMoveValue: 11
   manaCost: 3
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 1653636731812587965, guid: 24c595e0642abbb419ea49f8b1267e03, type: 3}

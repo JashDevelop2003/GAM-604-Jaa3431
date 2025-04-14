@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 6 Damage & Apply Shocked for 1 Turn
   attackValue: 6
   manaCost: 2
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 325925616909355294, guid: 463ec696d56a7ce46b77599a20b27ca2, type: 3}

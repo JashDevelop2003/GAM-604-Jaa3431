@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Blocks 3 Damage, Apply Resistant by 5% for 2 Turns
   defendValue: 3
   manaCost: 3
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 2762590825804869758, guid: 1fb55fc45d22d0144a77423564d4144e, type: 3}

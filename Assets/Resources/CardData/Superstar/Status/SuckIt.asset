@@ -23,4 +23,4 @@ MonoBehaviour:
   cardName: Suck it!
   cardDescription: Increase Thrust by 30%, Apply Exposed for 2 Turns.
   manaCost: 0
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 5877812378604127923, guid: 3502270c8b7ca74418f838bd4e409e24, type: 3}

@@ -16,8 +16,8 @@ MonoBehaviour:
   cardType: 2
   cardRarity: 3
   cardName: Raging Trainwreck
-  cardDescription: Rolls 7-10 & Damage Dealt by 20%
+  cardDescription: Rolls 7-10 & Increase Thrust by 20%
   minimumMoveValue: 7
   maximumMoveValue: 10
   manaCost: 5
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 7878408542099487407, guid: 8c0da57acdc9cd242bbd95c4e6c17b0a, type: 3}

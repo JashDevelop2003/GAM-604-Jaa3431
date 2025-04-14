@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 15 Damage, If Defence is Higher then Deal 15 Damage to Self
   attackValue: 15
   manaCost: 3
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 7237886815708474966, guid: 54851e59d303f074f9101b94397935f6, type: 3}

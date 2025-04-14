@@ -20,4 +20,4 @@ MonoBehaviour:
     for 2 turns. Fails if Defender's Defence is Equal or More than 7
   attackValue: 12
   manaCost: 3
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 5838355326646960374, guid: 5fe6154d552c45840aa1b5b1ebb8b503, type: 3}

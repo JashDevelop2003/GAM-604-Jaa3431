@@ -23,4 +23,4 @@ MonoBehaviour:
   cardName: Losing the Plot
   cardDescription: Increase Thrust by 15%, Apply Confuse for 2 Turns
   manaCost: 2
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 3878212122900154866, guid: 4561b528b6f391047940547417d1cb4a, type: 3}

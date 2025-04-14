@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Blocks 10 Damage & Deals Damage to Opponent Equal to Damage
   defendValue: 10
   manaCost: 7
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 5113552818802585207, guid: f64c9c9cdf135244e857bc2bc7964a74, type: 3}

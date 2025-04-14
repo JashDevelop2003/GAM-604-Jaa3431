@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: 50% to Either Deal 10 Damage to Opponent or Deal 3 Damage to Self
   attackValue: 10
   manaCost: 1
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 600466557799200450, guid: f976ad4e714f74d45a4e833c0315f29d, type: 3}

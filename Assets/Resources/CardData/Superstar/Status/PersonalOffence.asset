@@ -23,4 +23,4 @@ MonoBehaviour:
   cardName: Personal Offence
   cardDescription: Increase Thrust by 5%, Apply Unstable for 1 Turn.
   manaCost: 0
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 2821244105857556442, guid: 1a88c14dd2fbde64dacee23f60943b78, type: 3}

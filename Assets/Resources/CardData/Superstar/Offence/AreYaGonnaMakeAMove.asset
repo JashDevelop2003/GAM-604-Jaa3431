@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Deals 8 Damage & Apply Slow to Self for 3 Turns
   attackValue: 8
   manaCost: 2
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 3844419598680402000, guid: c3cc14468a8acc4438988efcae53370f, type: 3}

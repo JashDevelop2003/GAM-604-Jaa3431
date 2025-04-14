@@ -24,4 +24,4 @@ MonoBehaviour:
   cardDescription: Apply Unstable, Shocked, Fear, Exposed to Any for 3 Turns & Increase
     Thrust by 10%
   manaCost: 5
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 8753079887054373561, guid: 317eea87d4eb37b4fbed17ca1aabb124, type: 3}

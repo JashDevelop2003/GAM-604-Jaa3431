@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Randomly Blocks 0-10 Damage
   defendValue: 0
   manaCost: 2
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 6348900769921644092, guid: c7b867144e906e74c93841d5d2e0a4ff, type: 3}

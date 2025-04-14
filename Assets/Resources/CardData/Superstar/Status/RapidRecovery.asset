@@ -23,4 +23,4 @@ MonoBehaviour:
   cardName: Rapid Recovery
   cardDescription: Heals 10 Health, Apply Hasty & Healthy for 2 Turns
   manaCost: 3
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 2125907336765069845, guid: acb25aec381863f4387e5351aa06eba9, type: 3}

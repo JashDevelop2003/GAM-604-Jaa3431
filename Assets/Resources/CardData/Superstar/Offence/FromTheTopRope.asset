@@ -19,4 +19,4 @@ MonoBehaviour:
   cardDescription: Deal 12 Damage to Opponent & 3 Damage to Self
   attackValue: 12
   manaCost: 2
-  additionalEffect: {fileID: 0}
+  additionalEffect: {fileID: 2147373257692845482, guid: d2441d95cf9bf374aa8d9bc5d030875a, type: 3}
