@@ -23,6 +23,7 @@ public class luckBeThisLadyTonight : MonoBehaviour
         state = GetComponentInParent<startState>();
         //This has to go in the item events because placing it inside the start events with the stat reset will always set the mana to 0
         state.startItemEvents += LuckInThisLadyTonight;
+        controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
     }
 
     public void LuckInThisLadyTonight(object sender, EventArgs e)

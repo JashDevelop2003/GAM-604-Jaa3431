@@ -18,10 +18,14 @@ public class StanceSwap : MonoBehaviour
     private playerController controller;
     private passiveAgression passiveAbility;
 
+    [Header("User Interface")]
+    private decidingState stateUI;
+
     //This gets the component the ability needs to be used
     void Awake()
     {
         controller = GetComponentInParent<playerController>();
+        stateUI = GetComponentInParent<decidingState>();
         passiveAbility = GetComponent<passiveAgression>();
         controller.oneUseEvent += SwapStance;
     }
@@ -33,6 +37,7 @@ public class StanceSwap : MonoBehaviour
         {
             passiveAbility.ChangeStance();
             passiveUsed = true;
+            stateUI.EventText.SetText("Ability Used - Stance Swap: You stance has now changed and is set the change timer back to 3");
         }
         else
         {

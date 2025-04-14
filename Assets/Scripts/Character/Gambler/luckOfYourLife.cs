@@ -25,10 +25,16 @@ public class luckOfYourLife : MonoBehaviour
     private itemStats selectedRelic;
     private itemDeckPool itemDeck;
 
+    [Header("User Interface")]
+    private decidingState stateUI;
+
+
+
 
     void Awake()
     {
         controller = GetComponentInParent<playerController>();
+        stateUI = GetComponentInParent<decidingState>();
         buffs = GetComponentInParent<currentBuffs>();
         itemDeck = transform.parent.GetComponentInChildren<itemDeckPool>();
         turnManager = Singleton<turnManager>.Instance;
@@ -75,7 +81,7 @@ public class luckOfYourLife : MonoBehaviour
     void JumpingJackpot()
     {
         controller.ChangeCash(300);
-        Debug.Log("Jumping Jackpot = Gain 300");
+        stateUI.EventText.SetText("Using Ability - Luck of Your Life: Jumping Jackpot = Gain 300");
     }
 
     void BuffBonanza()
@@ -84,7 +90,7 @@ public class luckOfYourLife : MonoBehaviour
         buffs.AddBuff(buffEnum.Hasty, 3, 0);
         buffs.AddBuff(buffEnum.Healthy, 3, 0);
         buffs.AddBuff(buffEnum.Invincible, 3, 0);
-        Debug.Log("Buff Bonanza = Apply Lucky, Healthy, Hasty & Invincible for 3 turns");
+        stateUI.EventText.SetText("Using Ability - Luck of Your Life: Buff Bonanza = Apply Lucky, Healthy, Hasty & Invincible for 3 turns");
     }
 
     void RandomRelic()
@@ -98,11 +104,11 @@ public class luckOfYourLife : MonoBehaviour
             itemBehaviour item = relic.AddComponent<itemBehaviour>();
             item.CreateItem(selectedRelic);
             controller.IncrementDeck(deckTypeEnum.Item);
-            Debug.Log("Random Relic = Obtain Random Relic: " + item.Item.itemName + " : " + item.Item.itemDescription);
+            stateUI.EventText.SetText("Using Ability - Luck of Your Life: Random Relic = Obtain Random Relic: " + item.Item.itemName + " : " + item.Item.itemDescription);
         }
         else
         {
-            Debug.Log("Random Relic = Obtain Random Relic");
+            stateUI.EventText.SetText("Using Ability - Luck of Your Life: Random Relic = Obtain Random Relic. You don't have room unfortunately ;-;");
         }
     }
 
@@ -118,20 +124,20 @@ public class luckOfYourLife : MonoBehaviour
                 opponentController.ChangeCash(-20);
             }
         }
-        Debug.Log("Suprised Steal = Steal 20 Cash from Each Opponent");
-    }
+        stateUI.EventText.SetText("Using Ability - Luck of Your Life: Suprised Steal = Steal 20 Cash from Each Opponent");
+    } 
 
     void HealthyWealthy()
     {
         controller.ChangeHealth(controller.GetModel.CurrentCash);
         controller.ChangeCash(controller.GetModel.CurrentHealth);
-        Debug.Log("Healthy Whealthy = Gain Health = Cash and then Gain Cash = Health");
+        stateUI.EventText.SetText("OUsing Ability - Luck of Your Life: Healthy Whealthy = Gain Health = Cash. Then Gain Cash = Health");
     }
 
     void CashoutCrashout()
     {
         controller.ChangeCash(-controller.GetModel.CurrentCash);
-        Debug.Log("Lose All your cash :(");
+        stateUI.EventText.SetText("Using Ability - Luck of Your Life: Crashout Cashout: Lose All your cash :(");
     }
 
     private void OnDisable()

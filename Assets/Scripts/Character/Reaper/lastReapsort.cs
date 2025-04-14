@@ -32,6 +32,9 @@ public class lastReapsort : MonoBehaviour
 
     private GameObject opponentObject;
 
+    [Header("User Interface")]
+    private decidingState stateUI;
+
     //When awake the class has to gather the controller component
     void Awake()
     {
@@ -39,6 +42,7 @@ public class lastReapsort : MonoBehaviour
         //This will be used for events
         moveState = GetComponentInParent<moveState>();
         inactiveState = GetComponentInParent<inactiveState>();
+        stateUI = GetComponentInParent<decidingState>();
 
         //The object is a prefab meaning that when instantiated won't have the combat system object
         //This means that the class requires to find the prefab of the combat system
@@ -68,6 +72,7 @@ public class lastReapsort : MonoBehaviour
             combatSystem.beforeCombatEvent += Reap;
             combatSystem.duringCombatEvent += DefeatedOpponent;
             controller.DisplayAbility(controller.GetData.abilityIcon[1], controller.GetData.abilityColour[1]);
+            stateUI.EventText.SetText("Ability Used - Last Reapsort: Triple Thrust & Roll. You must defeat someone to stay in the game");
         }
         else
         {

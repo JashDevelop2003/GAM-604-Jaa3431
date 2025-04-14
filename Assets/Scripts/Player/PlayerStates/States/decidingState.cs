@@ -62,6 +62,13 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     [SerializeField] private TMP_Text[] cardNameText = new TMP_Text[4];
     [SerializeField] private TMP_Text[] cardDescriptionText = new TMP_Text[4];
     [SerializeField] private TMP_Text eventText;
+    
+    ///The encapsulation is required for the lucky gambler, This can possibly expand to use to identify the outcome of the one use ability.
+    public TMP_Text EventText
+    {
+        get { return eventText; }
+        set { eventText.SetText(value.ToString()); }
+    }
 
     public override void EnterState(playerStateManager player)
     {
@@ -310,7 +317,6 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             {
                 controller.ActivateOneUse();
                 controller.GetModel.AbilityUsed = false;
-                eventText.SetText("Using One Use Ability");
             }
             //otherwise apply an error to inform that the player hasn't chosen a card yet
             else
