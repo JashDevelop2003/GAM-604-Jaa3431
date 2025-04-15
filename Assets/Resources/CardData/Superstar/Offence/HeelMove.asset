@@ -17,6 +17,6 @@ MonoBehaviour:
   cardRarity: 1
   cardName: Heel Move
   cardDescription: Deals 3 Damage & Apply Shocked & Confused to Opponent for 2 Turns
-  attackValue: 0
+  attackValue: 3
   manaCost: 0
   additionalEffect: {fileID: 5861704802214465621, guid: cbb18d383012f3649a59981795acb5a4, type: 3}

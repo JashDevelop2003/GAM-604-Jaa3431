@@ -27,7 +27,7 @@ public class notTheFaceEffect : MonoBehaviour
     //Not The Face! Applies Resistant by 5% for 2 turns
     public void NotTheFace(object sender, EventArgs e)
     {
-        player = combatSystem.AttackingPlayer;
+        player = combatSystem.DefendingPlayer;
         currentBuffs buffs = player.GetComponent<currentBuffs>();
         buffs.AddBuff(buffEnum.Resistant, 2, 0.05f);
     }

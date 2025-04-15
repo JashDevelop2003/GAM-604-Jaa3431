@@ -16,7 +16,8 @@ MonoBehaviour:
   cardType: 0
   cardRarity: 2
   cardName: Barbed-wire Bat
-  cardDescription: Deals 15 Damage, If Defence is Higher then Deal 15 Damage to Self
+  cardDescription: Deals 15 Damage, Deals 15 Damage to Self if Defence Value is Higher
+    or Equal to the Attack Value
   attackValue: 15
   manaCost: 3
   additionalEffect: {fileID: 7237886815708474966, guid: 54851e59d303f074f9101b94397935f6, type: 3}

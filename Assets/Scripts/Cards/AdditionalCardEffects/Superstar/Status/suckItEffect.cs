@@ -21,11 +21,11 @@ public class suckItEffect : MonoBehaviour
     }
 
 
-    // Suck It Increases Thrust by 20% this turn
+    // Suck It Increases Thrust by 30% this turn
     public void SuckIt(object sender, EventArgs e)
     {
         playerController controller = player.GetComponent<playerController>();
-        controller.ChangeThrust(controller.GetModel.ThrustMultiplier + 0.2f);
+        controller.ChangeThrust(controller.GetModel.ThrustMultiplier + 0.3f);
     }
 
     void OnDisable()

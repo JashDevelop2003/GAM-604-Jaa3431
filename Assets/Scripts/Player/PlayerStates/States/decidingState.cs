@@ -163,6 +163,23 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             }
         }
 
+        else if(player.PreviousState == player.TargetState && effects.Confused)
+        {
+            int randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
+            selectedCard = movementDeck.SelectedCards[randomInt];
+            moveCard = selectedCard.GetComponent<movementCard>();
+
+            while (moveCard.ManaCost > controller.GetModel.CurrentMana)
+            {
+                randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
+                selectedCard = movementDeck.SelectedCards[randomInt];
+                moveCard = selectedCard.GetComponent<movementCard>();
+            }
+
+            eventText.SetText("A Random Movement Card was chosen: " + moveCard.MoveCard.cardName + " Roll the Dice by pressing Space");
+            hasSelected = true;
+        }
+
         if (effects.Stunned) 
         {
             unableMove = true;

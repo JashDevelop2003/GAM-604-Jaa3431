@@ -12,6 +12,7 @@ public class ruthlessRetaliation : MonoBehaviour
 {
     private combatSystem combatSystem;
     private playerController playerController;
+    private playerStateManager stateManager;
     private currentEffects effects;
     private playerController opponentController;
     private startState state;
@@ -23,6 +24,7 @@ public class ruthlessRetaliation : MonoBehaviour
         combatSystem = combatSystem.instance;
         playerController = GetComponentInParent<playerController>();
         effects = GetComponentInParent<currentEffects>();
+        stateManager = GetComponentInParent<playerStateManager>();
         state = GetComponentInParent<startState>();
 
         playerController.oneUseEvent += RuthlessRetaliation;
@@ -39,12 +41,16 @@ public class ruthlessRetaliation : MonoBehaviour
 
     public void Prepared(object sender, EventArgs e)
     {
-        combatSystem.AttackValue = 0;
-        opponentController = combatSystem.AttackingPlayer.GetComponent<playerController>();
-        opponentController.ChangeHealth(-50);
-        combatSystem.beforeCombatEvent -= Prepared;
-        state.startItemEvents -= OverPrepared;
-        playerController.DisplayAbility(playerController.GetData.abilityIcon[0], playerController.GetData.abilityColour[0]);
+        if (stateManager.CurrentState == stateManager.DefendState)
+        {
+            combatSystem.AttackValue = 0;
+            opponentController = combatSystem.AttackingPlayer.GetComponent<playerController>();
+            opponentController.ChangeHealth(-50);
+            combatSystem.beforeCombatEvent -= Prepared;
+            state.startItemEvents -= OverPrepared;
+            combatSystem.EventText.SetText("Ruthless Retaliation! Deal 50 Damage to Attacker");
+            playerController.DisplayAbility(playerController.GetData.abilityIcon[0], playerController.GetData.abilityColour[0]);
+        }
     }
 
     public void OverPrepared(object sender, EventArgs e)

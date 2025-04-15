@@ -100,14 +100,14 @@ public class lastReapsort : MonoBehaviour
         //If the opponent is defeated then set the form to false, heal 50% of Max Health & Gain 25% Max Health
         if (!opponentController.GetModel.IsAlive)
         {
-            combatSystem.OffenceValue.SetText("Reaper has Defeated Someone");
+            combatSystem.EventText.SetText("Reaper has Defeated Someone");
             controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
             EndReaping();
         }
         //otherwise the player is still in last reapsort
         else
         {
-            combatSystem.OffenceValue.SetText("Still alive");
+            combatSystem.EventText.SetText("Still alive");
         }
     }
 

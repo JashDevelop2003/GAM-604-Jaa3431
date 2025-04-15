@@ -16,12 +16,12 @@ MonoBehaviour:
   cardType: 3
   cardRarity: 1
   target: 0
-  effect: 0200000008000000
+  effect: 0800000007000000
   buff: 0400000005000000
   cooldown: 0100000002000000
   value: 0.15
   cardName: Fix it in Worked Shoot
-  cardDescription: Apply Exposed & Confuse for 1 Turn & Decrease Roll by 20%. Also,
+  cardDescription: Apply Slowed & Confuse for 1 Turn & Decrease Roll by 20%. Also,
     Apply Resistant & Impactful by 15% for 2 Turns
   manaCost: 4
   additionalEffect: {fileID: 0}

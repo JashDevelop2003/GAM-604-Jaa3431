@@ -15,7 +15,7 @@ MonoBehaviour:
   characterCard: 3
   cardType: 3
   cardRarity: 1
-  target: 1
+  target: 3
   effect: 010000000600000009000000
   buff: 
   cooldown: 0100000000000000

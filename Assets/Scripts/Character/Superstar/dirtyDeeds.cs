@@ -11,12 +11,14 @@ public class dirtyDeeds : MonoBehaviour
 {
     private combatSystem combatSystem;
     private playerController playerController;
+    private playerStateManager stateManager;
     private playerController oppponentController;
 
     void Awake()
     {
         combatSystem = combatSystem.instance;
         playerController = GetComponentInParent<playerController>();
+        stateManager = GetComponentInParent<playerStateManager>();
         playerController.DisplayAbility(playerController.GetData.abilityIcon[0], playerController.GetData.abilityColour[0]);
 
         combatSystem.duringCombatEvent += DirtyDeeds;
@@ -25,11 +27,11 @@ public class dirtyDeeds : MonoBehaviour
 
     public void DirtyDeeds(object sender, EventArgs e)
     {
-        if((combatSystem.AttackValue - combatSystem.DefendValue) >= 20)
+        if(stateManager.CurrentState == stateManager.DefendState && (combatSystem.AttackValue - combatSystem.DefendValue) >= 20)
         {
             oppponentController = combatSystem.AttackingPlayer.GetComponent<playerController>();
             oppponentController.ChangeHealth(-(combatSystem.AttackValue - combatSystem.DefendValue));
-            Debug.Log("Dirty Deeds deals to opponent: " + (combatSystem.AttackValue - combatSystem.DefendValue));
+            combatSystem.EventText.SetText("Dirty Deeds deals to opponent: " + (combatSystem.AttackValue - combatSystem.DefendValue));
         }
     }
 

@@ -40,7 +40,7 @@ public class barbedWireBatEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        combatSystem.afterCombatEvent -= BarbedwireBat;
+        combatSystem.duringCombatEvent -= BarbedwireBat;
         combatSystem.combatComplete -= RemoveEffect;
     }
 }

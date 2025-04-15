@@ -59,6 +59,11 @@ public class combatSystem : MonoBehaviour
     }
 
     [SerializeField] private TMP_Text eventText;
+    public TMP_Text EventText
+    {
+        get { return eventText; }
+        set { eventText.SetText(value.ToString()); }
+    }
 
 
     //These are essential for additional effects and abilities

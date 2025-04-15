@@ -30,8 +30,8 @@ public class heelMoveEffect : MonoBehaviour
     {
         opponent = combatSystem.DefendingPlayer;
         currentEffects addEffects = opponent.GetComponent<currentEffects>();
-        addEffects.AddEffect(effectEnum.Blind, 2);
-        addEffects.AddEffect(effectEnum.Blind, 2);
+        addEffects.AddEffect(effectEnum.Confused, 2);
+        addEffects.AddEffect(effectEnum.Shocked, 2);
         combatSystem.OffenceValue.SetText("Apply Shocked & Confused to Defender for 2 turns");
     }
 
