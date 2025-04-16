@@ -58,6 +58,9 @@ public class moveState : playerStateBase
     //The effect manager applies the space effect that the player is currently on when movement becomes 0
     private spaceManager spaceManager;
 
+    //The music manager applies changing the music from board map music to battle music
+    private musicManager musicManager;
+
     //the target space is the next space after the currentSpace from the currentPath list
     private GameObject targetSpace;
 
@@ -103,6 +106,9 @@ public class moveState : playerStateBase
         //This is to call the space effects towards ending the turn with a space effect occurring
         spaceManager = spaceManager.instance;
 
+        //This is to call the music manager by using a singleton
+        musicManager = Singleton<musicManager>.Instance;
+
         //This is to check if the previous state was the roll state
         //If the previous state was the roll state then the movement becomes the roll value of the controller
         //otherwise the movement's integer stays as it is
@@ -123,6 +129,7 @@ public class moveState : playerStateBase
         opponentDetected = null;
 
         combatEngage += AttackCombat;
+        combatEngage += musicManager.BattleMusic;
 
         //The coroutine will start moving the player around the board
         movePlayer = StartCoroutine(Moving());
@@ -165,6 +172,7 @@ public class moveState : playerStateBase
     public override void ExitState(playerStateManager player) 
     {        
         combatEngage -= AttackCombat;
+        combatEngage -= musicManager.BattleMusic;
         StopCoroutine(movePlayer);
     }
 

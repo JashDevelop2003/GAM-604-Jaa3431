@@ -95,6 +95,7 @@ public class combatSystem : MonoBehaviour
         {
             instance = this;
         }
+
     }
 
     public void AttackerReady(GameObject attacker, int value)

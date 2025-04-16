@@ -4,7 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 /// <summary>
-/// This is a generic singleton which makes this the only manager running in the board mao
+/// This is using a generic singleton which makes this the only manager running in the board map
 /// This will organise the turn of the player and checks if the player is defeated
 /// If the player is defeated then it must ignore the player's turn and move to the next player
 /// </summary>
