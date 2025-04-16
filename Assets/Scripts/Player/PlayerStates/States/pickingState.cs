@@ -11,7 +11,7 @@ using UnityEngine.UI;
 /// TODO Next Stage: This also include Status Cards for the player to choose from and collect
 /// </summary>
 
-public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm, ICancel
+public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm
 {
     //the controls are used to select the cards or even ignore collecting
     private boardControls controls;
@@ -65,6 +65,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     [SerializeField] private GameObject[] checkingAvailability;
     [SerializeField] private int numberOfNoSlots;
 
+    [Header("User Interface")]
     //This is used to display picking one of the cards.
     [SerializeField] private GameObject pickingCardUI;
     [SerializeField] private Color setBlank;
@@ -77,11 +78,21 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         set { eventText.SetText(value.ToString()); }
     }
 
+    [Header("Sound Effects")]
+    private soundManager soundManager;
+    [SerializeField] private AudioClip[] typeSound = new AudioClip[4];
+    [SerializeField] private AudioClip[] raritySound = new AudioClip[2];
+    [SerializeField] private AudioClip confirmSound;
+    [SerializeField] private AudioClip declineSound;
+
     //This is used for the event
     public event EventHandler pickingItemEvents;
 
     public override void EnterState(playerStateManager player)
     {
+        //This is to provide audio when selecting and confirming card. Also provides audio on a lucky or very lucky chance
+        soundManager = Singleton<soundManager>.Instance;
+
         //the boolean is set to false and card type to null to ensure that the player doesn't instantly change state or confirm the choice immediately
         cardCollected = false;
         typeSelected = CardType.Null;
@@ -155,11 +166,13 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
             else if (rarityInt >= 3 && rarityInt <= 7)
             {
                 rarity = CardRarity.Rare;
+                soundManager.PlaySound(raritySound[0]);
                 eventText.SetText("Lucky Chance! Select a card type you want to obtain.");
             }
             else if (rarityInt >= 8)
             {
                 rarity = CardRarity.Legendary;
+                soundManager.PlaySound(raritySound[1]);
                 eventText.SetText("Very Lucky Chance!! Select a card type you want to obtain.");
             }
             else
@@ -177,11 +190,13 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
             else if (rarityInt >= 6 && rarityInt <= 9)
             {
                 rarity = CardRarity.Rare;
+                soundManager.PlaySound(raritySound[0]);
                 eventText.SetText("Lucky Chance! Select a card type you want to obtain.");
             }
             else if(rarityInt == 10)
             {
                 rarity = CardRarity.Legendary;
+                soundManager.PlaySound(raritySound[1]);
                 eventText.SetText("Very Lucky Chance!! Select a card type you want to obtain.");
             }
             else
@@ -219,6 +234,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[2] != null)
         {
             typeSelected = CardType.Movement;
+            soundManager.PlaySound(typeSound[(int)CardType.Movement]);
             eventText.SetText(typeSelected.ToString());
         }
         else
@@ -233,6 +249,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[3] != null)
         {
             typeSelected = CardType.Status;
+            soundManager.PlaySound(typeSound[(int)CardType.Status]);
             eventText.SetText(typeSelected.ToString());
         }
         else
@@ -248,6 +265,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[0] != null)
         {
             typeSelected = CardType.Offence;
+            soundManager.PlaySound(typeSound[(int)CardType.Offence]);
             eventText.SetText(typeSelected.ToString());
         }
         else
@@ -262,6 +280,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[1] != null)
         {
             typeSelected = CardType.Defence;
+            soundManager.PlaySound(typeSound[(int)CardType.Defence]);
             eventText.SetText(typeSelected.ToString());
         }
         else
@@ -278,6 +297,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (typeSelected == CardType.Null)
         {
             eventText.SetText("You haven't selected a card yet");
+            soundManager.PlaySound(declineSound);
         }
 
         //if the type selected is movement then the method needs to check for avaialble movement slots
@@ -303,13 +323,15 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 movement.CreateCard(selectedMovementCard);
                 controller.IncrementDeck(deckTypeEnum.Movement);
                 eventText.SetText(typeSelected.ToString() + " Card Obtained: " + movement.MoveCard.cardName);
+                soundManager.PlaySound(confirmSound);
                 StartCoroutine(CardObtained());
             }
 
             //else inform the player that there are no available slots to proivde
             else if (moveCard == null)
             {
-                Debug.LogWarning("No Available Cards, Select a Different Deck");
+                eventText.SetText("No Available Cards, Select a Different Deck");
+                soundManager.PlaySound(declineSound);
             }
 
         }
@@ -337,13 +359,15 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 offence.CreateCard(selectedOffenceCard);
                 controller.IncrementDeck(deckTypeEnum.Offence);
                 eventText.SetText(typeSelected.ToString() + " Card Obtained: " + offence.AttackCard.cardName);
+                soundManager.PlaySound(confirmSound);
                 StartCoroutine(CardObtained()); 
             }
 
             //else inform the player that there are no available slots to proivde
             else if (offenceCard == null)
             {
-                Debug.LogWarning("No Available Cards, Select a Different Deck");
+                eventText.SetText("No Available Cards, Select a Different Deck");
+                soundManager.PlaySound(declineSound);
             }
         }
 
@@ -370,13 +394,15 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 defence.CreateCard(selectedDefenceCard);
                 controller.IncrementDeck(deckTypeEnum.Defence);
                 eventText.SetText(typeSelected.ToString() + " Card Obtained: " + defence.DefendCard.cardName);
+                soundManager.PlaySound(confirmSound);
                 StartCoroutine(CardObtained());
             }
 
             //else inform the player that there are no available slots to proivde
             else if (defenceCard == null)
             {
-                Debug.LogWarning("No Available Cards, Select a Different Deck");
+                eventText.SetText("No Available Cards, Select a Different Deck");
+                soundManager.PlaySound(declineSound);
             }
         }
 
@@ -403,13 +429,15 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 status.CreateCard(selectedStatusCard);
                 controller.IncrementDeck(deckTypeEnum.Status);
                 eventText.SetText(typeSelected.ToString() + " Card Obtained: " + status.StatusCard.cardName);
+                soundManager.PlaySound(confirmSound);
                 StartCoroutine(CardObtained());
             }
 
             //else inform the player that there are no available slots to proivde
             else if (statusCard == null)
             {
-                Debug.LogWarning("No Available Cards, Select a Different Deck");
+                eventText.SetText("No Available Cards, Select a Different Deck");
+                soundManager.PlaySound(declineSound);
             }
         }
 
@@ -424,13 +452,6 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         Controls.confirmPressed -= ConfirmingChoice;
         yield return new WaitForSeconds(3);
         cardCollected = true;
-    }
-
-    //the cancel interface method allows the player to decline obtaining a card
-    public void Cancel(object sender, EventArgs e)
-    {
-        eventText.SetText("You decided to Cancel your choices");
-        StartCoroutine(CardObtained());
     }
 
 }

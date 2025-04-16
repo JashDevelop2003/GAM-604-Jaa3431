@@ -9,13 +9,20 @@ public class firingBeamZ : eventSpace
     [SerializeField] private GameObject beam;
     private beamZ beamZ;
     private spaceManager spaceManager;
+    private soundManager soundManager;
     private turnManager turnManager;
+
+    [Header("User Interface")]
     [SerializeField] private TMP_Text eventText;
+
+    [Header("Sound Effect")]
+    [SerializeField] private AudioClip laserSound;
 
     void Start()
     {
         beamZ = beam.GetComponent<beamZ>();
         spaceManager = spaceManager.instance;
+        soundManager = Singleton<soundManager>.Instance;
         turnManager = Singleton<turnManager>.Instance;
     }
 
@@ -23,6 +30,7 @@ public class firingBeamZ : eventSpace
     {
         eventText.SetText("I'm firing my Laser at: " + beam.name + " Anyone there loses 20 Health");
         targetPlayers = beamZ.Players;
+        soundManager.PlaySound(laserSound);
         foreach (GameObject player in targetPlayers)
         { 
             playerController controller = player.GetComponent<playerController>();

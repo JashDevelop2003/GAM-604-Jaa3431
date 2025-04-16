@@ -6,6 +6,7 @@ using TMPro;
 public class blessOrHex : eventSpace
 {
     private turnManager turnManager;
+    private soundManager soundManager;
     private playerController controller;
 
     private List<itemStats> possibleRelics;
@@ -16,7 +17,11 @@ public class blessOrHex : eventSpace
 
     private int selectedInt;
 
+    [Header("User Interface")]
     [SerializeField] private TMP_Text eventText;
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip[] outcomeSounds = new AudioClip[2];
 
 
 
@@ -24,16 +29,17 @@ public class blessOrHex : eventSpace
     void Start()
     {
         turnManager = Singleton<turnManager>.Instance;
+        soundManager = Singleton<soundManager>.Instance;
     }
 
     public override void ActivateEvent()
     {
-        int Outcome = Random.Range(1, 3);
-        if (Outcome == 1)
+        int Outcome = Random.Range(0, 2);
+        if (Outcome == 0)
         {
             ObtainRelic();
         }
-        else if (Outcome == 2)
+        else if (Outcome == 1)
         {
             ObtainOmen();
         }
@@ -41,6 +47,7 @@ public class blessOrHex : eventSpace
         {
             Debug.LogError("Outcome was not sutiable towards it's value");
         }
+        soundManager.PlaySound(outcomeSounds[Outcome]);
         StartCoroutine(EndTurn());
     }
 

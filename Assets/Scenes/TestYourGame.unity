@@ -2467,6 +2467,16 @@ MonoBehaviour:
   - {fileID: 993156544}
   - {fileID: 1502790726}
   eventText: {fileID: 2116896888}
+  typeSound:
+  - {fileID: 8300000, guid: 3445a8b2782c4134985eb470cc656b10, type: 3}
+  - {fileID: 8300000, guid: 7da886a070ddeee4ba6bc0fd415e462c, type: 3}
+  - {fileID: 8300000, guid: c952c74dd0dfb5c44b632b0c5564c936, type: 3}
+  - {fileID: 8300000, guid: 8ce14858148c08a459f93602337335eb, type: 3}
+  raritySound:
+  - {fileID: 8300000, guid: 13b481262ca11bc4cbfa819b6dfe28cc, type: 3}
+  - {fileID: 8300000, guid: 7463e5e78bb6baa4b8caeec3645d5ae7, type: 3}
+  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
+  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
 --- !u!114 &83180095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11317,6 +11327,7 @@ MonoBehaviour:
   targetPlayers: []
   beam: {fileID: 407797159}
   eventText: {fileID: 2116896888}
+  laserSound: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
 --- !u!1 &373725447
 GameObject:
   m_ObjectHideFlags: 0
@@ -15058,6 +15069,7 @@ MonoBehaviour:
   targetPlayers: []
   beam: {fileID: 893313761}
   eventText: {fileID: 2116896888}
+  laserSound: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
 --- !u!1 &503637462
 GameObject:
   m_ObjectHideFlags: 0
@@ -19268,6 +19280,16 @@ MonoBehaviour:
   - {fileID: 1500249204}
   - {fileID: 680455888}
   eventText: {fileID: 2116896888}
+  typeSound:
+  - {fileID: 8300000, guid: 3445a8b2782c4134985eb470cc656b10, type: 3}
+  - {fileID: 8300000, guid: 7da886a070ddeee4ba6bc0fd415e462c, type: 3}
+  - {fileID: 8300000, guid: c952c74dd0dfb5c44b632b0c5564c936, type: 3}
+  - {fileID: 8300000, guid: 8ce14858148c08a459f93602337335eb, type: 3}
+  raritySound:
+  - {fileID: 8300000, guid: 13b481262ca11bc4cbfa819b6dfe28cc, type: 3}
+  - {fileID: 8300000, guid: 7463e5e78bb6baa4b8caeec3645d5ae7, type: 3}
+  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
+  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
 --- !u!114 &651103439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24816,6 +24838,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventText: {fileID: 2116896888}
+  outcomeSounds:
+  - {fileID: 8300000, guid: 7463e5e78bb6baa4b8caeec3645d5ae7, type: 3}
+  - {fileID: 8300000, guid: c6b596fd07a14a64b89285b6f079b167, type: 3}
 --- !u!1 &862160035
 GameObject:
   m_ObjectHideFlags: 0
@@ -38590,6 +38615,7 @@ MonoBehaviour:
   targetPlayers: []
   beam: {fileID: 893313761}
   eventText: {fileID: 2116896888}
+  laserSound: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
 --- !u!1 &1500249204
 GameObject:
   m_ObjectHideFlags: 0
@@ -52361,6 +52387,7 @@ MonoBehaviour:
   targetPlayers: []
   beam: {fileID: 407797159}
   eventText: {fileID: 2116896888}
+  laserSound: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
 --- !u!1001 &8697492481294704317
 PrefabInstance:
   m_ObjectHideFlags: 0
