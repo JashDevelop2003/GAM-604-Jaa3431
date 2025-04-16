@@ -26,6 +26,7 @@ public class musicManager : Singleton<musicManager>
 
     //This is for the battle music whenever combat is engaged
     [SerializeField] private AudioClip battleMusic;
+    private bool inCombat;
 
     //This is to apply the events
     private combatSystem combatSystem;
@@ -38,38 +39,53 @@ public class musicManager : Singleton<musicManager>
         musicPartInt = 0;
         combatSystem = combatSystem.instance;
         ChangeMusic(musicClips[musicPartInt].musicClip);
+        inCombat = false;
     }
 
     //This checks for the duration of the song which once the new waiting for seconds is complete will call the change music method to move to the next loop
     IEnumerator ChangeLoopPart(int duration)
     {
         yield return new WaitForSeconds(duration);
-        musicPartInt++;
-        if (musicPartInt > musicClips.Length) 
+        if(!inCombat)
         {
-            musicPartInt = 0;
+            musicPartInt++;
+            if (musicPartInt >= musicClips.Length)
+            {
+                musicPartInt = 0;
+            }
+            ChangeMusic(musicClips[musicPartInt].musicClip);
         }
-        ChangeMusic(musicClips[musicPartInt].musicClip);
+        else
+        {
+            Debug.LogWarning("Currently in combat");
+        }
     }
 
     public void ChangeMusic(AudioClip clip)
-    {
+    {       
         musicSource.PlayOneShot(clip);
         musicSource.loop = false;
         StartCoroutine(ChangeLoopPart(musicClips[musicPartInt].musicDuration));
+        Debug.Log("Playing: " + musicClips[musicPartInt].musicClip);
     }
 
     public void BattleMusic(object sender, EventArgs e)
     {
         StopCoroutine(ChangeLoopPart(0));
-        musicSource.PlayOneShot(battleMusic);
+        inCombat = true;
+        musicSource.Stop();
+        musicSource.clip = battleMusic;
+        musicSource.Play();
         musicSource.loop = true;
         combatSystem.combatComplete += BattleMusicComplete;
+        Debug.Log("Playing: " + battleMusic);
     }
 
     public void BattleMusicComplete(object sender, EventArgs e)
     {
+        musicSource.Stop();
         ChangeMusic(musicClips[musicPartInt].musicClip);
+        inCombat = false;
         combatSystem.combatComplete -= BattleMusicComplete;
     }
 
