@@ -61,14 +61,15 @@ public class musicManager : Singleton<musicManager>
         }
     }
 
+    //This changes part of the song to the next part of the loop music
     public void ChangeMusic(AudioClip clip)
     {       
         musicSource.PlayOneShot(clip);
         musicSource.loop = false;
         StartCoroutine(ChangeLoopPart(musicClips[musicPartInt].musicDuration));
-        Debug.Log("Playing: " + musicClips[musicPartInt].musicClip);
     }
 
+    //This stops the board map music and plays the battle music
     public void BattleMusic(object sender, EventArgs e)
     {
         StopCoroutine(ChangeLoopPart(0));
@@ -78,9 +79,9 @@ public class musicManager : Singleton<musicManager>
         musicSource.Play();
         musicSource.loop = true;
         combatSystem.combatComplete += BattleMusicComplete;
-        Debug.Log("Playing: " + battleMusic);
     }
 
+    //This stop the battle music and plays the board map based on where the music was left off.
     public void BattleMusicComplete(object sender, EventArgs e)
     {
         musicSource.Stop();

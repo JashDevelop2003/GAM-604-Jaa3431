@@ -18,6 +18,10 @@ public class spaceManager : MonoBehaviour
 
     [SerializeField] private TMP_Text eventText;
 
+    [Header("Sound Effects")]
+    private soundManager soundManager;
+    [SerializeField] private AudioClip[] spaceClips;
+
 
 
     //this is used to make this a singular instance of the component
@@ -29,6 +33,11 @@ public class spaceManager : MonoBehaviour
         }
 
         lucky = GetComponent<luckySpace>();
+    }
+
+    private void Start()
+    {
+        soundManager = Singleton<soundManager>.Instance;
     }
 
     //this method is only used when the player has ended their turn
@@ -57,6 +66,7 @@ public class spaceManager : MonoBehaviour
 
             controller.ChangeCash(3);
             eventText.SetText(player.name + " gain 3 cash");
+            soundManager.PlaySound(spaceClips[(int)spaceEnum.Blue]);
             StartCoroutine(ChangePlayerState(state.InactiveState, 2));
         }
 
@@ -72,6 +82,7 @@ public class spaceManager : MonoBehaviour
 
             controller.ChangeCash(-3);
             eventText.SetText(player.name + " lose 3 cash");
+            soundManager.PlaySound(spaceClips[(int)spaceEnum.Red]);
             StartCoroutine(ChangePlayerState(state.InactiveState, 2));
         }
 
@@ -79,6 +90,7 @@ public class spaceManager : MonoBehaviour
         else if (type == spaceEnum.Card)
         {
             eventText.SetText(player.name + " is obtaining a card of their preferred type");
+            soundManager.PlaySound(spaceClips[(int)spaceEnum.Card]);
             StartCoroutine(ChangePlayerState(state.PickingState, 3f));
         }
 
@@ -86,6 +98,7 @@ public class spaceManager : MonoBehaviour
         else if (type == spaceEnum.Item)
         {
             eventText.SetText(player.name + " can choose to obtain a relic or give someone a omen");
+            soundManager.PlaySound(spaceClips[(int)spaceEnum.Item]);
             StartCoroutine(ChangePlayerState(state.ItemState, 3));
         }
 
@@ -93,6 +106,7 @@ public class spaceManager : MonoBehaviour
         else if (type == spaceEnum.Lucky)
         {
             lucky.beginLucky(player, Random.Range(1, 11));
+            soundManager.PlaySound(spaceClips[(int)spaceEnum.Lucky]);
         }
 
         //if the type is event then currently it does nothing
@@ -100,6 +114,7 @@ public class spaceManager : MonoBehaviour
         {
             moveState findEvent = player.GetComponent<moveState>();
             events = findEvent.CurrentSpace.GetComponent<eventSpace>();
+            soundManager.PlaySound(spaceClips[(int)spaceEnum.Event]);
             events.ActivateEvent();
         }
 
@@ -107,12 +122,14 @@ public class spaceManager : MonoBehaviour
         else if (type == spaceEnum.Market)
         {
             eventText.SetText(player.name + " is entering the market to gain items and cards");
+            soundManager.PlaySound(spaceClips[(int)spaceEnum.Market]);
             StartCoroutine(ChangePlayerState(state.MarketState, 3));
         }
 
         else if (type == spaceEnum.FruitMachine) 
         {
             eventText.SetText(player.name + " is entering the Fruit Machine, they can confirm with spacebar to pay 20 cash to spin or cancel with backspace to ignore");
+            soundManager.PlaySound(spaceClips[(int)spaceEnum.FruitMachine]);
             StartCoroutine(ChangePlayerState(state.SpinState, 3));
         }
     }
