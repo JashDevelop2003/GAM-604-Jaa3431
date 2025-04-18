@@ -38,6 +38,7 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
 
     private GameObject checkingAvailability;
 
+    [Header("User Interface")]
     //This is used to display picking either an relic or omen.
     [SerializeField] private GameObject pickingItemUI;
     [SerializeField] private Color[] setColour = new Color [3];
@@ -45,8 +46,16 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
     [SerializeField] private TMP_Text[] itemText = new TMP_Text[2];
     [SerializeField] private TMP_Text eventText;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip[] itemSound = new AudioClip[2];
+    [SerializeField] private AudioClip confirmSound;
+    private soundManager soundManager;
+
     public override void EnterState(playerStateManager player)
     {
+        //This reference the sound manager as a singleton
+        soundManager = Singleton<soundManager>.Instance;
+
         //These are to prevent the process ending with the player not having a chance to select
         typeSelected = itemEnum.Null;
         itemDecided = false;
@@ -73,6 +82,8 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
         controls = GetComponent<boardControls>();
         Controls.leftPressed += DecidingLeft;
         Controls.rightPressed += DecidingRight;
+        Controls.leftPressed += ItemSound;
+        Controls.rightPressed += ItemSound;
         Controls.confirmPressed += ConfirmingChoice;
 
         //the relic pool is required to pool a relic if the player has chosen an item
@@ -84,6 +95,7 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
         if (checkingAvailability == null) 
         {
             typeSelected = itemEnum.Omen;
+            soundManager.PlaySound(itemSound[2]);
             StartCoroutine(WaitingforItem());
             eventText.SetText("You have to play omens since you don't have any space for a relic. Select a player (Except for yourself) to obtain a omen");
         }
@@ -136,6 +148,7 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
             itemBehaviour item = relic.AddComponent<itemBehaviour>();
             item.CreateItem(selectedRelic);
             controller.IncrementDeck(deckTypeEnum.Item);
+            soundManager.PlaySound(confirmSound);
             eventText.SetText(typeSelected.ToString() + " was selected. Player Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
             StartCoroutine(WaitingforItem());
         }
@@ -154,8 +167,17 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
     {
         Controls.leftPressed -= DecidingLeft;
         Controls.rightPressed -= DecidingRight;
+        Controls.leftPressed -= ItemSound;
+        Controls.rightPressed -= ItemSound;
         Controls.confirmPressed -= ConfirmingChoice;
         yield return new WaitForSeconds(4);
         itemDecided = true;
+    }
+
+    // Relic Sound = 0
+    // Omen Sound = 1
+    public void ItemSound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(itemSound[(int)typeSelected]);
     }
 }

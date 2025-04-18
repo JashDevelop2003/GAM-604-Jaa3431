@@ -79,11 +79,11 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     }
 
     [Header("Sound Effects")]
-    private soundManager soundManager;
     [SerializeField] private AudioClip[] typeSound = new AudioClip[4];
     [SerializeField] private AudioClip[] raritySound = new AudioClip[2];
     [SerializeField] private AudioClip confirmSound;
     [SerializeField] private AudioClip declineSound;
+    private soundManager soundManager;
 
     //This is used for the event
     public event EventHandler pickingItemEvents;

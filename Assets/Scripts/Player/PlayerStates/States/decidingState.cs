@@ -72,11 +72,11 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     }
 
     [Header("Sound Effects")]
-    private soundManager soundManager;
     [SerializeField] private AudioClip choiceSound;
     [SerializeField] private AudioClip abilitySound;
     [SerializeField] private AudioClip confirmSound;
     [SerializeField] private AudioClip declineSound;
+    private soundManager soundManager;
 
     public override void EnterState(playerStateManager player)
     {

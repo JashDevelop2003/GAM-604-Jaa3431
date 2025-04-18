@@ -52,10 +52,10 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
     [SerializeField] private TMP_Text eventText;
 
     [Header("Sound Effects")]
-    private soundManager soundManager;
     [SerializeField] private AudioClip pathSound;
     [SerializeField] private AudioClip confirmSound;
     [SerializeField] private AudioClip declineSound;
+    private soundManager soundManager;
 
     public override void EnterState(playerStateManager player)
     {

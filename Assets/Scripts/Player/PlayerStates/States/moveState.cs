@@ -81,10 +81,10 @@ public class moveState : playerStateBase
     public event EventHandler beginItemMoveEvent;
 
     [Header("Sound Effect")]
-    private soundManager soundManager;
     [SerializeField] private AudioClip moveSound;
     [SerializeField] private AudioClip combatSound;
-    
+    private soundManager soundManager;
+
     public override void EnterState(playerStateManager player)
     {
         //This checks if the previous state was the choosing state in which resets the current space integer

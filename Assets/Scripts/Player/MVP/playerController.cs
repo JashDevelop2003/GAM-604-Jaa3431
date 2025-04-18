@@ -32,7 +32,6 @@ public class playerController : MonoBehaviour
     public GameObject Path { get { return currentPath; } set { currentPath = value; } }
 
     [Header("Sound Effects")]
-    private soundManager soundManager;
     [SerializeField] private AudioClip damageSound;
     [SerializeField] private AudioClip healSound;
     [SerializeField] private AudioClip gainCashSound;
@@ -40,6 +39,7 @@ public class playerController : MonoBehaviour
     [SerializeField] private AudioClip increaseSound;
     [SerializeField] private AudioClip decreaseSound;
     [SerializeField] private AudioClip gameOverSound;
+    private soundManager soundManager;
 
     void Awake()
     {

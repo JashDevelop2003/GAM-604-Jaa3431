@@ -39,9 +39,9 @@ public class rollState : playerStateBase, IConfirm, ICancel
     public event EventHandler rollCancelEvent;
 
     [Header("Sound Effects")]
-    private soundManager soundManager;
     [SerializeField] private AudioClip rollSound;
     [SerializeField] private AudioClip cancelSound;
+    private soundManager soundManager;
 
 
     public override void EnterState(playerStateManager player)

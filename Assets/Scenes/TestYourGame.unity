@@ -2434,6 +2434,10 @@ MonoBehaviour:
   - {fileID: 1488030152}
   - {fileID: 1405427686}
   eventText: {fileID: 2116896888}
+  itemSound:
+  - {fileID: 0}
+  - {fileID: 0}
+  confirmSound: {fileID: 0}
 --- !u!114 &83180094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19268,6 +19272,10 @@ MonoBehaviour:
   - {fileID: 489746350}
   - {fileID: 1929839574}
   eventText: {fileID: 2116896888}
+  itemSound:
+  - {fileID: 0}
+  - {fileID: 0}
+  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
 --- !u!114 &651103438
 MonoBehaviour:
   m_ObjectHideFlags: 0

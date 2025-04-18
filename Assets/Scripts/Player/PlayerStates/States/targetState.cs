@@ -31,10 +31,10 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     [SerializeField] private TMP_Text eventText;
 
     [Header("Sound Effects")]
-    private soundManager soundManager;
     [SerializeField] private AudioClip playerSound;
     [SerializeField] private AudioClip confirmSound;
     [SerializeField] private AudioClip declineSound;
+    private soundManager soundManager;
 
 
     public override void EnterState(playerStateManager player)
