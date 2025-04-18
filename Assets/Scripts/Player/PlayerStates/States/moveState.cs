@@ -115,6 +115,9 @@ public class moveState : playerStateBase
         //This is to call the music manager by using a singleton
         musicManager = Singleton<musicManager>.Instance;
 
+        //This is to call the sound manager using a singleton
+        soundManager = Singleton<soundManager>.Instance;
+
         //This is to check if the previous state was the roll state
         //If the previous state was the roll state then the movement becomes the roll value of the controller
         //otherwise the movement's integer stays as it is
@@ -134,9 +137,10 @@ public class moveState : playerStateBase
 
         opponentDetected = null;
 
-        combatEngage += AttackCombat;
+        
         combatEngage += CombatSound;
         combatEngage += musicManager.BattleMusic;
+        combatEngage += AttackCombat;
 
         //The coroutine will start moving the player around the board
         movePlayer = StartCoroutine(Moving());
@@ -178,9 +182,9 @@ public class moveState : playerStateBase
     //when exiting this state, the method should stop the coroutine to prevent the player moving
     public override void ExitState(playerStateManager player) 
     {        
-        combatEngage -= AttackCombat;
         combatEngage -= musicManager.BattleMusic;
         combatEngage -= CombatSound;
+        combatEngage -= AttackCombat;
         StopCoroutine(movePlayer);
     }
 

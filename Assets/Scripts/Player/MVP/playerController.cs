@@ -31,6 +31,16 @@ public class playerController : MonoBehaviour
 
     public GameObject Path { get { return currentPath; } set { currentPath = value; } }
 
+    [Header("Sound Effects")]
+    private soundManager soundManager;
+    [SerializeField] private AudioClip damageSound;
+    [SerializeField] private AudioClip healSound;
+    [SerializeField] private AudioClip gainCashSound;
+    [SerializeField] private AudioClip loseCashSound;
+    [SerializeField] private AudioClip increaseSound;
+    [SerializeField] private AudioClip decreaseSound;
+    [SerializeField] private AudioClip gameOverSound;
+
     void Awake()
     {
         //this collects the path list for the player to start on
@@ -44,6 +54,11 @@ public class playerController : MonoBehaviour
         playerView = GetComponent<playerView>();
 
         Instantiate(GetData.characterObject, this.transform);
+    }
+
+    private void Start()
+    {
+        soundManager = Singleton<soundManager>.Instance;
     }
 
     //This is to reset the multipliers from the effects of their previous turn
@@ -64,12 +79,21 @@ public class playerController : MonoBehaviour
         if (playerModel.CurrentCash + value < 0)
         {
             playerModel.CurrentCash = 0;
+            soundManager.PlaySound(loseCashSound);
         }
 
         else
         {
-            playerModel.CurrentCash += value;
 
+            playerModel.CurrentCash += value;
+            if (value > 0) 
+            { 
+                soundManager.PlaySound(gainCashSound);
+            }
+            else if(value < 0)
+            {
+                soundManager.PlaySound(loseCashSound);
+            }
         }
 
         playerView.CashUI();
@@ -110,17 +134,27 @@ public class playerController : MonoBehaviour
         if (playerModel.CurrentHealth + value <= 0)
         {
             playerModel.IsAlive = false;
+            soundManager.PlaySound(gameOverSound);
+            Debug.Log(this.gameObject.name + " is Defeated");
         }
         //Else if the current health being added from the the value is greater than the max health, the current health will maximise to only the maximum health
         else if (playerModel.CurrentHealth + value > playerModel.MaxHealth)
         {
             playerModel.CurrentHealth = playerModel.MaxHealth;
-            Debug.Log(this.gameObject.name + " is Defeated");
+            soundManager.PlaySound(healSound);
         }
         //otherwise the value adds (or subtract if the value is negative) to the new current health
         else
         {
             playerModel.CurrentHealth += value;
+            if (value > 0) 
+            { 
+                soundManager.PlaySound(healSound);
+            }
+            else if(value < 0)
+            {
+                soundManager.PlaySound(damageSound);
+            }
         }
 
         playerView.HealthUI();
@@ -135,9 +169,18 @@ public class playerController : MonoBehaviour
         if (value < 0) 
         {
             GetModel.ThrustMultiplier = 0;
+            soundManager.PlaySound(decreaseSound);
         }
         else
         {
+            if (value < GetModel.ThrustMultiplier) 
+            {
+                soundManager.PlaySound(decreaseSound);
+            }
+            else if(value > GetModel.ThrustMultiplier)
+            {
+                soundManager.PlaySound(increaseSound);
+            }
             GetModel.ThrustMultiplier = value;
         }
         playerView.ThrustUI();
@@ -148,9 +191,18 @@ public class playerController : MonoBehaviour
         if (value < 0)
         {
             GetModel.GuardMultiplier = 0;
+            soundManager.PlaySound(decreaseSound);
         }
         else
         {
+            if (value < GetModel.GuardMultiplier)
+            {
+                soundManager.PlaySound(decreaseSound);
+            }
+            else if (value > GetModel.GuardMultiplier)
+            {
+                soundManager.PlaySound(increaseSound);
+            }
             GetModel.GuardMultiplier = value;
         }
         playerView.GuardUI();
@@ -161,9 +213,18 @@ public class playerController : MonoBehaviour
         if (value < 0)
         {
             GetModel.RollMultiplier = 0;
+            soundManager.PlaySound(decreaseSound);
         }
         else
         {
+            if (value < GetModel.RollMultiplier)
+            {
+                soundManager.PlaySound(decreaseSound);
+            }
+            else if (value > GetModel.RollMultiplier)
+            {
+                soundManager.PlaySound(increaseSound);
+            }
             GetModel.RollMultiplier = value;
         }
         playerView.RollUI();

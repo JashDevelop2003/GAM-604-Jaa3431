@@ -92,7 +92,6 @@ public class combatSystem : MonoBehaviour
     private soundManager soundManager;
     [SerializeField] private AudioClip attackSound;
     [SerializeField] private AudioClip defendSound;
-    [SerializeField] private AudioClip dealtSound;
     [SerializeField] private AudioClip blockSound;
 
 
@@ -170,7 +169,6 @@ public class combatSystem : MonoBehaviour
         {
             eventText.SetText("Defender Recieved " + (-defendValue - -attackValue).ToString() + " Damage");
             defendingPlayerController.ChangeHealth(defendValue - attackValue);
-            soundManager.PlaySound(dealtSound);
         }
 
         else

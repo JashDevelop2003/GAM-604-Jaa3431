@@ -2716,6 +2716,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: f5a71dd7a0988be4e84d69078a03991d, type: 2}
   currentPath: {fileID: 91498251}
+  damageSound: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
+  healSound: {fileID: 8300000, guid: 657578e4be6b64dbf9b09deada272e55, type: 3}
+  gainCashSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  loseCashSound: {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
+  increaseSound: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
+  decreaseSound: {fileID: 8300000, guid: 80e397195ea2940b69ee7bdbded856a5, type: 3}
+  gameOverSound: {fileID: 8300000, guid: 1d2f348735857f047b7a5defd60d930a, type: 3}
 --- !u!23 &83180107
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19543,6 +19550,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: 624c2f9d5091ec64b906997f8362575c, type: 2}
   currentPath: {fileID: 1346927037}
+  damageSound: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
+  healSound: {fileID: 8300000, guid: 657578e4be6b64dbf9b09deada272e55, type: 3}
+  gainCashSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  loseCashSound: {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
+  increaseSound: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
+  decreaseSound: {fileID: 8300000, guid: 80e397195ea2940b69ee7bdbded856a5, type: 3}
+  gameOverSound: {fileID: 8300000, guid: 1d2f348735857f047b7a5defd60d930a, type: 3}
 --- !u!23 &651103451
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -51664,6 +51678,18 @@ PrefabInstance:
       propertyPath: eventText
       value: 
       objectReference: {fileID: 2116896888}
+    - target: {fileID: 49361836109843382, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
+      propertyPath: blockSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3c8e1b51a59b6da42b0823020f826bf1, type: 3}
+    - target: {fileID: 49361836109843382, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+    - target: {fileID: 49361836109843382, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
+      propertyPath: defendSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
     - target: {fileID: 49361836109843382, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
       propertyPath: defenceValue
       value: 

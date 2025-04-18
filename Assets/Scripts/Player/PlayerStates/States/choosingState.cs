@@ -82,6 +82,9 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
         controls = GetComponent<boardControls>();
         effects = GetComponent<currentEffects>();
 
+        //This is to reference the sound manager by using a singleton
+        soundManager = Singleton<soundManager>.Instance;
+
         //The multi path calls the method to check if any paths are restricted due to the current direction type
         pathSelection.PathSelections(currentDirection);
 
