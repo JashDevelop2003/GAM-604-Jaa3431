@@ -2343,6 +2343,9 @@ MonoBehaviour:
   - {fileID: 330812529}
   defendPanel: {fileID: 1302263038}
   defenceCardDescription: {fileID: 2056914919}
+  choiceSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
+  revealSound: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
 --- !u!114 &83180091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2369,6 +2372,9 @@ MonoBehaviour:
   - {fileID: 1276922098}
   attackPanel: {fileID: 1632874144}
   offenceCardDescription: {fileID: 493387908}
+  choiceSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
+  revealSound: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
 --- !u!114 &83180092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2406,6 +2412,9 @@ MonoBehaviour:
   - {fileID: 1405427686}
   - {fileID: 1234384000}
   eventText: {fileID: 2116896888}
+  playerSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  confirmSound: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &83180093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2435,9 +2444,9 @@ MonoBehaviour:
   - {fileID: 1405427686}
   eventText: {fileID: 2116896888}
   itemSound:
-  - {fileID: 0}
-  - {fileID: 0}
-  confirmSound: {fileID: 0}
+  - {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+  - {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+  confirmSound: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
 --- !u!114 &83180094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2480,7 +2489,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 13b481262ca11bc4cbfa819b6dfe28cc, type: 3}
   - {fileID: 8300000, guid: 7463e5e78bb6baa4b8caeec3645d5ae7, type: 3}
   confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
-  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &83180095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2508,9 +2517,9 @@ MonoBehaviour:
   - {fileID: 1234384000}
   - {fileID: 1488030152}
   eventText: {fileID: 2116896888}
-  pathSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
-  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
-  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+  pathSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  confirmSound: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &83180096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2526,7 +2535,7 @@ MonoBehaviour:
   opponentDetected: {fileID: 0}
   eventText: {fileID: 2116896888}
   moveSound: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
-  combatSound: {fileID: 8300000, guid: ed52cca5993ec244ca29364a986d31be, type: 3}
+  combatSound: {fileID: 8300000, guid: 21c4a490b24ba2045bc815f7626a40ef, type: 3}
 --- !u!114 &83180097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2540,7 +2549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rollSound: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
-  cancelSound: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
+  cancelSound: {fileID: 8300000, guid: 7cc057bed53baf34799f52aab3c84800, type: 3}
 --- !u!114 &83180098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2577,7 +2586,7 @@ MonoBehaviour:
   eventText: {fileID: 2116896888}
   playerSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
   confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
-  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &83180099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2608,10 +2617,10 @@ MonoBehaviour:
   - {fileID: 620282616}
   - {fileID: 164688529}
   eventText: {fileID: 2116896888}
-  choiceSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
+  choiceSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
   abilitySound: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
-  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
-  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+  confirmSound: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &83180100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2682,6 +2691,14 @@ MonoBehaviour:
   isLucky: 0
   isResistant: 0
   isImpactful: 0
+  buffSound: {fileID: 8300000, guid: 2c48707a2a7183449ae6190e9e1addb1, type: 3}
+  effectSounds:
+  - {fileID: 8300000, guid: 7a9de5c4d998126449cf964a6b27a8b0, type: 3}
+  - {fileID: 8300000, guid: 79e6baad2fd414b82a6d49ce1568d2e5, type: 3}
+  - {fileID: 8300000, guid: e9bc800cb24ffc845bcc77c49ab64d31, type: 3}
+  - {fileID: 8300000, guid: 657578e4be6b64dbf9b09deada272e55, type: 3}
+  - {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
+  - {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
 --- !u!114 &83180105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2706,6 +2723,20 @@ MonoBehaviour:
   isFeared: 0
   isConfused: 0
   isBlind: 0
+  debuffSound: {fileID: 8300000, guid: acbcb75601b0082458fda8807f67c813, type: 3}
+  effectSounds:
+  - {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
+  - {fileID: 8300000, guid: f1cb5d83282f2904a85f73111d068616, type: 3}
+  - {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}
+  - {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
+  - {fileID: 8300000, guid: 83829ff414f47a048b5387e4ab33571c, type: 3}
+  - {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
+  - {fileID: 8300000, guid: b7f8695cf65a4f24eb37544298821146, type: 3}
+  - {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+  - {fileID: 8300000, guid: a0010a1a0c474473b81729eb770c485f, type: 3}
+  - {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
+  - {fileID: 8300000, guid: aa967a280457c054bb646d57611f5bd0, type: 3}
+  - {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
 --- !u!114 &83180106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2720,12 +2751,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: f5a71dd7a0988be4e84d69078a03991d, type: 2}
   currentPath: {fileID: 91498251}
-  damageSound: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
-  healSound: {fileID: 8300000, guid: 657578e4be6b64dbf9b09deada272e55, type: 3}
+  damageSound: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
+  healSound: {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
   gainCashSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
-  loseCashSound: {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
-  increaseSound: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
-  decreaseSound: {fileID: 8300000, guid: 80e397195ea2940b69ee7bdbded856a5, type: 3}
+  loseCashSound: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}
+  thrustSound: {fileID: 8300000, guid: b0e62ed71b1538648b719821f4f63b4c, type: 3}
+  guardSound: {fileID: 8300000, guid: 00e4eb96f4f6cc249a632e4027644cad, type: 3}
+  rollSound: {fileID: 8300000, guid: 6cf9c85b5a3b88c468b21b9d21250adf, type: 3}
+  decreaseSound: {fileID: 8300000, guid: acbcb75601b0082458fda8807f67c813, type: 3}
   gameOverSound: {fileID: 8300000, guid: 1d2f348735857f047b7a5defd60d930a, type: 3}
 --- !u!23 &83180107
 MeshRenderer:
@@ -2931,6 +2964,9 @@ MonoBehaviour:
   - {fileID: 2074016335}
   - {fileID: 437642674}
   eventText: {fileID: 2116896888}
+  choiceSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
+  leaveSound: {fileID: 8300000, guid: 7cc057bed53baf34799f52aab3c84800, type: 3}
 --- !u!114 &83180112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3030,6 +3066,13 @@ MonoBehaviour:
   - {fileID: 599319214}
   - {fileID: 304617310}
   eventText: {fileID: 2116896888}
+  confirmSound: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
+  rejectSound: {fileID: 8300000, guid: 7cc057bed53baf34799f52aab3c84800, type: 3}
+  spinSound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  winSound: {fileID: 8300000, guid: 7463e5e78bb6baa4b8caeec3645d5ae7, type: 3}
+  loseSound: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
+  luckySound: {fileID: 8300000, guid: d18a72499ba58dd40a0e379085d24c94, type: 3}
+  unluckySound: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
 --- !u!1 &85229457
 GameObject:
   m_ObjectHideFlags: 0
@@ -19181,6 +19224,9 @@ MonoBehaviour:
   - {fileID: 1757965122}
   defendPanel: {fileID: 1302263038}
   defenceCardDescription: {fileID: 2056914919}
+  choiceSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
+  revealSound: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
 --- !u!114 &651103435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19207,6 +19253,9 @@ MonoBehaviour:
   - {fileID: 1936476366}
   attackPanel: {fileID: 1632874144}
   offenceCardDescription: {fileID: 493387908}
+  choiceSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
+  revealSound: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
 --- !u!114 &651103436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19244,6 +19293,9 @@ MonoBehaviour:
   - {fileID: 1929839574}
   - {fileID: 503637464}
   eventText: {fileID: 2116896888}
+  playerSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  confirmSound: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &651103437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19273,9 +19325,9 @@ MonoBehaviour:
   - {fileID: 1929839574}
   eventText: {fileID: 2116896888}
   itemSound:
-  - {fileID: 0}
-  - {fileID: 0}
-  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
+  - {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+  - {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+  confirmSound: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
 --- !u!114 &651103438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19318,7 +19370,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 13b481262ca11bc4cbfa819b6dfe28cc, type: 3}
   - {fileID: 8300000, guid: 7463e5e78bb6baa4b8caeec3645d5ae7, type: 3}
   confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
-  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &651103439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19346,9 +19398,9 @@ MonoBehaviour:
   - {fileID: 503637464}
   - {fileID: 489746350}
   eventText: {fileID: 2116896888}
-  pathSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
-  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
-  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+  pathSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  confirmSound: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &651103440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19364,7 +19416,7 @@ MonoBehaviour:
   opponentDetected: {fileID: 0}
   eventText: {fileID: 2116896888}
   moveSound: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
-  combatSound: {fileID: 8300000, guid: ed52cca5993ec244ca29364a986d31be, type: 3}
+  combatSound: {fileID: 8300000, guid: 21c4a490b24ba2045bc815f7626a40ef, type: 3}
 --- !u!114 &651103441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19378,7 +19430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rollSound: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
-  cancelSound: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
+  cancelSound: {fileID: 8300000, guid: 7cc057bed53baf34799f52aab3c84800, type: 3}
 --- !u!114 &651103442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19415,7 +19467,7 @@ MonoBehaviour:
   eventText: {fileID: 2116896888}
   playerSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
   confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
-  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &651103443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19446,10 +19498,10 @@ MonoBehaviour:
   - {fileID: 1334786865}
   - {fileID: 287157015}
   eventText: {fileID: 2116896888}
-  choiceSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
+  choiceSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
   abilitySound: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
-  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
-  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+  confirmSound: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &651103444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19520,6 +19572,14 @@ MonoBehaviour:
   isLucky: 0
   isResistant: 0
   isImpactful: 0
+  buffSound: {fileID: 8300000, guid: 2c48707a2a7183449ae6190e9e1addb1, type: 3}
+  effectSounds:
+  - {fileID: 8300000, guid: 7a9de5c4d998126449cf964a6b27a8b0, type: 3}
+  - {fileID: 8300000, guid: 79e6baad2fd414b82a6d49ce1568d2e5, type: 3}
+  - {fileID: 8300000, guid: e9bc800cb24ffc845bcc77c49ab64d31, type: 3}
+  - {fileID: 8300000, guid: 657578e4be6b64dbf9b09deada272e55, type: 3}
+  - {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
+  - {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
 --- !u!114 &651103449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19544,6 +19604,20 @@ MonoBehaviour:
   isFeared: 0
   isConfused: 0
   isBlind: 0
+  debuffSound: {fileID: 8300000, guid: acbcb75601b0082458fda8807f67c813, type: 3}
+  effectSounds:
+  - {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
+  - {fileID: 8300000, guid: f1cb5d83282f2904a85f73111d068616, type: 3}
+  - {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}
+  - {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
+  - {fileID: 8300000, guid: 83829ff414f47a048b5387e4ab33571c, type: 3}
+  - {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
+  - {fileID: 8300000, guid: b7f8695cf65a4f24eb37544298821146, type: 3}
+  - {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+  - {fileID: 8300000, guid: a0010a1a0c474473b81729eb770c485f, type: 3}
+  - {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
+  - {fileID: 8300000, guid: aa967a280457c054bb646d57611f5bd0, type: 3}
+  - {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
 --- !u!114 &651103450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19558,12 +19632,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: 624c2f9d5091ec64b906997f8362575c, type: 2}
   currentPath: {fileID: 1346927037}
-  damageSound: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
-  healSound: {fileID: 8300000, guid: 657578e4be6b64dbf9b09deada272e55, type: 3}
+  damageSound: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
+  healSound: {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
   gainCashSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
-  loseCashSound: {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
-  increaseSound: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
-  decreaseSound: {fileID: 8300000, guid: 80e397195ea2940b69ee7bdbded856a5, type: 3}
+  loseCashSound: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}
+  thrustSound: {fileID: 8300000, guid: b0e62ed71b1538648b719821f4f63b4c, type: 3}
+  guardSound: {fileID: 8300000, guid: 00e4eb96f4f6cc249a632e4027644cad, type: 3}
+  rollSound: {fileID: 8300000, guid: 6cf9c85b5a3b88c468b21b9d21250adf, type: 3}
+  decreaseSound: {fileID: 8300000, guid: acbcb75601b0082458fda8807f67c813, type: 3}
   gameOverSound: {fileID: 8300000, guid: 1d2f348735857f047b7a5defd60d930a, type: 3}
 --- !u!23 &651103451
 MeshRenderer:
@@ -19769,6 +19845,9 @@ MonoBehaviour:
   - {fileID: 13824998}
   - {fileID: 213132092}
   eventText: {fileID: 2116896888}
+  choiceSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  declineSound: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
+  leaveSound: {fileID: 8300000, guid: 7cc057bed53baf34799f52aab3c84800, type: 3}
 --- !u!114 &651103456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19868,6 +19947,13 @@ MonoBehaviour:
   - {fileID: 599319214}
   - {fileID: 304617310}
   eventText: {fileID: 2116896888}
+  confirmSound: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
+  rejectSound: {fileID: 8300000, guid: 7cc057bed53baf34799f52aab3c84800, type: 3}
+  spinSound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  winSound: {fileID: 8300000, guid: 7463e5e78bb6baa4b8caeec3645d5ae7, type: 3}
+  loseSound: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
+  luckySound: {fileID: 8300000, guid: d18a72499ba58dd40a0e379085d24c94, type: 3}
+  unluckySound: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
 --- !u!1 &654428971
 GameObject:
   m_ObjectHideFlags: 0
@@ -51689,7 +51775,7 @@ PrefabInstance:
     - target: {fileID: 49361836109843382, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
       propertyPath: blockSound
       value: 
-      objectReference: {fileID: 8300000, guid: 3c8e1b51a59b6da42b0823020f826bf1, type: 3}
+      objectReference: {fileID: 8300000, guid: b7b5a6156961bac44a67504d42ce6fcf, type: 3}
     - target: {fileID: 49361836109843382, guid: 8712044c879454b4f84e7e6085e2ae1c, type: 3}
       propertyPath: attackSound
       value: 

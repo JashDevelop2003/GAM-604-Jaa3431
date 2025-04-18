@@ -45,11 +45,18 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     private bool isRevealed;
 
     //This is to add UI to the cards and add description of the card.
+    [Header("User Interface")]
     [SerializeField] private GameObject attackingDisplay;
     [SerializeField] private TMP_Text[] manaCostText = new TMP_Text[4];
     [SerializeField] private TMP_Text[] cardNameText = new TMP_Text[4];
     [SerializeField] private GameObject attackPanel;
     [SerializeField] private TMP_Text offenceCardDescription;
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip choiceSound;
+    [SerializeField] private AudioClip declineSound;
+    [SerializeField] private AudioClip revealSound;
+    private soundManager soundManager;
 
     public override void EnterState(playerStateManager player)
     {
@@ -63,11 +70,16 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         controller = GetComponent<playerController>();
         controls = GetComponent<boardControls>();
         effects = GetComponent<currentEffects>();
+        soundManager = Singleton<soundManager>.Instance;
 
         Controls.upPressed += DecidingUp;
         Controls.downPressed += DecidingDown;
         Controls.leftPressed += DecidingLeft;
         Controls.rightPressed += DecidingRight;
+        Controls.upPressed += ChoosingSound;
+        Controls.downPressed += ChoosingSound;
+        Controls.leftPressed += ChoosingSound;
+        Controls.rightPressed += ChoosingSound;
         Controls.confirmPressed += ConfirmingChoice;
         Controls.revealOffencePressed += RevealOffence;
 
@@ -180,6 +192,7 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         if (selectedCard == null) 
         {
             offenceCardDescription.SetText("You haven't chosen a card yet");
+            soundManager.PlaySound(declineSound);
         }
         
         else if(controller.GetModel.CurrentMana >= attackCard.ManaCost && !attackConfirm)
@@ -193,6 +206,7 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         else
         {
             offenceCardDescription.SetText("You don't have enough Mana to use this attack card");
+            soundManager.PlaySound(declineSound);
         }
     }
 
@@ -203,6 +217,7 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             if (!isRevealed)
             {
                 offenceCardDescription.SetText(attackCard.AttackCard.cardDescription);
+                soundManager.PlaySound(revealSound);
                 isRevealed = true;
             }
             else
@@ -224,6 +239,10 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         Controls.downPressed -= DecidingDown;
         Controls.leftPressed -= DecidingLeft;
         Controls.rightPressed -= DecidingRight;
+        Controls.upPressed -= ChoosingSound;
+        Controls.downPressed -= ChoosingSound;
+        Controls.leftPressed -= ChoosingSound;
+        Controls.rightPressed -= ChoosingSound;
         Controls.confirmPressed -= ConfirmingChoice;
         Controls.revealOffencePressed -= RevealOffence;
     }
@@ -231,5 +250,10 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     public void AttackOver(object sender, EventArgs e)
     {
         combatFinished = true;
+    }
+
+    public void ChoosingSound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(choiceSound);
     }
 }

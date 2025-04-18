@@ -69,10 +69,16 @@ public class currentEffects : MonoBehaviour
         get { return isBlind; }
     }
 
+    [Header("Sound Effect")]
+    [SerializeField] private AudioClip debuffSound;
+    [SerializeField] private AudioClip[] effectSounds = new AudioClip[12];
+    private soundManager soundManager;
+
     private void Start()
     {
         controller = GetComponent<playerController>();
         buffs = GetComponent<currentBuffs>();
+        soundManager = Singleton<soundManager>.Instance;
 
     }
 
@@ -303,6 +309,7 @@ public class currentEffects : MonoBehaviour
                 Debug.LogError("This effect doesn't exist");
             }
 
+
         }
     }
 
@@ -317,6 +324,7 @@ public class currentEffects : MonoBehaviour
 
 
             burnCooldown--;
+            EffectSound((int)effectEnum.Burned);
             if (burnCooldown <= 0) 
             { 
                 isBurned = false;
@@ -335,7 +343,8 @@ public class currentEffects : MonoBehaviour
         {
             controller.ChangeRoll(controller.GetModel.RollMultiplier - 0.2f);
             slowCooldown--;
-            if(slowCooldown <= 0)
+            EffectSound((int)effectEnum.Slowed);
+            if (slowCooldown <= 0)
             {
                 isSlowed = false;
                 controller.effectStartEvent -= SlowPlayer;
@@ -359,7 +368,8 @@ public class currentEffects : MonoBehaviour
     public void ShockPlayer(object sender, EventArgs e)
     {
         shockCooldown--;
-        if(shockCooldown <= 0)
+        EffectSound((int)effectEnum.Shocked);
+        if (shockCooldown <= 0)
         {
             isShocked = false;
             controller.effectEndEvent -= ShockPlayer;
@@ -374,6 +384,7 @@ public class currentEffects : MonoBehaviour
         {
             controller.ChangeGuard(controller.GetModel.GuardMultiplier - 0.25f);
             exposeCooldown--;
+            EffectSound((int)effectEnum.Exposed);
             if (exposeCooldown <= 0)
             {
                 isExposed = false;
@@ -402,7 +413,8 @@ public class currentEffects : MonoBehaviour
         {
             controller.ChangeHealth(-bleedCooldown);
             bleedCooldown--;
-            if(bleedCooldown <= 0)
+            EffectSound((int)effectEnum.Bleeding);
+            if (bleedCooldown <= 0)
             {
                 isBleeding = false;
                 controller.effectEndEvent -= BleedPlayer;
@@ -422,6 +434,7 @@ public class currentEffects : MonoBehaviour
 
 
             poisonCooldown--;
+            EffectSound((int)effectEnum.Poison);
             if (poisonCooldown <= 0)
             {
                 isPoisoned = false;
@@ -441,7 +454,7 @@ public class currentEffects : MonoBehaviour
             controller.ChangeHealth(-movementCards.MovementCards.Count);
             Debug.Log("Blister Deals: " + movementCards.MovementCards.Count + " Damage");
 
-
+            EffectSound((int)effectEnum.Blistered);
             blisterCooldown--;
             if (blisterCooldown <= 0)
             {
@@ -462,7 +475,7 @@ public class currentEffects : MonoBehaviour
             controller.ChangeHealth(-statusCards.StatusCards.Count);
             Debug.Log("Unstable Deals: " + statusCards.StatusCards.Count + " Damage");
 
-
+            EffectSound((int)effectEnum.Unstabled);
             unstableCooldown--;
             if (unstableCooldown <= 0)
             {
@@ -479,6 +492,7 @@ public class currentEffects : MonoBehaviour
     public void StunPlayer(object sender, EventArgs e)
     {
         stunCooldown--;
+        EffectSound((int)effectEnum.Stunned);
         if (stunCooldown <= 0)
         {
             isStunned = false;
@@ -494,6 +508,7 @@ public class currentEffects : MonoBehaviour
         {
             controller.ChangeThrust(controller.GetModel.ThrustMultiplier - 0.25f);
             fearCooldown--;
+            EffectSound((int)effectEnum.Feared);
             if (fearCooldown <= 0)
             {
                 isFeared = false;
@@ -519,6 +534,7 @@ public class currentEffects : MonoBehaviour
     public void ConfusePlayer(object sender, EventArgs e)
     {
         confusedCooldown--;
+        EffectSound((int)effectEnum.Confused);
         if (confusedCooldown <= 0)
         {
             isConfused = false;
@@ -531,11 +547,17 @@ public class currentEffects : MonoBehaviour
     public void BlindPlayer(object sender, EventArgs e)
     {
         blindCooldown--;
+        EffectSound((int)effectEnum.Blind);
         if (blindCooldown <= 0)
         {
             isBlind = false;
             controller.effectEndEvent -= BlindPlayer;
             controller.DisplayEffect((int)effectEnum.Blind, false);
         }
+    }
+
+    public void EffectSound(int sound)
+    {
+        soundManager.PlaySound(effectSounds[sound]);
     }
 }

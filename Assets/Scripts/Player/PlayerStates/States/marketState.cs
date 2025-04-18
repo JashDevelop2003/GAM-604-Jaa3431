@@ -89,11 +89,18 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     [SerializeField] private TMP_Text[] itemPrice = new TMP_Text[4];
     [SerializeField] private TMP_Text eventText;
 
-    
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip choiceSound;
+    [SerializeField] private AudioClip declineSound;
+    [SerializeField] private AudioClip leaveSound;
+    private soundManager soundManager;
+
     public override void EnterState(playerStateManager player)
     {
         selectedStock.price = 0;
         selectedStock.retailObject = marketEnum.Null;
+
+        soundManager = Singleton<soundManager>.Instance;
 
         //this enables to deciding events towards selecting a type of card
         controls = GetComponent<boardControls>();
@@ -101,6 +108,10 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         Controls.downPressed += DecidingDown;
         Controls.leftPressed += DecidingLeft;
         Controls.rightPressed += DecidingRight;
+        Controls.upPressed += ChoosingSound;
+        Controls.downPressed += ChoosingSound;
+        Controls.leftPressed += ChoosingSound;
+        Controls.rightPressed += ChoosingSound;
         Controls.confirmPressed += ConfirmingChoice;
         Controls.cancelPressed += Cancel;
 
@@ -136,7 +147,6 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             outcomeType[i] = UnityEngine.Random.Range(0, 4);
             while (checkingAvailability[outcomeType[i]] == null)
             {
-                Debug.LogWarning("Resource type is too full, changing resource type");
                 outcomeResource[i] = UnityEngine.Random.Range(1, 11);
                 outcomeType[i] = UnityEngine.Random.Range(0, 4);
             }
@@ -303,6 +313,7 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     public void Cancel(object sender, EventArgs e)
     {
+        
         StartCoroutine(EndShopping());
     }
 
@@ -329,6 +340,7 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         else
         {
             eventText.SetText("There is no Available Slot for Items");
+            soundManager.PlaySound(declineSound);
         }
 
     }
@@ -365,6 +377,7 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             else
             {
                 eventText.SetText("There is no Available Slot for Offence Cards");
+                soundManager.PlaySound(declineSound);
             }
         }
 
@@ -397,6 +410,7 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             else
             {
                 eventText.SetText("There is no Available Slot for Defence Cards");
+                soundManager.PlaySound(declineSound);
             }
         }
 
@@ -429,6 +443,7 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             else
             {
                 eventText.SetText("There is no Available Slot for Movement Cards");
+                soundManager.PlaySound(declineSound);
             }
 
         }
@@ -461,6 +476,7 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             }
             else
             {
+                soundManager.PlaySound(declineSound);
                 eventText.SetText("There is no Available Slot for Status Cards");
             }
         }
@@ -474,9 +490,18 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         Controls.downPressed -= DecidingDown;
         Controls.leftPressed -= DecidingLeft;
         Controls.rightPressed -= DecidingRight;
+        Controls.upPressed -= ChoosingSound;
+        Controls.downPressed -= ChoosingSound;
+        Controls.leftPressed -= ChoosingSound;
+        Controls.rightPressed -= ChoosingSound;
         Controls.confirmPressed -= ConfirmingChoice;
         Controls.cancelPressed -= Cancel;
         yield return new WaitForSeconds(2);
         endShopping = true;
+    }
+
+    public void ChoosingSound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(choiceSound);
     }
 }

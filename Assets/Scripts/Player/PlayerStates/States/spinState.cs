@@ -43,6 +43,16 @@ public class spinState : playerStateBase, IConfirm, ICancel
     [SerializeField] private Image[] symbolIcon = new Image[3];
     [SerializeField] private TMP_Text eventText;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip confirmSound;
+    [SerializeField] private AudioClip rejectSound;
+    [SerializeField] private AudioClip spinSound;
+    [SerializeField] private AudioClip winSound;
+    [SerializeField] private AudioClip loseSound;
+    [SerializeField] private AudioClip luckySound;
+    [SerializeField] private AudioClip unluckySound;
+    private soundManager soundManager;
+
     public override void EnterState(playerStateManager player)
     {
         spinEnded = false;
@@ -51,6 +61,8 @@ public class spinState : playerStateBase, IConfirm, ICancel
         controls = GetComponent<boardControls>();
         Controls.confirmPressed += ConfirmingChoice;
         Controls.cancelPressed += Cancel;
+
+        soundManager = Singleton<soundManager>.Instance;
 
         //the controller is referenced to collect the character data of the possible card to obtain
         controller = GetComponent<playerController>();
@@ -159,12 +171,14 @@ public class spinState : playerStateBase, IConfirm, ICancel
         }
 
         controller.ChangeCash(-20);
+        soundManager.PlaySound(confirmSound);
         StartCoroutine(Spin());
     }
 
     public void Cancel(object sender, EventArgs e)
     {
         StartCoroutine(SpinEnded(2));
+        soundManager.PlaySound(rejectSound);
         eventText.SetText("You decided to not spin");
     }
 
@@ -178,17 +192,20 @@ public class spinState : playerStateBase, IConfirm, ICancel
             yield return new WaitForSeconds(i);
             dialSymbols[i].SetActive(true);
             symbolIcon[i].sprite = spinOutcome.symbol[i];
+            soundManager.PlaySound(spinSound);
         }
 
         yield return new WaitForSeconds(1);
         if(spinOutcome.outcome == outcomeEnum.Jumbled)
         {
             StartCoroutine(SpinEnded(2));
+            soundManager.PlaySound(loseSound);
             eventText.SetText("Unfortunate, You got Jumbled");
         }
         else
         {
             controller.ChangeCash(spinOutcome.cashPrize);
+            soundManager.PlaySound(winSound);
             StartCoroutine(BonusChance(spinOutcome.bonusChance));
             eventText.SetText("Congratulations, you got: " + spinOutcome.outcome.ToString() + " Gain: " + spinOutcome.cashPrize.ToString() + " Cash. Bonus Chance: " + spinOutcome.bonusChance.ToString() + "% Chance");
         }
@@ -201,11 +218,13 @@ public class spinState : playerStateBase, IConfirm, ICancel
         if(outcome <= chance)
         {
             ObtainItem();
+            soundManager.PlaySound(luckySound);
         }
         else
         {
             StartCoroutine(SpinEnded(2));
             eventText.SetText("Unlucky, No Bonus.");
+            soundManager.PlaySound(unluckySound);
         }
     }
 

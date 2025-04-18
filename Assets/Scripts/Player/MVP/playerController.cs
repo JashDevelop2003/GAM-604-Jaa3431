@@ -36,7 +36,9 @@ public class playerController : MonoBehaviour
     [SerializeField] private AudioClip healSound;
     [SerializeField] private AudioClip gainCashSound;
     [SerializeField] private AudioClip loseCashSound;
-    [SerializeField] private AudioClip increaseSound;
+    [SerializeField] private AudioClip thrustSound;
+    [SerializeField] private AudioClip guardSound;
+    [SerializeField] private AudioClip rollSound;
     [SerializeField] private AudioClip decreaseSound;
     [SerializeField] private AudioClip gameOverSound;
     private soundManager soundManager;
@@ -179,7 +181,7 @@ public class playerController : MonoBehaviour
             }
             else if(value > GetModel.ThrustMultiplier)
             {
-                soundManager.PlaySound(increaseSound);
+                soundManager.PlaySound(thrustSound);
             }
             GetModel.ThrustMultiplier = value;
         }
@@ -201,7 +203,7 @@ public class playerController : MonoBehaviour
             }
             else if (value > GetModel.GuardMultiplier)
             {
-                soundManager.PlaySound(increaseSound);
+                soundManager.PlaySound(guardSound);
             }
             GetModel.GuardMultiplier = value;
         }
@@ -223,7 +225,7 @@ public class playerController : MonoBehaviour
             }
             else if (value > GetModel.RollMultiplier)
             {
-                soundManager.PlaySound(increaseSound);
+                soundManager.PlaySound(rollSound);
             }
             GetModel.RollMultiplier = value;
         }

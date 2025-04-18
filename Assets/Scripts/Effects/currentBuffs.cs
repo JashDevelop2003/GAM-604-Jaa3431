@@ -51,10 +51,16 @@ public class currentBuffs : MonoBehaviour
         get { return isImpactful; }
     }
 
+    [Header("Sound Effect")]
+    [SerializeField] private AudioClip buffSound;
+    [SerializeField] private AudioClip[] effectSounds = new AudioClip[6];
+    private soundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<playerController>();
+        soundManager = Singleton<soundManager>.Instance;
     }
 
     //This method has similar procedure and implementation as the current effect's AddEffect
@@ -216,11 +222,13 @@ public class currentBuffs : MonoBehaviour
 
         }
 
+        soundManager.PlaySound(buffSound);
     }
 
     public void InvinciblePlayer(object sender, EventArgs e)
     {
         invincibleCooldown--;
+        EffectSound((int)buffEnum.Invincible);
         if (invincibleCooldown <= 0)
         {
             isInvincible = false;
@@ -232,6 +240,7 @@ public class currentBuffs : MonoBehaviour
     public void HealthyPlayer(object sender, EventArgs e)
     {
         healthyCooldown--;
+        EffectSound((int)buffEnum.Healthy);
         if (healthyCooldown <= 0)
         {
             isHealthy = false;
@@ -246,6 +255,7 @@ public class currentBuffs : MonoBehaviour
         {
             controller.ChangeRoll(controller.GetModel.RollMultiplier * 2);
             hastyCooldown--;
+            EffectSound((int)buffEnum.Hasty);
             if (hastyCooldown <= 0)
             {
                 isHasty = false;
@@ -258,6 +268,7 @@ public class currentBuffs : MonoBehaviour
     public void LuckyPlayer(object sender, EventArgs e)
     {
         luckyCooldown--;
+        EffectSound((int)buffEnum.Lucky);
         if (luckyCooldown <= 0)
         {
             isLucky = false;
@@ -272,6 +283,7 @@ public class currentBuffs : MonoBehaviour
         {
             controller.ChangeGuard(controller.GetModel.GuardMultiplier + resistantValue);
             resistantCooldown--;
+            EffectSound((int)buffEnum.Resistant);
             if (resistantCooldown <= 0)
             {
                 isResistant = false;
@@ -288,6 +300,7 @@ public class currentBuffs : MonoBehaviour
         {
             controller.ChangeThrust(controller.GetModel.ThrustMultiplier + impactfulValue);
             impactfulCooldown--;
+            EffectSound((int)buffEnum.Impactful);
             if (impactfulCooldown <= 0)
             {
                 isImpactful = false;
@@ -296,6 +309,11 @@ public class currentBuffs : MonoBehaviour
                 controller.DisplayBuff((int)buffEnum.Impactful, false);
             }
         }
+    }
+
+    public void EffectSound(int sound)
+    {
+        soundManager.PlaySound(effectSounds[sound]);
     }
 
 }

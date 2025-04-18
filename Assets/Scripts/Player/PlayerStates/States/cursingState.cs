@@ -33,11 +33,18 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     [SerializeField] private int unavailablePlayers;
 
     //This is used to display the choosing player UI
+    [Header("User Interface")]
     [SerializeField] private GameObject choosingPlayerUI;
     [SerializeField] private Color[] colourDisplay = new Color[2];
     [SerializeField] private Image[] sectionDisplay = new Image[4];
     [SerializeField] private TMP_Text[] playerText = new TMP_Text[4];
     [SerializeField] private TMP_Text eventText;
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip playerSound;
+    [SerializeField] private AudioClip confirmSound;
+    [SerializeField] private AudioClip declineSound;
+    private soundManager soundManager;
 
 
     public override void EnterState(playerStateManager player)
@@ -52,6 +59,12 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         Controls.leftPressed += DecidingLeft;
         Controls.rightPressed += DecidingRight;
         Controls.confirmPressed += ConfirmingChoice;
+
+        soundManager = Singleton<soundManager>.Instance;
+        Controls.upPressed += ChoosingSound;
+        Controls.downPressed += ChoosingSound;
+        Controls.leftPressed += ChoosingSound;
+        Controls.rightPressed += ChoosingSound;
 
         turnManager = Singleton<turnManager>.Instance;
         checkingAvailability = new GameObject[turnManager.GetPlayers.Length];
@@ -159,6 +172,7 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 itemBehaviour item = omen.AddComponent<itemBehaviour>();
                 item.CreateItem(selectedOmen);
                 controller.IncrementDeck(deckTypeEnum.Item);
+                soundManager.PlaySound(confirmSound);
                 eventText.SetText(selectedPlayer.name + " has been selected. Omen obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
                 StartCoroutine(CursingPlayer());
             }
@@ -166,12 +180,14 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
             else
             {
                 eventText.SetText("Target Failed due to Full Deck of Items");
+                soundManager.PlaySound(declineSound);
             }
         }
 
         else 
         {
             eventText.SetText("You haven't chosen a player yet");
+            soundManager.PlaySound(declineSound);
         }
     }
 
@@ -182,7 +198,16 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         Controls.leftPressed -= DecidingLeft;
         Controls.rightPressed -= DecidingRight;
         Controls.confirmPressed -= ConfirmingChoice;
+        Controls.upPressed -= ChoosingSound;
+        Controls.downPressed -= ChoosingSound;
+        Controls.leftPressed -= ChoosingSound;
+        Controls.rightPressed -= ChoosingSound;
         yield return new WaitForSeconds(4);
         playerSelected = true;
+    }
+
+    public void ChoosingSound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(playerSound);
     }
 }

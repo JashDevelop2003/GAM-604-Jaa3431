@@ -39,15 +39,22 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
 
     private bool isRevealed;
 
+    //This is to Add Item Events when Defending
+    public event EventHandler defendItemEvents;
+
     //This is to add UI to the cards and add description of the card.
+    [Header("User Interface")]
     [SerializeField] private GameObject defendingDisplay;
     [SerializeField] private TMP_Text[] manaCostText = new TMP_Text[4];
     [SerializeField] private TMP_Text[] cardNameText = new TMP_Text[4];
     [SerializeField] private GameObject defendPanel;
     [SerializeField] private TMP_Text defenceCardDescription;
 
-    //This is to Add Item Events when Defending
-    public event EventHandler defendItemEvents;
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip choiceSound;
+    [SerializeField] private AudioClip declineSound;
+    [SerializeField] private AudioClip revealSound;
+    private soundManager soundManager;
 
 
 
@@ -63,10 +70,16 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         controller = GetComponent<playerController>();
         effects = GetComponent<currentEffects>();
         controls = GetComponent<boardControls>();
+        soundManager = Singleton<soundManager>.Instance;
+
         Controls.defendUpPressed += DefendingUp;
         Controls.defendDownPressed += DefendingDown;
         Controls.defendLeftPressed += DefendingLeft;
         Controls.defendRightPressed += DefendingRight;
+        Controls.upPressed += ChoosingSound;
+        Controls.downPressed += ChoosingSound;
+        Controls.leftPressed += ChoosingSound;
+        Controls.rightPressed += ChoosingSound;
         Controls.defendConfirmPressed += ConfirmingDefend;
         Controls.revealDefencePressed += RevealDefence;
 
@@ -182,6 +195,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         if (selectedCard == null)
         {
             defenceCardDescription.SetText("You haven't chosen a card yet");
+            soundManager.PlaySound(declineSound);
         }
 
         else if (controller.GetModel.CurrentMana >= defendCard.ManaCost && !defendConfirm)
@@ -195,6 +209,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         else
         {
             defenceCardDescription.SetText("You don't have enough mana to use that defend card");
+            soundManager.PlaySound(declineSound);
         }
     }
 
@@ -205,6 +220,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
             if (!isRevealed)
             {
                 defenceCardDescription.SetText(defendCard.DefendCard.cardDescription);
+                soundManager.PlaySound(revealSound);
                 isRevealed = true;
             }
             else
@@ -227,6 +243,10 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         Controls.defendDownPressed -= DefendingDown;
         Controls.defendLeftPressed -= DefendingLeft;
         Controls.defendRightPressed -= DefendingRight;
+        Controls.upPressed -= ChoosingSound;
+        Controls.downPressed -= ChoosingSound;
+        Controls.leftPressed -= ChoosingSound;
+        Controls.rightPressed -= ChoosingSound;
         Controls.defendConfirmPressed -= ConfirmingDefend;
         Controls.revealDefencePressed -= RevealDefence;
     }
@@ -234,5 +254,10 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
     public void DefendOver(object sender, EventArgs e)
     {
         combatFinished = true;
+    }
+
+    public void ChoosingSound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(choiceSound);
     }
 }
