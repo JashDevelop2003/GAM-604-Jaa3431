@@ -56,19 +56,27 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     //This is to check if the player is confused
     private currentEffects effects;
 
+    [Header("User Interface")]
     //This is to add UI to the cards and add description of the card.
     [SerializeField] private GameObject decidingDisplay;
     [SerializeField] private TMP_Text[] manaCostText = new TMP_Text [4];
     [SerializeField] private TMP_Text[] cardNameText = new TMP_Text[4];
     [SerializeField] private TMP_Text[] cardDescriptionText = new TMP_Text[4];
     [SerializeField] private TMP_Text eventText;
-    
+
     ///The encapsulation is required for the lucky gambler, This can possibly expand to use to identify the outcome of the one use ability.
     public TMP_Text EventText
     {
         get { return eventText; }
         set { eventText.SetText(value.ToString()); }
     }
+
+    [Header("Sound Effects")]
+    private soundManager soundManager;
+    [SerializeField] private AudioClip choiceSound;
+    [SerializeField] private AudioClip abilitySound;
+    [SerializeField] private AudioClip confirmSound;
+    [SerializeField] private AudioClip declineSound;
 
     public override void EnterState(playerStateManager player)
     {
@@ -102,6 +110,14 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         controller = GetComponent<playerController>();
 
         effects = GetComponent<currentEffects>();
+
+        //This reference the singleton of the sound manager
+        soundManager = Singleton<soundManager>.Instance;
+        Controls.upPressed += ChoosingSound;
+        Controls.downPressed += ChoosingSound;
+        Controls.leftPressed += ChoosingSound;
+        Controls.rightPressed += ChoosingSound;
+        Controls.useAbilityPressed += ChoosingSound;
 
         //This display the UI for the player to choose a card
         decidingDisplay.SetActive(true);
@@ -241,6 +257,11 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         Controls.rightPressed -= DecidingRight;
         Controls.confirmPressed -= ConfirmingChoice;
         Controls.useAbilityPressed -= UsingAbility;
+        Controls.useAbilityPressed -= ChoosingSound;
+        Controls.upPressed -= ChoosingSound;
+        Controls.downPressed -= ChoosingSound;
+        Controls.leftPressed -= ChoosingSound;
+        Controls.rightPressed -= ChoosingSound;
     }
 
     //These are using the interfaces of deciding Up, Down, Left, Right & Confirm in order for the state
@@ -304,10 +325,12 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                 if (controller.GetModel.CurrentMana >= moveCard.ManaCost)
                 {
                     hasSelected = true;
+                    soundManager.PlaySound(confirmSound);
                     eventText.SetText("Movement Card Selected: " + moveCard.MoveCard.cardName + " Roll the Dice by pressing Space or Go Back by Pressing Cancel");
                 }
                 else
                 {
+                    soundManager.PlaySound(declineSound);
                     eventText.SetText("You don't have enough mana to use that move card");
                 }
             }
@@ -317,9 +340,11 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                 {
                     isTargeting = true;
                     statusDeck.SelectedCard = null;
+                    soundManager.PlaySound(confirmSound);
                 }
                 else
                 {
+                    soundManager.PlaySound(declineSound);
                     eventText.SetText("You don't have enough mana to use that status card");
                 }
             }
@@ -332,14 +357,15 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             //If the player is using an ability then invoke the one use ability from the controller
             if (controller.GetModel.AbilityUsed)
             {
+                soundManager.PlaySound(abilitySound);
                 controller.ActivateOneUse();
                 controller.GetModel.AbilityUsed = false;
             }
             //otherwise apply an error to inform that the player hasn't chosen a card yet
             else
             {
+                soundManager.PlaySound(declineSound);
                 eventText.SetText("You already used your one use ability");
-
             }
 
         }
@@ -347,6 +373,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         else
         {
             eventText.SetText("You chosen nothing... Choose One with WASD or Q for One Use Ability");
+            soundManager.PlaySound(declineSound);
         }
     }
 
@@ -359,5 +386,10 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         moveCard = null;
         statCard = null;
         usingAbility = true;
+    }
+
+    public void ChoosingSound(object sender, EventArgs e) 
+    {
+        soundManager.PlaySound(choiceSound);
     }
 }

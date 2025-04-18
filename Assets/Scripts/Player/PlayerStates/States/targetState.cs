@@ -22,12 +22,19 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     private bool playerSelected;
 
+    [Header("User Interface")]
     //This is used to display the choosing player UI
     [SerializeField] private GameObject choosingPlayerUI;
     [SerializeField] private Color[] colourDisplay = new Color [2];
     [SerializeField] private Image[] sectionDisplay = new Image[4];
     [SerializeField] private TMP_Text[] playerText = new TMP_Text[4];
     [SerializeField] private TMP_Text eventText;
+
+    [Header("Sound Effects")]
+    private soundManager soundManager;
+    [SerializeField] private AudioClip playerSound;
+    [SerializeField] private AudioClip confirmSound;
+    [SerializeField] private AudioClip declineSound;
 
 
     public override void EnterState(playerStateManager player)
@@ -42,6 +49,11 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
         statusCard = selectedCard.GetComponent<statusCard>();
         turnManager = Singleton<turnManager>.Instance;
+        soundManager = Singleton<soundManager>.Instance;
+        Controls.upPressed += ChoosingSound;
+        Controls.downPressed += ChoosingSound;
+        Controls.leftPressed += ChoosingSound;
+        Controls.rightPressed += ChoosingSound;
 
         if (statusCard.Target == targetEnum.Any)
         {
@@ -168,10 +180,12 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             statusCard.ActivateAdditionalEffect();
             statusCard.ActivateEffect(selectedPlayer);
             StartCoroutine(ActivateCard());
+            soundManager.PlaySound(confirmSound);
             eventText.SetText("Player has chosen " + selectedPlayer.name + " to be affected by: " + statusCard.StatusCard.cardName);
         }
         else
         {
+            soundManager.PlaySound(declineSound);
             eventText.SetText("You haven't chosen a player");
         }
     }
@@ -183,8 +197,17 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         Controls.leftPressed -= DecidingLeft;
         Controls.rightPressed -= DecidingRight;
         Controls.confirmPressed -= ConfirmingChoice;
+        Controls.upPressed -= ChoosingSound;
+        Controls.downPressed -= ChoosingSound;
+        Controls.leftPressed -= ChoosingSound;
+        Controls.rightPressed -= ChoosingSound;
         yield return new WaitForSeconds(2);
         playerSelected = true;
+    }
+
+    public void ChoosingSound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(playerSound);
     }
 
 }

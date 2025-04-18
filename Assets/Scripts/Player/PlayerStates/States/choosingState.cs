@@ -43,12 +43,19 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
     //the boolean is use to ensure that when true the current state changes
     private bool hasSelected;
 
+    [Header("User Interface")]
     //This is used to display the choosing player UI
     [SerializeField] private GameObject choosingPathUI;
     [SerializeField] private Color[] colourDisplay = new Color[2];
     [SerializeField] private Image[] sectionDisplay = new Image[4];
     [SerializeField] private TMP_Text[] pathText = new TMP_Text[4];
     [SerializeField] private TMP_Text eventText;
+
+    [Header("Sound Effects")]
+    private soundManager soundManager;
+    [SerializeField] private AudioClip pathSound;
+    [SerializeField] private AudioClip confirmSound;
+    [SerializeField] private AudioClip declineSound;
 
     public override void EnterState(playerStateManager player)
     {
@@ -116,6 +123,7 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
                     {
                         pathDirection[0] = pathList[i];
                         Controls.upPressed += DecidingUp;
+                        Controls.upPressed += ChoosingSound;
                         pathText[0].SetText("Up");
                         sectionDisplay[0].color = colourDisplay[1];
 
@@ -124,6 +132,7 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
                     {
                         pathDirection[2] = pathList[i];
                         Controls.downPressed += DecidingDown;
+                        Controls.downPressed += ChoosingSound;
                         pathText[2].SetText("Down");
                         sectionDisplay[2].color = colourDisplay[1];
                     }
@@ -131,6 +140,7 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
                     {
                         pathDirection[3] = pathList[i];
                         Controls.leftPressed += DecidingLeft;
+                        Controls.leftPressed += ChoosingSound;
                         pathText[3].SetText("Left");
                         sectionDisplay[3].color = colourDisplay[1];
                     }
@@ -138,6 +148,7 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
                     {
                         pathDirection[1] = pathList[i];
                         Controls.rightPressed += DecidingRight;
+                        Controls.rightPressed += ChoosingSound;
                         pathText[1].SetText("Right");
                         sectionDisplay[1].color = colourDisplay[1];
                     }
@@ -173,6 +184,10 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
         Controls.leftPressed -= DecidingLeft;
         Controls.rightPressed -= DecidingRight;
         Controls.confirmPressed -= ConfirmingChoice;
+        Controls.upPressed -= ChoosingSound;
+        Controls.downPressed -= ChoosingSound;
+        Controls.leftPressed -= ChoosingSound;
+        Controls.rightPressed -= ChoosingSound;
     }
 
     //This method collects the multi path object the player has landed and the current direction the player is heading
@@ -189,7 +204,6 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
     {
         selectedPathway = pathDirection[0];
         eventText.SetText("Up");
-
     }
 
     public void DecidingDown(object sender, EventArgs e)
@@ -217,13 +231,20 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
         if (selectedPathway != null)
         {
             controller.Path = selectedPathway;
+            soundManager.PlaySound(confirmSound);
             hasSelected = true;
         }
         //else this infroms the player to choose another path or hasn't chosen one
         else
         {
+            soundManager.PlaySound(declineSound);
             eventText.SetText("You either haven't chosen a path or chosen an empty path, select another path");
         }
+    }
+
+    public void ChoosingSound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(pathSound);
     }
 
 }

@@ -119,6 +119,11 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         Controls.rightPressed += DecidingRight;
         Controls.confirmPressed += ConfirmingChoice;
 
+        Controls.upPressed += ChoosingSound;
+        Controls.downPressed += ChoosingSound;
+        Controls.leftPressed += ChoosingSound;
+        Controls.rightPressed += ChoosingSound;
+
         //This checks if there is an avaialble slot for the player to create cards
         offenceDeckPool offenceDeck = GetComponentInChildren<offenceDeckPool>();
         checkingAvailability[0] = offenceDeck.GetAvailableOffence();
@@ -234,7 +239,6 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[2] != null)
         {
             typeSelected = CardType.Movement;
-            soundManager.PlaySound(typeSound[(int)CardType.Movement]);
             eventText.SetText(typeSelected.ToString());
         }
         else
@@ -249,7 +253,6 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[3] != null)
         {
             typeSelected = CardType.Status;
-            soundManager.PlaySound(typeSound[(int)CardType.Status]);
             eventText.SetText(typeSelected.ToString());
         }
         else
@@ -265,7 +268,6 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[0] != null)
         {
             typeSelected = CardType.Offence;
-            soundManager.PlaySound(typeSound[(int)CardType.Offence]);
             eventText.SetText(typeSelected.ToString());
         }
         else
@@ -280,7 +282,6 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         if (checkingAvailability[1] != null)
         {
             typeSelected = CardType.Defence;
-            soundManager.PlaySound(typeSound[(int)CardType.Defence]);
             eventText.SetText(typeSelected.ToString());
         }
         else
@@ -450,8 +451,20 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         Controls.leftPressed -= DecidingLeft;
         Controls.rightPressed -= DecidingRight;
         Controls.confirmPressed -= ConfirmingChoice;
+        Controls.upPressed -= ChoosingSound;
+        Controls.downPressed -= ChoosingSound;
+        Controls.leftPressed -= ChoosingSound;
+        Controls.rightPressed -= ChoosingSound;
         yield return new WaitForSeconds(3);
         cardCollected = true;
+    }
+
+    public void ChoosingSound(object sender, EventArgs e)
+    {
+        if (typeSelected != CardType.Null)
+        {
+            soundManager.PlaySound(typeSound[(int)typeSelected]);
+        }
     }
 
 }

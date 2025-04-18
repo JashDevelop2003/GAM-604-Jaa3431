@@ -2504,6 +2504,9 @@ MonoBehaviour:
   - {fileID: 1234384000}
   - {fileID: 1488030152}
   eventText: {fileID: 2116896888}
+  pathSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
+  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
+  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
 --- !u!114 &83180096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2518,6 +2521,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   opponentDetected: {fileID: 0}
   eventText: {fileID: 2116896888}
+  moveSound: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
+  combatSound: {fileID: 8300000, guid: ed52cca5993ec244ca29364a986d31be, type: 3}
 --- !u!114 &83180097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2530,6 +2535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4be3720d2945d94f986bcc028603ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rollSound: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  cancelSound: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
 --- !u!114 &83180098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2564,6 +2571,9 @@ MonoBehaviour:
   - {fileID: 1405427686}
   - {fileID: 1234384000}
   eventText: {fileID: 2116896888}
+  playerSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
+  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
+  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
 --- !u!114 &83180099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2594,6 +2604,10 @@ MonoBehaviour:
   - {fileID: 620282616}
   - {fileID: 164688529}
   eventText: {fileID: 2116896888}
+  choiceSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
+  abilitySound: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
+  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
+  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
 --- !u!114 &83180100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19317,6 +19331,9 @@ MonoBehaviour:
   - {fileID: 503637464}
   - {fileID: 489746350}
   eventText: {fileID: 2116896888}
+  pathSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
+  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
+  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
 --- !u!114 &651103440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19331,6 +19348,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   opponentDetected: {fileID: 0}
   eventText: {fileID: 2116896888}
+  moveSound: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
+  combatSound: {fileID: 8300000, guid: ed52cca5993ec244ca29364a986d31be, type: 3}
 --- !u!114 &651103441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19343,6 +19362,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4be3720d2945d94f986bcc028603ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rollSound: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  cancelSound: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
 --- !u!114 &651103442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19377,6 +19398,9 @@ MonoBehaviour:
   - {fileID: 1929839574}
   - {fileID: 503637464}
   eventText: {fileID: 2116896888}
+  playerSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
+  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
+  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
 --- !u!114 &651103443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19407,6 +19431,10 @@ MonoBehaviour:
   - {fileID: 1334786865}
   - {fileID: 287157015}
   eventText: {fileID: 2116896888}
+  choiceSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
+  abilitySound: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
+  confirmSound: {fileID: 8300000, guid: beb5b46fe33edf148a0daa802a386bd9, type: 3}
+  declineSound: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
 --- !u!114 &651103444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33576,7 +33604,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -35053,7 +35081,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0

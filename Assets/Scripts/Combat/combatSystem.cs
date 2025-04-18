@@ -28,7 +28,7 @@ public class combatSystem : MonoBehaviour
     private bool attackerReady;
 
     //The defender provides:
-    // - Tge player that is on the same space as the current player's turn
+    // - The player that is on the same space as the current player's turn
     // - Player's controller
     // - Defend Value of the Card they chosen
     // - The multiplier of the guard
@@ -44,6 +44,29 @@ public class combatSystem : MonoBehaviour
     public event EventHandler duringCombatEvent;
     public event EventHandler afterCombatEvent;
 
+    //These are essential for additional effects and abilities
+    public GameObject DefendingPlayer
+    {
+        get { return defendingPlayer; }
+    }
+
+    public GameObject AttackingPlayer
+    {
+        get { return attackingPlayer; }
+    }
+
+    public int AttackValue
+    {
+        get { return attackValue; }
+        set { attackValue = value; }
+    }
+    public int DefendValue
+    {
+        get { return defendValue; }
+        set { defendValue = value; }
+    }
+
+    [Header("User Interface")]
     //This is the UI texts that are require to identify the value and outcome of the combat
     [SerializeField] private TMP_Text offenceValue;
     public TMP_Text OffenceValue
@@ -65,28 +88,13 @@ public class combatSystem : MonoBehaviour
         set { eventText.SetText(value.ToString()); }
     }
 
+    [Header("Sound Effects")]
+    private soundManager soundManager;
+    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip defendSound;
+    [SerializeField] private AudioClip dealtSound;
+    [SerializeField] private AudioClip blockSound;
 
-    //These are essential for additional effects and abilities
-    public GameObject DefendingPlayer
-    {
-        get { return defendingPlayer; }
-    }
-
-    public GameObject AttackingPlayer
-    {
-        get { return attackingPlayer; }
-    }
-    
-    public int AttackValue
-    {
-        get { return attackValue; }
-        set { attackValue = value; }
-    }
-    public int DefendValue
-    {
-        get { return defendValue; }
-        set { defendValue = value; }
-    }
 
     //this is used to make this a singular instance of the component
     private void Awake()
@@ -96,6 +104,11 @@ public class combatSystem : MonoBehaviour
             instance = this;
         }
 
+    }
+
+    private void Start()
+    {
+        soundManager = Singleton<soundManager>.Instance;
     }
 
     public void AttackerReady(GameObject attacker, int value)
@@ -108,6 +121,7 @@ public class combatSystem : MonoBehaviour
         //This calculates the defend value in an integer on the value multiplied by the thrust
         attackValue = (int)(value * thrustMultiplier);
         attackerReady = true;
+        soundManager.PlaySound(attackSound);
         CombatReady();
 
     }
@@ -122,6 +136,7 @@ public class combatSystem : MonoBehaviour
         //This calculates the defend value in an integer on the value multiplied by the guard
         defendValue = (int)(value * guardMultiplier);
         defenderReady = true;
+        soundManager.PlaySound(defendSound);
         CombatReady();
     }
 
@@ -155,11 +170,13 @@ public class combatSystem : MonoBehaviour
         {
             eventText.SetText("Defender Recieved " + (-defendValue - -attackValue).ToString() + " Damage");
             defendingPlayerController.ChangeHealth(defendValue - attackValue);
+            soundManager.PlaySound(dealtSound);
         }
 
         else
         {
             eventText.SetText("Defender Didn't Recieved Any Damage");
+            soundManager.PlaySound(blockSound);
         }
 
         StartCoroutine(DuringCombat());

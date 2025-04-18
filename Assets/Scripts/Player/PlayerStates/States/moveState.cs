@@ -74,10 +74,16 @@ public class moveState : playerStateBase
 
     public event EventHandler endTurnEvent;
 
+    [Header("User Interface")]
     [SerializeField] private TMP_Text eventText;
 
     public event EventHandler beginMoveEvent;
     public event EventHandler beginItemMoveEvent;
+
+    [Header("Sound Effect")]
+    private soundManager soundManager;
+    [SerializeField] private AudioClip moveSound;
+    [SerializeField] private AudioClip combatSound;
     
     public override void EnterState(playerStateManager player)
     {
@@ -129,6 +135,7 @@ public class moveState : playerStateBase
         opponentDetected = null;
 
         combatEngage += AttackCombat;
+        combatEngage += CombatSound;
         combatEngage += musicManager.BattleMusic;
 
         //The coroutine will start moving the player around the board
@@ -173,6 +180,7 @@ public class moveState : playerStateBase
     {        
         combatEngage -= AttackCombat;
         combatEngage -= musicManager.BattleMusic;
+        combatEngage -= CombatSound;
         StopCoroutine(movePlayer);
     }
 
@@ -191,6 +199,7 @@ public class moveState : playerStateBase
 
         //The movement integer is decremented
         movement--;
+        soundManager.PlaySound(moveSound);
         eventText.SetText(movement.ToString());
 
         if (invincibleBattle)
@@ -280,5 +289,10 @@ public class moveState : playerStateBase
     public void AttackCombat(object sender, EventArgs e)
     {
         beginCombat = true;
+    }
+
+    public void CombatSound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(combatSound);
     }
 }

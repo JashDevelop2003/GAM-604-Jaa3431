@@ -38,6 +38,11 @@ public class rollState : playerStateBase, IConfirm, ICancel
     public event EventHandler rollEvent;
     public event EventHandler rollCancelEvent;
 
+    [Header("Sound Effects")]
+    private soundManager soundManager;
+    [SerializeField] private AudioClip rollSound;
+    [SerializeField] private AudioClip cancelSound;
+
 
     public override void EnterState(playerStateManager player)
     {
@@ -49,10 +54,13 @@ public class rollState : playerStateBase, IConfirm, ICancel
         controls = GetComponent<boardControls>();
         controller = GetComponent<playerController>();
         effects = GetComponent<currentEffects>();
+        soundManager = Singleton<soundManager>.Instance;
         Controls.confirmPressed += ConfirmingChoice;
+        Controls.confirmPressed += ConfirmSound;
         if (!effects.Confused)
         {
             Controls.cancelPressed += Cancel;
+            Controls.cancelPressed += DeclineSound;
 
         }
     }
@@ -77,7 +85,9 @@ public class rollState : playerStateBase, IConfirm, ICancel
     {
         //When exiting this state, the control events must disable any method being listened to
         Controls.confirmPressed -= ConfirmingChoice;
+        Controls.confirmPressed -= ConfirmSound;
         Controls.cancelPressed -= Cancel;
+        Controls.cancelPressed -= DeclineSound;
     }
 
     //This method gathers the data from the selected card from the deciding state in order to provide a min and max roll value
@@ -108,5 +118,15 @@ public class rollState : playerStateBase, IConfirm, ICancel
     {
         rollCancelEvent?.Invoke(this, EventArgs.Empty);
         rollCancel = true;       
+    }
+
+    public void ConfirmSound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(rollSound);
+    }
+
+    public void DeclineSound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(cancelSound);
     }
 }
