@@ -178,15 +178,7 @@ public class boardControls : MonoBehaviour
     {
         //This checks if there is anything to invoke
         //If there is then invoke the events
-        //Otherwise provide an error mentioning: There is nothing to invoke
-        if (input != null)
-        {
-            input.Invoke(this, e); 
-        }
-        else
-        {
-            Debug.LogError("There is Nothing to Invoke");
-        }
+        input?.Invoke(this, e);
     }
     
     //Disable ensures that all of the inputs are disabled if they're not necessary
