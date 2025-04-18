@@ -76,10 +76,10 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         Controls.defendDownPressed += DefendingDown;
         Controls.defendLeftPressed += DefendingLeft;
         Controls.defendRightPressed += DefendingRight;
-        Controls.upPressed += ChoosingSound;
-        Controls.downPressed += ChoosingSound;
-        Controls.leftPressed += ChoosingSound;
-        Controls.rightPressed += ChoosingSound;
+        Controls.defendUpPressed += ChoosingSound;
+        Controls.defendDownPressed += ChoosingSound;
+        Controls.defendLeftPressed += ChoosingSound;
+        Controls.defendRightPressed += ChoosingSound;
         Controls.defendConfirmPressed += ConfirmingDefend;
         Controls.revealDefencePressed += RevealDefence;
 
@@ -243,10 +243,10 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         Controls.defendDownPressed -= DefendingDown;
         Controls.defendLeftPressed -= DefendingLeft;
         Controls.defendRightPressed -= DefendingRight;
-        Controls.upPressed -= ChoosingSound;
-        Controls.downPressed -= ChoosingSound;
-        Controls.leftPressed -= ChoosingSound;
-        Controls.rightPressed -= ChoosingSound;
+        Controls.defendRightPressed -= ChoosingSound;
+        Controls.defendUpPressed -= ChoosingSound;
+        Controls.defendDownPressed -= ChoosingSound;
+        Controls.defendLeftPressed -= ChoosingSound;
         Controls.defendConfirmPressed -= ConfirmingDefend;
         Controls.revealDefencePressed -= RevealDefence;
     }

@@ -132,27 +132,59 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     // Down = Player Four
     public void DecidingUp(object sender, EventArgs e)
     {
-        selectedPlayer = selectPlayers[1];
-        eventText.SetText(selectedPlayer.name);
+        if (selectPlayers[1] != null)
+        {
+            selectedPlayer = selectPlayers[1];
+            eventText.SetText(selectedPlayer.name);
+        }
+        else
+        {
+            selectedPlayer = null;
+            eventText.SetText("N/A");
+        }
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
-        selectedPlayer = selectPlayers[3];
-        eventText.SetText(selectedPlayer.name);
+        if (selectPlayers[3] != null)
+        {
+            selectedPlayer = selectPlayers[3];
+            eventText.SetText(selectedPlayer.name);
+        }
+        else
+        {
+            selectedPlayer = null;
+            eventText.SetText("N/A");
+        }
     }
 
 
     public void DecidingLeft(object sender, EventArgs e)
     {
-        selectedPlayer = selectPlayers[0];
-        eventText.SetText(selectedPlayer.name);
+        if (selectPlayers[0] != null)
+        {
+            selectedPlayer = selectPlayers[0];
+            eventText.SetText(selectedPlayer.name);
+        }
+        else
+        {
+            selectedPlayer = null;
+            eventText.SetText("N/A");
+        }
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
-        selectedPlayer = selectPlayers[2];
-        eventText.SetText(selectedPlayer.name);
+        if (selectPlayers[2] != null)
+        {
+            selectedPlayer = selectPlayers[2];
+            eventText.SetText(selectedPlayer.name);
+        }
+        else
+        {
+            selectedPlayer = null;
+            eventText.SetText("N/A");
+        }
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
