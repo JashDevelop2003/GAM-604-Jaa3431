@@ -313,7 +313,7 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     public void Cancel(object sender, EventArgs e)
     {
-        
+        soundManager.PlaySound(leaveSound);
         StartCoroutine(EndShopping());
     }
 
