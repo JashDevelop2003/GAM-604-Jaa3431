@@ -26,15 +26,14 @@ public class moveState : playerStateBase
 
     //These booleans are use to change to a specific state
     //changeDirection is used to change the current state to choosing state
-    //whilst movementEnd is used to change the current state to inactive and ends the player's turn
     private bool changeDirection;
     private bool beginCombat;
-    private bool movementEnd;
 
     //The player controller is use to collect the roll value
     //There is a coroutine which when started will allow the player to move around the board until eaching a multi path choice or movement becomes 0
     private playerController controller;
     private Coroutine movePlayer;
+    private Coroutine lookPlayer;
 
     //The direction enum is use to provide the restriction of choosing a certain path
     private directionEnum currentDirection;
@@ -64,8 +63,9 @@ public class moveState : playerStateBase
     //the target space is the next space after the currentSpace from the currentPath list
     private GameObject targetSpace;
 
-    //A vector 3 is used to move the player around the board
+    //A vector 3 is used to move & look the player around the board
     private Vector3 spacePosition;
+    private Vector3 spaceRotation;
 
     [SerializeField] private GameObject opponentDetected;
     private bool invincibleBattle;
@@ -131,7 +131,6 @@ public class moveState : playerStateBase
         eventText.SetText(movement.ToString());
         
         //These are the booleans that require to become false when entering this state to prevent instantly movinhg to the next state
-        movementEnd = false;
         changeDirection = false;
         beginCombat = false;
 
@@ -144,15 +143,11 @@ public class moveState : playerStateBase
 
         //The coroutine will start moving the player around the board
         movePlayer = StartCoroutine(Moving());
+        lookPlayer = StartCoroutine(Looking());
     }
 
     public override void UpdateState(playerStateManager player)
     {
-       
-        if (movementEnd)
-        {
-            player.ChangeState(player.InactiveState);
-        }
 
         //When changeDirection becomes true, the choosing state will need to collect the multi path object the player is currently on
         //along with the current direction the player went, this will then change the state to choosing state.
@@ -186,6 +181,7 @@ public class moveState : playerStateBase
         combatEngage -= CombatSound;
         combatEngage -= AttackCombat;
         StopCoroutine(movePlayer);
+        StopCoroutine(lookPlayer);
     }
 
     //this method provide a integer parameter of the next space to change the current targted space to the new current space & provide a new target to follow
@@ -223,6 +219,7 @@ public class moveState : playerStateBase
         {
             spacePosition = new Vector3(targetSpace.transform.position.x, 2f, targetSpace.transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, spacePosition, speed * Time.deltaTime);
+
             
             //if the raycast detects an object, then the detected object has to be the targetedSpace object
             if (Physics.Raycast(detectRay, out RaycastHit info, 10f))
@@ -277,6 +274,22 @@ public class moveState : playerStateBase
             inactiveState opponentState = opponent.GetComponent<inactiveState>();
             combatEngage -= opponentState.DefendCombat;
             opponentDetected = null;
+        }
+    }
+
+    IEnumerator Looking()
+    {
+        while(movement > 0)
+        {
+            spaceRotation = new Vector3(targetSpace.transform.position.x, 2f, targetSpace.transform.position.z);
+            Quaternion lookRotation = Quaternion.LookRotation(spaceRotation - transform.position);
+            float time = 0;
+            while(time < 1)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
+                time += Time.deltaTime;
+                yield return null;
+            }
         }
     }
 
