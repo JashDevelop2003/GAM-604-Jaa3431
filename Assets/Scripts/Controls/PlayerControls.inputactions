@@ -60,51 +60,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DefendUp",
-                    "type": "Button",
-                    "id": "70afe7d6-ca03-491b-9092-42b66aef27f3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DefendDown",
-                    "type": "Button",
-                    "id": "ec3419cb-0e39-4f2a-a509-c241164e7876",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DefendLeft",
-                    "type": "Button",
-                    "id": "e88424a0-97b9-406e-92d9-ada559883c46",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DefendRight",
-                    "type": "Button",
-                    "id": "5b422bf9-f6cc-4d04-9488-ebba10136885",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DefendConfirm",
-                    "type": "Button",
-                    "id": "ae51eef8-3f23-4088-a2bd-07737772b42f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "UseAbility",
                     "type": "Button",
                     "id": "bcc2d9e1-5664-4e96-b178-7ddd1de9e283",
@@ -117,15 +72,6 @@
                     "name": "RevealOffence",
                     "type": "Button",
                     "id": "861bf56d-4e4f-475c-95dc-0da87993779f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "RevealDefence",
-                    "type": "Button",
-                    "id": "02b1aaa7-fbb2-4948-b2a1-f8f8dfe0cb29",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -201,61 +147,6 @@
                 },
                 {
                     "name": "",
-                    "id": "cdae602a-cdc9-4d22-a9b2-ada388181f58",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DefendUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ab83442f-f4f8-4396-ac25-ddd405dd377c",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DefendDown",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "19f641ff-4508-4357-a5ac-20c1da86a15d",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DefendLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7c20dd4e-e188-4895-827f-ea73f4694ec0",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DefendRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3e9fefed-28b3-4b2b-a562-1b2a81a99261",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DefendConfirm",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0480b168-97f8-40ec-a99d-40488767d4ec",
                     "path": "<Keyboard>/q",
                     "interactions": "",
@@ -273,17 +164,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "RevealOffence",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "79761b9f-528c-4741-a7bd-6f68c57e9dbb",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RevealDefence",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

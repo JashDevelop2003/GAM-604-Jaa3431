@@ -81,6 +81,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
 
     IEnumerator WaitForTurn()
     {
+        //This Coroutine waits until the attacker has chosen the card. Once becoming true the player can then take their turn to defend
         yield return new WaitUntil(() => combatSystem.AttackerIsReady == true);
         Controls.upPressed += DefendingUp;
         Controls.downPressed += DefendingDown;

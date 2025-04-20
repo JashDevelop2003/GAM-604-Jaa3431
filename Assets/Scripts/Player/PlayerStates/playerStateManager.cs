@@ -153,7 +153,6 @@ public class playerStateManager : MonoBehaviour
         //If the current state isn't the inactive state then something went wrong
         if(currentState == inactiveState)
         {
-            Debug.Log(gameObject.name + " 's turn");
             startTurn?.Invoke(this, EventArgs.Empty);
         }
         else
@@ -176,9 +175,7 @@ public class playerStateManager : MonoBehaviour
     {
         currentState.ExitState(this);
         previousState = currentState;
-        Debug.Log("Previous State: " + previousState.ToString());
         currentState = newState;
-        Debug.Log("Current State: " + currentState.ToString());
         currentState.EnterState(this);
     }
 

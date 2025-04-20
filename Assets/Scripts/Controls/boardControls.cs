@@ -19,14 +19,8 @@ public class boardControls : MonoBehaviour
     private InputAction selectRight;
     private InputAction selectConfirm;
     private InputAction selectCancel;
-    private InputAction defendUp;
-    private InputAction defendDown;
-    private InputAction defendLeft;
-    private InputAction defendRight;
-    private InputAction defendConfirm;
     private InputAction useAbility;
     private InputAction revealOffence;
-    private InputAction revealDefence;
 
     //These are the Event Handlers which will allow other scripts to become observers for specifc events
     public event EventHandler upPressed;
@@ -35,14 +29,8 @@ public class boardControls : MonoBehaviour
     public event EventHandler rightPressed;
     public event EventHandler confirmPressed;
     public event EventHandler cancelPressed;
-    public event EventHandler defendUpPressed;
-    public event EventHandler defendDownPressed;
-    public event EventHandler defendLeftPressed;
-    public event EventHandler defendRightPressed;
-    public event EventHandler defendConfirmPressed;
     public event EventHandler useAbilityPressed;
     public event EventHandler revealOffencePressed;
-    public event EventHandler revealDefencePressed;
 
     
     /// The Awake method creates a new player control and provides suitable inputs from the action map
@@ -58,14 +46,8 @@ public class boardControls : MonoBehaviour
         selectLeft = playerControls.boardControls.SelectLeft;
         selectConfirm = playerControls.boardControls.Confirm;
         selectCancel = playerControls.boardControls.Cancel;
-        defendUp = playerControls.boardControls.DefendUp;
-        defendDown = playerControls.boardControls.DefendDown;
-        defendLeft = playerControls.boardControls.DefendLeft;
-        defendRight = playerControls.boardControls.DefendRight;
-        defendConfirm = playerControls.boardControls.DefendConfirm;
         useAbility = playerControls.boardControls.UseAbility;
         revealOffence = playerControls.boardControls.RevealOffence;
-        revealDefence = playerControls.boardControls.RevealDefence;
 
         //This calls the method once an input is performed
         selectUp.performed += OnUpPressed;
@@ -74,14 +56,8 @@ public class boardControls : MonoBehaviour
         selectLeft.performed += OnLeftPressed;
         selectConfirm.performed += OnConfirmPressed;
         selectCancel.performed += OnCancelPressed;
-        defendUp.performed += OnDefendUpPressed;
-        defendDown.performed += OnDefendDownPressed;
-        defendLeft.performed += OnDefendLeftPressed;
-        defendRight.performed += OnDefendRightPressed;
-        defendConfirm.performed += OnDefendConfirmPressed;
         useAbility.performed += OnUseAbilityPressed;
         revealOffence.performed += OnRevealOffencePressed;
-        revealDefence.performed += OnRevealDefencePressed;
         
         
         //Each input action has to be enabled in order for the inputs to perform in game
@@ -91,14 +67,8 @@ public class boardControls : MonoBehaviour
         selectLeft.Enable();
         selectConfirm.Enable();
         selectCancel.Enable();
-        defendUp.Enable();
-        defendDown.Enable();
-        defendLeft.Enable();
-        defendRight.Enable();
-        defendConfirm.Enable();
         useAbility.Enable();
         revealOffence.Enable();
-        revealDefence.Enable();
     }
 
     //These methods check for the button to be performed in which provides the events to call onPressed
@@ -133,31 +103,6 @@ public class boardControls : MonoBehaviour
         OnPressed(EventArgs.Empty, cancelPressed);
     }
 
-    private void OnDefendUpPressed(InputAction.CallbackContext defendUp) 
-    { 
-        OnPressed(EventArgs.Empty, defendUpPressed);
-    }
-
-    private void OnDefendDownPressed(InputAction.CallbackContext defendDown)
-    {
-        OnPressed(EventArgs.Empty, defendDownPressed);
-    }
-
-    private void OnDefendLeftPressed(InputAction.CallbackContext defendLeft)
-    {
-        OnPressed(EventArgs.Empty, defendLeftPressed);
-    }
-
-    private void OnDefendRightPressed(InputAction.CallbackContext defendRight)
-    {
-        OnPressed(EventArgs.Empty, defendRightPressed);
-    }
-
-    private void OnDefendConfirmPressed(InputAction.CallbackContext defendConfirm)
-    {
-        OnPressed(EventArgs.Empty, defendConfirmPressed);
-    }
-
     private void OnUseAbilityPressed(InputAction.CallbackContext useAbility)
     {
         OnPressed(EventArgs.Empty, useAbilityPressed);
@@ -166,11 +111,6 @@ public class boardControls : MonoBehaviour
     private void OnRevealOffencePressed(InputAction.CallbackContext revealOffence)
     {
         OnPressed(EventArgs.Empty, revealOffencePressed);
-    }
-
-    private void OnRevealDefencePressed(InputAction.CallbackContext revealDefence)
-    {
-        OnPressed(EventArgs.Empty, revealDefencePressed);
     }
 
     //OnPressed identifies the events inside of the event handler and invokes all methods that are listening
@@ -190,14 +130,8 @@ public class boardControls : MonoBehaviour
         selectLeft.Disable();
         selectConfirm.Disable();
         selectCancel.Disable();
-        defendUp.Disable();
-        defendDown.Disable();
-        defendLeft.Disable();
-        defendRight.Disable();
-        defendConfirm.Disable();
         useAbility.Disable();
         revealOffence.Disable();
-        revealDefence.Disable();
     }
 
 

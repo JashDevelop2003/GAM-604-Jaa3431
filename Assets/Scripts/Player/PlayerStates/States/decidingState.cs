@@ -121,7 +121,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
         //This display the UI for the player to choose a card
         decidingDisplay.SetActive(true);
-        eventText.SetText("Choose a Movement or Status Card");
+        eventText.SetText(this.gameObject.name + "'s turn. Choose a Movement or Status Card");
 
         //This conditional statement checks if the previous state was start state to draw cards
         //If the previous state is not the start state then the cards stay the same
