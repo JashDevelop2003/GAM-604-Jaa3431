@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft, IDefendRight, IDefendConfirm, IRevealDefence
 {
@@ -71,19 +72,28 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         effects = GetComponent<currentEffects>();
         controls = GetComponent<boardControls>();
         soundManager = Singleton<soundManager>.Instance;
-
-        Controls.defendUpPressed += DefendingUp;
-        Controls.defendDownPressed += DefendingDown;
-        Controls.defendLeftPressed += DefendingLeft;
-        Controls.defendRightPressed += DefendingRight;
-        Controls.defendUpPressed += ChoosingSound;
-        Controls.defendDownPressed += ChoosingSound;
-        Controls.defendLeftPressed += ChoosingSound;
-        Controls.defendRightPressed += ChoosingSound;
-        Controls.defendConfirmPressed += ConfirmingDefend;
-        Controls.revealDefencePressed += RevealDefence;
+        combatSystem = combatSystem.instance;
 
         defenceDeck = GetComponentInChildren<defenceDeckPile>();
+
+        StartCoroutine(WaitForTurn());
+    }
+
+    IEnumerator WaitForTurn()
+    {
+        yield return new WaitUntil(() => combatSystem.AttackerIsReady == true);
+        Controls.upPressed += DefendingUp;
+        Controls.downPressed += DefendingDown;
+        Controls.leftPressed += DefendingLeft;
+        Controls.rightPressed += DefendingRight;
+        Controls.upPressed += ChoosingSound;
+        Controls.downPressed += ChoosingSound;
+        Controls.leftPressed += ChoosingSound;
+        Controls.rightPressed += ChoosingSound;
+        Controls.confirmPressed += ConfirmingDefend;
+        Controls.revealOffencePressed += RevealDefence;
+
+
         defenceDeck.DrawCards();
         for (int i = 0; i < defenceDeck.SelectedCards.Length; i++)
         {
@@ -96,11 +106,10 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
             }
         }
 
-        combatSystem = combatSystem.instance;
         combatSystem.combatComplete += DefendOver;
         defendPanel.SetActive(true);
         defendingDisplay.SetActive(true);
-        defenceCardDescription.SetText("Press P to Reveal the selected card's description & Press P again to Hide the description");
+        defenceCardDescription.SetText("Press R to Reveal the selected card's description & Press R again to Hide the description");
 
         //If the player doesn't have enough mana for the lowest mana card or is stunned their defence becomes 0
         if (controller.GetModel.CurrentMana < lowestManaCost || effects.Stunned)
@@ -130,7 +139,6 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
             defenceCardDescription.SetText("Defender is Ready: Random Card was Selected due to being Confused");
         }
     }
-
 
     public override void UpdateState(playerStateManager player)
     {
@@ -239,16 +247,16 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
     {
         defendConfirm = true;
         defendItemEvents?.Invoke(this, EventArgs.Empty);
-        Controls.defendUpPressed -= DefendingUp;
-        Controls.defendDownPressed -= DefendingDown;
-        Controls.defendLeftPressed -= DefendingLeft;
-        Controls.defendRightPressed -= DefendingRight;
-        Controls.defendRightPressed -= ChoosingSound;
-        Controls.defendUpPressed -= ChoosingSound;
-        Controls.defendDownPressed -= ChoosingSound;
-        Controls.defendLeftPressed -= ChoosingSound;
-        Controls.defendConfirmPressed -= ConfirmingDefend;
-        Controls.revealDefencePressed -= RevealDefence;
+        Controls.upPressed -= DefendingUp;
+        Controls.downPressed -= DefendingDown;
+        Controls.leftPressed -= DefendingLeft;
+        Controls.rightPressed -= DefendingRight;
+        Controls.upPressed -= ChoosingSound;
+        Controls.downPressed -= ChoosingSound;
+        Controls.leftPressed -= ChoosingSound;
+        Controls.rightPressed -= ChoosingSound;
+        Controls.confirmPressed -= ConfirmingDefend;
+        Controls.revealOffencePressed -= RevealDefence;
     }
 
     public void DefendOver(object sender, EventArgs e)

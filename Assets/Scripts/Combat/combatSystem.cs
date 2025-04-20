@@ -26,6 +26,10 @@ public class combatSystem : MonoBehaviour
     [SerializeField] private int attackValue;
     private float thrustMultiplier;
     private bool attackerReady;
+    public bool AttackerIsReady
+    {
+        get { return attackerReady; }
+    }
 
     //The defender provides:
     // - The player that is on the same space as the current player's turn
