@@ -2751,6 +2751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: f5a71dd7a0988be4e84d69078a03991d, type: 2}
   currentPath: {fileID: 91498251}
+  eventText: {fileID: 2116896888}
   damageSound: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
   healSound: {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
   gainCashSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
@@ -19632,6 +19633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: 624c2f9d5091ec64b906997f8362575c, type: 2}
   currentPath: {fileID: 1346927037}
+  eventText: {fileID: 2116896888}
   damageSound: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
   healSound: {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
   gainCashSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}

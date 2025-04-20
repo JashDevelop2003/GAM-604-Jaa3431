@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 /// <summary>
 /// This is the player controller (presenter) that provides the logic for the model and changes to the view
 /// This collect the character data and applies changes to the model.
@@ -30,6 +31,9 @@ public class playerController : MonoBehaviour
     public characterData GetData {  get { return Data; } }
 
     public GameObject Path { get { return currentPath; } set { currentPath = value; } }
+
+    [Header("User Interface")]
+    [SerializeField] private TMP_Text eventText;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip damageSound;
@@ -136,8 +140,9 @@ public class playerController : MonoBehaviour
         if (playerModel.CurrentHealth + value <= 0)
         {
             playerModel.IsAlive = false;
+            playerModel.CurrentHealth = 0;
             soundManager.PlaySound(gameOverSound);
-            Debug.Log(this.gameObject.name + " is Defeated");
+            eventText.SetText(this.gameObject.name + " is Defeated");
         }
         //Else if the current health being added from the the value is greater than the max health, the current health will maximise to only the maximum health
         else if (playerModel.CurrentHealth + value > playerModel.MaxHealth)
