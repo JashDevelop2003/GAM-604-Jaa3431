@@ -333,4 +333,11 @@ public class playerController : MonoBehaviour
             isDefeatedEvent?.Invoke(this, EventArgs.Empty);
         }
     }
+
+    private void OnDisable()
+    {
+        takeDamageEvent -= animator.DamageAnimation;
+        endDamageEvent -= animator.EndDamageAnimation;
+        isDefeatedEvent -= animator.DeadAnimation;
+    }
 }

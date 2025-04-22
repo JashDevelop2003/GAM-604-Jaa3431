@@ -98,6 +98,11 @@ public class stateAnimation : MonoBehaviour
     //}
 
     //This occurs during combat
+    public void StopWalking(object sender, EventArgs e)
+    {
+        playerAnimator.SetBool("isWalking", false);
+    }
+
     public void AttackingAnimation(object sender, EventArgs e)
     {
         playerAnimator.SetBool("isAttacking", true);

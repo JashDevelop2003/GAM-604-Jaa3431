@@ -85,6 +85,9 @@ public class moveState : playerStateBase
     [SerializeField] private AudioClip combatSound;
     private soundManager soundManager;
 
+    [Header("Animation")]
+    stateAnimation stateAnimation;
+
     public override void EnterState(playerStateManager player)
     {
         //This checks if the previous state was the choosing state in which resets the current space integer
@@ -144,6 +147,9 @@ public class moveState : playerStateBase
         //The coroutine will start moving the player around the board
         movePlayer = StartCoroutine(Moving());
         lookPlayer = StartCoroutine(Looking());
+
+        stateAnimation = GetComponentInChildren<stateAnimation>();
+        endTurnEvent += stateAnimation.StopWalking;
     }
 
     public override void UpdateState(playerStateManager player)
@@ -180,6 +186,7 @@ public class moveState : playerStateBase
         combatEngage -= musicManager.BattleMusic;
         combatEngage -= CombatSound;
         combatEngage -= AttackCombat;
+        endTurnEvent -= stateAnimation.StopWalking;
         StopCoroutine(movePlayer);
         StopCoroutine(lookPlayer);
     }
@@ -250,8 +257,8 @@ public class moveState : playerStateBase
 
         //Once the loop is over (which is when movement reaches 0), apply the space effect based on the type of space the player is currently on
         eventText.SetText("Landed on: " + currentSpaceType + " space");
-        yield return new WaitForSeconds(2);
         endTurnEvent?.Invoke(this, EventArgs.Empty);
+        yield return new WaitForSeconds(2);
         spaceManager.ActivateEffect(this.gameObject, currentSpaceType);
 
     }
