@@ -36,6 +36,9 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     [SerializeField] private AudioClip declineSound;
     private soundManager soundManager;
 
+    [Header("Animation")]
+    private stateAnimation animator;
+
 
     public override void EnterState(playerStateManager player)
     {
@@ -54,6 +57,8 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         Controls.downPressed += ChoosingSound;
         Controls.leftPressed += ChoosingSound;
         Controls.rightPressed += ChoosingSound;
+
+        animator = GetComponentInChildren<stateAnimation>();
 
         if (statusCard.Target == targetEnum.Any)
         {

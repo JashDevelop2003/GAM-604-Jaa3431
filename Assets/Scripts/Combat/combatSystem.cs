@@ -98,6 +98,9 @@ public class combatSystem : MonoBehaviour
     [SerializeField] private AudioClip defendSound;
     [SerializeField] private AudioClip blockSound;
 
+    [Header("Animator")]
+    private stateAnimation attackerAnimator;
+
 
     //this is used to make this a singular instance of the component
     private void Awake()
@@ -118,6 +121,7 @@ public class combatSystem : MonoBehaviour
     {
         //This method collect the defender's object along with the controller to collect the guard multiplier
         attackingPlayer = attacker;
+        attackerAnimator = attackingPlayer.GetComponentInChildren<stateAnimation>();
         attackingPlayerController = attackingPlayer.GetComponent<playerController>();
         thrustMultiplier = attackingPlayerController.GetModel.ThrustMultiplier;
 
@@ -125,6 +129,8 @@ public class combatSystem : MonoBehaviour
         attackValue = (int)(value * thrustMultiplier);
         attackerReady = true;
         soundManager.PlaySound(attackSound);
+        duringCombatEvent += attackerAnimator.AttackingAnimation;
+        afterCombatEvent += attackerAnimator.EndAttackingAnimation;
         CombatReady();
 
     }
@@ -206,6 +212,8 @@ public class combatSystem : MonoBehaviour
     {
         attackerReady = false;
         defenderReady = false;
+        duringCombatEvent -= attackerAnimator.AttackingAnimation;
+        afterCombatEvent -= attackerAnimator.EndAttackingAnimation;
         combatComplete?.Invoke(this, EventArgs.Empty);
     }
 }

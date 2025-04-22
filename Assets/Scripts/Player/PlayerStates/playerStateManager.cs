@@ -122,6 +122,9 @@ public class playerStateManager : MonoBehaviour
         get { return spinState; }
     }
 
+    [Header("Animation")]
+    private stateAnimation stateAnimation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -144,6 +147,8 @@ public class playerStateManager : MonoBehaviour
         //this begins the player in the inactive state where nothing happens until is the player's turn
         currentState = inactiveState;
         currentState.EnterState(this);
+
+        stateAnimation = GetComponentInChildren<stateAnimation>();
     }
 
     //This is called from the turn manager
@@ -177,6 +182,7 @@ public class playerStateManager : MonoBehaviour
         previousState = currentState;
         currentState = newState;
         currentState.EnterState(this);
+        stateAnimation.ChangeAnimationState(newState);
     }
 
     //This ends the turn of the player by calling the turn manager instance to change to the next turn

@@ -47,6 +47,12 @@ public class playerController : MonoBehaviour
     [SerializeField] private AudioClip gameOverSound;
     private soundManager soundManager;
 
+    [Header("Animation")]
+    private stateAnimation animator;
+    public event EventHandler takeDamageEvent;
+    public event EventHandler endDamageEvent;
+    public event EventHandler isDefeatedEvent;
+
     void Awake()
     {
         //this collects the path list for the player to start on
@@ -65,6 +71,10 @@ public class playerController : MonoBehaviour
     private void Start()
     {
         soundManager = Singleton<soundManager>.Instance;
+        animator = GetComponentInChildren<stateAnimation>();
+        takeDamageEvent += animator.DamageAnimation;
+        endDamageEvent += animator.EndDamageAnimation;
+        isDefeatedEvent += animator.DeadAnimation;
     }
 
     //This is to reset the multipliers from the effects of their previous turn
@@ -143,6 +153,7 @@ public class playerController : MonoBehaviour
             playerModel.CurrentHealth = 0;
             soundManager.PlaySound(gameOverSound);
             eventText.SetText(this.gameObject.name + " is Defeated");
+            StartCoroutine(TakingDamage());
         }
         //Else if the current health being added from the the value is greater than the max health, the current health will maximise to only the maximum health
         else if (playerModel.CurrentHealth + value > playerModel.MaxHealth)
@@ -161,6 +172,7 @@ public class playerController : MonoBehaviour
             else if(value < 0)
             {
                 soundManager.PlaySound(damageSound);
+                StartCoroutine(TakingDamage());
             }
         }
 
@@ -306,5 +318,19 @@ public class playerController : MonoBehaviour
     public void DisplayAbility(Sprite icon, Color colour)
     {
         playerView.AbilityUI(icon, colour);
+    }
+
+    IEnumerator TakingDamage()
+    {
+        takeDamageEvent?.Invoke(this, EventArgs.Empty);
+        yield return new WaitForSeconds(2);
+        if (GetModel.IsAlive)
+        {
+            endDamageEvent?.Invoke(this, EventArgs.Empty);
+        }
+        else 
+        { 
+            isDefeatedEvent?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
