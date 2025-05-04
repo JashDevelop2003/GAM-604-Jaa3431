@@ -59,6 +59,9 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     private itemStats selectedItem;
     private itemDeckPool itemDeck;
 
+    //This checks if there is the player's decks are all full
+    private int nullSlots;
+
     //this selects the card out of the list and checks if this card is sutiable for the rarity
     private int selectedResource;
 
@@ -99,6 +102,7 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     {
         selectedStock.price = 0;
         selectedStock.retailObject = marketEnum.Null;
+        nullSlots = 0;
 
         soundManager = Singleton<soundManager>.Instance;
 
@@ -139,16 +143,32 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         itemDeck = GetComponentInChildren<itemDeckPool>();
         checkingAvailability[4] = itemDeck.GetAvailableItem();
 
-        //This applies the new resource in the game
-        //The while loop checks if the resource is available
-        for (int i = 0; i < outcomeResource.Length; i++)
+        for(int i = 0; i < checkingAvailability.Length; i++)
         {
-            outcomeResource[i] = UnityEngine.Random.Range(1, 11);
-            outcomeType[i] = UnityEngine.Random.Range(0, 4);
-            while (checkingAvailability[outcomeType[i]] == null)
+            if(checkingAvailability[i] == null)
+            {
+                nullSlots++;
+            }
+        }
+        
+        //There there are no available slots then end shopping immediately.
+        if(nullSlots == 5)
+        {
+            StartCoroutine(EndShopping());
+        }
+        else
+        {
+            //This applies the new resource in the game
+            //The while loop checks if the resource is available
+            for (int i = 0; i < outcomeResource.Length; i++)
             {
                 outcomeResource[i] = UnityEngine.Random.Range(1, 11);
                 outcomeType[i] = UnityEngine.Random.Range(0, 4);
+                while (checkingAvailability[outcomeType[i]] == null)
+                {
+                    outcomeResource[i] = UnityEngine.Random.Range(1, 11);
+                    outcomeType[i] = UnityEngine.Random.Range(0, 4);
+                }
             }
         }
 
