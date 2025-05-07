@@ -5,11 +5,16 @@ using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
 using System;
-using System.Linq;
 /// <summary>
 /// The viewing state is when the player can choose to view their cards and items in their inventory
 /// The state will include looking at one of the cards that includes
 /// </summary>
+
+[System.Serializable]
+public struct resources
+{
+    public List<GameObject> resourceList;
+}
 
 public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, ICancel
 {
@@ -25,13 +30,13 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     }
 
     //The array list is based on the order shown in the deck pool
-    [SerializeField] private offenceDeckPool offenceDeck;
+    private offenceDeckPool offenceDeck;
     private defenceDeckPool defenceDeck;
     private movementDeckPool movementDeck;
     private statusDeckPool statusDeck;
     private itemDeckPool itemDeck;
 
-    [SerializeField] private List<GameObject>[] resourceList = new List<GameObject>[5];
+    [SerializeField] public resources[] resourceType = new resources[5];
 
     [Header("User Interface")]
     //Display the UI
@@ -69,7 +74,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         { 
             if(offenceDeck.OffenceCard[i] != null)
             {
-                resourceList[0].Add(offenceDeck.OffenceCard[i]);
+                resourceType[0].resourceList.Add(offenceDeck.OffenceCard[i]);
             }
         }
 
@@ -77,7 +82,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         {
             if (defenceDeck.DefenceCard[i] != null)
             {
-                resourceList[1].Add(defenceDeck.DefenceCard[i]);
+                resourceType[1].resourceList.Add(defenceDeck.DefenceCard[i]);
             }
         }
 
@@ -85,7 +90,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         {
             if (movementDeck.MovementCard[i] != null)
             {
-                resourceList[2].Add(movementDeck.MovementCard[i]);
+                resourceType[2].resourceList.Add(movementDeck.MovementCard[i]);
             }
         }
 
@@ -93,7 +98,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         {
             if (statusDeck.StatusCard[i] != null)
             {
-                resourceList[3].Add(statusDeck.StatusCard[i]);
+                resourceType[3].resourceList.Add(statusDeck.StatusCard[i]);
             }
         }
 
@@ -101,7 +106,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         {
             if (itemDeck.Items[i] != null)
             {
-                resourceList[4].Add(itemDeck.Items[i]);
+                resourceType[4].resourceList.Add(itemDeck.Items[i]);
             }
         }
 
@@ -117,7 +122,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         cardUI.SetActive(true);
         itemUI.SetActive(false);
         cardImage.sprite = cardSprite[type];
-        offenceCard viewCard = resourceList[type][resource].GetComponent<offenceCard>();
+        offenceCard viewCard = resourceType[type].resourceList[resource].GetComponent<offenceCard>();
         cardName.SetText(viewCard.AttackCard.cardName);
         cardMana.SetText(viewCard.AttackCard.manaCost.ToString());
         cardDetail.SetText(viewCard.AttackCard.attackValue.ToString());
@@ -143,9 +148,9 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         viewingUI.SetActive(false);
 
 
-        for (int i = 0; i < resourceList.Length; i++) 
+        for (int i = 0; i < resourceType.Length; i++) 
         {
-            resourceList[i] = null;
+            resourceType[i].resourceList = null;
         }
     }
 
@@ -181,9 +186,9 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         type += change;
         if (type < 0)
         {
-            type = resourceList.Length;
+            type = resourceType.Length;
         }
-        else if (type > resourceList.Length) 
+        else if (type > resourceType.Length) 
         {
             type = 0;
         }
@@ -196,9 +201,9 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         resource += change;
         if(resource < 0)
         {
-            resource = resourceList[type].Count;
+            resource = resourceType[type].resourceList.Count;
         }
-        else if(resource > resourceList[type].Count)
+        else if(resource > resourceType[type].resourceList.Count + 1)
         {
             resource = 0;
         }
@@ -227,7 +232,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     {
         if (type == (int)deckTypeEnum.Offence)
         {
-            offenceCard viewCard = resourceList[type][resource].GetComponent<offenceCard>();
+            offenceCard viewCard = resourceType[type].resourceList[resource].GetComponent<offenceCard>();
             cardName.SetText(viewCard.AttackCard.cardName);
             cardMana.SetText(viewCard.AttackCard.manaCost.ToString());
             cardDetail.SetText(viewCard.AttackCard.attackValue.ToString());
@@ -236,7 +241,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
         else if (type == (int)deckTypeEnum.Defence)
         {
-            defenceCard viewCard = resourceList[type][resource].GetComponent<defenceCard>();
+            defenceCard viewCard = resourceType[type].resourceList[resource].GetComponent<defenceCard>();
             cardName.SetText(viewCard.DefendCard.cardName);
             cardMana.SetText(viewCard.DefendCard.manaCost.ToString());
             cardDetail.SetText(viewCard.DefendCard.defendValue.ToString());
@@ -245,7 +250,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
         else if (type == (int)deckTypeEnum.Movement)
         {
-            movementCard viewCard = resourceList[type][resource].GetComponent<movementCard>();
+            movementCard viewCard = resourceType[type].resourceList[resource].GetComponent<movementCard>();
             cardName.SetText(viewCard.MoveCard.cardName);
             cardMana.SetText(viewCard.MoveCard.manaCost.ToString());
             if (viewCard.MoveCard.minimumMoveValue != viewCard.MoveCard.maximumMoveValue) 
@@ -261,7 +266,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
         else if (type == (int)deckTypeEnum.Status)
         {
-            statusCard viewCard = resourceList[type][resource].GetComponent<statusCard>();
+            statusCard viewCard = resourceType[type].resourceList[resource].GetComponent<statusCard>();
             cardName.SetText(viewCard.StatusCard.cardName);
             cardMana.SetText(viewCard.StatusCard.manaCost.ToString());
             cardDetail.SetText(viewCard.StatusCard.target.ToString());
@@ -270,7 +275,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
         else if (type == (int)deckTypeEnum.Item)
         {
-            itemBehaviour viewItem = resourceList[type][resource].GetComponent<itemBehaviour>();
+            itemBehaviour viewItem = resourceType[type].resourceList[resource].GetComponent<itemBehaviour>();
             itemName.SetText(viewItem.Item.itemName);
             itemType.SetText(viewItem.Item.itemType.ToString());
             itemImage.color = typeColour[(int)viewItem.Item.itemType];

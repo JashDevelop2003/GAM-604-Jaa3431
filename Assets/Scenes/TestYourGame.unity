@@ -2524,6 +2524,7 @@ GameObject:
   - component: {fileID: 83180100}
   - component: {fileID: 83180099}
   - component: {fileID: 83180098}
+  - component: {fileID: 83180113}
   - component: {fileID: 83180097}
   - component: {fileID: 83180096}
   - component: {fileID: 83180095}
@@ -3349,6 +3350,43 @@ MonoBehaviour:
   loseSound: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
   luckySound: {fileID: 8300000, guid: d18a72499ba58dd40a0e379085d24c94, type: 3}
   unluckySound: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
+--- !u!114 &83180113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83180087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478986d9c3c992843b8a6e6b7df99b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceType:
+  - resourceList: []
+  - resourceList: []
+  - resourceList: []
+  - resourceList: []
+  - resourceList: []
+  viewingUI: {fileID: 183696280}
+  descriptionText: {fileID: 2033291988}
+  cardUI: {fileID: 1850185920}
+  cardImage: {fileID: 1850185922}
+  cardSprite:
+  - {fileID: 21300000, guid: f88e5059786af7e43a2e18a9f73d24fa, type: 3}
+  - {fileID: 21300000, guid: 5ae3dbb26a5b21b4680ccd366827e70e, type: 3}
+  - {fileID: 21300000, guid: c5d995f97753edf4db5f5db159fdce62, type: 3}
+  - {fileID: 21300000, guid: a99424a36da5ef941ac8a868fc4b401e, type: 3}
+  cardName: {fileID: 1994063223}
+  cardMana: {fileID: 1460725053}
+  cardDetail: {fileID: 343565383}
+  itemUI: {fileID: 863333888}
+  itemImage: {fileID: 863333890}
+  typeColour:
+  - {r: 0.9547169, g: 0.7680409, b: 0.055841886, a: 1}
+  - {r: 0.68707174, g: 0.00429328, b: 0.7584905, a: 1}
+  itemName: {fileID: 160262632}
+  itemType: {fileID: 28856896}
 --- !u!1 &85229457
 GameObject:
   m_ObjectHideFlags: 0
@@ -19808,6 +19846,7 @@ GameObject:
   - component: {fileID: 651103444}
   - component: {fileID: 651103443}
   - component: {fileID: 651103442}
+  - component: {fileID: 651103457}
   - component: {fileID: 651103441}
   - component: {fileID: 651103440}
   - component: {fileID: 651103439}
@@ -20633,6 +20672,43 @@ MonoBehaviour:
   loseSound: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
   luckySound: {fileID: 8300000, guid: d18a72499ba58dd40a0e379085d24c94, type: 3}
   unluckySound: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
+--- !u!114 &651103457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651103431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478986d9c3c992843b8a6e6b7df99b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceType:
+  - resourceList: []
+  - resourceList: []
+  - resourceList: []
+  - resourceList: []
+  - resourceList: []
+  viewingUI: {fileID: 183696280}
+  descriptionText: {fileID: 2033291988}
+  cardUI: {fileID: 1850185920}
+  cardImage: {fileID: 1850185922}
+  cardSprite:
+  - {fileID: 21300000, guid: f88e5059786af7e43a2e18a9f73d24fa, type: 3}
+  - {fileID: 21300000, guid: 5ae3dbb26a5b21b4680ccd366827e70e, type: 3}
+  - {fileID: 21300000, guid: c5d995f97753edf4db5f5db159fdce62, type: 3}
+  - {fileID: 21300000, guid: a99424a36da5ef941ac8a868fc4b401e, type: 3}
+  cardName: {fileID: 1994063223}
+  cardMana: {fileID: 1460725053}
+  cardDetail: {fileID: 343565383}
+  itemUI: {fileID: 863333888}
+  itemImage: {fileID: 863333890}
+  typeColour:
+  - {r: 0.9547169, g: 0.7680409, b: 0.055841886, a: 1}
+  - {r: 0.68707174, g: 0.00429328, b: 0.7584905, a: 1}
+  itemName: {fileID: 160262632}
+  itemType: {fileID: 28856896}
 --- !u!1 &654428971
 GameObject:
   m_ObjectHideFlags: 0
@@ -46639,7 +46715,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f88e5059786af7e43a2e18a9f73d24fa, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
