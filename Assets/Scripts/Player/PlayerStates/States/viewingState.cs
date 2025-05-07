@@ -184,16 +184,15 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     void ChangeType(int change)
     {
         type += change;
-        while(resourceType[type].resourceList.Count == 0)
+        while (resourceType[type].resourceList == null)
         {
             type += change;
         }
-
         if (type < 0)
         {
-            type = resourceType.Length;
+            type = resourceType.Length - 1;
         }
-        else if (type > resourceType.Length) 
+        else if (type >= resourceType.Length) 
         {
             type = 0;
         }
@@ -206,9 +205,9 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         resource += change;
         if(resource < 0)
         {
-            resource = resourceType[type].resourceList.Count;
+            resource = resourceType[type].resourceList.Count - 1;
         }
-        else if(resource > resourceType[type].resourceList.Count)
+        if(resource >= resourceType[type].resourceList.Count)
         {
             resource = 0;
         }
