@@ -63,6 +63,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         type = 0;
         resource = 0;
         endViewing = false;
+        //resourceType = new resources[5];
 
         offenceDeck = GetComponentInChildren<offenceDeckPool>();
         defenceDeck = GetComponentInChildren<defenceDeckPool>();
@@ -139,18 +140,18 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     }
     public override void ExitState(playerStateManager player) 
     {
-        Controls.upPressed += DecidingUp;
-        Controls.downPressed += DecidingDown;
-        Controls.leftPressed += DecidingLeft;
-        Controls.rightPressed += DecidingRight;
-        Controls.cancelPressed += Cancel;
+        Controls.upPressed -= DecidingUp;
+        Controls.downPressed -= DecidingDown;
+        Controls.leftPressed -= DecidingLeft;
+        Controls.rightPressed -= DecidingRight;
+        Controls.cancelPressed -= Cancel;
 
         viewingUI.SetActive(false);
 
 
         for (int i = 0; i < resourceType.Length; i++) 
         {
-            resourceType[i].resourceList = null;
+            resourceType[i].resourceList.Clear();
         }
     }
 
@@ -184,17 +185,25 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     void ChangeType(int change)
     {
         type += change;
-        while (resourceType[type].resourceList == null)
-        {
-            type += change;
-        }
+
         if (type < 0)
         {
             type = resourceType.Length - 1;
         }
-        else if (type >= resourceType.Length) 
+        if (type >= resourceType.Length) 
         {
             type = 0;
+        }
+        if(type == (int)deckTypeEnum.Item && resourceType[type].resourceList.Count == 0)
+        {
+            if(change > 0)
+            {
+                type = 0;
+            }
+            else
+            {
+               type += change;
+            }
         }
         resource = 0;
         DisplayType();

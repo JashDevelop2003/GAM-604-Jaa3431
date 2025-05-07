@@ -33,7 +33,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29533d513e0400544ae8da93ec77f6d7, type: 2}
   startingStatusCards:
   - {fileID: 11400000, guid: 33f325c458f5ff849bd90caf9d5eda62, type: 2}
-  startingItems: []
+  startingItems:
+  - {fileID: 11400000, guid: dabc2a4ad9281ca46b717f69dcef365f, type: 2}
+  - {fileID: 11400000, guid: afc8de527fec01b4bb36bf6720ff051b, type: 2}
+  - {fileID: 11400000, guid: dde48cbb9566b8d45aafcadcf9d28a09, type: 2}
   possibleOffenceCards:
   - {fileID: 11400000, guid: e54c96194375f7f438a7b171ec3930d4, type: 2}
   - {fileID: 11400000, guid: 2f6cc23b4008277478365652d0c0dce1, type: 2}
