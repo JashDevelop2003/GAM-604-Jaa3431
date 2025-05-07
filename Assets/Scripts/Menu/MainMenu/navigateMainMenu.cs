@@ -13,6 +13,10 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
         get { return menuControls; }
     }
 
+    [Header("Scene Management")]
+    private sceneManager sceneManager;
+    [SerializeField] private sceneEnum[] scene = new sceneEnum[5];
+    
     [Header("User Interface")]
     [SerializeField] private Image[] choices = new Image[5];
     [SerializeField] private Color[] colourChoice = new Color[2];
@@ -21,6 +25,7 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
     void Awake()
     {
         currentChoice = 0;
+        sceneManager = Singleton<sceneManager>.Instance;
         menuControls = GetComponent<mainMenuControls>();
         MenuControls.pressedUp += DecidingUp;
         MenuControls.pressedDown += DecidingDown;
@@ -50,7 +55,7 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
 
     public void ConfirmingChoice(object sender, EventArgs e)
     {
-        Debug.Log(choices[currentChoice]);
+        sceneManager.ChangeScene(scene[currentChoice]);
     }
 
     void HighlightChoice()
