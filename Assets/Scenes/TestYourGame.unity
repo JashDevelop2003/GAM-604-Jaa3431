@@ -3362,6 +3362,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 478986d9c3c992843b8a6e6b7df99b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  resource: 0
   resourceType:
   - resourceList: []
   - resourceList: []
@@ -6581,7 +6583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &183696281
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20684,6 +20686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 478986d9c3c992843b8a6e6b7df99b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  resource: 0
   resourceType:
   - resourceList: []
   - resourceList: []

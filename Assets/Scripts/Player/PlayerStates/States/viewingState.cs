@@ -18,8 +18,8 @@ public struct resources
 
 public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, ICancel
 {
-    private int type;
-    private int resource;
+    [SerializeField] private int type;
+    [SerializeField] private int resource;
     private bool endViewing;
 
     private boardControls controls;
@@ -72,7 +72,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
         for (int i = 0; i < offenceDeck.OffenceCard.Count; i++) 
         { 
-            if(offenceDeck.OffenceCard[i] != null)
+            if(offenceDeck.OffenceCard[i].activeInHierarchy)
             {
                 resourceType[0].resourceList.Add(offenceDeck.OffenceCard[i]);
             }
@@ -80,7 +80,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
         for (int i = 0; i < defenceDeck.DefenceCard.Count; i++)
         {
-            if (defenceDeck.DefenceCard[i] != null)
+            if (defenceDeck.DefenceCard[i].activeInHierarchy)
             {
                 resourceType[1].resourceList.Add(defenceDeck.DefenceCard[i]);
             }
@@ -88,7 +88,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
         for (int i = 0; i < movementDeck.MovementCard.Count; i++)
         {
-            if (movementDeck.MovementCard[i] != null)
+            if (movementDeck.MovementCard[i].activeInHierarchy)
             {
                 resourceType[2].resourceList.Add(movementDeck.MovementCard[i]);
             }
@@ -96,7 +96,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
         for (int i = 0; i < statusDeck.StatusCard.Count; i++)
         {
-            if (statusDeck.StatusCard[i] != null)
+            if (statusDeck.StatusCard[i].activeInHierarchy)
             {
                 resourceType[3].resourceList.Add(statusDeck.StatusCard[i]);
             }
@@ -104,7 +104,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
         for (int i = 0; i < itemDeck.Items.Count; i++)
         {
-            if (itemDeck.Items[i] != null)
+            if (itemDeck.Items[i].activeInHierarchy)
             {
                 resourceType[4].resourceList.Add(itemDeck.Items[i]);
             }
@@ -118,7 +118,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         Controls.rightPressed += DecidingRight;
         Controls.cancelPressed += Cancel;
 
-        viewingUI.SetActive(false);
+        viewingUI.SetActive(true);
         cardUI.SetActive(true);
         itemUI.SetActive(false);
         cardImage.sprite = cardSprite[type];
@@ -157,12 +157,12 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     //These change the current viewing card.
     public void DecidingUp(object sender, EventArgs e)
     {
-        ChangeType(1);
+        ChangeType(-1);
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
-        ChangeType(-1);
+        ChangeType(1);
     }
 
     public void DecidingLeft(object sender, EventArgs e)
@@ -184,6 +184,11 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     void ChangeType(int change)
     {
         type += change;
+        while(resourceType[type].resourceList.Count == 0)
+        {
+            type += change;
+        }
+
         if (type < 0)
         {
             type = resourceType.Length;
@@ -203,7 +208,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         {
             resource = resourceType[type].resourceList.Count;
         }
-        else if(resource > resourceType[type].resourceList.Count + 1)
+        else if(resource > resourceType[type].resourceList.Count)
         {
             resource = 0;
         }
@@ -224,7 +229,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
             itemUI.SetActive(false);
             cardImage.sprite = cardSprite[type];
         }
-
+        resource = 0;
         DisplayResource();
     }
 
