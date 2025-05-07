@@ -118,7 +118,7 @@ public class boardControls : MonoBehaviour
     private void OnPressed(EventArgs e, EventHandler input)
     {
         //This checks if there is anything to invoke
-        //If there is then invoke the events
+        //If there is then invoke the events and all oberver methods are called
         input?.Invoke(this, e);
     }
     

@@ -1,0 +1,114 @@
+{
+    "name": "MenuControls",
+    "maps": [
+        {
+            "name": "mainMenuControls",
+            "id": "8a28ea7c-8c0b-43ca-af7a-010a2d86284d",
+            "actions": [
+                {
+                    "name": "NavUp",
+                    "type": "Button",
+                    "id": "f240d83f-5d0d-4296-8656-9838c12ad4fe",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NavDown",
+                    "type": "Button",
+                    "id": "9a67fb01-88e4-4833-a7e6-a7f1ab8f934c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NavLeft",
+                    "type": "Button",
+                    "id": "8865a73a-8241-40c8-9455-67a143b93980",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NavRight",
+                    "type": "Button",
+                    "id": "1d3f9f4d-fd67-4e77-b282-c0c2691f3133",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Confirm",
+                    "type": "Button",
+                    "id": "140eb6ca-a934-47d6-9dc7-a8b11d0d9ea3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5addda3b-a10f-41fd-a443-de56eb81239a",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f25660d3-61cc-42a1-94f7-6d7d1df3551c",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ffa5f0bd-824b-48ef-a280-53241243a2a3",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20372cd8-f3df-4002-bda2-2b7ce6315f80",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6026473-9f2d-4e51-9d82-4a85a95aff2c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
