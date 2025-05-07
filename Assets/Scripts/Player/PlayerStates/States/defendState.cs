@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 
-public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft, IDefendRight, IDefendConfirm, IRevealDefence
+public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft, IDefendRight, IDefendConfirm, IReveal
 {
     private combatSystem combatSystem;
 
@@ -92,7 +92,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         Controls.leftPressed += ChoosingSound;
         Controls.rightPressed += ChoosingSound;
         Controls.confirmPressed += ConfirmingDefend;
-        Controls.revealOffencePressed += RevealDefence;
+        Controls.revealPressed += Reveal;
 
 
         defenceDeck.DrawCards();
@@ -222,7 +222,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         }
     }
 
-    public void RevealDefence(object sender, EventArgs e)
+    public void Reveal(object sender, EventArgs e)
     {
         if (selectedCard != null)
         {
@@ -257,7 +257,7 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
         Controls.leftPressed -= ChoosingSound;
         Controls.rightPressed -= ChoosingSound;
         Controls.confirmPressed -= ConfirmingDefend;
-        Controls.revealOffencePressed -= RevealDefence;
+        Controls.revealPressed -= Reveal;
     }
 
     public void DefendOver(object sender, EventArgs e)

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm, IRevealOffence
+public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm, IReveal
 {
     //This is to collect the combat system in the scene
     private combatSystem combatSystem;
@@ -81,7 +81,7 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         Controls.leftPressed += ChoosingSound;
         Controls.rightPressed += ChoosingSound;
         Controls.confirmPressed += ConfirmingChoice;
-        Controls.revealOffencePressed += RevealOffence;
+        Controls.revealPressed += Reveal;
 
         offenceDeck = GetComponentInChildren<offenceDeckPile>();
         offenceDeck.DrawCards();
@@ -210,7 +210,7 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         }
     }
 
-    public void RevealOffence(object sender, EventArgs e)
+    public void Reveal(object sender, EventArgs e)
     {
         if (selectedCard != null) 
         {
@@ -244,7 +244,7 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         Controls.leftPressed -= ChoosingSound;
         Controls.rightPressed -= ChoosingSound;
         Controls.confirmPressed -= ConfirmingChoice;
-        Controls.revealOffencePressed -= RevealOffence;
+        Controls.revealPressed -= Reveal;
     }
 
     public void AttackOver(object sender, EventArgs e)

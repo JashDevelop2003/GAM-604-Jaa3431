@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// This script is about providing controls for each input with suitable events
@@ -20,7 +21,7 @@ public class boardControls : MonoBehaviour
     private InputAction selectConfirm;
     private InputAction selectCancel;
     private InputAction useAbility;
-    private InputAction revealOffence;
+    private InputAction reveal;
 
     //These are the Event Handlers which will allow other scripts to become observers for specifc events
     public event EventHandler upPressed;
@@ -30,7 +31,7 @@ public class boardControls : MonoBehaviour
     public event EventHandler confirmPressed;
     public event EventHandler cancelPressed;
     public event EventHandler useAbilityPressed;
-    public event EventHandler revealOffencePressed;
+    public event EventHandler revealPressed;
 
     
     /// The Awake method creates a new player control and provides suitable inputs from the action map
@@ -47,7 +48,7 @@ public class boardControls : MonoBehaviour
         selectConfirm = playerControls.boardControls.Confirm;
         selectCancel = playerControls.boardControls.Cancel;
         useAbility = playerControls.boardControls.UseAbility;
-        revealOffence = playerControls.boardControls.RevealOffence;
+        reveal = playerControls.boardControls.RevealOffence;
 
         //This calls the method once an input is performed
         selectUp.performed += OnUpPressed;
@@ -57,7 +58,7 @@ public class boardControls : MonoBehaviour
         selectConfirm.performed += OnConfirmPressed;
         selectCancel.performed += OnCancelPressed;
         useAbility.performed += OnUseAbilityPressed;
-        revealOffence.performed += OnRevealOffencePressed;
+        reveal.performed += OnRevealOffencePressed;
         
         
         //Each input action has to be enabled in order for the inputs to perform in game
@@ -68,7 +69,7 @@ public class boardControls : MonoBehaviour
         selectConfirm.Enable();
         selectCancel.Enable();
         useAbility.Enable();
-        revealOffence.Enable();
+        reveal.Enable();
     }
 
     //These methods check for the button to be performed in which provides the events to call onPressed
@@ -110,7 +111,7 @@ public class boardControls : MonoBehaviour
 
     private void OnRevealOffencePressed(InputAction.CallbackContext revealOffence)
     {
-        OnPressed(EventArgs.Empty, revealOffencePressed);
+        OnPressed(EventArgs.Empty, revealPressed);
     }
 
     //OnPressed identifies the events inside of the event handler and invokes all methods that are listening
@@ -131,7 +132,7 @@ public class boardControls : MonoBehaviour
         selectConfirm.Disable();
         selectCancel.Disable();
         useAbility.Disable();
-        revealOffence.Disable();
+        reveal.Disable();
     }
 
 

@@ -7,7 +7,7 @@ using TMPro;
 /// First Playable: The Deciding State is to have the player select a movement card to choose for rolling
 /// </summary>
 
-public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRight, IDecideLeft, IConfirm, IUseAbility
+public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRight, IDecideLeft, IConfirm, IUseAbility, IReveal
 
 {
     //This controls will be use for providing inputs of deciding the movement card
@@ -53,6 +53,10 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     private bool usingAbility;
     private bool unableMove;
 
+    //This boolean checks when the player wants to view their deck
+    private bool viewingResource;
+    private bool isViewing;
+
     //This is to check if the player is confused
     private currentEffects effects;
 
@@ -87,6 +91,8 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         isTargeting = false;
         usingAbility = false;
         unableMove = false;
+        viewingResource = false;
+        isViewing = false;
         selectedCard = null;
         moveCard = null;
         lowestManaCost = 99;
@@ -99,6 +105,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         Controls.rightPressed += DecidingRight;
         Controls.confirmPressed += ConfirmingChoice;
         Controls.useAbilityPressed += UsingAbility;
+        Controls.revealPressed += Reveal;
 
         //This reference the movement deck pile inside of the child of the player object
         movementDeck = GetComponentInChildren<movementDeckPile>();
@@ -225,6 +232,11 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             player.ChangeState(player.TargetState);
         }
 
+        if (isViewing) 
+        { 
+            player.ChangeState(player.ViewingState);
+        }
+
         if (unableMove)
         {
             player.ChangeState(player.InactiveState);
@@ -262,6 +274,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         Controls.downPressed -= ChoosingSound;
         Controls.leftPressed -= ChoosingSound;
         Controls.rightPressed -= ChoosingSound;
+        Controls.revealPressed -= Reveal;
     }
 
     //These are using the interfaces of deciding Up, Down, Left, Right & Confirm in order for the state
@@ -277,6 +290,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
+        viewingResource = false;
     }
 
     //For status card selected must empty moveCard and turn using ability to false to make sure that only the status card is used
@@ -289,6 +303,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             statCard = selectedCard.GetComponent<statusCard>();
             moveCard = null;
             usingAbility = false;
+            viewingResource = false;
         }
         else
         {
@@ -304,6 +319,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
+        viewingResource = false;
     }
 
     public void DecidingRight(object sender, EventArgs e)
@@ -313,6 +329,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;
+        viewingResource = false;
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
@@ -370,6 +387,11 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
         }
 
+        else if (viewingResource)
+        {
+            isViewing = true;
+        }
+
         else
         {
             eventText.SetText("You chosen nothing... Choose One with WASD or Q for One Use Ability");
@@ -386,6 +408,13 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         moveCard = null;
         statCard = null;
         usingAbility = true;
+        viewingResource = false;
+    }
+
+    public void Reveal(object sender, EventArgs e)
+    {
+        eventText.SetText("Reavling Your Deck");
+        viewingResource = true;
     }
 
     public void ChoosingSound(object sender, EventArgs e) 

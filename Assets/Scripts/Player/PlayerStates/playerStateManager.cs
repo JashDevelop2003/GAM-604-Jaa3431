@@ -45,6 +45,7 @@ public class playerStateManager : MonoBehaviour
     private cursingState cursingState;
     private marketState marketState;
     private spinState spinState;
+    private viewingState viewingState;
 
     //These are to call the states in order for the states to change
     public playerStateBase PreviousState
@@ -122,6 +123,11 @@ public class playerStateManager : MonoBehaviour
         get { return spinState; }
     }
 
+    public viewingState ViewingState
+    {
+        get { return viewingState; }
+    }
+
     [Header("Animation")]
     private stateAnimation stateAnimation;
 
@@ -143,6 +149,7 @@ public class playerStateManager : MonoBehaviour
         cursingState = GetComponent<cursingState>();
         marketState = GetComponent<marketState>();
         spinState = GetComponent<spinState>();
+        viewingState = GetComponent<viewingState>();
 
         //this begins the player in the inactive state where nothing happens until is the player's turn
         currentState = inactiveState;
