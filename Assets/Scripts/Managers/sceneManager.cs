@@ -10,7 +10,6 @@ public class sceneManager : Singleton<sceneManager>
 {
     public void ChangeScene(sceneEnum newScene)
     {
-        Debug.Log("Changing Scene to: " + newScene);
         if(newScene != sceneEnum.Exit)
         {
             SceneManager.LoadScene((int)newScene);
@@ -18,6 +17,7 @@ public class sceneManager : Singleton<sceneManager>
         else
         {
             Application.Quit();
+            Debug.Log("Changing Scene to: " + newScene);
         }
     }
 }
