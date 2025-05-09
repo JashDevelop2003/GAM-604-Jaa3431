@@ -34,8 +34,8 @@ public class mainMenuControls : MonoBehaviour
         //This calls the method once an input is performed
         navigateUp.performed += OnUpPressed;
         navigateDown.performed += OnDownPressed;
-        navigateLeft.performed += OnRightPressed;
-        navigateRight.performed += OnLeftPressed;
+        navigateLeft.performed += OnLeftPressed;
+        navigateRight.performed += OnRightPressed;
         navigateConfirm.performed += OnConfirmPressed;
 
         //Each input action has to be enabled in order for the inputs to perform in game
