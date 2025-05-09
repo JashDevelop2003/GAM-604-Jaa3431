@@ -1,9 +1,10 @@
 public enum sceneEnum
 {
     MainMenu,
-    CharacterSelection,
     Tutorial,
     Credits,
+    CharacterSelection,
+    Victory,
     TestYourGame,
     Exit,
 }
