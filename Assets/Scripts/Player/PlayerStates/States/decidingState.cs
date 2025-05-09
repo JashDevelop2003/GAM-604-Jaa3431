@@ -415,6 +415,10 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     {
         eventText.SetText("Reavling Your Deck");
         viewingResource = true;
+        selectedCard = null;
+        moveCard = null;
+        statCard = null;
+        usingAbility = false;
     }
 
     public void ChoosingSound(object sender, EventArgs e) 
