@@ -123,7 +123,7 @@ public class boardControls : MonoBehaviour
     }
     
     //Disable ensures that all of the inputs are disabled if they're not necessary
-    public void Disable()
+    public void OnDisable()
     {
         selectUp.Disable();
         selectDown.Disable();
