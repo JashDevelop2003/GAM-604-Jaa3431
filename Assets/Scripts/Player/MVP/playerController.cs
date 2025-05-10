@@ -154,6 +154,7 @@ public class playerController : MonoBehaviour
             soundManager.PlaySound(gameOverSound);
             eventText.SetText(this.gameObject.name + " is Defeated");
             StartCoroutine(TakingDamage());
+            StartCoroutine(GameOver());
         }
         //Else if the current health being added from the the value is greater than the max health, the current health will maximise to only the maximum health
         else if (playerModel.CurrentHealth + value > playerModel.MaxHealth)
@@ -332,6 +333,13 @@ public class playerController : MonoBehaviour
         { 
             isDefeatedEvent?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(5);
+        sceneManager sceneManager = Singleton<sceneManager>.Instance;
+        sceneManager.ChangeScene(sceneEnum.Victory);
     }
 
     private void OnDisable()
