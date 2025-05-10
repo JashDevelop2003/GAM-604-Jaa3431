@@ -7,7 +7,7 @@ using TMPro;
 /// First Playable: The Deciding State is to have the player select a movement card to choose for rolling
 /// </summary>
 
-public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRight, IDecideLeft, IConfirm, IUseAbility, IReveal
+public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRight, IDecideLeft, IConfirm, IUseAbility, IReveal, IMenu
 
 {
     //This controls will be use for providing inputs of deciding the movement card
@@ -60,6 +60,13 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     //This is to check if the player is confused
     private currentEffects effects;
 
+    //This boolean checks if the player wants to end the game and leave to the main menu
+    private bool leaveGame;
+
+    [Header("Scene Management")]
+    [SerializeField] private sceneEnum scene;
+    private sceneManager sceneManager;
+
     [Header("User Interface")]
     //This is to add UI to the cards and add description of the card.
     [SerializeField] private GameObject decidingDisplay;
@@ -93,6 +100,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         unableMove = false;
         viewingResource = false;
         isViewing = false;
+        leaveGame = false;
         selectedCard = null;
         moveCard = null;
         lowestManaCost = 99;
@@ -117,6 +125,10 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         controller = GetComponent<playerController>();
 
         effects = GetComponent<currentEffects>();
+
+        //This reference the singleton of the scene manager
+        sceneManager = Singleton<sceneManager>.Instance;
+        Controls.cancelPressed += MainMenu;
 
         //This reference the singleton of the sound manager
         soundManager = Singleton<soundManager>.Instance;
@@ -275,6 +287,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         Controls.leftPressed -= ChoosingSound;
         Controls.rightPressed -= ChoosingSound;
         Controls.revealPressed -= Reveal;
+        Controls.cancelPressed -= MainMenu;
     }
 
     //These are using the interfaces of deciding Up, Down, Left, Right & Confirm in order for the state
@@ -291,6 +304,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         statCard = null;
         usingAbility = false;
         viewingResource = false;
+        leaveGame = false;
     }
 
     //For status card selected must empty moveCard and turn using ability to false to make sure that only the status card is used
@@ -304,6 +318,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             moveCard = null;
             usingAbility = false;
             viewingResource = false;
+            leaveGame = false;
         }
         else
         {
@@ -320,6 +335,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         statCard = null;
         usingAbility = false;
         viewingResource = false;
+        leaveGame = false;
     }
 
     public void DecidingRight(object sender, EventArgs e)
@@ -330,6 +346,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         statCard = null;
         usingAbility = false;
         viewingResource = false;
+        leaveGame = false;
     }
 
     public void ConfirmingChoice(object sender, EventArgs e)
@@ -392,6 +409,11 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             isViewing = true;
         }
 
+        else if (leaveGame)
+        {
+            sceneManager.ChangeScene(scene);
+        }
+
         else
         {
             eventText.SetText("You chosen nothing... Choose One with WASD or Q for One Use Ability");
@@ -409,6 +431,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         statCard = null;
         usingAbility = true;
         viewingResource = false;
+        leaveGame = false;
     }
 
     public void Reveal(object sender, EventArgs e)
@@ -419,6 +442,18 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         moveCard = null;
         statCard = null;
         usingAbility = false;
+        leaveGame = false;
+    }
+
+    public void MainMenu(object sender, EventArgs e)
+    {
+        eventText.SetText("Return to Main Menu. WARNING: Save files & Autosave haven't been created yet, you won't be able to load the game again to this point");
+        viewingResource = false;
+        selectedCard = null;
+        moveCard = null;
+        statCard = null;
+        usingAbility = false;
+        leaveGame = true;
     }
 
     public void ChoosingSound(object sender, EventArgs e) 
