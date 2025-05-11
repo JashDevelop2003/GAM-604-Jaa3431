@@ -7,5 +7,6 @@ public enum characterEnum
     Wielder,
     Reaper,
     Gambler,
-    Superstar
+    Superstar,
+    Null
 }
