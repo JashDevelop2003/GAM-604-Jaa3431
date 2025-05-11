@@ -101,26 +101,36 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         }
         else
         {
-            foreach (characterEnum character in playerChoice)
+            bool sameCharacter = false;
+            for (int i = 0; i < playerChoice.Length; i++) 
             {
-                if (characters[currentCharacter].character == character)
+                if (playerChoice[i] == characters[currentCharacter].character) 
+                { 
+                    sameCharacter = true;
+                }
+            }
+            if (sameCharacter)
+            {
+                infoText.SetText("Player has chosen this character, selected a new character");
+                Debug.Log(sameCharacter);
+                sameCharacter = false;
+            }
+
+            else
+            {
+                Debug.Log(sameCharacter);
+                playerChoice[player] = characters[currentCharacter].character;
+                playerIcon[player].sprite = characters[currentCharacter].characterData.abilityIcon[0];
+                playerIcon[player].color = characters[currentCharacter].characterData.abilityColour[0];
+
+                if (playerChoice[playerChoice.Length - 1] != characterEnum.Null)
                 {
-                    infoText.SetText("A Player has already chosen " + characters[currentCharacter].character + " choose a different character");
+                    StartCoroutine(StartGame());
                 }
                 else
                 {
-                    playerChoice[player] = characters[currentCharacter].character;
-                    playerIcon[player].sprite = characters[currentCharacter].characterData.abilityIcon[0];
-                    playerIcon[player].color = characters[currentCharacter].characterData.abilityColour[0];
-                    if (playerChoice[playerChoice.Length - 1] != characterEnum.Null)
-                    {
-                        sceneManager.ChangeScene(scenes[1]);
-                    }
-                    else
-                    {
-                        player++;
-                        infoText.SetText("Player " + (player + 1).ToString() + " Select a Character. You can confirm by pressing Space. S, then Space will send you back to the main menu");
-                    }
+                    player++;
+                    infoText.SetText("Player " + (player + 1).ToString() + " Select a Character. You can confirm by pressing Space. S, then Space will send you back to the main menu");
                 }
             }
         }
@@ -158,6 +168,17 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         characterIcon.sprite = characters[currentCharacter].characterData.abilityIcon[0];
         characterIcon.color = characters[currentCharacter].characterData.abilityColour[0];
 
+    }
+
+    IEnumerator StartGame()
+    {
+        MenuControls.pressedLeft -= DecidingLeft;
+        MenuControls.pressedRight -= DecidingRight;
+        MenuControls.pressedDown -= MainMenu;
+        MenuControls.pressedConfirm -= ConfirmingChoice;
+        infoText.SetText("Beginning Game at: " + scenes[1] + " board");
+        yield return new WaitForSeconds(3);
+        sceneManager.ChangeScene(scenes[1]);
     }
 
     private void OnDisable()
