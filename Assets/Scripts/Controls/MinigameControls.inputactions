@@ -1,0 +1,134 @@
+{
+    "name": "MinigameControls",
+    "maps": [
+        {
+            "name": "GameControls",
+            "id": "3ea76960-fe29-4bea-914b-28f4d44a5882",
+            "actions": [
+                {
+                    "name": "ChooseUp",
+                    "type": "Button",
+                    "id": "c15f2cbe-c166-4210-a9b5-c4be232dd922",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChooseDown",
+                    "type": "Button",
+                    "id": "d8d570c7-fb07-453f-a7ff-a601426b9178",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChooseLeft",
+                    "type": "Button",
+                    "id": "9a8c8281-a3e3-437a-b953-6d03464eaaf0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChooseRight",
+                    "type": "Button",
+                    "id": "442c6935-4b3a-4b9d-a997-61c23da5d069",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ConfirmChoice",
+                    "type": "Button",
+                    "id": "e491e3c8-0838-4644-bdae-f825cdb80916",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rules",
+                    "type": "Button",
+                    "id": "43e0d6c0-7aa8-4677-80ce-b0b9eb15cd6c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d9693552-62f0-43db-8b3a-f345668b3c15",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChooseUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07227ed0-9863-4f16-b5ce-10342f1535b6",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChooseDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6e0f5c1-43f5-47fc-96dd-cb66a6733276",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChooseLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3125dbf0-fd66-4231-bd7f-2ca3ec9b7394",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChooseRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f3400c4-d86b-4388-91d2-5eb0b0e08f88",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConfirmChoice",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a4c39f8-9ca8-4e95-b77e-81fc3368bff5",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rules",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
