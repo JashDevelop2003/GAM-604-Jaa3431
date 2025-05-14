@@ -18,6 +18,8 @@ public struct Cards
     public fruitEnum fruit;
     public bool isRevealed;
     public Image fruitImage;
+    public GameObject backCard;
+    public Image backCardColour;
 }
 
 //The fruits are to display the amount of fruits in the game
@@ -34,6 +36,11 @@ public struct Fruits
 public class xIIIManager : Singleton<xIIIManager>
 {
     [SerializeField] private Cards[] cards = new Cards[13];
+    public Cards[] Cards
+    {
+        get { return cards; }
+        set { cards = value; }
+    }
     [SerializeField] private Fruits fruits;
     private bool[] fruitPlaced = new bool[4];
 
@@ -46,6 +53,7 @@ public class xIIIManager : Singleton<xIIIManager>
         for(int i = 0; i < cards.Length; i++)
         {
             cards[i].fruit = fruitEnum.Null;
+            cards[i].backCard.SetActive(true);
         }
         StartCoroutine(OrganiseCards());
     }
