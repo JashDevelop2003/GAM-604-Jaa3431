@@ -31,7 +31,7 @@ public class gameControls : MonoBehaviour
         chooseLeft = minigameControls .GameControls.ChooseLeft;
         chooseRight = minigameControls.GameControls.ChooseRight;
         confirmChoice = minigameControls.GameControls.ConfirmChoice;
-        rules = minigameControls .GameControls.Rules;
+        rules = minigameControls.GameControls.Rules;
 
         //This calls the method once an input is performed
         chooseUp.performed += OnUpPressed;

@@ -19,9 +19,10 @@ public class ruleState : gameStateBase, IConfirm
 
     public override void EnterState(gameStateManager player)
     {
+        gameControls = GetComponent<gameControls>();
         isReady = false;
         rulesPanel.SetActive(true);
-        gameControls.pressedConfirm += ConfirmingChoice;
+        GameControls.pressedConfirm += ConfirmingChoice;
     }
 
     public override void UpdateState(gameStateManager player)

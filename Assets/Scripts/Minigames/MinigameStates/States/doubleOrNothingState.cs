@@ -24,11 +24,11 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
     [SerializeField] private Color[] panelColor = new Color[2];
 
     [Header ("Sound Effects")]
-    private AudioClip inputSound;
+    [SerializeField] private AudioClip inputSound;
 
     public override void EnterState(gameStateManager player)
     {
-        backToRules = true;
+        backToRules = false;
         gamePanel.SetActive(true);
         currentChoice = choiceEnum.Null;
         gameManager = Singleton<doubleOrNothingManager>.Instance;
@@ -60,6 +60,7 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
     public void ConfirmingChoice(object sender, EventArgs e)
     {
         gameManager.Outcome(currentChoice);
+        StartCoroutine(WaitForResults());
     }
 
     public void DecidingLeft(object sender, EventArgs e)
@@ -97,7 +98,7 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
     IEnumerator WaitForResults()
     {
         DisableControls();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         EnableControls();
     }
 
@@ -107,6 +108,7 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
         GameControls.pressedRight += DecidingRight;
         GameControls.pressedLeft += InputSound;
         GameControls.pressedRight += InputSound;
+        GameControls.pressedConfirm += ConfirmingChoice;
         GameControls.pressedRules += Rules;
     }
 
@@ -116,6 +118,7 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
         GameControls.pressedRight -= DecidingRight;
         GameControls.pressedLeft -= InputSound;
         GameControls.pressedRight -= InputSound;
+        GameControls.pressedConfirm -= ConfirmingChoice;
         GameControls.pressedRules -= Rules;
     }
 

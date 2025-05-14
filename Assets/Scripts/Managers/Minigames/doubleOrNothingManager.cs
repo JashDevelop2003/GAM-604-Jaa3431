@@ -27,12 +27,11 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
         cash = 10;
         chance = Random.Range(90, 101);
         cashText.SetText(cash.ToString());
-        chanceText.SetText(chance.ToString());
+        chanceText.SetText(chance.ToString() + "%");
         soundManager = Singleton<soundManager>.Instance;
         sceneManager = Singleton<sceneManager>.Instance;
     }
 
-    // Update is called once per frame
     public void Outcome(choiceEnum choice)
     {
         if (choice == choiceEnum.Keep) 
@@ -52,12 +51,13 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
     void DisplayOutcome()
     {
         cashText.SetText(cash.ToString());
-        chanceText.SetText(chance.ToString());
+        chanceText.SetText(chance.ToString() + "%");
     }
 
     IEnumerator TakeCash()
     {
         soundManager.PlaySound(soundOutcome[0]);
+        StartCoroutine(GameOver());
         yield return null;
     }
 
@@ -69,6 +69,8 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
             cash = 0;
             soundManager.PlaySound(soundOutcome[2]);
             infoText.SetText("Game Over, the player loses all their prize cash");
+            DisplayOutcome();
+            StartCoroutine(GameOver());
         }
         else
         {
@@ -79,12 +81,13 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
             {
                 chance = 0;
             }
+            DisplayOutcome();
         }
     }
 
     IEnumerator GameOver()
     {
-        yield return new WaitForSeconds(soundOutcome[0].samples + 1);
+        yield return new WaitForSeconds(5f);
         sceneManager.ChangeScene(scene);
     }
 }

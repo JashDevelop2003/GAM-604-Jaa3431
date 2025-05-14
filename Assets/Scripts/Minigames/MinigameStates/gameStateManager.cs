@@ -23,7 +23,7 @@ public class gameStateManager : MonoBehaviour
     {
         minigameState = GetComponent<gameStateBase>();
         ruleState = GetComponent<ruleState>();
-        currentState = ruleState;
+        currentState = RuleState;
         currentState.EnterState(this);
     }
 
