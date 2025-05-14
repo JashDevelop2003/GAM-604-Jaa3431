@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 292779306}
   - component: {fileID: 292779305}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconTen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,43 +684,43 @@ MonoBehaviour:
   cards:
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 1654742301}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 1159707915}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 1413445821}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 1401588373}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 886915343}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 871609037}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 419660113}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 1168781454}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 881255497}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 292779305}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 1413694219}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 1310207672}
   - fruit: 0
     isRevealed: 0
-    fruitImage: {fileID: 0}
+    fruitImage: {fileID: 1614672972}
   fruits:
     cherries: 5
     lemons: 4
@@ -836,7 +836,7 @@ GameObject:
   - component: {fileID: 419660114}
   - component: {fileID: 419660113}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconSeven
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1020,7 +1020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &446090623
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1695,12 +1695,12 @@ GameObject:
   - component: {fileID: 871609038}
   - component: {fileID: 871609037}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconSix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &871609036
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1771,7 +1771,7 @@ GameObject:
   - component: {fileID: 881255498}
   - component: {fileID: 881255497}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconNine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1847,12 +1847,12 @@ GameObject:
   - component: {fileID: 886915344}
   - component: {fileID: 886915343}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconFive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &886915342
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1928,7 +1928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &914310323
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2319,7 +2319,7 @@ GameObject:
   - component: {fileID: 1159707916}
   - component: {fileID: 1159707915}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2395,7 +2395,7 @@ GameObject:
   - component: {fileID: 1168781455}
   - component: {fileID: 1168781454}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconEight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2698,7 +2698,7 @@ GameObject:
   - component: {fileID: 1310207673}
   - component: {fileID: 1310207672}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconTwelve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2925,7 +2925,7 @@ GameObject:
   - component: {fileID: 1401588374}
   - component: {fileID: 1401588373}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconFour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3001,7 +3001,7 @@ GameObject:
   - component: {fileID: 1413445822}
   - component: {fileID: 1413445821}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconThree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3077,7 +3077,7 @@ GameObject:
   - component: {fileID: 1413694220}
   - component: {fileID: 1413694219}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconEleven
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3838,7 +3838,7 @@ GameObject:
   - component: {fileID: 1614672973}
   - component: {fileID: 1614672972}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconThirteen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3914,7 +3914,7 @@ GameObject:
   - component: {fileID: 1654742302}
   - component: {fileID: 1654742301}
   m_Layer: 5
-  m_Name: FruitIcon
+  m_Name: FruitIconOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
