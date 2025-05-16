@@ -11,6 +11,7 @@ public class gameStateManager : MonoBehaviour
     public gameStateBase MinigameState
     {
         get { return minigameState; }
+        set { minigameState = value; }
     }
 
     public ruleState RuleState

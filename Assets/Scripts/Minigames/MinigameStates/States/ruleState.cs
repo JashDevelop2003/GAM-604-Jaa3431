@@ -13,6 +13,10 @@ public class ruleState : gameStateBase, IConfirm
     }
 
     private bool isReady;
+    public bool IsReady
+    {
+        get { return isReady; }
+    }
 
     [Header("User Interface")]
     [SerializeField] private GameObject rulesPanel;

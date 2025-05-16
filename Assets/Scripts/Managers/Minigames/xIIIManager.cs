@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
@@ -20,6 +22,7 @@ public struct Cards
     public Image fruitImage;
     public GameObject backCard;
     public Image backCardColour;
+    public Image frontCardColour;
 }
 
 //The fruits are to display the amount of fruits in the game
@@ -35,17 +38,31 @@ public struct Fruits
 
 public class xIIIManager : Singleton<xIIIManager>
 {
+    //Struct is used to store data of the cards & fruits to provide for each card
     [SerializeField] private Cards[] cards = new Cards[13];
     public Cards[] Cards
     {
         get { return cards; }
         set { cards = value; }
     }
+    
     [SerializeField] private Fruits fruits;
+    //The boolean is used to make the coroutine wait until the boolean in the array is set to true
+    // 0 = Cherries are placed
+    // 1 = Lemons are placed
+    // 2 = Grapes are placed
+    // 3 = Watermelon are placed
     private bool[] fruitPlaced = new bool[4];
 
+    //This have an event that will change the placement of the players
+    public event EventHandler changeTurn;
+    [SerializeField] private GameObject[] startingPlayer = new GameObject[2];
+    private int startingPlayerInt;
+    [SerializeField] private Color[] playerColour = new Color[2];
+
     [Header ("User Interface")]
-    [SerializeField] Sprite[] fruitSprites = new Sprite[5];
+    [SerializeField] private Sprite[] fruitSprites = new Sprite[5];
+    [SerializeField] private TMP_Text infoText;
 
     // Start is called before the first frame update
     void Start()
@@ -54,11 +71,12 @@ public class xIIIManager : Singleton<xIIIManager>
         {
             cards[i].fruit = fruitEnum.Null;
             cards[i].backCard.SetActive(true);
+            cards[i].isRevealed = false;
         }
         StartCoroutine(OrganiseCards());
     }
 
-    
+    //The coroutine places each fruit one by one to ensure that there are no issues towards 2 fruits being stored in 1 card
     IEnumerator OrganiseCards()
     {
         PlaceCherries(fruits.cherries);
@@ -70,8 +88,23 @@ public class xIIIManager : Singleton<xIIIManager>
         PlaceWatermelon(fruits.watermelon);
         yield return new WaitUntil(() => fruitPlaced[3] == true);
         PlaceCoconut(fruits.coconut);
+        StartCoroutine(BeginGame());
     }
 
+    //This waits until the players are ready, once the players are ready the game will decide randomly who goes first
+    IEnumerator BeginGame()
+    {
+        startingPlayerInt = UnityEngine.Random.Range(0, 2);
+        ruleState ruleState = startingPlayer[startingPlayerInt].GetComponent<ruleState>();
+        yield return new WaitUntil(() => ruleState.IsReady == true);
+        xIIIInactiveState changeState = startingPlayer[startingPlayerInt].GetComponent<xIIIInactiveState>();
+        changeState.StartingGame = true;
+    }
+
+    //Place[Fruit/Coconut] uses a paramerter to store the amount of fruits equal to the struct's integer of that fruit/coocnut
+    //The outcome parameter chooses a random card from the struct and checks if the enumeration of the fruit enum inside of the card is null
+    //the outcome keeps choosing a random card until the chosen struct card is null which will change the card to the suitable fruit.
+    //Once all the amount of fruits are stored onto a card struct the boolean will turn true and move onto the next fruit/coconut to place down
     void PlaceCherries(int cherries)
     {
         int outcome;
@@ -80,7 +113,7 @@ public class xIIIManager : Singleton<xIIIManager>
         {
             do
             {
-                outcome = Random.Range(0, cards.Length);
+                outcome = UnityEngine.Random.Range(0, cards.Length);
             }
             while (cards[outcome].fruit != fruitEnum.Null);
             cards[outcome].fruit = fruitEnum.Cherries;
@@ -97,7 +130,7 @@ public class xIIIManager : Singleton<xIIIManager>
         {
             do
             {
-                outcome = Random.Range(0, cards.Length);
+                outcome = UnityEngine.Random.Range(0, cards.Length);
             }
             while (cards[outcome].fruit != fruitEnum.Null);
             cards[outcome].fruit = fruitEnum.Lemon;
@@ -114,7 +147,7 @@ public class xIIIManager : Singleton<xIIIManager>
         {
             do
             {
-                outcome = Random.Range(0, cards.Length);
+                outcome = UnityEngine.Random.Range(0, cards.Length);
             }
             while (cards[outcome].fruit != fruitEnum.Null);
             cards[outcome].fruit = fruitEnum.Grapes;
@@ -131,7 +164,7 @@ public class xIIIManager : Singleton<xIIIManager>
         {
             do
             {
-                outcome = Random.Range(0, cards.Length);
+                outcome = UnityEngine.Random.Range(0, cards.Length);
             }
             while (cards[outcome].fruit != fruitEnum.Null);
             cards[outcome].fruit = fruitEnum.Watermelon;
@@ -148,11 +181,31 @@ public class xIIIManager : Singleton<xIIIManager>
         {
             do
             {
-                outcome = Random.Range(0, cards.Length);
+                outcome = UnityEngine.Random.Range(0, cards.Length);
             }
             while (cards[outcome].fruit != fruitEnum.Null);
             cards[outcome].fruit = fruitEnum.Watermelon;
             cards[outcome].fruitImage.sprite = fruitSprites[(int)fruitEnum.Coconut];
         }
+    }
+
+    public void RevealCard(int selectedCard, int player)
+    {
+        cards[selectedCard].backCard.SetActive(false);
+        cards[selectedCard].frontCardColour.color = playerColour[player - 1];
+        cards[selectedCard].isRevealed = true;
+        if(cards[selectedCard].fruit != fruitEnum.Coconut)
+        {
+            ChangeTurn();
+        }
+        else if (cards[selectedCard].fruit == fruitEnum.Coconut)
+        {
+            infoText.SetText("Game Over: Player " + player.ToString() + "loses all of their cash prize");
+        }
+    }
+
+    public void ChangeTurn()
+    {
+        changeTurn?.Invoke(this, EventArgs.Empty);
     }
 }
