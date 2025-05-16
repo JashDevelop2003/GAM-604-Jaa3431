@@ -13,7 +13,6 @@ public class xIIIInactiveState : gameStateBase
         set { startTurn = value; }
     }
     private xIIIManager xIIIManager;
-    private xIIIActiveState nextState;
 
     public override void EnterState(gameStateManager player)
     {
@@ -26,7 +25,7 @@ public class xIIIInactiveState : gameStateBase
     {
         if (startTurn)
         {
-            player.MinigameState = nextState;
+            player.MinigameState = GetComponent<xIIIActiveState>();
             player.ChangeState(player.MinigameState);
         }
     }

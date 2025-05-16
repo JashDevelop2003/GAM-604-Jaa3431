@@ -35,7 +35,6 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
     private bool isSkipping;
 
     //The XIII manager is needed towards changing the states by using an event along with calling to skip the next turn and revealing the card
-    private xIIIInactiveState nextState;
     private xIIIManager xIIIManager;
 
     //Prize cash is use to store the amount of cash the player can possibly win
@@ -45,7 +44,7 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
     private int selectedCard;
 
     //This is to inform the parameter of the player is currently playing
-    [SerializeField] private int player;
+    [SerializeField] private int playerInt;
 
     [Header("User Interface")]
     [SerializeField] private Color[] cardColors = new Color[2];
@@ -79,6 +78,17 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         { 
             selectedCard++;
         }
+        for (int i = 0; i < xIIIManager.Cards.Length; i++)
+        {
+            if (i == selectedCard)
+            {
+                xIIIManager.Cards[i].backCardColour.color = cardColors[1];
+            }
+            else
+            {
+                xIIIManager.Cards[i].backCardColour.color = cardColors[0];
+            }
+        }
 
         //This checks if the player can skip, if they can then the skip panel will appear, otherwise the panel won't appear
         if (!usedSkip)
@@ -92,7 +102,7 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         }
 
         //This displays the info on who turn it is with setting the text
-        infoText.SetText("Player " + player.ToString() + "'s turn");
+        infoText.SetText("Player " + playerInt.ToString() + "'s turn");
     }
 
     //Update state will update to check if any of the booleans are true which will change to the specifc state
@@ -100,7 +110,7 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
     {
         if (endTurn) 
         {
-            player.MinigameState = nextState;
+            player.MinigameState = GetComponent<xIIIInactiveState>();
             player.ChangeState(player.MinigameState);
         }
         
@@ -246,7 +256,8 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
             UnityEngine.Debug.LogError("Something went wrong with either the Reveal Card or Card Struct");
         }
 
-        xIIIManager.RevealCard(selectedCard, player);
+        xIIIManager.RevealCard(selectedCard, playerInt);
+        cashPrizeText.SetText(prizeCash.ToString());
     }
 
     public void EndTurn(object sender, EventArgs e)

@@ -184,7 +184,7 @@ public class xIIIManager : Singleton<xIIIManager>
                 outcome = UnityEngine.Random.Range(0, cards.Length);
             }
             while (cards[outcome].fruit != fruitEnum.Null);
-            cards[outcome].fruit = fruitEnum.Watermelon;
+            cards[outcome].fruit = fruitEnum.Coconut;
             cards[outcome].fruitImage.sprite = fruitSprites[(int)fruitEnum.Coconut];
         }
     }
