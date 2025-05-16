@@ -215,6 +215,8 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         }
     }
 
+    //When pressing S (Down), the player can skip if they deicde to confirm whilst is skipping is true
+    //However they can only do so if they haven't used their skip yet
     public void DecidingDown(object sender, EventArgs e)
     {
         if (!usedSkip)
@@ -228,6 +230,9 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         }
     }
 
+    //This confirms the player choice when pressing spacebar
+    //If the boolean of isSkipping is true then the player skips their turn
+    // Otherwise the card is reveal to identify the outcome of the card.
     public void ConfirmingChoice(object sender, EventArgs e)
     {
         if (isSkipping)
@@ -242,6 +247,8 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         }
     }
 
+    //Reveal Card method checks what fruit the card is and gain cash depending on the fruit
+    //If it turns out the fruit was a coconut, then the player loses all their cash and turn prize cash to 0
     public void RevealCard()
     {
         if(xIIIManager.Cards[selectedCard].fruit != fruitEnum.Coconut)
@@ -276,11 +283,14 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         cashPrizeText.SetText(prizeCash.ToString());
     }
 
+    //This observer method is added onto the change turn subject from the XIII manager
+    //This will set the end turn boolean to true, which will trigger the update state to change the state to inactive state
     public void EndTurn(object sender, EventArgs e)
     {
         endTurn = true;
     }
 
+    //This observer method is added onto each input (excluding confirm) which plays every time the player presses left, right or down
     public void PlaySound(object sender, EventArgs e)
     {
         soundManager.PlaySound(inputSound);

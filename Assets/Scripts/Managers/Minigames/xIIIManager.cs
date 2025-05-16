@@ -52,7 +52,7 @@ public class xIIIManager : Singleton<xIIIManager>
     // 1 = Lemons are placed
     // 2 = Grapes are placed
     // 3 = Watermelon are placed
-    private bool[] fruitPlaced = new bool[4];
+    private bool[] fruitPlaced = new bool[5];
 
     //This have an event that will change the placement of the players
     public event EventHandler changeTurn;
@@ -90,15 +90,16 @@ public class xIIIManager : Singleton<xIIIManager>
     //The coroutine places each fruit one by one to ensure that there are no issues towards 2 fruits being stored in 1 card
     IEnumerator OrganiseCards()
     {
-        PlaceCherries(fruits.cherries);
+        PlaceFruits(fruitEnum.Cherries, fruits.cherries);
         yield return new WaitUntil(() => fruitPlaced[0] == true);
-        PlaceLemon(fruits.lemons);
+        PlaceFruits(fruitEnum.Lemon, fruits.lemons);
         yield return new WaitUntil(() => fruitPlaced[1] == true);
-        PlaceGrapes(fruits.grapes);
+        PlaceFruits(fruitEnum.Grapes, fruits.grapes);
         yield return new WaitUntil(() => fruitPlaced[2] == true);
-        PlaceWatermelon(fruits.watermelon);
+        PlaceFruits(fruitEnum.Watermelon, fruits.watermelon);
         yield return new WaitUntil(() => fruitPlaced[3] == true);
-        PlaceCoconut(fruits.coconut);
+        PlaceFruits(fruitEnum.Coconut, fruits.coconut);
+        yield return new WaitUntil(() => fruitPlaced[4] == true);
         StartCoroutine(BeginGame());
     }
 
@@ -116,95 +117,36 @@ public class xIIIManager : Singleton<xIIIManager>
     //The outcome parameter chooses a random card from the struct and checks if the enumeration of the fruit enum inside of the card is null
     //the outcome keeps choosing a random card until the chosen struct card is null which will change the card to the suitable fruit.
     //Once all the amount of fruits are stored onto a card struct the boolean will turn true and move onto the next fruit/coconut to place down
-    void PlaceCherries(int cherries)
+    void PlaceFruits(fruitEnum fruit, int amount)
     {
         int outcome;
 
-        for(int i = 0; i < cherries; i++)
+        for (int i = 0; i < amount; i++)
         {
             do
             {
                 outcome = UnityEngine.Random.Range(0, cards.Length);
             }
             while (cards[outcome].fruit != fruitEnum.Null);
-            cards[outcome].fruit = fruitEnum.Cherries;
-            cards[outcome].fruitImage.sprite = fruitSprites[(int)fruitEnum.Cherries];
+            cards[outcome].fruit = fruit;
+            cards[outcome].fruitImage.sprite = fruitSprites[(int)fruit];
         }
-        fruitPlaced[0] = true;
+        fruitPlaced[(int)fruit] = true;
     }
 
-    void PlaceLemon(int lemon)
-    {
-        int outcome;
-
-        for (int i = 0; i < lemon; i++)
-        {
-            do
-            {
-                outcome = UnityEngine.Random.Range(0, cards.Length);
-            }
-            while (cards[outcome].fruit != fruitEnum.Null);
-            cards[outcome].fruit = fruitEnum.Lemon;
-            cards[outcome].fruitImage.sprite = fruitSprites[(int)fruitEnum.Lemon];
-        }
-        fruitPlaced[1] = true;
-    }
-
-    void PlaceGrapes(int grapes)
-    {
-        int outcome;
-
-        for (int i = 0; i < grapes; i++)
-        {
-            do
-            {
-                outcome = UnityEngine.Random.Range(0, cards.Length);
-            }
-            while (cards[outcome].fruit != fruitEnum.Null);
-            cards[outcome].fruit = fruitEnum.Grapes;
-            cards[outcome].fruitImage.sprite = fruitSprites[(int)fruitEnum.Grapes];
-        }
-        fruitPlaced[2] = true;
-    }
-
-    void PlaceWatermelon(int watermelon)
-    {
-        int outcome;
-
-        for (int i = 0; i < watermelon; i++)
-        {
-            do
-            {
-                outcome = UnityEngine.Random.Range(0, cards.Length);
-            }
-            while (cards[outcome].fruit != fruitEnum.Null);
-            cards[outcome].fruit = fruitEnum.Watermelon;
-            cards[outcome].fruitImage.sprite = fruitSprites[(int)fruitEnum.Watermelon];
-        }
-        fruitPlaced[3] = true;
-    }
-
-    void PlaceCoconut(int coconut) 
-    {
-        int outcome;
-
-        for (int i = 0; i < coconut; i++)
-        {
-            do
-            {
-                outcome = UnityEngine.Random.Range(0, cards.Length);
-            }
-            while (cards[outcome].fruit != fruitEnum.Null);
-            cards[outcome].fruit = fruitEnum.Coconut;
-            cards[outcome].fruitImage.sprite = fruitSprites[(int)fruitEnum.Coconut];
-        }
-    }
-
+    //This method is called when the player confirms and doesn't skips
+    //The card is revealed to the player to identify what they won/possibly lost
     public void RevealCard(int selectedCard, int player)
     {
+        //The parameter of selected card will reveal the card the player has chosen
+        //The int player will identifty who owns the card
         cards[selectedCard].backCard.SetActive(false);
         cards[selectedCard].frontCardColour.color = playerColour[player - 1];
         cards[selectedCard].isRevealed = true;
+
+        //A Conditional statement is used to check if the card was a coconut
+        //If the card is a coconut then the game is over and the current player loses all their prize cash
+        //Otherwise the game will change the turns around
         if(cards[selectedCard].fruit != fruitEnum.Coconut)
         {
             ChangeTurn();
@@ -218,11 +160,15 @@ public class xIIIManager : Singleton<xIIIManager>
         }
     }
 
+    //This method is called when revealing a fruit card
+    //This method will invoke the change turn event which will change the turn of the active and inactive player
     public void ChangeTurn()
     {
         changeTurn?.Invoke(this, EventArgs.Empty);
     }
 
+    //This Coroutine begins when the player finds the coconut
+    //The scene manager will change the scene to the board map
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(3);
