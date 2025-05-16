@@ -53,12 +53,18 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
     [SerializeField] private TMP_Text cashPrizeText;
     [SerializeField] private TMP_Text infoText;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip inputSound;
+    [SerializeField] private AudioClip skipSound;
+    soundManager soundManager;
+
 
     public override void EnterState(gameStateManager player)
     {
         //The booleans that cause the change in the state must be false to prevent the player from changing instantly
         endTurn = false;
         isSkipping = false;
+        checkRules = false;
 
         //The controls are collect with a method to be added onto the specific event to be listening to when a controls input has been invoked.
         controls = GetComponent<gameControls>();
@@ -71,6 +77,12 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         //The XIII manager is collected from the singleton instance to ensure that there is only 1 XIII manager that is being used for referencing and collecting methods
         xIIIManager = Singleton<xIIIManager>.Instance;
         xIIIManager.changeTurn += EndTurn;
+
+        //The sound manager is collected from the singleton instance to play sound towards input
+        soundManager = Singleton<soundManager>.Instance;
+        GameControls.pressedLeft += PlaySound;
+        GameControls.pressedRight += PlaySound;
+        GameControls.pressedDown += PlaySound;
 
         //The while loop checks if the lowest card integer that isn't revealed yet
         selectedCard = 0;
@@ -129,6 +141,9 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         GameControls.pressedDown -= DecidingDown;
         GameControls.pressedConfirm -= ConfirmingChoice;
         GameControls.pressedRules -= Rules;
+        GameControls.pressedLeft -= PlaySound;
+        GameControls.pressedRight -= PlaySound;
+        GameControls.pressedDown -= PlaySound;
     }
 
     //Pressing Backspace will return the player back to the rules
@@ -218,6 +233,7 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         if (isSkipping)
         {
             usedSkip = true;
+            soundManager.PlaySound(skipSound);
             xIIIManager.ChangeTurn();
         }
         else 
@@ -263,6 +279,11 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
     public void EndTurn(object sender, EventArgs e)
     {
         endTurn = true;
+    }
+
+    public void PlaySound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(inputSound);
     }
 }
 

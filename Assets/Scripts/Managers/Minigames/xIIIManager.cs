@@ -64,9 +64,20 @@ public class xIIIManager : Singleton<xIIIManager>
     [SerializeField] private Sprite[] fruitSprites = new Sprite[5];
     [SerializeField] private TMP_Text infoText;
 
+    [Header ("Sound Effects")]
+    [SerializeField] private AudioClip[] outcomeSounds = new AudioClip[2];
+    private soundManager soundManager;
+
+    [Header("Scene Management")]
+    [SerializeField] private sceneEnum scene;
+    private sceneManager sceneManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = Singleton<soundManager>.Instance;
+        sceneManager = Singleton<sceneManager>.Instance;
+
         for(int i = 0; i < cards.Length; i++)
         {
             cards[i].fruit = fruitEnum.Null;
@@ -197,15 +208,24 @@ public class xIIIManager : Singleton<xIIIManager>
         if(cards[selectedCard].fruit != fruitEnum.Coconut)
         {
             ChangeTurn();
+            soundManager.PlaySound(outcomeSounds[1]);
         }
         else if (cards[selectedCard].fruit == fruitEnum.Coconut)
         {
             infoText.SetText("Game Over: Player " + player.ToString() + "loses all of their cash prize");
+            soundManager.PlaySound(outcomeSounds[0]);
+            StartCoroutine(GameOver());
         }
     }
 
     public void ChangeTurn()
     {
         changeTurn?.Invoke(this, EventArgs.Empty);
+    }
+
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(3);
+        sceneManager.ChangeScene(scene);
     }
 }
