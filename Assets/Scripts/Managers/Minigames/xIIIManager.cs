@@ -154,7 +154,7 @@ public class xIIIManager : Singleton<xIIIManager>
         }
         else if (cards[selectedCard].fruit == fruitEnum.Coconut)
         {
-            infoText.SetText("Game Over: Player " + player.ToString() + "loses all of their cash prize");
+            infoText.SetText("Game Over: Player " + player.ToString() + " loses all of their cash prize");
             soundManager.PlaySound(outcomeSounds[0]);
             StartCoroutine(GameOver());
         }
