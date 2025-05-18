@@ -62,13 +62,25 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
     [SerializeField] private TMP_Text infoText;
     [SerializeField] private Sprite[] iconImage = new Sprite[5];
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip appearSound;
+    [SerializeField] private AudioClip[] outcomeSound = new AudioClip[2];
+    private soundManager soundManager;
+
+    [Header("Scene Management")]
+    [SerializeField] private sceneEnum scene;
+    private sceneManager sceneManager;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = Singleton<soundManager>.Instance;
+        sceneManager = Singleton<sceneManager>.Instance;
+
         secondSpin = false;
         for (int i = 0; i < blocks.Length; i++)
         {
-            blocks[i].icon = iconEnum.Null;
             blocks[i].isLocked = false;
         }
         for( int i = 0;i < winLines.Length; i++)
@@ -99,7 +111,8 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
             //Otherwise the icon will change their icon (or if unlucky stay the same)
             if (!blocks[i].isLocked)
             {
-                yield return new WaitForSeconds(1);
+                blocks[i].icon = iconEnum.Null;
+                yield return new WaitForSeconds(0.5f);
                 outcome = UnityEngine.Random.Range(0, (int)iconEnum.Null);
                 if (outcome == (int)iconEnum.Cherries)
                 {
@@ -122,6 +135,7 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
                     blocks[i].icon = iconEnum.Seven;
                 }
                 blocks[i].iconImage.sprite = iconImage[outcome];
+                soundManager.PlaySound(appearSound);
             }
         }
 
@@ -166,15 +180,24 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
                 {
                     cashPrize += 250;
                 }
-                else if (blocks[winLines[i].winBlocks[0]].icon == iconEnum.Lemon)
+                else if (blocks[winLines[i].winBlocks[0]].icon == iconEnum.Seven)
                 {
                     cashPrize += 777;
                 }
+                yield return new WaitForSeconds(1);
             }
-
-            yield return new WaitForSeconds(1);
         }
 
+        if (cashPrize > 0) 
+        {
+            soundManager.PlaySound(outcomeSound[1]);
+        }
+        else
+        {
+            soundManager.PlaySound(outcomeSound[0]);
+        }
         infoText.SetText("Game Over, the player has won: " +  cashPrize.ToString() + " cash");
+        yield return new WaitForSeconds(3);
+        sceneManager.ChangeScene(scene);
     }
 }

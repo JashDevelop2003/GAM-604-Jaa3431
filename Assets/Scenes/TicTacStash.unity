@@ -229,6 +229,11 @@ MonoBehaviour:
   - {fileID: -1251093787, guid: a03c2610221b14940b818fb271b448fa, type: 3}
   - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
   - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
+  appearSound: {fileID: 8300000, guid: 674164301a9ad2345adc93c006e87495, type: 3}
+  outcomeSound:
+  - {fileID: 8300000, guid: c6b596fd07a14a64b89285b6f079b167, type: 3}
+  - {fileID: 8300000, guid: 3830029b89ea7a04992156c6adbc327c, type: 3}
+  scene: 5
 --- !u!1 &31781086
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &225044778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1162,6 +1167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 439115536}
   - component: {fileID: 439115537}
+  - component: {fileID: 439115538}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1196,7 +1202,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1280,6 +1286,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &439115538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439115535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fa369ba28957c94288da8144f857879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &482081098
 GameObject:
   m_ObjectHideFlags: 0
@@ -3619,7 +3637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1503567072
 Transform:
   m_ObjectHideFlags: 0
@@ -4085,7 +4103,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4448,6 +4466,11 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0.16458082, g: 1, b: 0, a: 1}
   spinPanel: {fileID: 846152912}
+  inputSound: {fileID: 8300000, guid: 15e9f634e944e104dab8ac20d84b5e12, type: 3}
+  spinSound: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+  lockSound:
+  - {fileID: 8300000, guid: b83bf8726a7fac349a54389f0c57cda6, type: 3}
+  - {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
 --- !u!114 &1930557457
 MonoBehaviour:
   m_ObjectHideFlags: 0

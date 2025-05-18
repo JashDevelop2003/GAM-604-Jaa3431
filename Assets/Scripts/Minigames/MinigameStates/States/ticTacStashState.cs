@@ -37,6 +37,12 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
     [SerializeField] private Color[] spinColour = new Color[2];
     [SerializeField] private Image spinPanel;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip inputSound;
+    [SerializeField] private AudioClip spinSound;
+    [SerializeField] private AudioClip[] lockSound = new AudioClip[2];
+    private soundManager soundManager;
+
     public override void EnterState(gameStateManager player)
     {
         //The booleans must be false to ensure that the player doesn't acidentally start spinning when they want to make a choice or kept on the rules state
@@ -48,6 +54,10 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
         //The tic tac stash manager needs be to be reference to gather the struct and boolean variable by using a singleton instance
         gameManager = Singleton<ticTacStashManager>.Instance;
         gameControls = GetComponent<gameControls>();
+
+        //The sound manager is reference to provide the input sound
+        soundManager = Singleton<soundManager>.Instance;
+
         //At the start of this state, a Coroutine starts to wait until the first spin is complete.
         StartCoroutine(WaitSpin());
     }
@@ -69,6 +79,9 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
         GameControls.pressedUp -= DecidingUp;
         GameControls.pressedConfirm -= ConfirmingChoice;
         GameControls.pressedRules -= Rules;
+        GameControls.pressedLeft -= PlaySound;
+        GameControls.pressedRight -= PlaySound;
+        GameControls.pressedUp -= PlaySound;
     }
 
     //When pressing backspace, the player heads back to the rule state
@@ -118,12 +131,18 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
         //If the player wants to spin then all the controls are disabled since the player doesn't need to do anything else
         if (beginSpin)
         {
+            selectedBlock = 9;
+            HighlightBlock();
             GameControls.pressedLeft -= DecidingLeft;
             GameControls.pressedRight -= DecidingRight;
             GameControls.pressedUp -= DecidingUp;
+            GameControls.pressedLeft -= PlaySound;
+            GameControls.pressedRight -= PlaySound;
+            GameControls.pressedUp -= PlaySound;
             GameControls.pressedConfirm -= ConfirmingChoice;
             GameControls.pressedRules -= Rules;
             StartCoroutine(gameManager.Spin());
+            soundManager.PlaySound(spinSound);
         }
 
         //otherwise the block is either locked or unlocked depending if the block's boolean is true (unlock) or false (locked)
@@ -132,10 +151,12 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
             if (gameManager.Blocks[selectedBlock].isLocked)
             {
                 gameManager.Blocks[selectedBlock].isLocked = false;
+                soundManager.PlaySound(lockSound[1]);
             }
             else
             {
                 gameManager.Blocks[selectedBlock].isLocked = true;
+                soundManager.PlaySound(lockSound[0]);
             }
         }
     }
@@ -174,5 +195,16 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
         GameControls.pressedUp += DecidingUp;
         GameControls.pressedConfirm += ConfirmingChoice;
         GameControls.pressedRules += Rules;
+
+        GameControls.pressedLeft += PlaySound;
+        GameControls.pressedRight += PlaySound;
+        GameControls.pressedUp += PlaySound;
+        HighlightBlock();
+    }
+
+    //The observer method is to play sound for every input performed
+    public void PlaySound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(inputSound);
     }
 }
