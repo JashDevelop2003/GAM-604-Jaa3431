@@ -47145,7 +47145,7 @@ PrefabInstance:
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: spaceOrder.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1277863545}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: spaceOrder.Array.data[3]
       value: 
@@ -64953,7 +64953,7 @@ PrefabInstance:
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: spaceOrder.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1744402829648484194}
     - target: {fileID: 5904974522565088868, guid: c75d239a4b110774c99cdff56b5cd67b, type: 3}
       propertyPath: spaceOrder.Array.data[3]
       value: 
