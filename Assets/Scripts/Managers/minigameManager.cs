@@ -43,6 +43,7 @@ public class minigameManager : Singleton<minigameManager>
             gameStateManager gameStateManager = turnManager.CurrentPlayer.GetComponentInChildren<gameStateManager>();
             gameStateManager.MinigameState = turnManager.CurrentPlayer.GetComponent<doubleOrNothingState>();
             gameStateManager.StartMinigame(minigame);
+            doubleOrNothingManager.BeginMinigame();
         }
         else if (minigame == (int)minigameEnum.XIII)
         {
@@ -51,6 +52,7 @@ public class minigameManager : Singleton<minigameManager>
                 gameStateManager gameStateManager = turnManager.GetPlayers[i].GetComponentInChildren<gameStateManager>();
                 gameStateManager.MinigameState = turnManager.GetPlayers[i].GetComponent<xIIIInactiveState>();
                 gameStateManager.StartMinigame(minigame);
+                xIIIManager.BeginMinigame();
             }
         }
         else if(minigame == (int)minigameEnum.TicTacStash)
@@ -58,11 +60,13 @@ public class minigameManager : Singleton<minigameManager>
             gameStateManager gameStateManager = turnManager.CurrentPlayer.GetComponentInChildren<gameStateManager>();
             gameStateManager.MinigameState = turnManager.CurrentPlayer.GetComponent<ticTacStashState>();
             gameStateManager.StartMinigame(minigame);
+            ticTacStashManager.BeginMinigame();
         }
 
         gameplayUI[minigame].SetActive(true);
     }
 
+    //Once the game is complete, the manager will disable all of the minigame UI that are currently active
     public void EndMinigame(object sender, EventArgs e)
     {
         gameInProgress = false;

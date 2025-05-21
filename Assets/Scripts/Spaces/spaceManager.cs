@@ -7,7 +7,7 @@ using TMPro;
 /// The space have their own behaiour and apply unique state changes for the player
 /// </summary>
 
-public class spaceManager : MonoBehaviour
+public class spaceManager : Singleton<spaceManager>
 {
     public static spaceManager instance;
     private luckySpace lucky;
@@ -16,28 +16,23 @@ public class spaceManager : MonoBehaviour
     private GameObject player;
     private playerStateManager state;
 
+    private minigameManager minigameManager;
+
+    [Header ("User Interface")]
     [SerializeField] private TMP_Text eventText;
 
     [Header("Sound Effects")]
     private soundManager soundManager;
     [SerializeField] private AudioClip[] spaceClips;
 
-
-
-    //this is used to make this a singular instance of the component
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-
-        lucky = GetComponent<luckySpace>();
-    }
+    private musicManager musicManager;
 
     private void Start()
     {
         soundManager = Singleton<soundManager>.Instance;
+        lucky = GetComponent<luckySpace>();
+        musicManager = Singleton<musicManager>.Instance;
+        minigameManager = Singleton<minigameManager>.Instance;
     }
 
     //this method is only used when the player has ended their turn
@@ -132,11 +127,37 @@ public class spaceManager : MonoBehaviour
             soundManager.PlaySound(spaceClips[(int)spaceEnum.FruitMachine]);
             StartCoroutine(ChangePlayerState(state.SpinState, 3));
         }
+
+        else if (type == spaceEnum.Minigame)
+        {
+            StartCoroutine(LoadingMinigame());
+            StartCoroutine(ChangePlayerState(state.InactiveState, 10));
+
+        }
     }
 
     IEnumerator ChangePlayerState(playerStateBase changeState, float time)
     {
         yield return new WaitForSeconds(time);
         state.ChangeState(changeState);
+    }
+
+    IEnumerator LoadingMinigame()
+    {
+        int randomint = Random.Range(0, (int)minigameEnum.Null);
+        eventText.SetText(player.name + " is going to play a minigame, are they alone or with a friend?");
+        yield return new WaitForSeconds(2);
+        if (randomint == (int)minigameEnum.DoubleOrNothing || randomint == (int)minigameEnum.TicTacStash) 
+        {
+            eventText.SetText("Outcome: Single Player");
+        }
+        else if(randomint == (int)minigameEnum.XIII)
+        {
+            eventText.SetText("Outcome: Multi Player");
+        }
+        yield return new WaitForSeconds(4);
+        minigameManager.Minigame(randomint);
+        musicManager.MinigameMusic();
+
     }
 }

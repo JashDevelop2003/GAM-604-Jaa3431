@@ -75,6 +75,11 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
         { 
             player.ChangeState(player.RuleState);
         }
+
+        if (endGame) 
+        { 
+            player.ChangeState(player.InactiveState);
+        }
     }
 
     //When exiting the state, all controls must be disabled since entering the state will always enable the controls.

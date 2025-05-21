@@ -7,5 +7,6 @@ public enum spaceEnum
     Lucky,
     Event,
     Market,
-    FruitMachine
+    FruitMachine,
+    Minigame
 }

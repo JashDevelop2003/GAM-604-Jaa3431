@@ -69,6 +69,9 @@ public class xIIIManager : Singleton<xIIIManager>
     //The turn manager will be required to get the players
     private turnManager turnManager;
 
+    //the minigame manager will be required to end the minigame and return back to the board map
+    private minigameManager minigameManager;
+
     [Header ("User Interface")]
     [SerializeField] private Sprite[] fruitSprites = new Sprite[5];
     [SerializeField] private TMP_Text[] cashPrizeText = new TMP_Text[2];
@@ -77,12 +80,17 @@ public class xIIIManager : Singleton<xIIIManager>
     [Header ("Sound Effects")]
     [SerializeField] private AudioClip[] outcomeSounds = new AudioClip[2];
     private soundManager soundManager;
+    private musicManager musicManager;
 
     // Start is called before the first frame update
     public void BeginMinigame()
     {
         turnManager = Singleton<turnManager>.Instance;
         soundManager = Singleton<soundManager>.Instance;
+        minigameManager = Singleton<minigameManager>.Instance;
+        musicManager = Singleton<musicManager>.Instance;
+        endEvent += minigameManager.EndMinigame;
+        endEvent += musicManager.MinigameOver;
         for (int i = 0; i < prizeCash.Length; i++) 
         {
             prizeCash[i] = 0;
@@ -186,6 +194,8 @@ public class xIIIManager : Singleton<xIIIManager>
             soundManager.PlaySound(outcomeSounds[0]);
             StartCoroutine(GameOver());
         }
+
+        cashPrizeText[player - 1].SetText(prizeCash[player - 1].ToString());
     }
 
     //This method is called when revealing a fruit card
@@ -206,5 +216,7 @@ public class xIIIManager : Singleton<xIIIManager>
         }
         yield return new WaitForSeconds(3);
         endEvent?.Invoke(this, EventArgs.Empty);
+        endEvent -= minigameManager.EndMinigame;
+        endEvent -= musicManager.MinigameOver;
     }
 }

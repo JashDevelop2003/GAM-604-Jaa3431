@@ -39,7 +39,8 @@ public class Singleton<T> : MonoBehaviour where T : Component
         }
     }
     
-    // this
+    // this occurs to every component that is inheriting fro mthe awake method
+    // Each manager will check if there are more than 2 identical manager components
     protected virtual void Awake()
     {
         //this checks when awake if there is an exisitng singleton when creating a new one

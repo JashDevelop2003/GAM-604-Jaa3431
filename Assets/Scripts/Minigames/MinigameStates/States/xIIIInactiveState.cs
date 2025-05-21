@@ -29,6 +29,7 @@ public class xIIIInactiveState : gameStateBase
         //Start Turn observer is added onto the manger's change turn event
         xIIIManager = Singleton<xIIIManager>.Instance;
         xIIIManager.changeTurn += StartTurn;
+        xIIIManager.endEvent += EndGame;
     }
 
     public override void UpdateState(gameStateManager player)
@@ -48,6 +49,7 @@ public class xIIIInactiveState : gameStateBase
     public override void ExitState(gameStateManager player)
     {
         xIIIManager.changeTurn -= StartTurn;
+        xIIIManager.endEvent -= EndGame;
     }
 
     //The start turn obersver method will set the start turn boolean to true to change the state to the active state

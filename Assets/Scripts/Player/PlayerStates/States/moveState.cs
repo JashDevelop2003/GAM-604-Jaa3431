@@ -113,7 +113,7 @@ public class moveState : playerStateBase
         targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
 
         //This is to call the space effects towards ending the turn with a space effect occurring
-        spaceManager = spaceManager.instance;
+        spaceManager = Singleton<spaceManager>.Instance;
 
         //This is to call the music manager by using a singleton
         musicManager = Singleton<musicManager>.Instance;

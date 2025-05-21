@@ -34,6 +34,7 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
         gamePanel.SetActive(true);
         currentChoice = choiceEnum.Null;
         gameManager = Singleton<doubleOrNothingManager>.Instance;
+        gameManager.endEvent += EndGame;
         soundManager = Singleton<soundManager>.Instance;
         gameControls = GetComponent<gameControls>();
         EnableControls();
@@ -56,6 +57,7 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
     public override void ExitState(gameStateManager player)
     {
         gamePanel.SetActive(false);
+        gameManager.endEvent -= EndGame;
         DisableControls();
     }
 

@@ -22,6 +22,7 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
     [Header("Sound Effect")]
     [SerializeField] private AudioClip[] soundOutcome = new AudioClip[3];
     private soundManager soundManager;
+    private musicManager musicManager;
 
     // Start is called before the first frame update
     public void BeginMinigame()
@@ -33,7 +34,9 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
         soundManager = Singleton<soundManager>.Instance;
         turnManager = Singleton<turnManager>.Instance;
         minigameManager = Singleton<minigameManager>.Instance;
+        musicManager = Singleton<musicManager>.Instance;
         endEvent += minigameManager.EndMinigame;
+        endEvent += musicManager.MinigameOver;
     }
 
     public void Outcome(choiceEnum choice)
@@ -96,5 +99,6 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
         yield return new WaitForSeconds(5f);
         endEvent?.Invoke(this, EventArgs.Empty);
         endEvent -= minigameManager.EndMinigame;
+        endEvent -= musicManager.MinigameOver;
     }
 }

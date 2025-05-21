@@ -191,12 +191,4 @@ public class playerStateManager : MonoBehaviour
         currentState.EnterState(this);
         stateAnimation.ChangeAnimationState(newState);
     }
-
-    //This ends the turn of the player by calling the turn manager instance to change to the next turn
-    public void EndTurn()
-    {
-
-        turnManager turnManager = Singleton<turnManager>.Instance;
-        turnManager.StartTurn();
-    }
 }

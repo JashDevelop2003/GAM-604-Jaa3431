@@ -73,6 +73,7 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
     [SerializeField] private AudioClip appearSound;
     [SerializeField] private AudioClip[] outcomeSound = new AudioClip[2];
     private soundManager soundManager;
+    private musicManager musicManager;
 
 
     // Start is called before the first frame update
@@ -81,9 +82,12 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
         soundManager = Singleton<soundManager>.Instance;
         turnManager = Singleton<turnManager>.Instance;
         minigameManager = Singleton<minigameManager>.Instance;
+        musicManager = Singleton<musicManager>.Instance;
         endEvent += minigameManager.EndMinigame;
+        endEvent += musicManager.MinigameOver;
         player = turnManager.CurrentPlayer;
         secondSpin = false;
+        cashPrize = 0;
         for (int i = 0; i < blocks.Length; i++)
         {
             blocks[i].isLocked = false;
@@ -99,7 +103,7 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
     //The coroutine waits until the player has stop looking at the rules
     IEnumerator BeginGame()
     {
-        ruleState ruleState = player.GetComponent<ruleState>();
+        ruleState ruleState = player.GetComponentInChildren<ruleState>();
         yield return new WaitUntil(() => ruleState.IsReady == true);
         StartCoroutine(Spin());
     }
@@ -202,8 +206,11 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
             soundManager.PlaySound(outcomeSound[0]);
         }
         infoText.SetText("Game Over, the player has won: " +  cashPrize.ToString() + " cash");
+        playerController player = turnManager.CurrentPlayer.GetComponent<playerController>();
+        player.ChangeCash(cashPrize);
         yield return new WaitForSeconds(3);
         endEvent?.Invoke(this, EventArgs.Empty);
-        endEvent += minigameManager.EndMinigame;
+        endEvent -= minigameManager.EndMinigame;
+        endEvent -= musicManager.MinigameOver;
     }
 }

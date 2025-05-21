@@ -23,6 +23,9 @@ public class inactiveState : playerStateBase
 
     public event EventHandler endEvents;
 
+    private minigameManager minigameManager;
+    private turnManager turnManager;
+
 
     //the enter state checks whether if the player ends their turn or their combat
     public override void EnterState(playerStateManager player)
@@ -34,13 +37,15 @@ public class inactiveState : playerStateBase
 
         beginCombat = false;
 
+        minigameManager = Singleton<minigameManager>.Instance;
+        turnManager = Singleton<turnManager>.Instance;
+
         //this checks if the previous state was an actual state (TODO: besides defend state) then end their turn
         if (player.PreviousState != null && player.PreviousState != player.DefendState)
         {
-            controller.ActivateEndEffect();
-            endEvents?.Invoke(this, EventArgs.Empty);
-            player.EndTurn();
+            StartCoroutine(EndTurn());
         }
+
     }
 
     //this state checks when begin turn is turned to true, which will begin the player's turn
@@ -73,5 +78,16 @@ public class inactiveState : playerStateBase
     public void DefendCombat(object sender, EventArgs e) 
     {
         beginCombat = true;
+    }
+
+    //When the player ends their turn, a coroutine starts to check if there is a minigame in hand
+    //If there is a minigame then the board game will be on pause
+    //Otherwise it'll be the next player's turn
+    IEnumerator EndTurn()
+    {
+        yield return new WaitUntil(() => minigameManager.GameInProgress == false);
+        turnManager.StartTurn();
+        controller.ActivateEndEffect();
+        endEvents?.Invoke(this, EventArgs.Empty);
     }
 }

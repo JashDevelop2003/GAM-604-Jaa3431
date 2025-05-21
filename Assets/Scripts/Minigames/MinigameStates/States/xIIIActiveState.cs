@@ -79,6 +79,7 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         //The XIII manager is collected from the singleton instance to ensure that there is only 1 XIII manager that is being used for referencing and collecting methods
         xIIIManager = Singleton<xIIIManager>.Instance;
         xIIIManager.changeTurn += EndTurn;
+        xIIIManager.endEvent += EndGame;
 
         //The sound manager is collected from the singleton instance to play sound towards input
         soundManager = Singleton<soundManager>.Instance;
@@ -151,6 +152,7 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         GameControls.pressedLeft -= PlaySound;
         GameControls.pressedRight -= PlaySound;
         GameControls.pressedDown -= PlaySound;
+        xIIIManager.endEvent -= EndGame;
     }
 
     //Pressing Backspace will return the player back to the rules

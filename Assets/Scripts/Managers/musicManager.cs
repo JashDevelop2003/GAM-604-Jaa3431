@@ -28,6 +28,9 @@ public class musicManager : Singleton<musicManager>
     [SerializeField] private AudioClip battleMusic;
     private bool inCombat;
 
+    [SerializeField] private AudioClip minigameMusic;
+    private minigameManager minigameManager;
+
     //This is to apply the events
     private combatSystem combatSystem;
 
@@ -38,6 +41,7 @@ public class musicManager : Singleton<musicManager>
         musicSource = GetComponent<AudioSource>();
         musicPartInt = 0;
         combatSystem = combatSystem.instance;
+        minigameManager = Singleton<minigameManager>.Instance;
         ChangeMusic(musicClips[musicPartInt].musicClip);
         inCombat = false;
     }
@@ -46,7 +50,7 @@ public class musicManager : Singleton<musicManager>
     IEnumerator ChangeLoopPart(int duration)
     {
         yield return new WaitForSeconds(duration);
-        if(!inCombat)
+        if(!inCombat && !minigameManager.GameInProgress)
         {
             musicPartInt++;
             if (musicPartInt >= musicClips.Length)
@@ -88,6 +92,22 @@ public class musicManager : Singleton<musicManager>
         ChangeMusic(musicClips[musicPartInt].musicClip);
         inCombat = false;
         combatSystem.combatComplete -= BattleMusicComplete;
+    }
+
+    public void MinigameMusic()
+    {
+        StopCoroutine(ChangeLoopPart(0));
+        inCombat = true;
+        musicSource.Stop();
+        musicSource.clip = battleMusic;
+        musicSource.Play();
+        musicSource.loop = true;
+    }
+
+    public void MinigameOver(object sender, EventArgs e)
+    {
+        musicSource.Stop();
+        ChangeMusic(musicClips[musicPartInt].musicClip);
     }
 
 }

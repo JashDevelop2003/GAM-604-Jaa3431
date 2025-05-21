@@ -24,7 +24,7 @@ public class firingBeamX : eventSpace
     void Start()
     {
         beamX = beam.GetComponent<beamX>();
-        spaceManager = spaceManager.instance;
+        spaceManager = Singleton<spaceManager>.Instance;
         soundManager = Singleton<soundManager>.Instance;
         turnManager = Singleton<turnManager>.Instance;
     }
