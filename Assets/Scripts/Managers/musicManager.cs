@@ -61,7 +61,16 @@ public class musicManager : Singleton<musicManager>
         }
         else
         {
-            Debug.LogWarning("Currently in combat");
+            if (inCombat)
+            {
+                Debug.LogWarning("Currently in combat");
+
+            }
+
+            else if (minigameManager.GameInProgress)
+            {
+                Debug.LogWarning("Currently in a minigame");
+            }
         }
     }
 
@@ -99,7 +108,7 @@ public class musicManager : Singleton<musicManager>
         StopCoroutine(ChangeLoopPart(0));
         inCombat = true;
         musicSource.Stop();
-        musicSource.clip = battleMusic;
+        musicSource.clip = minigameMusic;
         musicSource.Play();
         musicSource.loop = true;
     }

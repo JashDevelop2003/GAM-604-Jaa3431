@@ -144,19 +144,19 @@ public class spaceManager : Singleton<spaceManager>
 
     IEnumerator LoadingMinigame()
     {
-        int randomint = Random.Range(0, (int)minigameEnum.Null);
+        int randomInt = Random.Range(0, (int)minigameEnum.Null);
         eventText.SetText(player.name + " is going to play a minigame, are they alone or with a friend?");
         yield return new WaitForSeconds(2);
-        if (randomint == (int)minigameEnum.DoubleOrNothing || randomint == (int)minigameEnum.TicTacStash) 
+        if (randomInt == (int)minigameEnum.DoubleOrNothing || randomInt == (int)minigameEnum.TicTacStash) 
         {
             eventText.SetText("Outcome: Single Player");
         }
-        else if(randomint == (int)minigameEnum.XIII)
+        else if(randomInt == (int)minigameEnum.XIII)
         {
             eventText.SetText("Outcome: Multi Player");
         }
         yield return new WaitForSeconds(4);
-        minigameManager.Minigame(randomint);
+        minigameManager.Minigame(randomInt);
         musicManager.MinigameMusic();
 
     }

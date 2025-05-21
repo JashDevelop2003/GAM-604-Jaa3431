@@ -61,6 +61,8 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
 
         gameManager.endEvent += EndGame;
 
+        spinPanel.color = spinColour[0];
+
         //The sound manager is reference to provide the input sound
         soundManager = Singleton<soundManager>.Instance;
 

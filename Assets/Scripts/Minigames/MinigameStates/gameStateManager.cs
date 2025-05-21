@@ -41,9 +41,21 @@ public class gameStateManager : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    public void StartMinigame(int rulesInt)
+    public void StartMinigame(int minigameInt)
     {
-        ruleState.RulesPanel = rulesUI[rulesInt];
+        if (minigameInt == (int)minigameEnum.DoubleOrNothing)
+        {
+            minigameState = GetComponent<doubleOrNothingState>();
+        }
+        else if (minigameInt == (int)minigameEnum.XIII)
+        {
+            minigameState = GetComponent<xIIIInactiveState>();
+        }
+        else if (minigameInt == (int)minigameEnum.TicTacStash) 
+        { 
+            minigameState = GetComponent<ticTacStashState>();
+        }
+        ruleState.RulesPanel = rulesUI[minigameInt];
         beginEvent?.Invoke(this, EventArgs.Empty);
     }
 

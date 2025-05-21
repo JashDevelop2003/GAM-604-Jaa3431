@@ -253,6 +253,17 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         else 
         { 
             xIIIManager.RevealCard(selectedCard, playerInt);
+            if(xIIIManager.Cards[selectedCard].fruit == fruitEnum.Coconut)
+            {
+                GameControls.pressedLeft -= DecidingLeft;
+                GameControls.pressedRight -= DecidingRight;
+                GameControls.pressedDown -= DecidingDown;
+                GameControls.pressedConfirm -= ConfirmingChoice;
+                GameControls.pressedRules -= Rules;
+                GameControls.pressedLeft -= PlaySound;
+                GameControls.pressedRight -= PlaySound;
+                GameControls.pressedDown -= PlaySound;
+            }
         }
     }
 

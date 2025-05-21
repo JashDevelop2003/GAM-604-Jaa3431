@@ -33,6 +33,10 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
         endGame = false;
         gamePanel.SetActive(true);
         currentChoice = choiceEnum.Null;
+        for (int i = 0; i < choicePanels.Length; i++) 
+        {
+            choicePanels[i].color = panelColor[0];
+        }
         gameManager = Singleton<doubleOrNothingManager>.Instance;
         gameManager.endEvent += EndGame;
         soundManager = Singleton<soundManager>.Instance;

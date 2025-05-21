@@ -61,7 +61,7 @@ public class xIIIManager : Singleton<xIIIManager>
     public event EventHandler changeTurn;
     [SerializeField] private GameObject[] startingPlayer = new GameObject[2];
     private int startingPlayerInt;
-    [SerializeField] private Color[] playerColour = new Color[2];
+    [SerializeField] private Color[] playerColour = new Color[3];
 
     //This will store each players' prize cash
     private int[] prizeCash = new int[2];
@@ -98,6 +98,7 @@ public class xIIIManager : Singleton<xIIIManager>
 
         for(int i = 0; i < cards.Length; i++)
         {
+            cards[i].frontCardColour.color = playerColour[2];
             cards[i].fruit = fruitEnum.Null;
             cards[i].backCard.SetActive(true);
             cards[i].isRevealed = false;
@@ -126,9 +127,9 @@ public class xIIIManager : Singleton<xIIIManager>
     IEnumerator BeginGame()
     {
         startingPlayerInt = UnityEngine.Random.Range(0, 2);
-        ruleState ruleState = startingPlayer[startingPlayerInt].GetComponent<ruleState>();
+        ruleState ruleState = startingPlayer[startingPlayerInt].GetComponentInChildren<ruleState>();
         yield return new WaitUntil(() => ruleState.IsReady == true);
-        xIIIInactiveState changeState = startingPlayer[startingPlayerInt].GetComponent<xIIIInactiveState>();
+        xIIIInactiveState changeState = startingPlayer[startingPlayerInt].GetComponentInChildren<xIIIInactiveState>();
         changeState.StartingGame = true;
     }
 

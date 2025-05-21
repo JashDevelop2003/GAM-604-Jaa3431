@@ -68,6 +68,7 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
     [Header("User Interface")]
     [SerializeField] private TMP_Text infoText;
     [SerializeField] private Sprite[] iconImage = new Sprite[5];
+    [SerializeField] private Color startingColour;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip appearSound;
@@ -91,6 +92,9 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
         for (int i = 0; i < blocks.Length; i++)
         {
             blocks[i].isLocked = false;
+            blocks[i].blockPanel.color = startingColour;
+            blocks[i].icon = iconEnum.Null;
+            blocks[i].iconImage.sprite = null;
         }
         for( int i = 0;i < winLines.Length; i++)
         {
@@ -113,14 +117,21 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
     {
         spinProgress = true;
         int outcome;
-        for (int i = 0; i < blocks.Length; i++) 
+        for (int i = 0; i < blocks.Length; i++)
+        {
+            if (!blocks[i].isLocked)
+            {
+                blocks[i].icon = iconEnum.Null;
+                blocks[i].iconImage.sprite = null;
+            }
+        }
+            for (int i = 0; i < blocks.Length; i++) 
         {
             //During the second spin, the code will need to check if the player has locked that icon
             //if the player has then the icon stays as it is
             //Otherwise the icon will change their icon (or if unlucky stay the same)
             if (!blocks[i].isLocked)
             {
-                blocks[i].icon = iconEnum.Null;
                 yield return new WaitForSeconds(0.5f);
                 outcome = UnityEngine.Random.Range(0, (int)iconEnum.Null);
                 if (outcome == (int)iconEnum.Cherries)
