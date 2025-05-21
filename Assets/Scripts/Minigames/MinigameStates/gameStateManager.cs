@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class gameStateManager : MonoBehaviour
 {
+    public event EventHandler beginEvent;
+    
     [SerializeField] private gameStateBase currentState;
     [SerializeField] private gameStateBase minigameState;
     private ruleState ruleState;
+    private gameInactiveState inactiveState;
 
     public gameStateBase MinigameState
     {
@@ -19,13 +23,28 @@ public class gameStateManager : MonoBehaviour
         get { return ruleState; }
     }
 
+    public gameInactiveState InactiveState
+    {
+        get { return inactiveState; }
+    }
+
+    [Header ("Minigame Interface")]
+    [SerializeField] private GameObject[] rulesUI = new GameObject[3];
+
     // Start is called before the first frame update
     void Start()
     {
         minigameState = GetComponent<gameStateBase>();
         ruleState = GetComponent<ruleState>();
-        currentState = RuleState;
+        inactiveState = GetComponent<gameInactiveState>();
+        currentState = inactiveState;
         currentState.EnterState(this);
+    }
+
+    public void StartMinigame(int rulesInt)
+    {
+        ruleState.RulesPanel = rulesUI[rulesInt];
+        beginEvent?.Invoke(this, EventArgs.Empty);
     }
 
     // Update is called once per frame

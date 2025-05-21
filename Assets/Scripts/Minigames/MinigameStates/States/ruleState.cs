@@ -20,6 +20,11 @@ public class ruleState : gameStateBase, IConfirm
 
     [Header("User Interface")]
     [SerializeField] private GameObject rulesPanel;
+    public GameObject RulesPanel
+    {
+        get { return rulesPanel; }
+        set { rulesPanel = value; }
+    }
 
     public override void EnterState(gameStateManager player)
     {

@@ -14,6 +14,7 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
     }
     
     private bool backToRules;
+    private bool endGame;
     private choiceEnum currentChoice;
     private doubleOrNothingManager gameManager;
     private soundManager soundManager;
@@ -29,6 +30,7 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
     public override void EnterState(gameStateManager player)
     {
         backToRules = false;
+        endGame = false;
         gamePanel.SetActive(true);
         currentChoice = choiceEnum.Null;
         gameManager = Singleton<doubleOrNothingManager>.Instance;
@@ -43,6 +45,11 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
         if (backToRules) 
         { 
             player.ChangeState(player.RuleState);
+        }
+
+        if (endGame) 
+        {
+            player.ChangeState(player.InactiveState);
         }
     }
 
@@ -122,4 +129,10 @@ public class doubleOrNothingState : gameStateBase, IRules, IConfirm, IDecideLeft
         GameControls.pressedRules -= Rules;
     }
 
+    public void EndGame(object sender, EventArgs e)
+    {
+        endGame = true;
+    }
 }
+
+

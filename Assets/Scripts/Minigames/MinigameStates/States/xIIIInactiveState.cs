@@ -9,6 +9,7 @@ public class xIIIInactiveState : gameStateBase
     //Boolean is used to identify when the player's next turn is
     //There is an encapsulation for the boolean for the XIII Manager to change one of the player's booleans to true.
     private bool startTurn;
+    private bool endGame;
     public bool StartingGame
     {
         get { return startTurn; }
@@ -22,6 +23,7 @@ public class xIIIInactiveState : gameStateBase
     {
         //All booleans that change the states are set to false at the enter state
         startTurn = false;
+        endGame = false;
 
         //The Singleton of the XIII Manager is reference to reference only one of them  in the scene
         //Start Turn observer is added onto the manger's change turn event
@@ -37,6 +39,10 @@ public class xIIIInactiveState : gameStateBase
             player.MinigameState = GetComponent<xIIIActiveState>();
             player.ChangeState(player.MinigameState);
         }
+        if (endGame) 
+        { 
+            player.ChangeState(player.InactiveState);
+        }
     }
 
     public override void ExitState(gameStateManager player)
@@ -48,5 +54,10 @@ public class xIIIInactiveState : gameStateBase
     public void StartTurn(object sender, EventArgs e)
     {
         startTurn = true;
+    }
+
+    public void EndGame(object sender, EventArgs e)
+    {
+        endGame = true;
     }
 }

@@ -38,6 +38,9 @@ public struct Fruits
 
 public class xIIIManager : Singleton<xIIIManager>
 {
+    //This invokes the end of the minigame and returns back to the game
+    public event EventHandler endEvent;
+    
     //Struct is used to store data of the cards & fruits to provide for each card
     [SerializeField] private Cards[] cards = new Cards[13];
     public Cards[] Cards
@@ -60,8 +63,15 @@ public class xIIIManager : Singleton<xIIIManager>
     private int startingPlayerInt;
     [SerializeField] private Color[] playerColour = new Color[2];
 
+    //This will store each players' prize cash
+    private int[] prizeCash = new int[2];
+
+    //The turn manager will be required to get the players
+    private turnManager turnManager;
+
     [Header ("User Interface")]
     [SerializeField] private Sprite[] fruitSprites = new Sprite[5];
+    [SerializeField] private TMP_Text[] cashPrizeText = new TMP_Text[2];
     [SerializeField] private TMP_Text infoText;
 
     [Header ("Sound Effects")]
@@ -71,7 +81,12 @@ public class xIIIManager : Singleton<xIIIManager>
     // Start is called before the first frame update
     public void BeginMinigame()
     {
+        turnManager = Singleton<turnManager>.Instance;
         soundManager = Singleton<soundManager>.Instance;
+        for (int i = 0; i < prizeCash.Length; i++) 
+        {
+            prizeCash[i] = 0;
+        }
 
         for(int i = 0; i < cards.Length; i++)
         {
@@ -99,6 +114,7 @@ public class xIIIManager : Singleton<xIIIManager>
     }
 
     //This waits until the players are ready, once the players are ready the game will decide randomly who goes first
+    //This will call the boolean to change state when is true become set to true via encapsulation
     IEnumerator BeginGame()
     {
         startingPlayerInt = UnityEngine.Random.Range(0, 2);
@@ -144,11 +160,28 @@ public class xIIIManager : Singleton<xIIIManager>
         //Otherwise the game will change the turns around
         if(cards[selectedCard].fruit != fruitEnum.Coconut)
         {
+            if (cards[selectedCard].fruit == fruitEnum.Cherries)
+            {
+                prizeCash[player-1] += 10;
+            }
+            else if (cards[selectedCard].fruit == fruitEnum.Lemon)
+            {
+                prizeCash[player - 1] += 25;
+            }
+            else if (cards[selectedCard].fruit == fruitEnum.Grapes)
+            {
+                prizeCash[player - 1] += 50;
+            }
+            else if (cards[selectedCard].fruit == fruitEnum.Watermelon)
+            {
+                prizeCash[player - 1] += 100;
+            }
             ChangeTurn();
             soundManager.PlaySound(outcomeSounds[1]);
         }
         else if (cards[selectedCard].fruit == fruitEnum.Coconut)
         {
+            prizeCash[player - 1] = 0;
             infoText.SetText("Game Over: Player " + player.ToString() + " loses all of their cash prize");
             soundManager.PlaySound(outcomeSounds[0]);
             StartCoroutine(GameOver());
@@ -166,6 +199,12 @@ public class xIIIManager : Singleton<xIIIManager>
     //The scene manager will change the scene to the board map
     IEnumerator GameOver()
     {
+        for(int i = 0; i < turnManager.GetPlayers.Length; i++)
+        {
+            playerController player = turnManager.GetPlayers[i].GetComponent<playerController>();
+            player.ChangeCash(prizeCash[i]);
+        }
         yield return new WaitForSeconds(3);
+        endEvent?.Invoke(this, EventArgs.Empty);
     }
 }

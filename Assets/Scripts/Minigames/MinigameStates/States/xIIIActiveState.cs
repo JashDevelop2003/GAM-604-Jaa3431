@@ -29,6 +29,7 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
     //check rules will change the state to the rules state
     private bool endTurn;
     private bool checkRules;
+    private bool endGame;
 
     //These booleans check if the player is planning to skip and if the has used their skip
     private bool usedSkip = false;
@@ -40,6 +41,7 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
     //Prize cash is use to store the amount of cash the player can possibly win
     private int prizeCash;
 
+
     //The selected card is used to identify which stuct card in the array of cards the player is currently on and which one to reveal when confirming
     private int selectedCard;
 
@@ -50,7 +52,6 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
     [SerializeField] private Color[] cardColors = new Color[2];
     [SerializeField] private GameObject skipPanel;
     [SerializeField] private Image skipImage;
-    [SerializeField] private TMP_Text cashPrizeText;
     [SerializeField] private TMP_Text infoText;
 
     [Header("Sound Effects")]
@@ -63,6 +64,7 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
     {
         //The booleans that cause the change in the state must be false to prevent the player from changing instantly
         endTurn = false;
+        endGame = false;
         isSkipping = false;
         checkRules = false;
 
@@ -129,6 +131,11 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         if (checkRules) 
         { 
             player.ChangeState(player.RuleState);
+        }
+
+        if (endGame)
+        {
+            player.ChangeState(player.InactiveState);
         }
     }
 
@@ -243,44 +250,8 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
         }
         else 
         { 
-            RevealCard();
+            xIIIManager.RevealCard(selectedCard, playerInt);
         }
-    }
-
-    //Reveal Card method checks what fruit the card is and gain cash depending on the fruit
-    //If it turns out the fruit was a coconut, then the player loses all their cash and turn prize cash to 0
-    public void RevealCard()
-    {
-        if(xIIIManager.Cards[selectedCard].fruit != fruitEnum.Coconut)
-        {
-            if (xIIIManager.Cards[selectedCard].fruit == fruitEnum.Cherries)
-            {
-                prizeCash += 10;
-            }
-            else if (xIIIManager.Cards[selectedCard].fruit == fruitEnum.Lemon)
-            {
-                prizeCash += 25;
-            }
-            else if (xIIIManager.Cards[selectedCard].fruit == fruitEnum.Grapes)
-            {
-                prizeCash += 50;
-            }
-            else if (xIIIManager.Cards[selectedCard].fruit == fruitEnum.Watermelon)
-            {
-                prizeCash += 100;
-            }
-        }
-        else if (xIIIManager.Cards[selectedCard].fruit == fruitEnum.Coconut)
-        {
-            prizeCash = 0;
-        }
-        else
-        {
-            UnityEngine.Debug.LogError("Something went wrong with either the Reveal Card or Card Struct");
-        }
-
-        xIIIManager.RevealCard(selectedCard, playerInt);
-        cashPrizeText.SetText(prizeCash.ToString());
     }
 
     //This observer method is added onto the change turn subject from the XIII manager
@@ -288,6 +259,11 @@ public class xIIIActiveState : gameStateBase, IDecideDown, IDecideLeft, IDecideR
     public void EndTurn(object sender, EventArgs e)
     {
         endTurn = true;
+    }
+
+    public void EndGame(object sender, EventArgs e)
+    {
+        endGame = true;
     }
 
     //This observer method is added onto each input (excluding confirm) which plays every time the player presses left, right or down

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 /// <summary>
 /// This is the manager for the minigame tic tac stash
 /// In this minigame the manager will spin 9 blocks as structs and change their icon by using a enum to identify the icon
@@ -35,6 +36,8 @@ public struct winLine
 
 public class ticTacStashManager : Singleton<ticTacStashManager>
 {
+    public event EventHandler endEvent;
+    
     //The manger provides 9 blocks due to the structure being tic tac toe
     [SerializeField] private block[] blocks = new block[9];
     public block[] Blocks
@@ -46,13 +49,17 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
     //The manager also provides 8 win lines since there are 3 horizontal wins, 3 vertical wins and 2 diagonal wins
     [SerializeField] private winLine[] winLines = new winLine[8];
 
-    //The maneger collects the player object to check if the state is no longer in the rules state
+    //The turn manager collects the player object to check if the state is no longer in the rules state
+    private turnManager turnManager;
     [SerializeField] private GameObject player;
     
     //The manager provides the cash prize
     [SerializeField] private int cashPrize;
     private bool secondSpin;
     private bool spinProgress;
+
+    //The minigame manager is used to add the observer method to end the game
+    private minigameManager minigameManager;
     public bool SpinProgress
     {
         get { return spinProgress; }
@@ -72,7 +79,10 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
     public void BeginMinigame()
     {
         soundManager = Singleton<soundManager>.Instance;
-
+        turnManager = Singleton<turnManager>.Instance;
+        minigameManager = Singleton<minigameManager>.Instance;
+        endEvent += minigameManager.EndMinigame;
+        player = turnManager.CurrentPlayer;
         secondSpin = false;
         for (int i = 0; i < blocks.Length; i++)
         {
@@ -193,5 +203,7 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
         }
         infoText.SetText("Game Over, the player has won: " +  cashPrize.ToString() + " cash");
         yield return new WaitForSeconds(3);
+        endEvent?.Invoke(this, EventArgs.Empty);
+        endEvent += minigameManager.EndMinigame;
     }
 }

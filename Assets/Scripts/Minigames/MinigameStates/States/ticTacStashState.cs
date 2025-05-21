@@ -29,6 +29,9 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
     //this is the boolean that pretty much ends the player's turn and waits for the results
     private bool beginSpin;
 
+    //This boolean ends the minigame and set the player's game state back to inactive
+    private bool endGame;
+
     //this int is to identify the current block the player is on towards them to either lock or unlock
     private int selectedBlock;
 
@@ -48,12 +51,15 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
         //The booleans must be false to ensure that the player doesn't acidentally start spinning when they want to make a choice or kept on the rules state
         checkingRules = false;
         beginSpin = false;
+        endGame = false;
 
         selectedBlock = 0;
 
         //The tic tac stash manager needs be to be reference to gather the struct and boolean variable by using a singleton instance
         gameManager = Singleton<ticTacStashManager>.Instance;
         gameControls = GetComponent<gameControls>();
+
+        gameManager.endEvent += EndGame;
 
         //The sound manager is reference to provide the input sound
         soundManager = Singleton<soundManager>.Instance;
@@ -82,6 +88,7 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
         GameControls.pressedLeft -= PlaySound;
         GameControls.pressedRight -= PlaySound;
         GameControls.pressedUp -= PlaySound;
+        gameManager.endEvent -= EndGame;
     }
 
     //When pressing backspace, the player heads back to the rule state
@@ -202,9 +209,16 @@ public class ticTacStashState : gameStateBase, IDecideLeft, IDecideRight, IDecid
         HighlightBlock();
     }
 
+    public void EndGame(object sender, EventArgs e)
+    {
+        endGame = true;
+    }
+
     //The observer method is to play sound for every input performed
     public void PlaySound(object sender, EventArgs e)
     {
         soundManager.PlaySound(inputSound);
     }
+
+
 }

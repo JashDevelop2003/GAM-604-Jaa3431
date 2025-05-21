@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
 {
+    public event EventHandler endEvent;
+
     private int cash;
     private int chance;
+
+    private turnManager turnManager;
+    private minigameManager minigameManager;
 
     [Header("User Interface")]
     [SerializeField] private TMP_Text infoText;
@@ -21,10 +27,13 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
     public void BeginMinigame()
     {
         cash = 10;
-        chance = Random.Range(90, 101);
+        chance = UnityEngine.Random.Range(90, 101);
         cashText.SetText(cash.ToString());
         chanceText.SetText(chance.ToString() + "%");
         soundManager = Singleton<soundManager>.Instance;
+        turnManager = Singleton<turnManager>.Instance;
+        minigameManager = Singleton<minigameManager>.Instance;
+        endEvent += minigameManager.EndMinigame;
     }
 
     public void Outcome(choiceEnum choice)
@@ -35,7 +44,7 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
         }
         else if(choice == choiceEnum.Double)
         {
-            StartCoroutine(DoubleChance(Random.Range(0, 101)));
+            StartCoroutine(DoubleChance(UnityEngine.Random.Range(0, 101)));
         }
         else
         {
@@ -51,6 +60,8 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
 
     IEnumerator TakeCash()
     {
+        playerController player = turnManager.CurrentPlayer.GetComponent<playerController>();
+        player.ChangeCash(cash);
         soundManager.PlaySound(soundOutcome[0]);
         StartCoroutine(GameOver());
         yield return null;
@@ -71,7 +82,7 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
         {
             cash *= 2;
             soundManager.PlaySound(soundOutcome[1]);
-            chance -= Random.Range(1, 11);
+            chance -= UnityEngine.Random.Range(1, 11);
             if(chance < 0)
             {
                 chance = 0;
@@ -83,5 +94,7 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(5f);
+        endEvent?.Invoke(this, EventArgs.Empty);
+        endEvent -= minigameManager.EndMinigame;
     }
 }
