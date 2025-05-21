@@ -1631,7 +1631,7 @@ GameObject:
   - component: {fileID: 380554139}
   - component: {fileID: 380554138}
   m_Layer: 0
-  m_Name: MinigameManager
+  m_Name: XIIIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
