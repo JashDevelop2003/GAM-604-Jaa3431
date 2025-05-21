@@ -67,16 +67,11 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
     [SerializeField] private AudioClip[] outcomeSound = new AudioClip[2];
     private soundManager soundManager;
 
-    [Header("Scene Management")]
-    [SerializeField] private sceneEnum scene;
-    private sceneManager sceneManager;
-
 
     // Start is called before the first frame update
-    void Start()
+    public void BeginMinigame()
     {
         soundManager = Singleton<soundManager>.Instance;
-        sceneManager = Singleton<sceneManager>.Instance;
 
         secondSpin = false;
         for (int i = 0; i < blocks.Length; i++)
@@ -198,6 +193,5 @@ public class ticTacStashManager : Singleton<ticTacStashManager>
         }
         infoText.SetText("Game Over, the player has won: " +  cashPrize.ToString() + " cash");
         yield return new WaitForSeconds(3);
-        sceneManager.ChangeScene(scene);
     }
 }

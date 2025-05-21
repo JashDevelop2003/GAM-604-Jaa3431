@@ -4081,7 +4081,7 @@ GameObject:
   - component: {fileID: 87004834}
   - component: {fileID: 87004833}
   m_Layer: 5
-  m_Name: PlayerOne
+  m_Name: PlayerOneCash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6935,6 +6935,117 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147294475}
   m_CullTransparentMesh: 1
+--- !u!1 &159680922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 159680923}
+  - component: {fileID: 159680924}
+  m_Layer: 0
+  m_Name: TicTacStashManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &159680923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159680922}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1335470428}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &159680924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159680922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c1d0a38716983b4e8e4c9e8e5ef824d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blocks:
+  - icon: 0
+    iconImage: {fileID: 225511293}
+    blockPanel: {fileID: 545188873}
+    isLocked: 0
+  - icon: 0
+    iconImage: {fileID: 122284146}
+    blockPanel: {fileID: 244221616}
+    isLocked: 0
+  - icon: 0
+    iconImage: {fileID: 1578872042}
+    blockPanel: {fileID: 426154140}
+    isLocked: 0
+  - icon: 0
+    iconImage: {fileID: 832959126}
+    blockPanel: {fileID: 1569360009}
+    isLocked: 0
+  - icon: 0
+    iconImage: {fileID: 1320789349}
+    blockPanel: {fileID: 1586701622}
+    isLocked: 0
+  - icon: 0
+    iconImage: {fileID: 1589001721}
+    blockPanel: {fileID: 867958554}
+    isLocked: 0
+  - icon: 0
+    iconImage: {fileID: 1260833601}
+    blockPanel: {fileID: 694631333}
+    isLocked: 0
+  - icon: 0
+    iconImage: {fileID: 826858959}
+    blockPanel: {fileID: 145537410}
+    isLocked: 0
+  - icon: 0
+    iconImage: {fileID: 169425426}
+    blockPanel: {fileID: 1358318244}
+    isLocked: 0
+  winLines:
+  - winBlocks: 000000000100000002000000
+    line: {fileID: 549580711}
+  - winBlocks: 030000000400000005000000
+    line: {fileID: 2032410996}
+  - winBlocks: 060000000700000008000000
+    line: {fileID: 1091921895}
+  - winBlocks: 000000000300000006000000
+    line: {fileID: 1126852466}
+  - winBlocks: 010000000400000007000000
+    line: {fileID: 2027175194}
+  - winBlocks: 020000000500000008000000
+    line: {fileID: 188114918}
+  - winBlocks: 000000000400000008000000
+    line: {fileID: 508792277}
+  - winBlocks: 020000000400000006000000
+    line: {fileID: 189136994}
+  player: {fileID: 0}
+  cashPrize: 0
+  infoText: {fileID: 386849333}
+  iconImage:
+  - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: 1366144071, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: -1251093787, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
+  appearSound: {fileID: 8300000, guid: 674164301a9ad2345adc93c006e87495, type: 3}
+  outcomeSound:
+  - {fileID: 8300000, guid: c6b596fd07a14a64b89285b6f079b167, type: 3}
+  - {fileID: 8300000, guid: 3830029b89ea7a04992156c6adbc327c, type: 3}
 --- !u!1 &160262630
 GameObject:
   m_ObjectHideFlags: 0
@@ -12208,7 +12319,6 @@ MonoBehaviour:
   outcomeSounds:
   - {fileID: 8300000, guid: c6b596fd07a14a64b89285b6f079b167, type: 3}
   - {fileID: 8300000, guid: d18a72499ba58dd40a0e379085d24c94, type: 3}
-  scene: 5
 --- !u!1 &297169473
 GameObject:
   m_ObjectHideFlags: 0
@@ -18744,6 +18854,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460294957}
   m_CullTransparentMesh: 1
+--- !u!1 &466380217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 466380218}
+  - component: {fileID: 466380219}
+  m_Layer: 0
+  m_Name: DoubleOrNothingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &466380218
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466380217}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1335470428}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &466380219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466380217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1eb398524fcfea419f41576e3c11af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoText: {fileID: 866658208}
+  cashText: {fileID: 1314323249}
+  chanceText: {fileID: 117493217}
+  soundOutcome:
+  - {fileID: 8300000, guid: 5877f21220a782e4e9b636f72ed1f5f3, type: 3}
+  - {fileID: 8300000, guid: aefff84a12c287b4a8012f4034d9f224, type: 3}
+  - {fileID: 8300000, guid: c6b596fd07a14a64b89285b6f079b167, type: 3}
 --- !u!1001 &472031226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46134,6 +46295,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 294874699}
+  - {fileID: 466380218}
+  - {fileID: 159680923}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1335874223
@@ -54150,7 +54313,7 @@ GameObject:
   - component: {fileID: 1609833953}
   - component: {fileID: 1609833952}
   m_Layer: 5
-  m_Name: PlayerTwo
+  m_Name: PlayerTwoCash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55579,7 +55742,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1675492198
 MonoBehaviour:
   m_ObjectHideFlags: 0

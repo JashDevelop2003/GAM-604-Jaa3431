@@ -17,19 +17,14 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
     [SerializeField] private AudioClip[] soundOutcome = new AudioClip[3];
     private soundManager soundManager;
 
-    [Header ("Scene Management")]
-    [SerializeField] private sceneEnum scene;
-    private sceneManager sceneManager;
-
     // Start is called before the first frame update
-    void Start()
+    public void BeginMinigame()
     {
         cash = 10;
         chance = Random.Range(90, 101);
         cashText.SetText(cash.ToString());
         chanceText.SetText(chance.ToString() + "%");
         soundManager = Singleton<soundManager>.Instance;
-        sceneManager = Singleton<sceneManager>.Instance;
     }
 
     public void Outcome(choiceEnum choice)
@@ -88,6 +83,5 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(5f);
-        sceneManager.ChangeScene(scene);
     }
 }

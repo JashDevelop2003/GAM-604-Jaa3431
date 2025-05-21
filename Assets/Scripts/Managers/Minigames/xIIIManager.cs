@@ -68,15 +68,10 @@ public class xIIIManager : Singleton<xIIIManager>
     [SerializeField] private AudioClip[] outcomeSounds = new AudioClip[2];
     private soundManager soundManager;
 
-    [Header("Scene Management")]
-    [SerializeField] private sceneEnum scene;
-    private sceneManager sceneManager;
-
     // Start is called before the first frame update
-    void Start()
+    public void BeginMinigame()
     {
         soundManager = Singleton<soundManager>.Instance;
-        sceneManager = Singleton<sceneManager>.Instance;
 
         for(int i = 0; i < cards.Length; i++)
         {
@@ -172,6 +167,5 @@ public class xIIIManager : Singleton<xIIIManager>
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(3);
-        sceneManager.ChangeScene(scene);
     }
 }
