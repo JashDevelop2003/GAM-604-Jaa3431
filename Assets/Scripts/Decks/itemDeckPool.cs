@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class itemDeckPool : MonoBehaviour
 {
@@ -24,15 +25,17 @@ public class itemDeckPool : MonoBehaviour
     //This is the empty prefab that should provide the item prefab
     [SerializeField] private GameObject emptyPrefabs;
 
+    private playerController controller;
+
 
 
     private void Awake()
     {
         //In order to decide on the amount of objects to pool and the starting items, the method must collect the player controller from the parent
-        playerController player = GetComponentInParent<playerController>();
+        controller = GetComponentInParent<playerController>();
         //This collects from the character data on the starting items and deck capacity based upon the type of deck
-        startingItems = player.GetData.startingItems;
-        amountToPool = player.GetData.deckCapacity[(int)deckType];
+        startingItems = controller.GetData.startingItems;
+        amountToPool = controller.GetData.deckCapacity[(int)deckType];
 
     }
 
@@ -47,9 +50,6 @@ public class itemDeckPool : MonoBehaviour
             card.SetActive(false);
             emptyItems.Add(card);
         }
-
-        //At the start of the game there needs to be a call for collecting the starting items
-        LoadItems();
     }
 
     public GameObject GetAvailableItem()
@@ -68,23 +68,27 @@ public class itemDeckPool : MonoBehaviour
     }
 
 
-    //this method creates all of the starting items and will be useful loading back the items in the game
-    private void LoadItems()
+    public void LoadRelics(int id)
     {
-        //This loop creates every starting item until all of the starting items are made
-        for (int i = 0; i < startingItems.Count; i++)
+        GameObject item = GetAvailableItem();
+        if (item != null)
         {
-            //This checks if there is any available items to be use
-            //If there is then this will set the item to active and enable in the hierarchy
-            GameObject item = GetAvailableItem();
-            if (item != null)
-            {
-                item.SetActive(true);
-                //this will then add the items component into the deck & add the items data in the items object
-                itemBehaviour loadItem = item.AddComponent<itemBehaviour>();
-                loadItem.LoadItem(startingItems[i]);
-            }
+            item.SetActive(true);
+            itemBehaviour relic = item.AddComponent<itemBehaviour>();
+            relic.LoadItem(controller.GetData.possibleRelics[id]);
+            controller.IncrementDeck(deckTypeEnum.Item);
+        }
+    }
 
+    public void LoadOmens(int id)
+    {
+        GameObject item = GetAvailableItem();
+        if (item != null)
+        {
+            item.SetActive(true);
+            itemBehaviour omen = item.AddComponent<itemBehaviour>();
+            omen.LoadItem(controller.GetData.possibleOmens[id]);
+            controller.IncrementDeck(deckTypeEnum.Item);
         }
     }
 }

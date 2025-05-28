@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
@@ -325,6 +326,16 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 controller.IncrementDeck(deckTypeEnum.Movement);
                 eventText.SetText(typeSelected.ToString() + " Card Obtained: " + movement.MoveCard.cardName);
                 soundManager.PlaySound(confirmSound);
+                if (controller.Player == 1)
+                {
+                    playerOneData playerData = GetComponentInChildren<playerOneData>();
+                    playerData.storedMovement.Add(selectedCard);
+                }
+                else if (controller.Player == 2) 
+                {
+                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                    playerData.storedMovement.Add(selectedCard);
+                }
                 StartCoroutine(CardObtained());
             }
 
@@ -361,7 +372,17 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 controller.IncrementDeck(deckTypeEnum.Offence);
                 eventText.SetText(typeSelected.ToString() + " Card Obtained: " + offence.AttackCard.cardName);
                 soundManager.PlaySound(confirmSound);
-                StartCoroutine(CardObtained()); 
+                if (controller.Player == 1)
+                {
+                    playerOneData playerData = GetComponentInChildren<playerOneData>();
+                    playerData.storedOffence.Add(selectedCard);
+                }
+                else if (controller.Player == 2)
+                {
+                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                    playerData.storedOffence.Add(selectedCard);
+                }
+                StartCoroutine(CardObtained());
             }
 
             //else inform the player that there are no available slots to proivde
@@ -396,6 +417,16 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 controller.IncrementDeck(deckTypeEnum.Defence);
                 eventText.SetText(typeSelected.ToString() + " Card Obtained: " + defence.DefendCard.cardName);
                 soundManager.PlaySound(confirmSound);
+                if (controller.Player == 1)
+                {
+                    playerOneData playerData = GetComponentInChildren<playerOneData>();
+                    playerData.storedDefence.Add(selectedCard);
+                }
+                else if (controller.Player == 2)
+                {
+                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                    playerData.storedDefence.Add(selectedCard);
+                }
                 StartCoroutine(CardObtained());
             }
 
@@ -431,6 +462,16 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 controller.IncrementDeck(deckTypeEnum.Status);
                 eventText.SetText(typeSelected.ToString() + " Card Obtained: " + status.StatusCard.cardName);
                 soundManager.PlaySound(confirmSound);
+                if (controller.Player == 1)
+                {
+                    playerOneData playerData = GetComponentInChildren<playerOneData>();
+                    playerData.storedStatus.Add(selectedCard);
+                }
+                else if (controller.Player == 2)
+                {
+                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                    playerData.storedStatus.Add(selectedCard);
+                }
                 StartCoroutine(CardObtained());
             }
 

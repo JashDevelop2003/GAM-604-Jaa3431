@@ -19,12 +19,14 @@ public class PlayerData
 
     public int[] effectCooldown = new int[12];
     public int[] buffCooldown = new int[6];
+    public float[] buffValue = new float[6];
 
-    public int[] offenceCards;
-    public int[] defenceCards;
-    public int[] movementCards;
-    public int[] statusCards;
-    public int[] items;
+    public List<int> offenceCards;
+    public List<int> defenceCards;
+    public List<int> movementCards;
+    public List<int> statusCards;
+    public List<int> relics;
+    public List<int> omens;
 
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 /// <summary>
 /// This is alternative solution of the deck pool where instead of 1 Pool Script There's multiple
@@ -30,14 +31,16 @@ public class statusDeckPool : MonoBehaviour
     //This is the empty prefab that should provide the status card prefab
     [SerializeField] private GameObject emptyPrefabs;
 
+    private playerController controller;
+
     // Start is called before the first frame update
     void Start()
     {
         //In order to decide on the amount of objects to pool and the starting cards, the method must collect the player controller from the parent
-        playerController player = GetComponentInParent<playerController>();
+        controller = GetComponentInParent<playerController>();
         //This collects from the character data on the starting status cards and deck capacity based upon the type of deck
-        startingStatusCards = player.GetData.startingStatusCards;
-        amountToPool = player.GetData.deckCapacity[(int)deckType];
+        startingStatusCards = controller.GetData.startingStatusCards;
+        amountToPool = controller.GetData.deckCapacity[(int)deckType];
 
         //Depending on the value of the capacity, create cards of that type into the deck
         //Make sure that the cards are derived classes to the deck
@@ -82,6 +85,18 @@ public class statusDeckPool : MonoBehaviour
                 statusCard status = card.AddComponent<statusCard>();
                 status.CreateCard(startingStatusCards[i]);
             }
+        }
+    }
+
+    public void LoadStatusCards(int id)
+    {
+        GameObject card = GetAvailableStatus();
+        if (card != null)
+        {
+            card.SetActive(true);
+            statusCard status = card.AddComponent<statusCard>();
+            status.CreateCard(controller.GetData.possibleStatusCards[id]);
+            controller.IncrementDeck(deckTypeEnum.Status);
         }
     }
 }

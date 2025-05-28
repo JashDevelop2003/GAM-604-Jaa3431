@@ -41,6 +41,11 @@ public class playerView : MonoBehaviour
     void Start()
     {
         controller = GetComponent<playerController>();
+        DisplayUI();
+    }
+
+    public void DisplayUI()
+    {
         characterName.SetText(controller.GetData.name);
         offenceValue.SetText(controller.GetModel.OffenceCards.ToString());
         defenceValue.SetText(controller.GetModel.DefenceCards.ToString());

@@ -33,16 +33,18 @@ public class offenceDeckPool : MonoBehaviour
 
     //This is the empty prefab that should provide the offence card prefab
     [SerializeField] private GameObject emptyPrefabs;
+
+    private playerController controller;
     
 
     // Start is called before the first frame update
     void Start()
     {
         //In order to decide on the amount of objects to pool and the starting cards, the method must collect the player controller from the parent
-        playerController player = GetComponentInParent<playerController>();
+        controller = GetComponentInParent<playerController>();
         //This collects from the character data on the starting offence cards and deck capacity based upon the type of deck
-        startingOffenceCards = player.GetData.startingOffenceCards;
-        amountToPool = player.GetData.deckCapacity[(int)deckType];
+        startingOffenceCards = controller.GetData.startingOffenceCards;
+        amountToPool = controller.GetData.deckCapacity[(int)deckType];
 
         //Depending on the value of the capacity, create cards of that type into the deck
         //Make sure that the cards are derived classes to the deck
@@ -89,6 +91,18 @@ public class offenceDeckPool : MonoBehaviour
                 offenceCard offence = card.AddComponent<offenceCard>();
                 offence.CreateCard(startingOffenceCards[i]);
             }
+        }
+    }
+
+    public void LoadOffenceCards(int id)
+    {
+        GameObject card = GetAvailableOffence();
+        if (card != null) 
+        {
+            card.SetActive(true);
+            offenceCard offence = card.AddComponent<offenceCard>();
+            offence.CreateCard(controller.GetData.possibleOffenceCards[id]);
+            controller.IncrementDeck(deckTypeEnum.Offence);
         }
     }
 }

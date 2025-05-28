@@ -13,17 +13,17 @@ public class playerTwoData : MonoBehaviour
     public int healthMax;
     public int manaCurrent;
     public int manaMax;
-    public int usedAbility;
-    public int characterInt;
+    public bool usedAbility;
+    public int cashCurrent;
 
     public int currentPath;
     public int spaceInt;
 
-    public int[] storedOffence;
-    public int[] storedDefence;
-    public int[] storedMovement;
-    public int[] storedStatus;
-    public int[] storedItems;
+    public List<int> storedOffence;
+    public List<int> storedDefence;
+    public List<int> storedMovement;
+    public List<int> storedStatus;
+    public List<int> storedItems;
 
     public int[] effectCooldown;
     public int[] buffCooldown;

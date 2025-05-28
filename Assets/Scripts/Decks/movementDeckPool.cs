@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class movementDeckPool : MonoBehaviour
 {
@@ -27,14 +28,16 @@ public class movementDeckPool : MonoBehaviour
     //This is the empty prefab that should provide the offence card prefab
     [SerializeField] private GameObject emptyPrefabs;
 
+    private playerController controller;
+
     // Start is called before the first frame update
     void Start()
     {
         //In order to decide on the amount of objects to pool and the starting cards, the method must collect the player controller from the parent
-        playerController player = GetComponentInParent<playerController>();
+        controller = GetComponentInParent<playerController>();
         //This collects from the character data on the starting offence cards and deck capacity based upon the type of deck
-        startingMovementCards = player.GetData.startingMovementCards;
-        amountToPool = player.GetData.deckCapacity[(int)deckType];
+        startingMovementCards = controller.GetData.startingMovementCards;
+        amountToPool = controller.GetData.deckCapacity[(int)deckType];
 
         //Depending on the value of the capacity, create cards of that type into the deck
         //Make sure that the cards are derived classes to the deck
@@ -78,6 +81,18 @@ public class movementDeckPool : MonoBehaviour
                 movementCard movement = card.AddComponent<movementCard>();
                 movement.CreateCard(startingMovementCards[i]);
             }
+        }
+    }
+
+    public void LoadMovementCards(int id)
+    {
+        GameObject card = GetAvailableMovement();
+        if (card != null)
+        {
+            card.SetActive(true);
+            movementCard move = card.AddComponent<movementCard>();
+            move.CreateCard(controller.GetData.possibleMovementCards[id]);
+            controller.IncrementDeck(deckTypeEnum.Movement);
         }
     }
 }

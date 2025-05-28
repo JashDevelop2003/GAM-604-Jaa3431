@@ -12,6 +12,11 @@ public class playerController : MonoBehaviour
 {
     //This indicates the player
     [SerializeField] private int player;
+    public int Player
+    {
+        get { return player; }
+    }
+
     [SerializeField] private int character;
     [SerializeField] private characterData[] characters;
 
@@ -108,6 +113,84 @@ public class playerController : MonoBehaviour
         takeDamageEvent += animator.DamageAnimation;
         endDamageEvent += animator.EndDamageAnimation;
         isDefeatedEvent += animator.DeadAnimation;
+    }
+
+    public void ChangeStats()
+    {
+        allPaths paths = allPaths.instance;
+
+        if (player == 1)
+        {
+            playerOneData playerData = GetComponentInChildren<playerOneData>();
+            GetModel.CurrentHealth = playerData.healthCurrent;
+            GetModel.MaxHealth = playerData.healthMax;
+            GetModel.CurrentMana = playerData.manaCurrent;
+            GetModel.MaxMana = playerData.manaMax;
+            GetModel.CurrentCash = playerData.cashCurrent;
+            GetModel.AbilityUsed = playerData.usedAbility;
+            currentPath = paths.Paths[playerData.currentPath];
+            currentSpaceInt = playerData.spaceInt;
+            playerData.ControllerComplete = true;
+        }
+        else if (player == 2) 
+        { 
+            playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+            GetModel.CurrentHealth = playerData.healthCurrent;
+            GetModel.MaxHealth = playerData.healthMax;
+            GetModel.CurrentMana = playerData.manaCurrent;
+            GetModel.MaxMana = playerData.manaMax;
+            GetModel.CurrentCash = playerData.cashCurrent;
+            GetModel.AbilityUsed = playerData.usedAbility;
+            currentPath = paths.Paths[playerData.currentPath];
+            currentSpaceInt = playerData.spaceInt;
+           // playerData.ControllerComplete = true;
+        }
+
+
+        //this collects the path list for the player to start on
+        pathOrder startingSpace = currentPath.GetComponent<pathOrder>();
+
+        //this creates a new player model based on the character the player has chosen
+        transform.position = new Vector3(startingSpace.SpaceOrder[currentSpaceInt].transform.position.x, 2f, startingSpace.SpaceOrder[currentSpaceInt].transform.position.z);
+
+        //This displays the new data to the UI
+        playerView.DisplayUI();
+    }
+
+    public void StoreStats()
+    {
+        allPaths paths = allPaths.instance;
+
+        if (player == 1)
+        {
+            playerOneData playerData = GetComponentInChildren<playerOneData>();
+            playerData.healthCurrent = GetModel.CurrentHealth;
+            playerData.healthMax = GetModel.MaxHealth;
+            playerData.manaCurrent = GetModel.CurrentMana;
+            playerData.manaMax = GetModel.MaxMana;
+            playerData.cashCurrent = GetModel.CurrentCash;
+            playerData.usedAbility = GetModel.AbilityUsed;
+            playerData.spaceInt = currentSpaceInt;
+            for (int i = 0; i < paths.Paths.Length; i++)
+            {
+                if (paths.Paths[i].gameObject == currentPath)
+                {
+                    playerData.currentPath = i;
+                }
+            }
+        }
+        else if (player == 2)
+        {
+            playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+            playerData.healthCurrent = GetModel.CurrentHealth;
+            playerData.healthMax = GetModel.MaxHealth;
+            playerData.manaCurrent = GetModel.CurrentMana;
+            playerData.manaMax = GetModel.MaxMana;
+            playerData.cashCurrent = GetModel.CurrentCash;
+            playerData.usedAbility = GetModel.AbilityUsed;
+            currentPath = paths.Paths[playerData.currentPath];
+            currentSpaceInt = playerData.spaceInt;
+        }
     }
 
     //This is to reset the multipliers from the effects of their previous turn
