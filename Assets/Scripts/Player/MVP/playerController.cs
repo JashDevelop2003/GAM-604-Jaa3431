@@ -19,6 +19,7 @@ public class playerController : MonoBehaviour
 
     //This is to provide the current path for the move state to use
     [SerializeField] private GameObject currentPath;
+    private int currentSpaceInt = 1;
 
     //These are the events to activate the passive and one use ability
     public event EventHandler oneUseEvent;
@@ -31,6 +32,11 @@ public class playerController : MonoBehaviour
     public characterData GetData {  get { return Data; } }
 
     public GameObject Path { get { return currentPath; } set { currentPath = value; } }
+    public int CurrentSpaceInt
+    {
+        get { return currentSpaceInt; }
+        set { currentSpaceInt = value; }
+    }
 
     [Header("User Interface")]
     [SerializeField] private TMP_Text eventText;
@@ -60,7 +66,7 @@ public class playerController : MonoBehaviour
 
         //this creates a new player model based on the character the player has chosen
         playerModel = new playerModel(Data);
-        transform.position = new Vector3(startingSpace.SpaceOrder[1].transform.position.x, 2f, startingSpace.SpaceOrder[1].transform.position.z);
+        transform.position = new Vector3(startingSpace.SpaceOrder[currentSpaceInt].transform.position.x, 2f, startingSpace.SpaceOrder[currentSpaceInt].transform.position.z);
 
         //this collects the view for providing the interface of the statistics
         playerView = GetComponent<playerView>();

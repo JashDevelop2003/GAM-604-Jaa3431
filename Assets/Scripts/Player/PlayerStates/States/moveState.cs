@@ -41,7 +41,6 @@ public class moveState : playerStateBase
     //The current path object provides the path order which is use to provide the order for the player to move around
     //the integer is referencing the list of objects, which the current value being the current space and +1 will consider the targeted space in that list
     private GameObject currentPath;
-    private int currentSpaceInt = 1;
 
     //the current space is the object that the raycast is detected last as the targeted object
     //the space enum checks which type of space the player is currently landed on
@@ -94,7 +93,7 @@ public class moveState : playerStateBase
         //This means that a new path is used for the player to follow around the map
         if(player.PreviousState == player.ChoosingState)
         {
-            currentSpaceInt = 0;
+            controller.CurrentSpaceInt = 0;
         }
 
         //This collects the infromation from the controller based on which path the player is currently on
@@ -109,8 +108,8 @@ public class moveState : playerStateBase
 
         //The currentSpace is the current integer of the currentSpaceInteger
         //Whilst targetSpace is the current integer +1 of the currentSpaceInteger
-        currentSpace = pathOrder.SpaceOrder[currentSpaceInt];
-        targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
+        currentSpace = pathOrder.SpaceOrder[controller.CurrentSpaceInt];
+        targetSpace = pathOrder.SpaceOrder[controller.CurrentSpaceInt + 1];
 
         //This is to call the space effects towards ending the turn with a space effect occurring
         spaceManager = Singleton<spaceManager>.Instance;
@@ -160,7 +159,7 @@ public class moveState : playerStateBase
         if (changeDirection) 
         {
             choosingState choosing = player.ChoosingState.GetComponent<choosingState>();
-            choosing.CollectCurrentPath(pathOrder.SpaceOrder[currentSpaceInt], currentDirection);
+            choosing.CollectCurrentPath(pathOrder.SpaceOrder[controller.CurrentSpaceInt], currentDirection);
             player.ChangeState(player.ChoosingState);
         }
 
@@ -195,14 +194,14 @@ public class moveState : playerStateBase
     void ChangeTarget(int nextSpace)
     {
         //the new currentSpace is the currentSpaceInt which has been incremented from the coroutine
-        currentSpace = pathOrder.SpaceOrder[currentSpaceInt];
+        currentSpace = pathOrder.SpaceOrder[controller.CurrentSpaceInt];
 
         //This changes the space type based on the new current space
-        spaceBehaviour type = pathOrder.SpaceOrder[currentSpaceInt].transform.GetComponent<spaceBehaviour>();
+        spaceBehaviour type = pathOrder.SpaceOrder[controller.CurrentSpaceInt].transform.GetComponent<spaceBehaviour>();
         currentSpaceType = type.SpaceType;
 
         //A new target space is created for the player to follow
-        targetSpace = pathOrder.SpaceOrder[currentSpaceInt + 1];
+        targetSpace = pathOrder.SpaceOrder[controller.CurrentSpaceInt + 1];
 
         //The movement integer is decremented
         movement--;
@@ -234,19 +233,19 @@ public class moveState : playerStateBase
                 //If the detected object is the target space then increment the current space int
                 if (info.collider.gameObject == targetSpace.gameObject)
                 {
-                    currentSpaceInt++;
+                    controller.CurrentSpaceInt++;
 
                     //this then checks if the targeted space was either a regular space or a multi path object
                     //if the object was a multi path (also known as the last object in the path list)
                     //then change the state to choosing state
-                    if(currentSpaceInt + 1 == pathOrder.SpaceOrder.Count)
+                    if(controller.CurrentSpaceInt + 1 == pathOrder.SpaceOrder.Count)
                     {
                         changeDirection = true;
                     }
                     //otherwise change the target to the next space from the list
                     else
                     {
-                        ChangeTarget(currentSpaceInt);
+                        ChangeTarget(controller.CurrentSpaceInt);
                     }
                     
                 }
