@@ -66,7 +66,28 @@ public class playerController : MonoBehaviour
 
     void Awake()
     {
-        RetrieveCharacter();
+        SelectedData characterData = characterSystem.Retrieve();
+        if (characterData != null)
+        {
+            if (player == 1)
+            {
+                character = characterData.playerOne;
+            }
+            else if (player == 2)
+            {
+                character = characterData.playerTwo;
+            }
+
+            data = characters[character];
+        }
+        else
+        {
+            sceneManager scene = Singleton<sceneManager>.Instance;
+            scene.ChangeScene(sceneEnum.MainMenu);
+            Debug.LogError("You don't have any data, you need to start a new game");
+        }
+
+        playerModel = new playerModel(data);
 
         //this collects the path list for the player to start on
         pathOrder startingSpace = currentPath.GetComponent<pathOrder>();
@@ -76,22 +97,7 @@ public class playerController : MonoBehaviour
 
         //this collects the view for providing the interface of the statistics
         playerView = GetComponent<playerView>();
-    }
 
-    private void RetrieveCharacter()
-    {
-        SelectedData characterData = characterSystem.Retrieve();
-        if (player == 1)
-        {
-            character = characterData.playerOne;
-        }
-        else if (player == 2) 
-        {
-            character = characterData.playerTwo;
-        }
-
-        data = characters[character];
-        playerModel = new playerModel(data);
         Instantiate(GetData.characterObject, this.transform);
     }
 

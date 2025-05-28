@@ -120,7 +120,6 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
 
             else
             {
-                Debug.Log(sameCharacter);
                 playerChoice[player] = characters[currentCharacter].character;
                 playerIcon[player].sprite = characters[currentCharacter].characterData.abilityIcon[0];
                 playerIcon[player].color = characters[currentCharacter].characterData.abilityColour[0];

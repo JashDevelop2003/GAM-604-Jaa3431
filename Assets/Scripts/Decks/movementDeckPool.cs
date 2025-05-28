@@ -27,7 +27,8 @@ public class movementDeckPool : MonoBehaviour
     //This is the empty prefab that should provide the offence card prefab
     [SerializeField] private GameObject emptyPrefabs;
 
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
         //In order to decide on the amount of objects to pool and the starting cards, the method must collect the player controller from the parent
         playerController player = GetComponentInParent<playerController>();
@@ -35,16 +36,6 @@ public class movementDeckPool : MonoBehaviour
         startingMovementCards = player.GetData.startingMovementCards;
         amountToPool = player.GetData.deckCapacity[(int)deckType];
 
-        //this creates it's own static deck pool in order to pool the objects and be use for referencing
-        //if (instance == null)
-        //{
-        //    instance = this;
-        // }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         //Depending on the value of the capacity, create cards of that type into the deck
         //Make sure that the cards are derived classes to the deck
         for (int i = 0; i < amountToPool; i++)

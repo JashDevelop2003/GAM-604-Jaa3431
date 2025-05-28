@@ -51,7 +51,7 @@ public class playerView : MonoBehaviour
         healthPoints.SetText(controller.GetModel.CurrentHealth.ToString());
         manaPoints.SetText(controller.GetModel.CurrentMana.ToString());
         cashPoints.SetText(controller.GetModel.CurrentCash.ToString());
-        thrustPercentage.SetText((controller.GetModel.ThrustMultiplier * 100).ToString() + "%" );
+        thrustPercentage.SetText((controller.GetModel.ThrustMultiplier * 100).ToString() + "%");
         guardPercentage.SetText((controller.GetModel.GuardMultiplier * 100).ToString() + "%");
         rollPercentage.SetText((controller.GetModel.RollMultiplier * 100).ToString() + "%");
 
