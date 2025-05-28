@@ -10,12 +10,17 @@ using TMPro;
 /// </summary>
 public class playerController : MonoBehaviour
 {
+    //This indicates the player
+    [SerializeField] private int player;
+    [SerializeField] private int character;
+    [SerializeField] private characterData[] characters;
+
     //this provide encapsulation of the player model, character data and the current path
     //this allows other classes to reference these to return the data
     //However the choosing state can set a new current path for the controller to collect and provide
     private playerModel playerModel;
     private playerView playerView;
-    [SerializeField] private characterData Data;
+    [SerializeField] private characterData data;
 
     //This is to provide the current path for the move state to use
     [SerializeField] private GameObject currentPath;
@@ -29,7 +34,7 @@ public class playerController : MonoBehaviour
     public event EventHandler effectEndEvent;
 
     public playerModel GetModel { get { return playerModel; } }
-    public characterData GetData {  get { return Data; } }
+    public characterData GetData {  get { return data; } }
 
     public GameObject Path { get { return currentPath; } set { currentPath = value; } }
     public int CurrentSpaceInt
@@ -61,16 +66,32 @@ public class playerController : MonoBehaviour
 
     void Awake()
     {
+        RetrieveCharacter();
+
         //this collects the path list for the player to start on
         pathOrder startingSpace = currentPath.GetComponent<pathOrder>();
 
         //this creates a new player model based on the character the player has chosen
-        playerModel = new playerModel(Data);
         transform.position = new Vector3(startingSpace.SpaceOrder[currentSpaceInt].transform.position.x, 2f, startingSpace.SpaceOrder[currentSpaceInt].transform.position.z);
 
         //this collects the view for providing the interface of the statistics
         playerView = GetComponent<playerView>();
+    }
 
+    private void RetrieveCharacter()
+    {
+        SelectedData characterData = characterSystem.Retrieve();
+        if (player == 1)
+        {
+            character = characterData.playerOne;
+        }
+        else if (player == 2) 
+        {
+            character = characterData.playerTwo;
+        }
+
+        data = characters[character];
+        playerModel = new playerModel(data);
         Instantiate(GetData.characterObject, this.transform);
     }
 

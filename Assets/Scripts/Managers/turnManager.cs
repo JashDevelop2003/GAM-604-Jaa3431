@@ -25,6 +25,11 @@ public class turnManager : Singleton<turnManager>
     }
 
     [SerializeField] private int currentPlayerTurn;
+    public int CurrentPlayerTurn
+    {
+        get { return currentPlayerTurn; }
+        set { currentPlayerTurn = value; }
+    }
     
     // Start is called before the first frame update
     void Start()

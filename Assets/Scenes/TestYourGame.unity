@@ -3626,7 +3626,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854ac4d527ec5bc4b9651916eae4b682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: f4bdce986ad000841bf72b29cb6efcae, type: 2}
+  player: 1
+  character: 0
+  characters:
+  - {fileID: 11400000, guid: 624c2f9d5091ec64b906997f8362575c, type: 2}
+  - {fileID: 11400000, guid: f4bdce986ad000841bf72b29cb6efcae, type: 2}
+  - {fileID: 11400000, guid: 82a5a4f9001c2ae4c88a27b80d187815, type: 2}
+  - {fileID: 11400000, guid: f5a71dd7a0988be4e84d69078a03991d, type: 2}
+  data: {fileID: 0}
   currentPath: {fileID: 91498251}
   eventText: {fileID: 2116896888}
   damageSound: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
@@ -25766,7 +25773,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854ac4d527ec5bc4b9651916eae4b682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: 624c2f9d5091ec64b906997f8362575c, type: 2}
+  player: 2
+  character: 0
+  characters:
+  - {fileID: 11400000, guid: 624c2f9d5091ec64b906997f8362575c, type: 2}
+  - {fileID: 11400000, guid: f4bdce986ad000841bf72b29cb6efcae, type: 2}
+  - {fileID: 11400000, guid: 82a5a4f9001c2ae4c88a27b80d187815, type: 2}
+  - {fileID: 11400000, guid: f5a71dd7a0988be4e84d69078a03991d, type: 2}
+  data: {fileID: 0}
   currentPath: {fileID: 140970317}
   eventText: {fileID: 2116896888}
   damageSound: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
@@ -46124,6 +46138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1324529452}
+  - component: {fileID: 1324529453}
   m_Layer: 0
   m_Name: Pathways
   m_TagString: Untagged
@@ -46158,6 +46173,31 @@ Transform:
   - {fileID: 553951421}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1324529453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324529451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208cb532365bf044cb4af164c2fcecfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paths:
+  - {fileID: 91498251}
+  - {fileID: 54048264}
+  - {fileID: 1346927037}
+  - {fileID: 1986095463}
+  - {fileID: 140970317}
+  - {fileID: 1485928020}
+  - {fileID: 1405300753}
+  - {fileID: 235016057}
+  - {fileID: 1294239499}
+  - {fileID: 1964181347}
+  - {fileID: 395616113}
+  - {fileID: 382064971}
 --- !u!1 &1331685285
 GameObject:
   m_ObjectHideFlags: 0

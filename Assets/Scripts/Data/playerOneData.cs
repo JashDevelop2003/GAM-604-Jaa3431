@@ -1,0 +1,65 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class playerOneData : MonoBehaviour
+{
+    private dataManager dataManager;
+    private Transform locatePlayer;
+    private GameObject player;
+
+    public int healthCurrent;
+    public int healthMax;
+    public int manaCurrent;
+    public int manaMax;
+    public int usedAbility;
+    public int characterInt;
+
+    public int currentPath;
+    public int spaceInt;
+
+    public int[] storedOffence;
+    public int[] storedDefence;
+    public int[] storedMovement;
+    public int[] storedStatus;
+    public int[] storedItems;
+
+    public int[] effectCooldown;
+    public int[] buffCooldown;
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        locatePlayer = this.transform.parent;
+        player = locatePlayer.gameObject;
+        dataManager = Singleton<dataManager>.Instance;
+        dataManager.loadFiles += LoadPlayer;
+        dataManager.saveFiles += SavePlayer;
+    }
+
+    public void LoadPlayer(object sender, EventArgs e)
+    {
+       // PlayerData playerOneData = new PlayerData
+       // {
+
+       // }
+    }
+
+    public void SavePlayer(object sender, EventArgs e)
+    {
+
+    }
+
+    //TODO - Change return null to yield return new WaitUntil( Suitable Boolean becomes true)
+    IEnumerator LoadingData()
+    {
+        return null;
+    }
+
+    private void OnDisable()
+    {
+        dataManager.loadFiles -= LoadPlayer;
+        dataManager.saveFiles -= SavePlayer;
+    }
+}
