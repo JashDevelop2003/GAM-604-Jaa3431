@@ -21,6 +21,20 @@ public class dataManager : Singleton<dataManager>
     public event EventHandler saveFiles;
     public event EventHandler loadFiles;
 
+    private bool[] loadedPlayer = new bool [2];
+    private bool loadComplete;
+
+    public bool LoadComplete
+    {
+        get { return loadComplete; }
+    }
+
+    public bool[] LoadedPlayer
+    {
+        get { return loadedPlayer; }
+        set { loadedPlayer = value; }
+    }
+
     void Start()
     {
         turnManager = Singleton<turnManager>.Instance;
@@ -37,6 +51,7 @@ public class dataManager : Singleton<dataManager>
             selectedBoard = gameData.board;
             progressGame = gameData.midGame;
             loadFiles?.Invoke(this, EventArgs.Empty);
+            StartCoroutine(LoadingPlayers());
         }
         else
         {
@@ -48,6 +63,12 @@ public class dataManager : Singleton<dataManager>
         turnManager.CurrentPlayerTurn = currentTurn;
     }
 
+    public IEnumerator LoadingPlayers()
+    {
+        yield return new WaitUntil(() => loadedPlayer[0] == true && loadedPlayer[1] == true);
+        loadComplete = true;
+    }
+    
     //This saves the game data by creating a new game data to replace the old data.
     public void SaveGame()
     {
@@ -62,5 +83,6 @@ public class dataManager : Singleton<dataManager>
         
         saveSystem.Save(gameData);
         saveFiles?.Invoke(this, EventArgs.Empty);
+
     }
 }

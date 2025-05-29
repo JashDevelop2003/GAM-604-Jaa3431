@@ -11,6 +11,8 @@ using Random = UnityEngine.Random;
 
 public class turnManager : Singleton<turnManager>
 {
+    private dataManager dataManager;
+
     //this provides an array to collect all of the players
     [SerializeField] private GameObject[] Players;
     public GameObject[] GetPlayers
@@ -35,6 +37,8 @@ public class turnManager : Singleton<turnManager>
     void Start()
 
     {
+        dataManager = Singleton<dataManager>.Instance;
+
         //This gathers all of the players since each player object provides a tag called "Player"
         Players = GameObject.FindGameObjectsWithTag("Player");
 
@@ -49,7 +53,7 @@ public class turnManager : Singleton<turnManager>
 
     IEnumerator WaitForLoad()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitUntil(() => dataManager.LoadComplete == true);
         StartTurn();
     }
 

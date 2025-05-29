@@ -32,6 +32,7 @@ public class playerTwoData : MonoBehaviour
 
     private bool controllerComplete = false;
     private bool decksComplete = false;
+    private bool effectsComplete = false;
 
     private List<effectEnum> effectEnums = new List<effectEnum>()
     {
@@ -63,12 +64,6 @@ public class playerTwoData : MonoBehaviour
     {
         get { return controllerComplete; }
         set { controllerComplete = value; }
-    }
-
-    public bool DecksComplete
-    {
-        get { return decksComplete; }
-        set { decksComplete = value; }
     }
 
     private playerController controller;
@@ -209,6 +204,10 @@ public class playerTwoData : MonoBehaviour
                 buffs.AddBuff(buffEnums[i], storedBuffs[i], storedValues[i]);
             }
         }
+
+        effectsComplete = true;
+        yield return new WaitUntil(() => effectsComplete == true);
+        dataManager.LoadedPlayer[1] = true;
     }
 
     private void OnDisable()
