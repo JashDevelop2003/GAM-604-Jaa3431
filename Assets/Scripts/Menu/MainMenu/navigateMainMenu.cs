@@ -60,7 +60,7 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
     public void ConfirmingChoice(object sender, EventArgs e)
     {
 
-        if(currentChoice == 2)
+        if(currentChoice == 1)
         {
             GameData gameData = saveSystem.Load();
             if (gameData != null)
@@ -68,13 +68,12 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
                 sceneManager.ChangeScene(scene[currentChoice]);
 
             }
-
             else
             {
                 Debug.LogError("You have no data in this game");
             }
         }
-        else if(currentChoice == 1)
+        else if(currentChoice == 0)
         {
             if (!checkGame)
             {

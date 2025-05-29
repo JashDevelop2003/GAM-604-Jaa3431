@@ -25,6 +25,7 @@ public class inactiveState : playerStateBase
 
     private minigameManager minigameManager;
     private turnManager turnManager;
+    private dataManager dataManager;
 
 
     //the enter state checks whether if the player ends their turn or their combat
@@ -39,6 +40,7 @@ public class inactiveState : playerStateBase
 
         minigameManager = Singleton<minigameManager>.Instance;
         turnManager = Singleton<turnManager>.Instance;
+        dataManager = Singleton<dataManager>.Instance;
 
         //this checks if the previous state was an actual state (TODO: besides defend state) then end their turn
         if (player.PreviousState != null && player.PreviousState != player.DefendState)
@@ -83,11 +85,15 @@ public class inactiveState : playerStateBase
     //When the player ends their turn, a coroutine starts to check if there is a minigame in hand
     //If there is a minigame then the board game will be on pause
     //Otherwise it'll be the next player's turn
+    //The game will save when the player has 
     IEnumerator EndTurn()
     {
         yield return new WaitUntil(() => minigameManager.GameInProgress == false);
-        turnManager.StartTurn();
         controller.ActivateEndEffect();
+        turnManager.StartTurn();
+        yield return new WaitForSeconds(0.5f);
         endEvents?.Invoke(this, EventArgs.Empty);
+        yield return new WaitForSeconds(0.5f);
+        dataManager.SaveGame();
     }
 }
