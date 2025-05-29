@@ -83,6 +83,17 @@ public class godPackEffect : MonoBehaviour
             offenceCard attack = attackCard.AddComponent<offenceCard>();
             attack.CreateCard(selectedOffenceCard);
             controller.IncrementDeck(deckTypeEnum.Offence);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = GetComponentInChildren<playerOneData>();
+                playerData.storedOffence.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                playerData.storedOffence.Add(selectedInt);
+            }
+
         }
     }
 
@@ -109,6 +120,16 @@ public class godPackEffect : MonoBehaviour
             defenceCard defend = defendCard.AddComponent<defenceCard>();
             defend.CreateCard(selectedDefenceCard);
             controller.IncrementDeck(deckTypeEnum.Defence);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = GetComponentInChildren<playerOneData>();
+                playerData.storedDefence.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                playerData.storedDefence.Add(selectedInt);
+            }
         }
     }
 
@@ -136,6 +157,16 @@ public class godPackEffect : MonoBehaviour
             move.CreateCard(selectedMovementCard);
             controller.IncrementDeck(deckTypeEnum.Movement);
         }
+        if (controller.Player == 1)
+        {
+            playerOneData playerData = GetComponentInChildren<playerOneData>();
+            playerData.storedMovement.Add(selectedInt);
+        }
+        else if (controller.Player == 2)
+        {
+            playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+            playerData.storedMovement.Add(selectedInt);
+        }
     }
 
     void LegendaryStatus()
@@ -161,6 +192,16 @@ public class godPackEffect : MonoBehaviour
             statusCard status = statusCard.AddComponent<statusCard>();
             status.CreateCard(selectedStatusCard);
             controller.IncrementDeck(deckTypeEnum.Status);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = GetComponentInChildren<playerOneData>();
+                playerData.storedStatus.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                playerData.storedStatus.Add(selectedInt);
+            }
         }
     }
 }

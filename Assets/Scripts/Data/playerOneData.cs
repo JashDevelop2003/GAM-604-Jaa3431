@@ -71,6 +71,12 @@ public class playerOneData : MonoBehaviour
         set { decksComplete = value; }
     }
 
+    private playerController controller;
+    private currentEffects effects;
+    private currentBuffs buffs;
+
+    public event EventHandler saveData;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -79,6 +85,14 @@ public class playerOneData : MonoBehaviour
         dataManager = Singleton<dataManager>.Instance;
         dataManager.loadFiles += LoadPlayer;
         dataManager.saveFiles += SavePlayer;
+
+        controller = player.GetComponent<playerController>();
+        effects = player.GetComponent<currentEffects>();
+        buffs = player.GetComponent<currentBuffs>();
+
+        saveData += controller.StoreStats;
+        saveData += effects.SaveEffects;
+        saveData += buffs.SaveBuffs;
     }
 
     public void LoadPlayer(object sender, EventArgs e)
@@ -107,15 +121,43 @@ public class playerOneData : MonoBehaviour
             storedValues = playerOneData.buffValue;
         }
 
-        playerController controller = player.GetComponent<playerController>();
         controller.ChangeStats();
         StartCoroutine(LoadingData());
     }
 
+    //Save player will store all the statistics, cards obtained, effects and position of the player.
+    //Stats, effects and position will use 3 methods to gain these data:
+    // 1. From the Controller component for statistics and position
+    // 2. From the Effect component for the negative effects
+    // 3. From the Buff component for the positive effects
+    // The decks store card whenever the player obtains a card, relic or omen
     public void SavePlayer(object sender, EventArgs e)
     {
-        playerController controller = player.GetComponent<playerController>();
-        controller.StoreStats();
+        saveData?.Invoke(this, EventArgs.Empty);
+
+        PlayerData playerOneData = new PlayerData
+        {
+            currentHealth = healthCurrent,
+            maxHealth = healthMax,
+            currentMana = manaCurrent,
+            maxMana = manaMax,
+            currentCash = cashCurrent,
+            abilityUsed = usedAbility,
+            path = currentPath,
+            currentSpace = spaceInt,
+            effectCooldown = storedEffects,
+            buffCooldown = storedBuffs,
+            buffValue = storedValues,
+            offenceCards = storedOffence,
+            defenceCards = storedDefence,
+            movementCards = storedMovement,
+            statusCards = storedStatus,
+            relics = storedRelics,
+            omens = storedOmens,
+        };
+
+        saveSystem.SaveOne(playerOneData);
+
     }
 
     //TODO - Change return null to yield return new WaitUntil( Suitable Boolean becomes true)
@@ -160,7 +202,6 @@ public class playerOneData : MonoBehaviour
         decksComplete = true;
         yield return new WaitUntil(() => decksComplete == true);
 
-        currentEffects effects = player.GetComponent<currentEffects>();
         for(int i = 0; i < storedEffects.Length; i++)
         {
             if (storedEffects[i] > 0)
@@ -169,7 +210,6 @@ public class playerOneData : MonoBehaviour
             }
         }
 
-        currentBuffs buffs = player.GetComponent<currentBuffs>();
         for(int i = 0; i < storedBuffs.Length; i++)
         {
             if(storedBuffs[i] > 0)
@@ -184,5 +224,8 @@ public class playerOneData : MonoBehaviour
     {
         dataManager.loadFiles -= LoadPlayer;
         dataManager.saveFiles -= SavePlayer;
+        saveData -= controller.StoreStats;
+        saveData -= effects.SaveEffects;
+        saveData -= buffs.SaveBuffs;
     }
 }

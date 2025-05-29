@@ -73,6 +73,16 @@ public class blessOrHex : eventSpace
             item.CreateItem(selectedRelic);
             controller.IncrementDeck(deckTypeEnum.Item);
             eventText.SetText("Congratulations! you recieved a relic. You Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = GetComponentInChildren<playerOneData>();
+                playerData.storedRelics.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                playerData.storedDefence.Add(selectedInt);
+            }
         }
 
         else if (relic == null)
@@ -109,6 +119,16 @@ public class blessOrHex : eventSpace
             item.CreateItem(selectedOmens);
             controller.IncrementDeck(deckTypeEnum.Item);
             eventText.SetText("How unfortunate! You recieved a omen. You Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = GetComponentInChildren<playerOneData>();
+                playerData.storedOmens.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                playerData.storedOmens.Add(selectedInt);
+            }
         }
 
         else if (omen == null)

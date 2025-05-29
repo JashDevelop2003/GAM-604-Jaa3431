@@ -143,7 +143,7 @@ public class playerController : MonoBehaviour
             GetModel.AbilityUsed = playerData.usedAbility;
             currentPath = paths.Paths[playerData.currentPath];
             currentSpaceInt = playerData.spaceInt;
-           // playerData.ControllerComplete = true;
+            playerData.ControllerComplete = true;
         }
 
 
@@ -157,7 +157,7 @@ public class playerController : MonoBehaviour
         playerView.DisplayUI();
     }
 
-    public void StoreStats()
+    public void StoreStats(object sender, EventArgs e)
     {
         allPaths paths = allPaths.instance;
 

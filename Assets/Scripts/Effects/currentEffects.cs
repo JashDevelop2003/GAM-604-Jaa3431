@@ -82,6 +82,47 @@ public class currentEffects : MonoBehaviour
 
     }
 
+    public void SaveEffects(object sender, EventArgs e)
+    {
+        if (controller.Player == 1)
+        {
+            playerOneData playerData = GetComponentInChildren<playerOneData>();
+            playerData.storedEffects[0] = burnCooldown;
+            playerData.storedEffects[1] = shockCooldown;
+            playerData.storedEffects[2] = exposeCooldown;
+            playerData.storedEffects[3] = bleedCooldown;
+            playerData.storedEffects[4] = poisonCooldown;
+            playerData.storedEffects[5] = blisterCooldown;
+            playerData.storedEffects[6] = unstableCooldown;
+            playerData.storedEffects[7] = slowCooldown;
+            playerData.storedEffects[8] = confusedCooldown;
+            playerData.storedEffects[9] = fearCooldown;
+            playerData.storedEffects[10] = stunCooldown;
+            playerData.storedEffects[11] = blindCooldown;
+        }
+        else if (controller.Player == 2)
+        {
+            playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+            playerData.storedEffects[0] = burnCooldown;
+            playerData.storedEffects[1] = shockCooldown;
+            playerData.storedEffects[2] = exposeCooldown;
+            playerData.storedEffects[3] = bleedCooldown;
+            playerData.storedEffects[4] = poisonCooldown;
+            playerData.storedEffects[5] = blisterCooldown;
+            playerData.storedEffects[6] = unstableCooldown;
+            playerData.storedEffects[7] = slowCooldown;
+            playerData.storedEffects[8] = confusedCooldown;
+            playerData.storedEffects[9] = fearCooldown;
+            playerData.storedEffects[10] = stunCooldown;
+            playerData.storedEffects[11] = blindCooldown;
+        }
+        else
+        {
+            Debug.LogError("Cannot find Player Int");
+        }
+
+    }
+
     //When the current player has chosen this player
     //This method requires the type and cooldown of the status card that is effecting this player
     public void AddEffect(effectEnum type, int cooldown)

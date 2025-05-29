@@ -206,6 +206,16 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 controller.IncrementDeck(deckTypeEnum.Item);
                 soundManager.PlaySound(confirmSound);
                 eventText.SetText(selectedPlayer.name + " has been selected. Omen obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
+                if (controller.Player == 1)
+                {
+                    playerOneData playerData = GetComponentInChildren<playerOneData>();
+                    playerData.storedOmens.Add(randomOmen);
+                }
+                else if (controller.Player == 2)
+                {
+                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                    playerData.storedOmens.Add(randomOmen);
+                }
                 StartCoroutine(CursingPlayer());
             }
 

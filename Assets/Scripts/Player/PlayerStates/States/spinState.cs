@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+/// <summary>
+/// The spin state occurs when the player lands on the slot machine
+/// The player can press confirm to spin and pay 25 cash or press cancel to not pay to spin
+/// There is odd chances for the player 
+/// </summary>
 
 [System.Serializable]
 public struct PossibleWinnings
@@ -243,6 +248,16 @@ public class spinState : playerStateBase, IConfirm, ICancel
             controller.IncrementDeck(deckTypeEnum.Item);
 
             eventText.SetText("Bonus Item: " + item.Item.itemName + " : " + item.Item.itemDescription + " Press Backspace once you're done shopping");
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = GetComponentInChildren<playerOneData>();
+                playerData.storedRelics.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                playerData.storedDefence.Add(selectedInt);
+            }
         }
         else
         {

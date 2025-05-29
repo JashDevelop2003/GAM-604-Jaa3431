@@ -5,8 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    public int character;
-
     public int currentHealth;
     public int maxHealth;
     public int currentMana;

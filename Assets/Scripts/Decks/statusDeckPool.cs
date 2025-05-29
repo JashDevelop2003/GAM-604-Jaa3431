@@ -12,7 +12,7 @@ using UnityEngine.InputSystem.XR;
 public class statusDeckPool : MonoBehaviour
 {
     //this enum provides the correct deck capacity to match with the player's character stats
-    deckTypeEnum deckType = deckTypeEnum.Status;
+    private deckTypeEnum deckType = deckTypeEnum.Status;
 
     //The list is used to collect all of the pooled objects from this deck pool manager
     private List<GameObject> emptyStatusCards = new List<GameObject>();

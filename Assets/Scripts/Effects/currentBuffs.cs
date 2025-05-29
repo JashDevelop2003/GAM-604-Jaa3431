@@ -63,6 +63,38 @@ public class currentBuffs : MonoBehaviour
         soundManager = Singleton<soundManager>.Instance;
     }
 
+    public void SaveBuffs(object sender, EventArgs e)
+    {
+        if (controller.Player == 1)
+        {
+            playerOneData playerData = GetComponentInChildren<playerOneData>();
+            playerData.storedBuffs[0] = invincibleCooldown;
+            playerData.storedBuffs[1] = healthyCooldown;
+            playerData.storedBuffs[2] = hastyCooldown;
+            playerData.storedBuffs[3] = luckyCooldown;
+            playerData.storedBuffs[4] = resistantCooldown;
+            playerData.storedValues[4] = impactfulValue;
+            playerData.storedBuffs[5] = impactfulCooldown;
+            playerData.storedValues[5] = impactfulCooldown;
+        }
+        else if (controller.Player == 2) 
+        {
+            playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+            playerData.storedBuffs[0] = invincibleCooldown;
+            playerData.storedBuffs[1] = healthyCooldown;
+            playerData.storedBuffs[2] = hastyCooldown;
+            playerData.storedBuffs[3] = luckyCooldown;
+            playerData.storedBuffs[4] = resistantCooldown;
+            playerData.storedValues[4] = impactfulValue;
+            playerData.storedBuffs[5] = impactfulCooldown;
+            playerData.storedValues[5] = impactfulCooldown;
+        }
+        else
+        {
+            Debug.LogError("Cannot Find Player Int");
+        }
+    }
+
     //This method has similar procedure and implementation as the current effect's AddEffect
     //This slight difference being that there is a float value for some effects to use.
     public void AddBuff(buffEnum type, int cooldown, float value)

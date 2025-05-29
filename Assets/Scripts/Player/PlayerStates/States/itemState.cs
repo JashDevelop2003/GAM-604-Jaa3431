@@ -150,6 +150,16 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
             controller.IncrementDeck(deckTypeEnum.Item);
             soundManager.PlaySound(confirmSound);
             eventText.SetText(typeSelected.ToString() + " was selected. Player Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = GetComponentInChildren<playerOneData>();
+                playerData.storedRelics.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                playerData.storedDefence.Add(selectedInt);
+            }
             StartCoroutine(WaitingforItem());
         }
         else if( typeSelected == itemEnum.Omen)
