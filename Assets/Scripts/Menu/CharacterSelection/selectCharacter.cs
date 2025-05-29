@@ -66,6 +66,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         infoText.SetText("Player " + (player + 1).ToString() + " Select a Character. You can confirm by pressing Space. S, then Space will send you back to the main menu");
 
         characterSystem.Remove();
+        saveSystem.NewGame();
     }
 
     public void DecidingLeft(object sender, EventArgs e)
