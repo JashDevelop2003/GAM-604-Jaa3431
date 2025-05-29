@@ -73,18 +73,6 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
                 Debug.LogError("You have no data in this game");
             }
         }
-        else if(currentChoice == 0)
-        {
-            if (!checkGame)
-            {
-                warningUI.SetActive(false);
-            }
-
-            else
-            {
-                sceneManager.ChangeScene(scene[currentChoice]);
-            }
-        }
         else
         {
             sceneManager.ChangeScene(scene[currentChoice]);
@@ -93,6 +81,16 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
 
     void HighlightChoice()
     {
+        GameData data = saveSystem.Load();
+        if (currentChoice == 0 && data != null) 
+        {
+            warningUI.SetActive(true);
+        }
+        else
+        {
+            warningUI.SetActive(false);
+        }
+
         for (int i = 0; i < choices.Length; i++)
         {
             if(i == currentChoice)
