@@ -20,6 +20,9 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
     [Header("User Interface")]
     [SerializeField] private Image[] choices = new Image[5];
     [SerializeField] private Color[] colourChoice = new Color[2];
+    [SerializeField] private GameObject warningUI;
+
+    private bool checkGame;
 
     // Start is called before the first frame update
     void Awake()
@@ -31,6 +34,7 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
         MenuControls.pressedDown += DecidingDown;
         MenuControls.pressedConfirm += ConfirmingChoice;
         choices[currentChoice].color = colourChoice[1];
+        warningUI.SetActive(false);
     }
 
     public void DecidingUp(object sender, EventArgs e)
@@ -55,7 +59,37 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
 
     public void ConfirmingChoice(object sender, EventArgs e)
     {
-        sceneManager.ChangeScene(scene[currentChoice]);
+
+        if(currentChoice == (int)sceneEnum.TestYourGame)
+        {
+            GameData gameData = saveSystem.Load();
+            if (gameData != null)
+            {
+                sceneManager.ChangeScene(scene[currentChoice]);
+
+            }
+
+            else
+            {
+                Debug.LogError("You have no data in this game");
+            }
+        }
+        else if(currentChoice == (int)sceneEnum.CharacterSelection)
+        {
+            if (!checkGame)
+            {
+                warningUI.SetActive(false);
+            }
+
+            else
+            {
+                sceneManager.ChangeScene(scene[currentChoice]);
+            }
+        }
+        else
+        {
+            sceneManager.ChangeScene(scene[currentChoice]);
+        }
     }
 
     void HighlightChoice()
