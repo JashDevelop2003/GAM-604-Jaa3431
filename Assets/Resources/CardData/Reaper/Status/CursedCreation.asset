@@ -22,5 +22,5 @@ MonoBehaviour:
   value: 0
   cardName: Cursed Creation
   cardDescription: Apply 3 Random Effects to any Player for 4 Turns
-  manaCost: 0
+  manaCost: 10
   additionalEffect: {fileID: 2261181614867909992, guid: 37ba2a13ab41bf149a9bbdcf68775cba, type: 3}
