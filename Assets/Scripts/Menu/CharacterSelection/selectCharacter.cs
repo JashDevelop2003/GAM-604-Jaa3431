@@ -67,6 +67,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
 
         characterSystem.Remove();
         saveSystem.NewGame();
+        stanceSystem.Remove();
     }
 
     public void DecidingLeft(object sender, EventArgs e)
@@ -180,6 +181,16 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
             playerTwo = (int)playerChoice[1],
         };
         characterSystem.Store(selectedData);
+
+        if (playerChoice[1] == characterEnum.Wielder || playerChoice[0] == characterEnum.Wielder) 
+        {
+            StanceData stanceData = new StanceData
+            {
+                stance = UnityEngine.Random.Range(0, (int)stanceEnum.Aggressive + 1),
+                stanceCooldown = 3,
+            };
+            stanceSystem.Store(stanceData);
+        }
 
         MenuControls.pressedLeft -= DecidingLeft;
         MenuControls.pressedRight -= DecidingRight;

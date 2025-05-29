@@ -43,6 +43,8 @@ public class passiveAgression : MonoBehaviour
     //This is the cooldown to provide on the character
     [SerializeField] private int changeCooldown;
 
+    private dataManager dataManager;
+
     //When awake the class has to gather the controller component and then decide if the player starts their character of with being passive or aggressive
     void Awake()
     {
@@ -50,23 +52,42 @@ public class passiveAgression : MonoBehaviour
         state = GetComponentInParent<startState>();
         stateManager = GetComponentInParent<playerStateManager>();
         combatSystem = combatSystem.instance;
-        startingStance = UnityEngine.Random.Range(0, 2);
-        if(startingStance == 0)
-        {
-            stance = stanceEnum.Passive;
-            controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
-        }
-        else
-        {
-            stance = stanceEnum.Aggressive;
-            controller.DisplayAbility(controller.GetData.abilityIcon[1], controller.GetData.abilityColour[1]);
-        }
-
-        changeCooldown = 3;
+        dataManager = Singleton<dataManager>.Instance;
+        dataManager.saveFiles += SaveStance;
 
         combatSystem.beforeCombatEvent += BattleStance;
         state.startEvent += DecrementCooldown;
 
+        StanceData stancedata = stanceSystem.Retrieve();
+        if (stancedata != null)
+        {
+            if (stancedata.stance == (int)stanceEnum.Aggressive)
+            {
+                stance = stanceEnum.Aggressive;
+            }
+            else
+            {
+                stance = stanceEnum.Passive;
+
+            }
+            controller.DisplayAbility(controller.GetData.abilityIcon[(int)stance], controller.GetData.abilityColour[(int)stance]);
+            changeCooldown = stancedata.stanceCooldown;
+        }
+        else
+        {
+            Debug.LogError("There isn't any data");
+        }
+    }
+
+    public void SaveStance(object sender, EventArgs e)
+    {
+        StanceData stanceData = new StanceData
+        {
+            stance = (int)stance,
+            stanceCooldown = changeCooldown,
+        };
+
+        stanceSystem.Store(stanceData);
     }
 
     //During the start state, the event will invoke this method which decrements the cooldown
@@ -86,13 +107,12 @@ public class passiveAgression : MonoBehaviour
         if (stance == stanceEnum.Passive) 
         {
             stance = stanceEnum.Aggressive;
-            controller.DisplayAbility(controller.GetData.abilityIcon[1], controller.GetData.abilityColour[1]);
         }
         else if (stance == stanceEnum.Aggressive)
         {
             stance = stanceEnum.Passive;
-            controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
         }
+        controller.DisplayAbility(controller.GetData.abilityIcon[(int)stance], controller.GetData.abilityColour[(int)stance]);
 
         changeCooldown = 3;
         Debug.Log("Change to " + stance);
@@ -136,7 +156,9 @@ public class passiveAgression : MonoBehaviour
 
     private void OnDisable()
     {
+        dataManager.saveFiles -= SaveStance;
         state.startEvent -= DecrementCooldown;
+        combatSystem.beforeCombatEvent -= BattleStance;
     }
 
 

@@ -296,7 +296,11 @@ public class moveState : playerStateBase
                 time += Time.deltaTime;
                 yield return null;
             }
+
+            yield return null;
         }
+
+        yield return null;
     }
 
     void CheckCombat()
