@@ -33893,9 +33893,15 @@ MonoBehaviour:
   storedStatus: 
   storedRelics: 
   storedOmens: 
-  storedEffects: 
-  storedBuffs: 
-  storedValues: []
+  storedEffects: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  storedBuffs: 000000000000000000000000000000000000000000000000
+  storedValues:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!1 &878069068
 GameObject:
   m_ObjectHideFlags: 0
@@ -52502,9 +52508,15 @@ MonoBehaviour:
   storedStatus: 
   storedRelics: 
   storedOmens: 
-  storedEffects: 
-  storedBuffs: 
-  storedValues: []
+  storedEffects: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  storedBuffs: 000000000000000000000000000000000000000000000000
+  storedValues:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!1 &1512982137
 GameObject:
   m_ObjectHideFlags: 0

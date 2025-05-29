@@ -26,9 +26,9 @@ public class playerTwoData : MonoBehaviour
     public List<int> storedRelics;
     public List<int> storedOmens;
 
-    public int[] storedEffects;
-    public int[] storedBuffs;
-    public float[] storedValues;
+    public int[] storedEffects = new int[12];
+    public int[] storedBuffs = new int[6];
+    public float[] storedValues = new float[6];
 
     private bool controllerComplete = false;
     private bool decksComplete = false;

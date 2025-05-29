@@ -121,12 +121,12 @@ public class blessOrHex : eventSpace
             eventText.SetText("How unfortunate! You recieved a omen. You Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
             if (controller.Player == 1)
             {
-                playerOneData playerData = GetComponentInChildren<playerOneData>();
+                playerOneData playerData = turnManager.CurrentPlayer.GetComponentInChildren<playerOneData>();
                 playerData.storedOmens.Add(selectedInt);
             }
             else if (controller.Player == 2)
             {
-                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                playerTwoData playerData = turnManager.CurrentPlayer.GetComponentInChildren<playerTwoData>();
                 playerData.storedOmens.Add(selectedInt);
             }
         }

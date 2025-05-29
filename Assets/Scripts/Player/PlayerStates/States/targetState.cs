@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Runtime.CompilerServices;
 
 public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm
 {
@@ -19,6 +20,8 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     private turnManager turnManager;
     [SerializeField] private GameObject[] selectPlayers = new GameObject[4];
     [SerializeField] private GameObject selectedPlayer;
+
+    private playerController controller;
 
     private bool playerSelected;
 
@@ -57,6 +60,8 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         Controls.downPressed += ChoosingSound;
         Controls.leftPressed += ChoosingSound;
         Controls.rightPressed += ChoosingSound;
+
+        controller = GetComponent<playerController>();
 
         animator = GetComponentInChildren<stateAnimation>();
 
@@ -218,6 +223,7 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             statusCard.ActivateEffect(selectedPlayer);
             StartCoroutine(ActivateCard());
             soundManager.PlaySound(confirmSound);
+            controller.ChangeMana(statusCard.ManaCost);
             eventText.SetText("Player has chosen " + selectedPlayer.name + " to be affected by: " + statusCard.StatusCard.cardName);
         }
         else

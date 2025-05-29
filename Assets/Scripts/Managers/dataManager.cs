@@ -58,6 +58,7 @@ public class dataManager : Singleton<dataManager>
             currentTurn = UnityEngine.Random.Range(0, turnManager.GetPlayers.Length);
             selectedBoard = (int)sceneEnum.TestYourGame;
             progressGame = true;
+            loadComplete = true;
         }
 
         turnManager.CurrentPlayerTurn = currentTurn;

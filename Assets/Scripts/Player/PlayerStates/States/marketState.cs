@@ -356,6 +356,16 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             sectionDisplay[boughtStock].color = setColour[4];
             itemUI[boughtStock].SetActive(false);
             eventText.SetText("item Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription + " Press Backspace once you're done shopping");
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = GetComponentInChildren<playerOneData>();
+                playerData.storedRelics.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                playerData.storedRelics.Add(selectedInt);
+            }
         }
         else
         {
@@ -393,6 +403,16 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 sectionDisplay[boughtStock].color = setColour[4];
                 cardUI[boughtStock].SetActive(false);
                 eventText.SetText("Offence Card Obtained: " + offence.AttackCard.cardName + " : " + offence.AttackCard.cardDescription + " Press Backspace once you're done shopping");
+                if (controller.Player == 1)
+                {
+                    playerOneData playerData = GetComponentInChildren<playerOneData>();
+                    playerData.storedOffence.Add(selectedCard);
+                }
+                else if (controller.Player == 2)
+                {
+                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                    playerData.storedOffence.Add(selectedCard);
+                }
             }
             else
             {
@@ -426,6 +446,16 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 sectionDisplay[boughtStock].color = setColour[4];
                 cardUI[boughtStock].SetActive(false);
                 eventText.SetText("Defence Card Obtained: " + defence.DefendCard.cardName + " : " + defence.DefendCard.cardDescription + " Press Backspace once you're done shopping");
+                if (controller.Player == 1)
+                {
+                    playerOneData playerData = GetComponentInChildren<playerOneData>();
+                    playerData.storedDefence.Add(selectedCard);
+                }
+                else if (controller.Player == 2)
+                {
+                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                    playerData.storedDefence.Add(selectedCard);
+                }
             }
             else
             {
@@ -459,6 +489,16 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 sectionDisplay[boughtStock].color = setColour[4];
                 cardUI[boughtStock].SetActive(false);
                 eventText.SetText("Movement Card Obtained: " + move.MoveCard.cardName + " : " + move.MoveCard.cardDescription + " Press Backspace once you're done shopping");
+                if (controller.Player == 1)
+                {
+                    playerOneData playerData = GetComponentInChildren<playerOneData>();
+                    playerData.storedMovement.Add(selectedCard);
+                }
+                else if (controller.Player == 2)
+                {
+                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                    playerData.storedMovement.Add(selectedCard);
+                }
             }
             else
             {
@@ -493,6 +533,16 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 sectionDisplay[boughtStock].color = setColour[4];
                 cardUI[boughtStock].SetActive(false);
                 eventText.SetText("Status Card Obtained: " + stat.StatusCard.cardName + " : " + stat.StatusCard.cardDescription + " Press Backspace once you're done shopping");
+                if (controller.Player == 1)
+                {
+                    playerOneData playerData = GetComponentInChildren<playerOneData>();
+                    playerData.storedStatus.Add(selectedCard);
+                }
+                else if (controller.Player == 2)
+                {
+                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
+                    playerData.storedStatus.Add(selectedCard);
+                }
             }
             else
             {

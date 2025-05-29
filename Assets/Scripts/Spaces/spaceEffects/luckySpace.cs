@@ -180,6 +180,16 @@ public class luckySpace : MonoBehaviour
             offence.CreateCard(selectedOffenceCard);
             eventText.SetText("Card Obtained: " + offence.AttackCard.cardName);
             playerController.IncrementDeck(deckTypeEnum.Offence);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = luckyPlayer.GetComponentInChildren<playerOneData>();
+                playerData.storedOffence.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = luckyPlayer.GetComponentInChildren<playerTwoData>();
+                playerData.storedOffence.Add(selectedInt);
+            }
         }
 
         else if (offenceCard == null)
@@ -221,6 +231,16 @@ public class luckySpace : MonoBehaviour
             defence.CreateCard(selectedDefenceCard);
             eventText.SetText("Card Obtained: " + defence.DefendCard.cardName);
             playerController.IncrementDeck(deckTypeEnum.Defence);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = luckyPlayer.GetComponentInChildren<playerOneData>();
+                playerData.storedDefence.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = luckyPlayer.GetComponentInChildren<playerTwoData>();
+                playerData.storedDefence.Add(selectedInt);
+            }
         }
 
         else if (defenceCard == null)
@@ -262,6 +282,16 @@ public class luckySpace : MonoBehaviour
             movement.CreateCard(selectedMovementCard);
             eventText.SetText("Card Obtained: " + movement.MoveCard.cardName);
             playerController.IncrementDeck(deckTypeEnum.Movement);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = luckyPlayer.GetComponentInChildren<playerOneData>();
+                playerData.storedMovement.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = luckyPlayer.GetComponentInChildren<playerTwoData>();
+                playerData.storedMovement.Add(selectedInt);
+            }
         }
 
         else if (moveCard == null)
@@ -303,6 +333,16 @@ public class luckySpace : MonoBehaviour
             status.CreateCard(selectedStatusCard);
             eventText.SetText("Card Obtained: " + status.StatusCard.cardName);
             playerController.IncrementDeck(deckTypeEnum.Status);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = luckyPlayer.GetComponentInChildren<playerOneData>();
+                playerData.storedStatus.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = luckyPlayer.GetComponentInChildren<playerTwoData>();
+                playerData.storedStatus.Add(selectedInt);
+            }
         }
 
         else if (statusCard == null)
@@ -336,6 +376,16 @@ public class luckySpace : MonoBehaviour
             itemBehaviour item = relic.AddComponent<itemBehaviour>();
             item.CreateItem(selectedRelic);
             playerController.IncrementDeck(deckTypeEnum.Item);
+            if (controller.Player == 1)
+            {
+                playerOneData playerData = luckyPlayer.GetComponentInChildren<playerOneData>();
+                playerData.storedRelics.Add(selectedInt);
+            }
+            else if (controller.Player == 2)
+            {
+                playerTwoData playerData = luckyPlayer.GetComponentInChildren<playerTwoData>();
+                playerData.storedRelics.Add(selectedInt);
+            }
         }
 
         else if(relic == null)

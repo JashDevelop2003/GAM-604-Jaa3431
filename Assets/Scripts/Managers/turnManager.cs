@@ -60,6 +60,7 @@ public class turnManager : Singleton<turnManager>
     //this provides starting the next player's turn on the array
     public void StartTurn()
     {
+
         //This checks if the integer to call the player in the array has extended equal to or more than the number of players
         if(currentPlayerTurn >= Players.Length) 
         {
@@ -72,6 +73,8 @@ public class turnManager : Singleton<turnManager>
 
         //This finds the state manager in the current player's turn to infrom the state manager to move to start state
         Players[currentPlayerTurn].GetComponent<playerStateManager>().StartPlayerTurn();
+
+        dataManager.SaveGame();
 
         //This increments to the next player; when the current player's turn ends it moves onto the next player
         currentPlayerTurn++;

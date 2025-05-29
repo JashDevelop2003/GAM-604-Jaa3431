@@ -90,10 +90,7 @@ public class inactiveState : playerStateBase
     {
         yield return new WaitUntil(() => minigameManager.GameInProgress == false);
         controller.ActivateEndEffect();
-        turnManager.StartTurn();
-        yield return new WaitForSeconds(0.5f);
         endEvents?.Invoke(this, EventArgs.Empty);
-        yield return new WaitForSeconds(0.5f);
-        dataManager.SaveGame();
+        turnManager.StartTurn();
     }
 }

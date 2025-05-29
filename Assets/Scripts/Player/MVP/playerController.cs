@@ -173,7 +173,7 @@ public class playerController : MonoBehaviour
             playerData.spaceInt = currentSpaceInt;
             for (int i = 0; i < paths.Paths.Length; i++)
             {
-                if (paths.Paths[i].gameObject == currentPath)
+                if (paths.Paths[i].gameObject == currentPath.gameObject)
                 {
                     playerData.currentPath = i;
                 }
@@ -188,11 +188,17 @@ public class playerController : MonoBehaviour
             playerData.manaMax = GetModel.MaxMana;
             playerData.cashCurrent = GetModel.CurrentCash;
             playerData.usedAbility = GetModel.AbilityUsed;
-            currentPath = paths.Paths[playerData.currentPath];
-            currentSpaceInt = playerData.spaceInt;
+            playerData.spaceInt = currentSpaceInt;
+            for (int i = 0; i < paths.Paths.Length; i++)
+            {
+                if (paths.Paths[i].gameObject == currentPath.gameObject)
+                {
+                    playerData.currentPath = i;
+
+                }
+            }
         }
     }
-
     //This is to reset the multipliers from the effects of their previous turn
     //Thus also regains the mana for the player to use cards
     public void ResetStats(object sender, EventArgs e)
