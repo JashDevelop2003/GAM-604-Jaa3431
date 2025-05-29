@@ -60,7 +60,7 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
     public void ConfirmingChoice(object sender, EventArgs e)
     {
 
-        if(currentChoice == (int)sceneEnum.TestYourGame)
+        if(currentChoice == 2)
         {
             GameData gameData = saveSystem.Load();
             if (gameData != null)
@@ -74,7 +74,7 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
                 Debug.LogError("You have no data in this game");
             }
         }
-        else if(currentChoice == (int)sceneEnum.CharacterSelection)
+        else if(currentChoice == 1)
         {
             if (!checkGame)
             {
