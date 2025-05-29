@@ -55,12 +55,10 @@ public class ruthlessRetaliation : MonoBehaviour
 
     public void OverPrepared(object sender, EventArgs e)
     {
-        playerController.ChangeThrust(playerController.GetModel.ThrustMultiplier - 0.5f);
-        playerController.ChangeGuard(playerController.GetModel.GuardMultiplier - 0.5f);
-        playerController.ChangeGuard(playerController.GetModel.RollMultiplier - 0.5f);
-        effects.AddEffect(effectEnum.Exposed, 4);
-        effects.AddEffect(effectEnum.Feared, 4);
-        effects.AddEffect(effectEnum.Slowed, 4);
+        effects.AddEffect(effectEnum.Exposed, 5);
+        effects.AddEffect(effectEnum.Feared, 5);
+        effects.AddEffect(effectEnum.Slowed, 5);
+        effects.AddEffect(effectEnum.Stunned, 3);
         combatSystem.beforeCombatEvent -= Prepared;
         state.startItemEvents -= OverPrepared;
         playerController.DisplayAbility(playerController.GetData.abilityIcon[0], playerController.GetData.abilityColour[0]);
