@@ -15,8 +15,10 @@ using UnityEngine;
 public class luckOfYourLife : MonoBehaviour
 {
     private playerController controller;
+    private inactiveState state;
     private currentBuffs buffs;
     private turnManager turnManager;
+    private dataManager dataManager;
     private GameObject opponent;
     private int outcome;
 
@@ -34,19 +36,39 @@ public class luckOfYourLife : MonoBehaviour
     void Awake()
     {
         controller = GetComponentInParent<playerController>();
+        state = GetComponentInParent<inactiveState>();
         stateUI = GetComponentInParent<decidingState>();
         buffs = GetComponentInParent<currentBuffs>();
         itemDeck = transform.parent.GetComponentInChildren<itemDeckPool>();
+
         turnManager = Singleton<turnManager>.Instance;
+        dataManager = Singleton<dataManager>.Instance;
+
         controller.oneUseEvent += LuckOfYourLife;
+        state.endEvents += RandomiseOutcome;
+
         possibleRelics = controller.GetData.possibleRelics;
 
+        LuckOutcomeData outcomeData = luckOutcomeSystem.Retrieve();
+        if (outcomeData != null)
+        {
+            outcome = outcomeData.luckOutcome;
+        }
+    }
+
+    public void RandomiseOutcome(object sender, EventArgs e)
+    {
+        outcome = UnityEngine.Random.Range(1, 7);
+        LuckOutcomeData outcomeData = new LuckOutcomeData
+        {
+            luckOutcome = outcome,
+        };        
+        luckOutcomeSystem.Store(outcomeData);
     }
 
     public void LuckOfYourLife(object sender, EventArgs e)
     {
         controller.oneUseEvent -= LuckOfYourLife;
-        outcome = UnityEngine.Random.Range(1, 7);
         if (outcome == 1)
         {
             JumpingJackpot();
@@ -143,5 +165,6 @@ public class luckOfYourLife : MonoBehaviour
     private void OnDisable()
     {
         controller.oneUseEvent -= LuckOfYourLife;
+        state.endEvents -= RandomiseOutcome;
     }
 }

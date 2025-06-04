@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class luckSystem : MonoBehaviour
+public static class luckSystem
 {
     private static string luckPath = Application.persistentDataPath + "/luckdata.json";
 

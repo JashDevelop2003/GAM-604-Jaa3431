@@ -69,6 +69,8 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         saveSystem.NewGame();
         stanceSystem.Remove();
         luckSystem.Remove();
+        ruthlessSystem.Remove();
+        luckOutcomeSystem.Remove();
     }
 
     public void DecidingLeft(object sender, EventArgs e)
@@ -203,6 +205,24 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
                 randomisedMana = mana,
             };
             luckSystem.Store(luckData);
+
+            int outcome =  UnityEngine.Random.Range(1, 7);
+            LuckOutcomeData outcomeData = new LuckOutcomeData
+            {
+                luckOutcome = outcome
+            };
+            luckOutcomeSystem.Store(outcomeData);
+        }
+
+        else if (playerChoice[1] == characterEnum.Superstar || playerChoice[0] == characterEnum.Superstar)
+        {
+
+            RuthlessData ruthlessData = new RuthlessData
+            {
+                retaliating = false,
+            };
+
+            ruthlessSystem.Store(ruthlessData);
         }
 
         MenuControls.pressedLeft -= DecidingLeft;

@@ -34,6 +34,8 @@ public class navigateVictory : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         saveSystem.NewGame();
         stanceSystem.Remove();
         luckSystem.Remove();
+        ruthlessSystem.Remove();
+        luckOutcomeSystem.Remove();
     }
 
     public void DecidingLeft(object sender, EventArgs e)
