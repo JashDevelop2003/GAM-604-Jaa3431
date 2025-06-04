@@ -19,6 +19,8 @@ public class beamX : MonoBehaviour
         }
     }
 
+    //Trigger Enter Method will be called when a collider from the collider has hit the beam's box collider
+    //If it has then add that player to the list
     void OnTriggerEnter(Collider player)
     {
         if (player.gameObject.tag == "Player")
@@ -27,15 +29,10 @@ public class beamX : MonoBehaviour
         }
     }
 
+    //Trigger Exit is the same method as enter, expecpt this time when a player leaves the beam's box collider
+    //This will need to identify which player left and if it's the same then remove that player fro mthe list
     private void OnTriggerExit(Collider player)
     {
-        //foreach (GameObject removePlayer in players)
-        //{
-         //   if (player.gameObject == removePlayer)
-         //   {
-         //       players.Remove(removePlayer);
-         //   }
-        //}
 
         for (int i = 0; i < players.Count; i++) 
         {

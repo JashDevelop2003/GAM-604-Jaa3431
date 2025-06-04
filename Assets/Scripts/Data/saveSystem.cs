@@ -11,13 +11,16 @@ using System.IO;
 /// </summary>
 public static class saveSystem
 {
+    //Application persistent data path will provide an accurate path for a system to identify the json file path
     private static string filePath = Application.persistentDataPath + "/gamedata.json";
     private static string onePath = Application.persistentDataPath + "/playeronedata.json";
     private static string twoPath = Application.persistentDataPath + "/playertwodata.json";
 
     //This saves when the data mangager has been called from the turn manager to change the player's turn
+    //SaveOne & SaveTwo have the same implementation execpt for the suitable player
     public static void Save(GameData data)
     {
+        //When saving the game data serialise the data variables into a suitable json file to be stored into the file path
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(filePath, json);
         Debug.Log("Saved: " + filePath);
@@ -38,8 +41,10 @@ public static class saveSystem
     }
 
     //This checks if there is a GameData to be retrieved to finish off a game
+    //LoadOne & loadTwo have the same implementation execpt for the suitable player
     public static GameData Load() 
     {
+        //if there is a json file based on the file path then the json file will need to be deserialise from a json file to a public class
         if (File.Exists(filePath)) 
         { 
             string json = File.ReadAllText(filePath);
@@ -92,6 +97,7 @@ public static class saveSystem
     //This checks if there is an existing game, if there is then destroy the loaded file.
     public static void NewGame()
     {
+        //This only needs to check if the json file of the game data exists which will then delete all the json files from the data path
         if (File.Exists(filePath)) 
         { 
             File.Delete(filePath);

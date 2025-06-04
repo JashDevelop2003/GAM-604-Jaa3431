@@ -4,7 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Diagnostics.CodeAnalysis;
+/// <summary>
+/// Select Character is when the players chooses their characters
+/// The component is required to prevent the player to choose the same character as the other player
+/// The component is also required to create game data and suitable character data depending on character the player has selected.
+/// </summary>
 
+//A struct is used to store information about the character to provide detail on their name, stats and abilities.
 [System.Serializable]
 public struct characterInfo
 {
@@ -16,9 +23,14 @@ public struct characterInfo
 }
 public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfirm, IMenu
 {
+    //An array of character information is used to store all the playable characters in the game
+    //The enums are the characters that the player have selected
     public characterInfo[] characters;
     [SerializeField] characterEnum[] playerChoice = new characterEnum[2];
 
+    //the player int is used to identify which player is currently selecting
+    //The current character int is used to identify the current character the player is currently on
+    //The boolean is to check if the player wants to go back to main menu when confirming
     private int player;
     private int currentCharacter;
     private bool mainMenu;
@@ -29,6 +41,9 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         get { return menuControls; }
     }
 
+    //There are 2 scenes that character selection can transition to:
+    // Array 0 = Main Menu
+    // Arrau 1 = Test Your Board Map
     [Header("Scene Manager")]
     [SerializeField] private sceneEnum[] scenes = new sceneEnum[2];
     private sceneManager sceneManager;
@@ -65,6 +80,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         ChangeCharacter();
         infoText.SetText("Player " + (player + 1).ToString() + " Select a Character. You can confirm by pressing Space. S, then Space will send you back to the main menu");
 
+        //When starting a new game all existing data must be removed to start fresh in the game
         characterSystem.Remove();
         saveSystem.NewGame();
         stanceSystem.Remove();
@@ -73,6 +89,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         luckOutcomeSystem.Remove();
     }
 
+    //When pressing A or D, the player goes to the next or previous character
     public void DecidingLeft(object sender, EventArgs e)
     {
         currentCharacter--;
@@ -95,13 +112,18 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         ChangeCharacter();
     }
 
+    //when pressing S, the player is currently choosing to go back to menu
     public void MainMenu(object sender, EventArgs e)
     {
         mainMenu = true;
     }
 
+    //when confirming the player checks for 2 things
+    // 1. If the player wants to leave and return back to main menu
+    // 2. (Player 2 Only) checks if the other player has chosen that character
     public void ConfirmingChoice(object sender, EventArgs e)
     {
+        //If the main menu boolean is true then return to main menu
         if (mainMenu)
         {
             sceneManager.ChangeScene(scenes[0]);
@@ -119,7 +141,6 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
             if (sameCharacter)
             {
                 infoText.SetText("Player has chosen this character, selected a new character");
-                Debug.Log(sameCharacter);
                 sameCharacter = false;
             }
 
@@ -142,6 +163,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         }
     }
 
+    //Change chararacter method will update the current character the player is currently hovering on to provide the name, stats and abilities
     void ChangeCharacter()
     {
         characterName.SetText(characters[currentCharacter].name);
@@ -176,8 +198,10 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
 
     }
 
+    //The Coroutine starts once the last player has chosen their character, which will create suitable data files for the game
     IEnumerator StartGame()
     {
+        //Selected Data will store the character the players have chosen and when loading in the game, the player controller will retrieve the suitable character data
         SelectedData selectedData = new SelectedData
         {
             playerOne = (int)playerChoice[0],
@@ -185,6 +209,9 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         };
         characterSystem.Store(selectedData);
 
+        //The coroutine then checks if the player is anyone besides the grim reaper to store suitable data
+
+        //Playing as double wielder will require the game to store the current stance
         if (playerChoice[1] == characterEnum.Wielder || playerChoice[0] == characterEnum.Wielder) 
         {
             StanceData stanceData = new StanceData
@@ -195,6 +222,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
             stanceSystem.Store(stanceData);
         }
 
+        //Playing as Lucky Gambler will require the game to store the random mana and outcome
         else if (playerChoice[1] == characterEnum.Gambler || playerChoice[0] == characterEnum.Gambler)
         {
             int mana = UnityEngine.Random.Range(1, 31);
@@ -214,6 +242,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
             luckOutcomeSystem.Store(outcomeData);
         }
 
+        //Playing as Robotic Superstar will require the game to store the active ability of being retaliating
         else if (playerChoice[1] == characterEnum.Superstar || playerChoice[0] == characterEnum.Superstar)
         {
 
@@ -225,6 +254,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
             ruthlessSystem.Store(ruthlessData);
         }
 
+        //Once the data is stored, the coroutine will then start the game by calling the scene manager to transition to the board map
         MenuControls.pressedLeft -= DecidingLeft;
         MenuControls.pressedRight -= DecidingRight;
         MenuControls.pressedDown -= MainMenu;
