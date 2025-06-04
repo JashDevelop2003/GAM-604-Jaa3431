@@ -12,7 +12,8 @@ public class luckBeThisLadyTonight : MonoBehaviour
 {
     private playerController controller;
     private playerView view;
-    private startState state;
+    private startState startState;
+    private inactiveState inactiveState;
     private int randomMana;
 
     // Start is called before the first frame update
@@ -20,22 +21,49 @@ public class luckBeThisLadyTonight : MonoBehaviour
     {
         controller = GetComponentInParent<playerController>();
         view = GetComponentInParent<playerView>();
-        state = GetComponentInParent<startState>();
+        startState = GetComponentInParent<startState>();
+        inactiveState = GetComponentInParent<inactiveState>();
         //This has to go in the item events because placing it inside the start events with the stat reset will always set the mana to 0
-        state.startItemEvents += LuckInThisLadyTonight;
+        startState.startItemEvents += LuckInThisLadyTonight;
+        inactiveState.endEvents += RandomiseMana;
+
+        LuckData data = luckSystem.Retrieve();
+        if(data != null)
+        {
+            controller.GetModel.CurrentMana = data.storedMana;
+            randomMana = data.randomisedMana;
+            view.ManaUI();
+        }
+        else
+        {
+            Debug.LogError("Something went wrong with the luck data");
+        }
         controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
     }
 
     public void LuckInThisLadyTonight(object sender, EventArgs e)
     {
-        randomMana = UnityEngine.Random.Range(1, 31);
         controller.GetModel.CurrentMana = randomMana;
         view.ManaUI();
         controller.ChangeCash(randomMana);
     }
 
+    public void RandomiseMana(object sender, EventArgs e)
+    {
+        randomMana = UnityEngine.Random.Range(1, 31);
+
+        LuckData data = new LuckData
+        {
+            storedMana = controller.GetModel.CurrentMana,
+            randomisedMana = randomMana,
+        };
+
+        luckSystem.Store(data);
+    }
+
     private void OnDisable()
     {
-        state.startItemEvents -= LuckInThisLadyTonight;
+        startState.startItemEvents -= LuckInThisLadyTonight;
+        inactiveState.endEvents -= RandomiseMana;
     }
 }

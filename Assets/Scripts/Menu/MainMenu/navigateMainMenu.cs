@@ -34,7 +34,7 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
         MenuControls.pressedDown += DecidingDown;
         MenuControls.pressedConfirm += ConfirmingChoice;
         choices[currentChoice].color = colourChoice[1];
-        warningUI.SetActive(false);
+        HighlightChoice();
     }
 
     public void DecidingUp(object sender, EventArgs e)

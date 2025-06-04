@@ -153,6 +153,8 @@ public class playerController : MonoBehaviour
         //this creates a new player model based on the character the player has chosen
         transform.position = new Vector3(startingSpace.SpaceOrder[currentSpaceInt].transform.position.x, 2f, startingSpace.SpaceOrder[currentSpaceInt].transform.position.z);
 
+        Debug.Log(GetModel.AbilityUsed);
+
         //This displays the new data to the UI
         playerView.DisplayUI();
     }
@@ -459,6 +461,15 @@ public class playerController : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        if (player == 1)
+        {
+            eventText.SetText("Player 1 has been defeated, Player 2 Wins!");
+        }
+        else if (player == 2) 
+        {
+            eventText.SetText("Player 2 has been defeated, Player 1 Wins!");
+
+        }
         yield return new WaitForSeconds(5);
         sceneManager sceneManager = Singleton<sceneManager>.Instance;
         sceneManager.ChangeScene(sceneEnum.Victory);

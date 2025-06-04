@@ -64,6 +64,10 @@ public class playerView : MonoBehaviour
         {
             oneUseAbility.SetActive(true);
         }
+        else
+        {
+            oneUseAbility.SetActive(false);
+        }
     }
 
 

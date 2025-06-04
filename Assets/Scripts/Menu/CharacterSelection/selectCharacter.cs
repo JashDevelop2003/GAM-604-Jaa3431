@@ -68,6 +68,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         characterSystem.Remove();
         saveSystem.NewGame();
         stanceSystem.Remove();
+        luckSystem.Remove();
     }
 
     public void DecidingLeft(object sender, EventArgs e)
@@ -190,6 +191,18 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
                 stanceCooldown = 3,
             };
             stanceSystem.Store(stanceData);
+        }
+
+        else if (playerChoice[1] == characterEnum.Gambler || playerChoice[0] == characterEnum.Gambler)
+        {
+            int mana = UnityEngine.Random.Range(1, 31);
+
+            LuckData luckData = new LuckData
+            {
+                storedMana = mana,
+                randomisedMana = mana,
+            };
+            luckSystem.Store(luckData);
         }
 
         MenuControls.pressedLeft -= DecidingLeft;

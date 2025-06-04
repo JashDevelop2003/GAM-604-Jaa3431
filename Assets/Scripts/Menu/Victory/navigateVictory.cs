@@ -29,6 +29,11 @@ public class navigateVictory : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         MenuControls.pressedLeft += DecidingLeft;
         MenuControls.pressedRight += DecidingRight;
         MenuControls.pressedConfirm += ConfirmingChoice;
+
+        characterSystem.Remove();
+        saveSystem.NewGame();
+        stanceSystem.Remove();
+        luckSystem.Remove();
     }
 
     public void DecidingLeft(object sender, EventArgs e)
