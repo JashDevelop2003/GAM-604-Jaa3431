@@ -10,6 +10,9 @@ public class PlayerData
     public int currentMana;
     public int maxMana;
     public int currentCash;
+    public float thrust;
+    public float guard;
+    public float roll;
     public bool abilityUsed;
 
     public int path;

@@ -113,6 +113,7 @@ public class playerController : MonoBehaviour
         takeDamageEvent += animator.DamageAnimation;
         endDamageEvent += animator.EndDamageAnimation;
         isDefeatedEvent += animator.DeadAnimation;
+
     }
 
     public void ChangeStats()
@@ -130,6 +131,9 @@ public class playerController : MonoBehaviour
             GetModel.AbilityUsed = playerData.usedAbility;
             currentPath = paths.Paths[playerData.currentPath];
             currentSpaceInt = playerData.spaceInt;
+            GetModel.ThrustMultiplier = playerData.storedThrust;
+            GetModel.GuardMultiplier = playerData.storedGuard;
+            GetModel.RollMultiplier = playerData.storedRoll;
             playerData.ControllerComplete = true;
         }
         else if (player == 2) 
@@ -143,6 +147,9 @@ public class playerController : MonoBehaviour
             GetModel.AbilityUsed = playerData.usedAbility;
             currentPath = paths.Paths[playerData.currentPath];
             currentSpaceInt = playerData.spaceInt;
+            GetModel.ThrustMultiplier = playerData.storedThrust;
+            GetModel.GuardMultiplier = playerData.storedGuard;
+            GetModel.RollMultiplier = playerData.storedRoll;
             playerData.ControllerComplete = true;
         }
 
@@ -173,6 +180,9 @@ public class playerController : MonoBehaviour
             playerData.cashCurrent = GetModel.CurrentCash;
             playerData.usedAbility = GetModel.AbilityUsed;
             playerData.spaceInt = currentSpaceInt;
+            playerData.storedThrust = GetModel.ThrustMultiplier;
+            playerData.storedGuard = GetModel.GuardMultiplier;
+            playerData.storedRoll = GetModel.RollMultiplier;
             for (int i = 0; i < paths.Paths.Length; i++)
             {
                 if (paths.Paths[i].gameObject == currentPath.gameObject)
@@ -190,6 +200,9 @@ public class playerController : MonoBehaviour
             playerData.manaMax = GetModel.MaxMana;
             playerData.cashCurrent = GetModel.CurrentCash;
             playerData.usedAbility = GetModel.AbilityUsed;
+            playerData.storedThrust = GetModel.ThrustMultiplier;
+            playerData.storedGuard = GetModel.GuardMultiplier;
+            playerData.storedRoll = GetModel.RollMultiplier;
             playerData.spaceInt = currentSpaceInt;
             for (int i = 0; i < paths.Paths.Length; i++)
             {

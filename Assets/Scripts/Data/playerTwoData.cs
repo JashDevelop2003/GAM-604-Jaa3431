@@ -14,6 +14,9 @@ public class playerTwoData : MonoBehaviour
     public int manaCurrent;
     public int manaMax;
     public int cashCurrent;
+    public float storedThrust;
+    public float storedGuard;
+    public float storedRoll;
     public bool usedAbility;
 
     public int currentPath;
@@ -102,6 +105,10 @@ public class playerTwoData : MonoBehaviour
             usedAbility = playerTwoData.abilityUsed;
             currentPath = playerTwoData.path;
             spaceInt = playerTwoData.currentSpace;
+            storedThrust = playerTwoData.thrust;
+            storedGuard = playerTwoData.guard;
+            storedRoll = playerTwoData.roll;
+
 
             storedOffence = playerTwoData.offenceCards;
             storedDefence = playerTwoData.defenceCards;
@@ -130,6 +137,9 @@ public class playerTwoData : MonoBehaviour
             currentMana = manaCurrent,
             maxMana = manaMax,
             currentCash = cashCurrent,
+            thrust = storedThrust,
+            guard = storedGuard,
+            roll = storedRoll,
             abilityUsed = usedAbility,
             path = currentPath,
             currentSpace = spaceInt,

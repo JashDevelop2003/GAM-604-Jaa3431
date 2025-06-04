@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 /// <summary>
 /// Luck in this Lady Tonight is the Gambler's Passive Ability
@@ -10,6 +11,7 @@ using UnityEngine;
 
 public class luckBeThisLadyTonight : MonoBehaviour
 {
+    private dataManager dataManager;
     private playerController controller;
     private playerView view;
     private startState startState;
@@ -19,6 +21,7 @@ public class luckBeThisLadyTonight : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        dataManager = Singleton<dataManager>.Instance;
         controller = GetComponentInParent<playerController>();
         view = GetComponentInParent<playerView>();
         startState = GetComponentInParent<startState>();
@@ -26,9 +29,15 @@ public class luckBeThisLadyTonight : MonoBehaviour
         //This has to go in the item events because placing it inside the start events with the stat reset will always set the mana to 0
         startState.startItemEvents += LuckInThisLadyTonight;
         inactiveState.endEvents += RandomiseMana;
+        controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
+        StartCoroutine(LoadMana());
+    }
 
+    public IEnumerator LoadMana()
+    {
+        yield return new WaitUntil(() => dataManager.LoadComplete == true);
         LuckData data = luckSystem.Retrieve();
-        if(data != null)
+        if (data != null)
         {
             controller.GetModel.CurrentMana = data.storedMana;
             randomMana = data.randomisedMana;
@@ -38,7 +47,6 @@ public class luckBeThisLadyTonight : MonoBehaviour
         {
             Debug.LogError("Something went wrong with the luck data");
         }
-        controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
     }
 
     public void LuckInThisLadyTonight(object sender, EventArgs e)
