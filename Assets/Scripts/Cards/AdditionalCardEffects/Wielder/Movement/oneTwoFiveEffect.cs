@@ -35,7 +35,6 @@ public class oneTwoFiveEffect : MonoBehaviour
         if(controller.GetModel.RollValue == 3)
         {
             controller.GetModel.RollValue = 5;
-            Debug.Log("1... 2... 5!");
         }
     }
 

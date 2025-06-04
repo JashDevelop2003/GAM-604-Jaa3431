@@ -73,10 +73,6 @@ public class sevenSevenSevenEffect : MonoBehaviour
             buffs.AddBuff(buffEnum.Resistant, 7, 0.77f);
             buffs.AddBuff(buffEnum.Impactful, 7, 0.77f);
         }
-        else
-        {
-            Debug.LogWarning("You don't these cards");
-        }
     }
 
     void OnDisable()

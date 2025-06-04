@@ -43,10 +43,6 @@ public class luckBeThisLadyTonight : MonoBehaviour
             randomMana = data.randomisedMana;
             view.ManaUI();
         }
-        else
-        {
-            Debug.LogError("Something went wrong with the luck data");
-        }
     }
 
     public void LuckInThisLadyTonight(object sender, EventArgs e)

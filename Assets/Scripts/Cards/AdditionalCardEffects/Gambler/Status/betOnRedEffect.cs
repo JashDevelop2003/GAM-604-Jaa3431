@@ -35,10 +35,6 @@ public class betOnRedEffect : MonoBehaviour
         { 
             controller.ChangeCash(-(controller.GetModel.CurrentCash / 2));
         }
-        else
-        {
-            Debug.LogError("Something went wrong with the Int outcome");
-        }
     }
 
     void OnDisable()

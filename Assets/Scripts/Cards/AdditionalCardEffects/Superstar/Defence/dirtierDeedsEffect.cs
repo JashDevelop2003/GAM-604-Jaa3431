@@ -20,12 +20,12 @@ public class dirtierDeedsEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void AddEffect(object sender, EventArgs e)
     {
-        combatSystem.beforeCombatEvent += Counter;
+        combatSystem.beforeCombatEvent += DirtierDeeds;
         combatSystem.combatComplete += RemoveEffect;
     }
 
     //Dirtier Deeds Halves the Attack Value & Deals 20 Damage to Attacker
-    public void Counter(object sender, EventArgs e)
+    public void DirtierDeeds(object sender, EventArgs e)
     {
 
         opponent = combatSystem.AttackingPlayer;
@@ -39,7 +39,7 @@ public class dirtierDeedsEffect : MonoBehaviour
     ///This should be used for all additional effects
     public void RemoveEffect(object sender, EventArgs e)
     {
-        combatSystem.beforeCombatEvent -= Counter;
+        combatSystem.beforeCombatEvent -= DirtierDeeds;
         combatSystem.combatComplete -= RemoveEffect;
     }
 }
