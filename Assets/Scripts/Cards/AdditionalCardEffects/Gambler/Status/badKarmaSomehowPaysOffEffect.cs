@@ -24,7 +24,7 @@ public class badKarmaSomehowPaysOffEffect : MonoBehaviour
     }
 
 
-    // Acting Hubris Doubles Cash
+    // Acting Hubris gains cash equal to the amount of omens, the player will obtain an omen item
     public void ActingHubris(object sender, EventArgs e)
     {
         amountofOmens = 0;
