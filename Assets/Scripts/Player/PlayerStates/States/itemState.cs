@@ -169,7 +169,7 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
         }
         else
         {
-            Debug.LogWarning("You haven't selected anything yet");
+            eventText.SetText("You haven't selected anything yet");
         }
     }
 

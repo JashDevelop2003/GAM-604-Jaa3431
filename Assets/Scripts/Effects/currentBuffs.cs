@@ -89,10 +89,6 @@ public class currentBuffs : MonoBehaviour
             playerData.storedBuffs[5] = impactfulCooldown;
             playerData.storedValues[5] = impactfulCooldown;
         }
-        else
-        {
-            Debug.LogError("Cannot Find Player Int");
-        }
     }
 
     //This method has similar procedure and implementation as the current effect's AddEffect
@@ -199,11 +195,6 @@ public class currentBuffs : MonoBehaviour
                 }
             }
 
-            else if (resistantValue > value)
-            {
-                Debug.LogWarning(value + " is less than current value");
-            }
-
 
         }
 
@@ -247,16 +238,12 @@ public class currentBuffs : MonoBehaviour
                 }
             }
 
-            else if(impactfulValue > value)
-            {
-                Debug.LogWarning(value + " is less than current value");
-            }
-
         }
 
         soundManager.PlaySound(buffSound);
     }
 
+    //Invincible prevents the player to take any damage
     public void InvinciblePlayer(object sender, EventArgs e)
     {
         invincibleCooldown--;
@@ -269,6 +256,7 @@ public class currentBuffs : MonoBehaviour
         }
     }
 
+    //Healthy prevents the player from gaining effects
     public void HealthyPlayer(object sender, EventArgs e)
     {
         healthyCooldown--;
@@ -281,6 +269,7 @@ public class currentBuffs : MonoBehaviour
         }
     }
 
+    //Hasty Doubles the roll value at the start of the turn
     public void HastyPlayer(object sender, EventArgs e)
     {
         if (isHasty)
@@ -297,6 +286,7 @@ public class currentBuffs : MonoBehaviour
         }
     }
 
+    //Lucky increases the chance of obtaining rarer cards
     public void LuckyPlayer(object sender, EventArgs e)
     {
         luckyCooldown--;
@@ -309,6 +299,7 @@ public class currentBuffs : MonoBehaviour
         }
     }
 
+    //Resistant Increase Guard by a certain percentage
     public void ResistantPlayer(object sender, EventArgs e)
     {
         if (isResistant)
@@ -326,6 +317,7 @@ public class currentBuffs : MonoBehaviour
         }
     }
 
+    //Impactful Increases Thrust by a certain percentage
     public void ImpactfulPlayer(object sender, EventArgs e)
     {
         if (isImpactful)

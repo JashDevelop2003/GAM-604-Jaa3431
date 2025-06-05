@@ -66,10 +66,6 @@ public class ruthlessRetaliation : MonoBehaviour
         {
             active = ruthlessData.retaliating;
         }
-        else
-        {
-            Debug.LogError("Something went wrong with the ruthless data");
-        }
 
         //If the player is currently active then this will then carry on the ability to where it was left off
         if (active)
@@ -108,7 +104,6 @@ public class ruthlessRetaliation : MonoBehaviour
         combatSystem.beforeCombatEvent += Prepared;
         state.startItemEvents += OverPrepared; //Has to be in Start Item Events to prevent stacking the effects
         playerController.DisplayAbility(playerController.GetData.abilityIcon[1], playerController.GetData.abilityColour[1]);
-        Debug.Log("He's Prepared");
     }
 
     //This observer method listens to the before combat event in the combat system

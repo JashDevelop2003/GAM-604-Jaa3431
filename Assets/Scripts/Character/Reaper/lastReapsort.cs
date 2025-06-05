@@ -74,10 +74,6 @@ public class lastReapsort : MonoBehaviour
             controller.DisplayAbility(controller.GetData.abilityIcon[1], controller.GetData.abilityColour[1]);
             stateUI.EventText.SetText("Ability Used - Last Reapsort: Triple Thrust & Roll. You must defeat someone to stay in the game");
         }
-        else
-        {
-            Debug.LogWarning("Cannot go to Last Reapsort again");
-        }
     }
 
     public void Chase(object sender, EventArgs e)

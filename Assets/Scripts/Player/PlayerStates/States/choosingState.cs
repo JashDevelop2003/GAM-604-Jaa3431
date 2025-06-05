@@ -155,11 +155,6 @@ public class choosingState : playerStateBase, IDecideUp, IDecideLeft, IDecideRig
                         pathText[1].SetText("Right");
                         sectionDisplay[1].color = colourDisplay[1];
                     }
-
-                    else
-                    {
-                        Debug.LogError(pathList[i] + " has a int of " + pathDirectionInt[i] + " which is not suitable for the path struct. You'll need to change the int between 0 to 3");
-                    }
                 }
             }
 

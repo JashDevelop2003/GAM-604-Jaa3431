@@ -11,7 +11,6 @@ public static class ruthlessSystem
     {
         string json = JsonUtility.ToJson(retaliating, true);
         File.WriteAllText(ruthlessPath, json);
-        Debug.Log("Stored Stance at:" + json);
     }
 
     public static RuthlessData Retrieve()

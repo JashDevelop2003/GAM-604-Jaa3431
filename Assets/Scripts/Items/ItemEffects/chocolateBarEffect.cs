@@ -49,11 +49,6 @@ public class chocolateBarEffect : MonoBehaviour
             buffs.AddBuff(buffEnum.Lucky, 10, 0);
         }
 
-        else         
-        {
-            Debug.LogError("The value was insufficient");
-        }
-
         item.pickupEvent -= UponPickup;
     }
 }

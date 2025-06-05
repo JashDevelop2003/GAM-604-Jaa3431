@@ -39,7 +39,6 @@ public class kitanaEffect : MonoBehaviour
         {
             playerController opponentController = combatSystem.AttackingPlayer.GetComponent<playerController>();
             opponentController.ChangeHealth(-10);
-            Debug.Log("Slice & Dice");
         }
     }
 

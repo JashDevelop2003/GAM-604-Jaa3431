@@ -11,7 +11,6 @@ public static class luckSystem
     {
         string json = JsonUtility.ToJson(luck, true);
         File.WriteAllText(luckPath, json);
-        Debug.Log("Stored Luck Mana at:" + json);
     }
 
     public static LuckData Retrieve()

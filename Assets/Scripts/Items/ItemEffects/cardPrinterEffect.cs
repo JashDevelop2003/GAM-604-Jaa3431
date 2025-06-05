@@ -74,10 +74,6 @@ public class cardPrinterEffect : MonoBehaviour
             { 
                 ObtainStatus();
             }
-            else 
-            {
-                Debug.LogError("Something went wrong with the int");
-            }
 
         }
 

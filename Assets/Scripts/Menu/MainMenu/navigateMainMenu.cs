@@ -66,11 +66,6 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
             if (gameData != null)
             {
                 sceneManager.ChangeScene(scene[currentChoice]);
-
-            }
-            else
-            {
-                Debug.LogError("You have no data in this game");
             }
         }
         else

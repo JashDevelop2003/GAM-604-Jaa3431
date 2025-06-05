@@ -11,7 +11,6 @@ public static class stanceSystem
     {
         string json = JsonUtility.ToJson(stance, true);
         File.WriteAllText(stancePath, json);
-        Debug.Log("Stored Stance at:" + json);
     }
 
     public static StanceData Retrieve()

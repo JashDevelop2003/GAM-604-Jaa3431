@@ -23,21 +23,18 @@ public static class saveSystem
         //When saving the game data serialise the data variables into a suitable json file to be stored into the file path
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(filePath, json);
-        Debug.Log("Saved: " + filePath);
     }
 
     public static void SaveOne(PlayerData data)
     {
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(onePath, json);
-        Debug.Log("Saved: " + onePath);
     }
 
     public static void SaveTwo(PlayerData data) 
     {
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(twoPath, json);
-        Debug.Log("Saved: " + twoPath);
     }
 
     //This checks if there is a GameData to be retrieved to finish off a game
@@ -49,13 +46,11 @@ public static class saveSystem
         { 
             string json = File.ReadAllText(filePath);
             GameData data = JsonUtility.FromJson<GameData>(json);
-            Debug.Log("Game Found");
             return data;
         }
 
         else
         {
-            Debug.LogError("No File was Found");
             return null;
         }
     }
@@ -66,13 +61,11 @@ public static class saveSystem
         {
             string json = File.ReadAllText(onePath);
             PlayerData data = JsonUtility.FromJson<PlayerData>(json);
-            Debug.Log("Player Found");
             return data;
         }
 
         else
         {
-            Debug.LogError("No File was Found");
             return null;
         }
     }
@@ -83,13 +76,11 @@ public static class saveSystem
         {
             string json = File.ReadAllText(twoPath);
             PlayerData data = JsonUtility.FromJson<PlayerData>(json);
-            Debug.Log("Player Found");
             return data;
         }
 
         else
         {
-            Debug.LogError("No File was Found");
             return null;
         }
     }

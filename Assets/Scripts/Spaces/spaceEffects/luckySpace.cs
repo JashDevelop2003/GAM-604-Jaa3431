@@ -146,10 +146,6 @@ public class luckySpace : MonoBehaviour
         {
             ObtainRelic();
         }
-        else
-        {
-            Debug.LogError("Something went wrong with the Obtaining Resource Coroutine");
-        }
     }
 
     private void ObtainOffence()

@@ -11,7 +11,6 @@ public static class characterSystem
     {
         string json = JsonUtility.ToJson(selectedData, true);
         File.WriteAllText(characterPath, json);
-        Debug.Log("Stored Character at:" +  json);
     }
 
     public static SelectedData Retrieve()

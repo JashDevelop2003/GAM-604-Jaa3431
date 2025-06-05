@@ -54,10 +54,6 @@ public class navigateTutorial : MonoBehaviour, IMenu, IDecideLeft, IDecideRight
             currentStep--;
             stepEvent?.Invoke(this, e);
         }
-        else
-        {
-            Debug.LogWarning("You're at the first step, you cannot go further back");
-        }
     }
 
     public void DecidingRight(object sender, EventArgs e)
@@ -66,10 +62,6 @@ public class navigateTutorial : MonoBehaviour, IMenu, IDecideLeft, IDecideRight
         {
             currentStep++;
             stepEvent?.Invoke(this, e);
-        }
-        else
-        {
-            Debug.LogWarning("You're at the last  step, you cannot go further forward");
         }
     }
 
@@ -110,10 +102,6 @@ public class navigateTutorial : MonoBehaviour, IMenu, IDecideLeft, IDecideRight
             else if(currentStep == 18)
             {
                 panels[4].SetActive(true);
-            }
-            else
-            {
-                Debug.LogError("Something went wrong when changing panels");
             }
         }
     }

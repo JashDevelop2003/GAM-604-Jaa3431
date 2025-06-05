@@ -116,10 +116,6 @@ public class currentEffects : MonoBehaviour
             playerData.storedEffects[10] = stunCooldown;
             playerData.storedEffects[11] = blindCooldown;
         }
-        else
-        {
-            Debug.LogError("Cannot find Player Int");
-        }
 
     }
 
@@ -127,12 +123,9 @@ public class currentEffects : MonoBehaviour
     //This method requires the type and cooldown of the status card that is effecting this player
     public void AddEffect(effectEnum type, int cooldown)
     {
-        if (buffs.IsHealthy)
-        {
-            Debug.Log("Player is healthy so no debuff for them");
-        }
 
-        else
+
+        if(!buffs.IsHealthy)
         {
             //This is the procedure of how to apply status effects
             //If the effect has a cooldown more than 0 then increase the cooldown
@@ -345,12 +338,6 @@ public class currentEffects : MonoBehaviour
 
             }
 
-            else
-            {
-                Debug.LogError("This effect doesn't exist");
-            }
-
-
         }
     }
 
@@ -361,8 +348,6 @@ public class currentEffects : MonoBehaviour
         {
             offenceDeckPile offenceCards = GetComponentInChildren<offenceDeckPile>();
             controller.ChangeHealth(-offenceCards.OffenceCards.Count);
-            Debug.Log("Burn Deals: " + offenceCards.OffenceCards.Count + " Damage");
-
 
             burnCooldown--;
             EffectSound((int)effectEnum.Burned);
@@ -401,7 +386,6 @@ public class currentEffects : MonoBehaviour
             slowCooldown = 0;
             controller.effectStartEvent -= SlowPlayer;
             controller.DisplayEffect((int)effectEnum.Slowed, false);
-            Debug.Log("Player has Hasty so Slow is Removed");
         }
     }
 
@@ -443,7 +427,6 @@ public class currentEffects : MonoBehaviour
             exposeCooldown = 0;
             controller.effectStartEvent -= ExposePlayer;
             controller.DisplayEffect((int)effectEnum.Exposed, false);
-            Debug.Log("Player has Resistant so Exposed is Removed");
         }
     }
 
@@ -471,7 +454,6 @@ public class currentEffects : MonoBehaviour
         {
             defenceDeckPile defenceCards = GetComponentInChildren<defenceDeckPile>();
             controller.ChangeHealth(-defenceCards.DefenceCards.Count);
-            Debug.Log("Poison Deals: " + defenceCards.DefenceCards.Count + " Damage");
 
 
             poisonCooldown--;
@@ -493,7 +475,6 @@ public class currentEffects : MonoBehaviour
         {
             movementDeckPile movementCards = GetComponentInChildren<movementDeckPile>();
             controller.ChangeHealth(-movementCards.MovementCards.Count);
-            Debug.Log("Blister Deals: " + movementCards.MovementCards.Count + " Damage");
 
             EffectSound((int)effectEnum.Blistered);
             blisterCooldown--;
@@ -514,7 +495,6 @@ public class currentEffects : MonoBehaviour
         {
             statusDeckPile statusCards = GetComponentInChildren<statusDeckPile>();
             controller.ChangeHealth(-statusCards.StatusCards.Count);
-            Debug.Log("Unstable Deals: " + statusCards.StatusCards.Count + " Damage");
 
             EffectSound((int)effectEnum.Unstabled);
             unstableCooldown--;
@@ -566,7 +546,6 @@ public class currentEffects : MonoBehaviour
             fearCooldown = 0;
             controller.effectStartEvent -= FearPlayer;
             controller.DisplayEffect((int)effectEnum.Feared, false);
-            Debug.Log("Player has Impactful so Fear is Removed");
         }
     }
 

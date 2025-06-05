@@ -18,7 +18,7 @@ public class bigBugEffect : MonoBehaviour
         state.pickingItemEvents += BigBug;
     }
 
-    // When landing on a card space will heal 5 health to the player
+    // When landing on a card space will prevent the player from obtaining the card if the card is a rare
     public void BigBug(object sender, EventArgs e)
     {
         if (state.Rarity == CardRarity.Rare) 

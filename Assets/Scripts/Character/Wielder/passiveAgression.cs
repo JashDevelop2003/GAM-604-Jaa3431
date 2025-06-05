@@ -73,10 +73,6 @@ public class passiveAgression : MonoBehaviour
             controller.DisplayAbility(controller.GetData.abilityIcon[(int)stance], controller.GetData.abilityColour[(int)stance]);
             changeCooldown = stancedata.stanceCooldown;
         }
-        else
-        {
-            Debug.LogError("There isn't any data");
-        }
     }
 
     public void SaveStance(object sender, EventArgs e)
@@ -115,7 +111,6 @@ public class passiveAgression : MonoBehaviour
         controller.DisplayAbility(controller.GetData.abilityIcon[(int)stance], controller.GetData.abilityColour[(int)stance]);
 
         changeCooldown = 3;
-        Debug.Log("Change to " + stance);
     }
 
     //Before Combat, the value doubles or half depending on the player's state and the stance they're currently in
@@ -128,13 +123,11 @@ public class passiveAgression : MonoBehaviour
             if (stance == stanceEnum.Passive) 
             {
                 combatSystem.AttackValue /= 2;
-                Debug.Log("Attack when passive, half the attack");
             }
 
             else if(stance == stanceEnum.Aggressive)
             {
                 combatSystem.AttackValue *= 2;
-                Debug.Log("Attack when aggressive, double the attack");
             }
         }
 
@@ -143,13 +136,11 @@ public class passiveAgression : MonoBehaviour
             if (stance == stanceEnum.Aggressive)
             {
                 combatSystem.DefendValue /= 2;
-                Debug.Log("Defend when aggressive, half the attack");
             }
 
             else if (stance == stanceEnum.Passive)
             {
                 combatSystem.DefendValue *= 2;
-                Debug.Log("Defend when passive, double the attack");
             }
         }
     }

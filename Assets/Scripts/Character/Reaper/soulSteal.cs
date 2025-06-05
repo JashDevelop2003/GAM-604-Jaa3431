@@ -27,7 +27,6 @@ public class soulSteal : MonoBehaviour
         //This means that the class requires to find the prefab of the combat system
         combatSystem = combatSystem.instance;
         combatSystem.duringCombatEvent += GainHealth;
-        //controller.passiveEvent += GainHealth;
 
         controller.DisplayAbility(controller.GetData.abilityIcon[0], controller.GetData.abilityColour[0]);
     }
@@ -44,7 +43,6 @@ public class soulSteal : MonoBehaviour
         {
             healthValue = (int)((combatSystem.AttackValue - combatSystem.DefendValue) * healthPercentage);
             controller.ChangeHealth(healthValue);
-            Debug.Log("Heal Value: " + healthValue);
         }
     }
 

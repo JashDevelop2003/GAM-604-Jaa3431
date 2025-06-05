@@ -49,10 +49,6 @@ public class doubleOrNothingManager : Singleton<doubleOrNothingManager>
         {
             StartCoroutine(DoubleChance(UnityEngine.Random.Range(0, 101)));
         }
-        else
-        {
-            Debug.LogError("You haven't chosen a choice, press A for keep or D to Double");
-        }
     }
 
     void DisplayOutcome()

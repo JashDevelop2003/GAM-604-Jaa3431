@@ -89,7 +89,6 @@ public class playerController : MonoBehaviour
         {
             sceneManager scene = Singleton<sceneManager>.Instance;
             scene.ChangeScene(sceneEnum.MainMenu);
-            Debug.LogError("You don't have any data, you need to start a new game");
         }
 
         playerModel = new playerModel(data);
@@ -159,8 +158,6 @@ public class playerController : MonoBehaviour
 
         //this creates a new player model based on the character the player has chosen
         transform.position = new Vector3(startingSpace.SpaceOrder[currentSpaceInt].transform.position.x, 2f, startingSpace.SpaceOrder[currentSpaceInt].transform.position.z);
-
-        Debug.Log(GetModel.AbilityUsed);
 
         //This displays the new data to the UI
         playerView.DisplayUI();
@@ -268,7 +265,6 @@ public class playerController : MonoBehaviour
         {
             ChangeHealth(-value);
         }
-        Debug.Log(playerModel.RollValue);
     }
 
     public void ChangeHealth(int value) 
@@ -417,11 +413,6 @@ public class playerController : MonoBehaviour
         {
             GetModel.ItemPile++;
             playerView.ItemUI();
-        }
-
-        else
-        {
-            Debug.LogError("There's a possible chance that the type is not suitable");
         }
     }
 

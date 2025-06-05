@@ -59,19 +59,7 @@ public class musicManager : Singleton<musicManager>
             }
             ChangeMusic(musicClips[musicPartInt].musicClip);
         }
-        else
-        {
-            if (inCombat)
-            {
-                Debug.LogWarning("Currently in combat");
-
-            }
-
-            else if (minigameManager.GameInProgress)
-            {
-                Debug.LogWarning("Currently in a minigame");
-            }
-        }
+  
     }
 
     //This changes part of the song to the next part of the loop music

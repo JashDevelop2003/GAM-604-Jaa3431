@@ -10,15 +10,4 @@ public class pathOrder : MonoBehaviour
     
     public directionEnum Direction { get { return direction; } }
     public List<GameObject> SpaceOrder {  get { return spaceOrder; } }
-    
-    //[SerializeField] private GameObject directionalSpace;
-
-    //void Start()
-    //{
-    //    foreach(Transform space in transform)
-    //    {
-    //        spaceOrder.Add(space.gameObject); 
-    //    }
-    //    spaceOrder.Add (directionalSpace.gameObject);
-    //}
 }

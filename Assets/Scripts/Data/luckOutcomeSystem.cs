@@ -11,7 +11,6 @@ public static class luckOutcomeSystem
     {
         string json = JsonUtility.ToJson(outcome, true);
         File.WriteAllText(outcomePath, json);
-        Debug.Log("Stored Luck Outcome at:" + json);
     }
 
     public static LuckOutcomeData Retrieve()

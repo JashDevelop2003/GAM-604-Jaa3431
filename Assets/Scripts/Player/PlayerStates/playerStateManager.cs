@@ -167,10 +167,6 @@ public class playerStateManager : MonoBehaviour
         {
             startTurn?.Invoke(this, EventArgs.Empty);
         }
-        else
-        {
-            Debug.LogError("Incorrect State Found");
-        }
     }
 
     // Update is called once per frame and keeps updating the current state's update method

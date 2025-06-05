@@ -43,21 +43,12 @@ public class spaceManager : Singleton<spaceManager>
         player = currentPlayer;
         state = player.GetComponent<playerStateManager>();
 
-        if (state == null)
-        {
-            Debug.LogError("There is no player state manager to be called up, Check what the method's parameters or the game object's components");
-        }
-
         //the behaviour occurs depending on the player's space type
         //if the type is blue then add 3 cash to the current cash in the player controller
         //change the player's current state to inactive state to end their turn
         if (type == spaceEnum.Blue)
         {
             playerController controller = player.GetComponent<playerController>();
-            if (controller == null)
-            {
-                Debug.LogError("There is no player controller to be called up, Check what the method's parameters or the game object's components");
-            }
 
             controller.ChangeCash(3);
             eventText.SetText(player.name + " gain 3 cash");
@@ -70,10 +61,6 @@ public class spaceManager : Singleton<spaceManager>
         else if (type == spaceEnum.Red)
         {
             playerController controller = player.GetComponent<playerController>();
-            if (controller == null)
-            {
-                Debug.LogError("There is no player controller to be called up, Check what the method's parameters or the game object's components");
-            }
 
             controller.ChangeCash(-3);
             eventText.SetText(player.name + " lose 3 cash");

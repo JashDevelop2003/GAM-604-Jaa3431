@@ -170,11 +170,6 @@ public class spinState : playerStateBase, IConfirm, ICancel
             spinOutcome = winnings[9];
         }
 
-        else
-        {
-            Debug.LogError("Probability was off. Check the coding in when Confirming");
-        }
-
         controller.ChangeCash(-20);
         soundManager.PlaySound(confirmSound);
         StartCoroutine(Spin());

@@ -38,12 +38,10 @@ public class wantedPoster : MonoBehaviour
         int wantedChance = UnityEngine.Random.Range(0, 5);
         if (wantedChance == 0)
         {
-            Debug.Log("Attack Old Value: " + combatSystem.AttackValue);
             combatSystem.AttackValue = (int)(combatSystem.AttackValue * 0.3f);
         }
         else
         {
-            Debug.Log("Defend Old Value: " + combatSystem.DefendValue);
             combatSystem.DefendValue /= 2;
         }
     }

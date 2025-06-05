@@ -39,10 +39,6 @@ public class StanceSwap : MonoBehaviour
             passiveUsed = true;
             stateUI.EventText.SetText("Ability Used - Stance Swap: You stance has now changed and is set the change timer back to 3");
         }
-        else
-        {
-            Debug.LogWarning("Cannot swap stances again");
-        }
     }
 
     public void OnDisable()

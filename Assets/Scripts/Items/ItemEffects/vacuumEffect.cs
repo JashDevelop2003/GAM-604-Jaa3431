@@ -40,6 +40,7 @@ public class vacuumEffect : MonoBehaviour
         state.startItemEvents -= Vacuum;
     }
 
+    //Coroutine is used to make sure that the turn manager is enabled in the scene
     IEnumerator WaitforLoad()
     {
         yield return new WaitForSeconds(1);

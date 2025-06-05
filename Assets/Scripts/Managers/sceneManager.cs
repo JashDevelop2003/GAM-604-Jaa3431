@@ -17,7 +17,6 @@ public class sceneManager : Singleton<sceneManager>
         else
         {
             Application.Quit();
-            Debug.Log("Changing Scene to: " + newScene);
         }
     }
 }

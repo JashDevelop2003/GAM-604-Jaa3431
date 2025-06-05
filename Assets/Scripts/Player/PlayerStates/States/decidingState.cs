@@ -172,6 +172,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                 lowestManaCost= statcard.ManaCost;
             }
 
+            //This checks if the lowest mana card is higher than the player's current mana, if it is then end the player's turn
             if(controller.GetModel.CurrentMana < lowestManaCost)
             {
                 unableMove = true;
@@ -179,6 +180,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
             }
 
+            //If the player is confused then the player will chose a random card
             if(!unableMove && effects.Confused)
             {
                 int randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
@@ -192,12 +194,13 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
                     moveCard = selectedCard.GetComponent<movementCard>();
                 }
 
-                eventText.SetText("A Random Movement Card was chosen: " + moveCard.MoveCard.cardName + " Roll the Dice by pressing Space");
+                eventText.SetText("A Random Movement Card was chosen: " + moveCard.MoveCard.cardName + " .Roll the Dice by pressing Space");
                 hasSelected = true;
 
             }
         }
 
+        //The purpose of this condition is to check if the player is confused after using a status card
         else if(player.PreviousState == player.TargetState && effects.Confused)
         {
             int randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
@@ -215,6 +218,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             hasSelected = true;
         }
 
+        //This prevents the player to start their turn
         if (effects.Stunned) 
         {
             unableMove = true;
