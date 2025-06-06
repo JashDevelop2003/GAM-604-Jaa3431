@@ -32,6 +32,13 @@ public class ruthlessRetaliation : MonoBehaviour
     //Active boolean is used to identify the current status of the character when loading in the game
     private bool active;
 
+    private List<effectEnum> unpreparedEffects = new List<effectEnum>()
+    {
+        effectEnum.Exposed,
+        effectEnum.Feared,
+        effectEnum.Slowed,
+    };
+
 
     // Start is called before the first frame update
     void Awake()
@@ -130,9 +137,10 @@ public class ruthlessRetaliation : MonoBehaviour
     {
         //Stun is a ending effect, meaning that the effect will  decrement when they end their turn
         active = false;
-        effects.AddEffect(effectEnum.Exposed, 5);
-        effects.AddEffect(effectEnum.Feared, 5);
-        effects.AddEffect(effectEnum.Slowed, 5);
+        for (int i = 0; i < unpreparedEffects.Count; i++) 
+        {
+            effects.AddEffect(unpreparedEffects[i], 5);
+        }
         effects.AddEffect(effectEnum.Stunned, 3);
         combatSystem.beforeCombatEvent -= Prepared;
         state.startItemEvents -= OverPrepared;

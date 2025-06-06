@@ -153,16 +153,14 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
             //If the player is confused then the player will chose a random card
             if(!unableMove && effects.Confused)
             {
-                int randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
-                selectedCard = movementDeck.SelectedCards[randomInt];
-                moveCard = selectedCard.GetComponent<movementCard>();
-
-                while (moveCard.ManaCost > controller.GetModel.CurrentMana)
+                do
                 {
-                    randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
+                    int randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
                     selectedCard = movementDeck.SelectedCards[randomInt];
                     moveCard = selectedCard.GetComponent<movementCard>();
                 }
+                while (moveCard.ManaCost > controller.GetModel.CurrentMana);
+
 
                 eventText.SetText("A Random Movement Card was chosen: " + moveCard.MoveCard.cardName + " .Roll the Dice by pressing Space");
                 hasSelected = true;
@@ -173,16 +171,13 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         //The purpose of this condition is to check if the player is confused after using a status card
         else if(player.PreviousState == player.TargetState && effects.Confused)
         {
-            int randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
-            selectedCard = movementDeck.SelectedCards[randomInt];
-            moveCard = selectedCard.GetComponent<movementCard>();
-
-            while (moveCard.ManaCost > controller.GetModel.CurrentMana)
+            do
             {
-                randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
+                int randomInt = UnityEngine.Random.Range(0, movementDeck.SelectedCards.Length);
                 selectedCard = movementDeck.SelectedCards[randomInt];
                 moveCard = selectedCard.GetComponent<movementCard>();
             }
+            while (moveCard.ManaCost > controller.GetModel.CurrentMana);
 
             eventText.SetText("A Random Movement Card was chosen: " + moveCard.MoveCard.cardName + " Roll the Dice by pressing Space");
             hasSelected = true;

@@ -123,16 +123,13 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
 
         if (!unableDefend && effects.Confused)
         {
-            int randomInt = UnityEngine.Random.Range(0, defenceDeck.SelectedCards.Length);
-            selectedCard = defenceDeck.SelectedCards[randomInt];
-            defendCard = selectedCard.GetComponent<defenceCard>();
-
-            while (defendCard.ManaCost > controller.GetModel.CurrentMana)
+            do
             {
-                randomInt = UnityEngine.Random.Range(0, defenceDeck.SelectedCards.Length);
+                int randomInt = UnityEngine.Random.Range(0, defenceDeck.SelectedCards.Length);
                 selectedCard = defenceDeck.SelectedCards[randomInt];
                 defendCard = selectedCard.GetComponent<defenceCard>();
             }
+            while (defendCard.ManaCost > controller.GetModel.CurrentMana) ;
 
             combatSystem.DefenderReady(this.gameObject, defendCard.DefendValue);
             controller.ChangeMana(defendCard.ManaCost);

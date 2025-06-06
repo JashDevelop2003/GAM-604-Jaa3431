@@ -3867,6 +3867,8 @@ MonoBehaviour:
     cashPrize: 0
     bonusChance: 0
     symbol: []
+    minOutcome: 0
+    maxOutcome: 0
   winnings:
   - outcome: 0
     cashPrize: 0
@@ -3875,6 +3877,8 @@ MonoBehaviour:
     - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: -1586687842, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+    minOutcome: 1
+    maxOutcome: 30
   - outcome: 1
     cashPrize: 40
     bonusChance: 25
@@ -3882,6 +3886,8 @@ MonoBehaviour:
     - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+    minOutcome: 31
+    maxOutcome: 45
   - outcome: 2
     cashPrize: 50
     bonusChance: 30
@@ -3889,6 +3895,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
     - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
     - {fileID: 21300000, guid: 60d3dd8d64a78004d93458b7d82e40d0, type: 3}
+    minOutcome: 46
+    maxOutcome: 56
   - outcome: 3
     cashPrize: 75
     bonusChance: 40
@@ -3896,6 +3904,8 @@ MonoBehaviour:
     - {fileID: 1366144071, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 1366144071, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 1366144071, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+    minOutcome: 57
+    maxOutcome: 66
   - outcome: 4
     cashPrize: 100
     bonusChance: 50
@@ -3903,6 +3913,8 @@ MonoBehaviour:
     - {fileID: 828239227, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 828239227, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 828239227, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+    minOutcome: 67
+    maxOutcome: 76
   - outcome: 5
     cashPrize: 150
     bonusChance: 60
@@ -3910,6 +3922,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 0e165c8eecd675a418cf89d7292e0120, type: 3}
     - {fileID: 21300000, guid: 0e165c8eecd675a418cf89d7292e0120, type: 3}
     - {fileID: 21300000, guid: 0e165c8eecd675a418cf89d7292e0120, type: 3}
+    minOutcome: 77
+    maxOutcome: 84
   - outcome: 6
     cashPrize: 200
     bonusChance: 75
@@ -3917,6 +3931,8 @@ MonoBehaviour:
     - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+    minOutcome: 85
+    maxOutcome: 91
   - outcome: 7
     cashPrize: 250
     bonusChance: 80
@@ -3924,6 +3940,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b5a17ac4bf4e89f43a8313529cf7cab7, type: 3}
     - {fileID: 21300000, guid: b5a17ac4bf4e89f43a8313529cf7cab7, type: 3}
     - {fileID: 21300000, guid: b5a17ac4bf4e89f43a8313529cf7cab7, type: 3}
+    minOutcome: 92
+    maxOutcome: 96
   - outcome: 8
     cashPrize: 350
     bonusChance: 90
@@ -3931,6 +3949,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 60d3dd8d64a78004d93458b7d82e40d0, type: 3}
     - {fileID: 21300000, guid: 60d3dd8d64a78004d93458b7d82e40d0, type: 3}
     - {fileID: 21300000, guid: 60d3dd8d64a78004d93458b7d82e40d0, type: 3}
+    minOutcome: 97
+    maxOutcome: 99
   - outcome: 9
     cashPrize: 700
     bonusChance: 100
@@ -3938,6 +3958,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
     - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
     - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
+    minOutcome: 100
+    maxOutcome: 100
   fruitMachineUI: {fileID: 91805638}
   dialSymbols:
   - {fileID: 810502087}
@@ -26023,6 +26045,8 @@ MonoBehaviour:
     cashPrize: 0
     bonusChance: 0
     symbol: []
+    minOutcome: 0
+    maxOutcome: 0
   winnings:
   - outcome: 0
     cashPrize: 0
@@ -26031,6 +26055,8 @@ MonoBehaviour:
     - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: -1586687842, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+    minOutcome: 1
+    maxOutcome: 30
   - outcome: 1
     cashPrize: 40
     bonusChance: 25
@@ -26038,6 +26064,8 @@ MonoBehaviour:
     - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+    minOutcome: 31
+    maxOutcome: 45
   - outcome: 2
     cashPrize: 50
     bonusChance: 30
@@ -26045,6 +26073,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
     - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
     - {fileID: 21300000, guid: 60d3dd8d64a78004d93458b7d82e40d0, type: 3}
+    minOutcome: 46
+    maxOutcome: 56
   - outcome: 3
     cashPrize: 75
     bonusChance: 40
@@ -26052,6 +26082,8 @@ MonoBehaviour:
     - {fileID: 1366144071, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 1366144071, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 1366144071, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+    minOutcome: 57
+    maxOutcome: 66
   - outcome: 4
     cashPrize: 100
     bonusChance: 50
@@ -26059,6 +26091,8 @@ MonoBehaviour:
     - {fileID: 828239227, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 828239227, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: 828239227, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+    minOutcome: 67
+    maxOutcome: 76
   - outcome: 5
     cashPrize: 150
     bonusChance: 60
@@ -26066,6 +26100,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 0e165c8eecd675a418cf89d7292e0120, type: 3}
     - {fileID: 21300000, guid: 0e165c8eecd675a418cf89d7292e0120, type: 3}
     - {fileID: 21300000, guid: 0e165c8eecd675a418cf89d7292e0120, type: 3}
+    minOutcome: 77
+    maxOutcome: 84
   - outcome: 6
     cashPrize: 200
     bonusChance: 75
@@ -26073,6 +26109,8 @@ MonoBehaviour:
     - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
     - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+    minOutcome: 85
+    maxOutcome: 91
   - outcome: 7
     cashPrize: 250
     bonusChance: 80
@@ -26080,6 +26118,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b5a17ac4bf4e89f43a8313529cf7cab7, type: 3}
     - {fileID: 21300000, guid: b5a17ac4bf4e89f43a8313529cf7cab7, type: 3}
     - {fileID: 21300000, guid: b5a17ac4bf4e89f43a8313529cf7cab7, type: 3}
+    minOutcome: 92
+    maxOutcome: 96
   - outcome: 8
     cashPrize: 350
     bonusChance: 90
@@ -26087,6 +26127,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 60d3dd8d64a78004d93458b7d82e40d0, type: 3}
     - {fileID: 21300000, guid: 60d3dd8d64a78004d93458b7d82e40d0, type: 3}
     - {fileID: 21300000, guid: 60d3dd8d64a78004d93458b7d82e40d0, type: 3}
+    minOutcome: 97
+    maxOutcome: 99
   - outcome: 9
     cashPrize: 700
     bonusChance: 100
@@ -26094,6 +26136,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
     - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
     - {fileID: 21300000, guid: bb569c458251d6544b40f62d3ef38e28, type: 3}
+    minOutcome: 100
+    maxOutcome: 100
   fruitMachineUI: {fileID: 91805638}
   dialSymbols:
   - {fileID: 810502087}

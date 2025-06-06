@@ -113,16 +113,13 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
         if (!unableAttack && effects.Confused)
         {
-            int randomInt = UnityEngine.Random.Range(0, offenceDeck.SelectedCards.Length);
-            selectedCard = offenceDeck.SelectedCards[randomInt];
-            attackCard = selectedCard.GetComponent<offenceCard>();
-
-            while (attackCard.ManaCost > controller.GetModel.CurrentMana)
+            do
             {
-                randomInt = UnityEngine.Random.Range(0, offenceDeck.SelectedCards.Length);
+                int randomInt = UnityEngine.Random.Range(0, offenceDeck.SelectedCards.Length);
                 selectedCard = offenceDeck.SelectedCards[randomInt];
                 attackCard = selectedCard.GetComponent<offenceCard>();
             }
+            while (attackCard.ManaCost > controller.GetModel.CurrentMana);
 
             combatSystem.AttackerReady(this.gameObject, attackCard.AttackValue);
             controller.ChangeMana(attackCard.ManaCost);

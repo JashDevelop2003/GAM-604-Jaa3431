@@ -17,6 +17,8 @@ public struct PossibleWinnings
     public int cashPrize;
     public int bonusChance;
     public Sprite[] symbol;
+    public int minOutcome;
+    public int maxOutcome;
 }
 
 public class spinState : playerStateBase, IConfirm, ICancel
@@ -109,66 +111,73 @@ public class spinState : playerStateBase, IConfirm, ICancel
 
         //This provides the probability of the outcome of the spin
         int outcome = UnityEngine.Random.Range(1, 101);
+        for (int i = 0; i < winnings.Length; i++) 
+        { 
+            if(outcome >= winnings[i].minOutcome && outcome <= winnings[i].maxOutcome)
+            {
+                spinOutcome = winnings[i];
+            }
+        }
 
         //Outcome = Jumbled (30% Chance)
-        if (outcome >= 1 && outcome <= 30) 
-        {
-            spinOutcome = winnings[0];
-        }
+        //if (outcome >= 1 && outcome <= 30) 
+        //{
+        //    spinOutcome = winnings[0];
+        //}
         
         //Outcome = Cherries (15% Chance)
-        else if(outcome >= 31 && outcome <= 45)
-        {
-            spinOutcome = winnings[1];
-        }
+       // else if(outcome >= 31 && outcome <= 45)
+       // {
+       //     spinOutcome = winnings[1];
+       // }
 
         //Outcome = Mixed 7(11% Chance)
-        else if (outcome >= 46 && outcome <= 56)
-        {
-            spinOutcome = winnings[2];
-        }
+      //  else if (outcome >= 46 && outcome <= 56)
+      //  {
+     //       spinOutcome = winnings[2];
+      //  }
 
         //Outcome Lemon (10% Chance)
-        else if(outcome >= 57 && outcome <= 66)
-        {
-            spinOutcome = winnings[3];
-        }
+     //   else if(outcome >= 57 && outcome <= 66)
+     //   {
+     //       spinOutcome = winnings[3];
+    //    }
 
         //Outcome Grapes(10% Chance)
-        else if(outcome >= 67 && outcome <= 76)
-        {
-            spinOutcome = winnings[4];
-        }
+    //    else if(outcome >= 67 && outcome <= 76)
+    //    {
+    //        spinOutcome = winnings[4];
+    //    }
 
         //Outcome Bar(8% Chance)
-        else if (outcome >= 77 && outcome <= 84)
-        {
-            spinOutcome = winnings[5];
-        }
+    //    else if (outcome >= 77 && outcome <= 84)
+    //    {
+    //        spinOutcome = winnings[5];
+   //     }
 
         //Outcome Watermelon (7% Chance)
-        else if (outcome >= 85 && outcome <= 91)
-        {
-            spinOutcome = winnings[6];
-        }
+    //    else if (outcome >= 85 && outcome <= 91)
+    ////    {
+    //        spinOutcome = winnings[6];
+    //    }
 
         //Outcome Bell (5% Chance)
-        else if (outcome >= 92 && outcome <= 96)
-        {
-            spinOutcome = winnings[7];
-        }
+    //    else if (outcome >= 92 && outcome <= 96)
+    //    {
+    //        spinOutcome = winnings[7];
+    //    }
 
         //Outcome Blue Seven (3% Chance)
-        else if (outcome >= 97 && outcome <= 99)
-        {
-            spinOutcome = winnings[8];
-        }
+     //   else if (outcome >= 97 && outcome <= 99)
+     //   {
+    //        spinOutcome = winnings[8];
+    //    }
 
         //Outcome Red Seven (1% Chance)
-        else if(outcome == 100)
-        {
-            spinOutcome = winnings[9];
-        }
+     //   else if(outcome == 100)
+     //   {
+     //       spinOutcome = winnings[9];
+     //   }
 
         controller.ChangeCash(-20);
         soundManager.PlaySound(confirmSound);
