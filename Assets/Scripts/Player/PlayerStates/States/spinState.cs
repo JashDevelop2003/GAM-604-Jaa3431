@@ -119,66 +119,6 @@ public class spinState : playerStateBase, IConfirm, ICancel
             }
         }
 
-        //Outcome = Jumbled (30% Chance)
-        //if (outcome >= 1 && outcome <= 30) 
-        //{
-        //    spinOutcome = winnings[0];
-        //}
-        
-        //Outcome = Cherries (15% Chance)
-       // else if(outcome >= 31 && outcome <= 45)
-       // {
-       //     spinOutcome = winnings[1];
-       // }
-
-        //Outcome = Mixed 7(11% Chance)
-      //  else if (outcome >= 46 && outcome <= 56)
-      //  {
-     //       spinOutcome = winnings[2];
-      //  }
-
-        //Outcome Lemon (10% Chance)
-     //   else if(outcome >= 57 && outcome <= 66)
-     //   {
-     //       spinOutcome = winnings[3];
-    //    }
-
-        //Outcome Grapes(10% Chance)
-    //    else if(outcome >= 67 && outcome <= 76)
-    //    {
-    //        spinOutcome = winnings[4];
-    //    }
-
-        //Outcome Bar(8% Chance)
-    //    else if (outcome >= 77 && outcome <= 84)
-    //    {
-    //        spinOutcome = winnings[5];
-   //     }
-
-        //Outcome Watermelon (7% Chance)
-    //    else if (outcome >= 85 && outcome <= 91)
-    ////    {
-    //        spinOutcome = winnings[6];
-    //    }
-
-        //Outcome Bell (5% Chance)
-    //    else if (outcome >= 92 && outcome <= 96)
-    //    {
-    //        spinOutcome = winnings[7];
-    //    }
-
-        //Outcome Blue Seven (3% Chance)
-     //   else if (outcome >= 97 && outcome <= 99)
-     //   {
-    //        spinOutcome = winnings[8];
-    //    }
-
-        //Outcome Red Seven (1% Chance)
-     //   else if(outcome == 100)
-     //   {
-     //       spinOutcome = winnings[9];
-     //   }
-
         controller.ChangeCash(-20);
         soundManager.PlaySound(confirmSound);
         StartCoroutine(Spin());
