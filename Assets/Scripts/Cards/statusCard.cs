@@ -97,7 +97,6 @@ public class statusCard : MonoBehaviour
             {
                 currentBuffs targetBuff = target.GetComponent<currentBuffs>();
                 targetBuff.AddBuff(addBuff, buffCooldown, value);
-                Debug.Log(target + " is " + addBuff);
             }
         }
 
@@ -107,7 +106,6 @@ public class statusCard : MonoBehaviour
             {
                 currentEffects targetEffect = target.GetComponent<currentEffects>();
                 targetEffect.AddEffect(addEffect, effectCooldown);
-                Debug.Log(target + " is " + addEffect);
             }
         }
     }

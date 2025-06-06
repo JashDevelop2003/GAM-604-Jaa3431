@@ -115,7 +115,8 @@ public class itemDeckPool : MonoBehaviour
 
         if (type == itemEnum.Relic)
         {
-            selectedInt = Random.Range(0, controller.GetData.possibleRelics.Count);
+            //selectedInt = Random.Range(0, controller.GetData.possibleRelics.Count);
+            selectedInt = 19;
             selectedItem = controller.GetData.possibleRelics[selectedInt];
         }
         else if(type == itemEnum.Omen)

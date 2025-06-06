@@ -70,6 +70,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     [Header("User Interface")]
     //This is to add UI to the cards and add description of the card.
     [SerializeField] private GameObject decidingDisplay;
+    [SerializeField] private GameObject statusDisplay;
     [SerializeField] private TMP_Text[] manaCostText = new TMP_Text [4];
     [SerializeField] private TMP_Text[] cardNameText = new TMP_Text[4];
     [SerializeField] private TMP_Text[] cardDescriptionText = new TMP_Text[4];
@@ -148,37 +149,6 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
         {
             movementDeck.DrawCards();
             statusDeck.DrawCard();
-            
-            //This for loop checks which card has the lowest maan cost which will be use to check if the player can use the card
-            for (int i = 0; i < movementDeck.SelectedCards.Length; i++) 
-            { 
-                movementCard movecard = movementDeck.SelectedCards[i].GetComponent<movementCard>();
-                manaCostText[i].SetText(movecard.MoveCard.manaCost.ToString());
-                cardNameText[i].SetText(movecard.MoveCard.cardName);
-                cardDescriptionText[i].SetText(movecard.MoveCard.cardDescription);
-                if(movecard.ManaCost < lowestManaCost)
-                {
-                    lowestManaCost = movecard.ManaCost;
-                }
-            }
-
-            statusCard statcard = statusDeck.SelectedCard.GetComponent<statusCard>();
-            manaCostText[3].SetText(statcard.StatusCard.manaCost.ToString());
-            cardNameText[3].SetText(statcard.StatusCard.cardName);
-            cardDescriptionText[3].SetText(statcard.StatusCard.cardDescription);
-
-            if (statcard.ManaCost < lowestManaCost)
-            {
-                lowestManaCost= statcard.ManaCost;
-            }
-
-            //This checks if the lowest mana card is higher than the player's current mana, if it is then end the player's turn
-            if(controller.GetModel.CurrentMana < lowestManaCost)
-            {
-                unableMove = true;
-                eventText.SetText("Unable to Move due to low amount of Mana");
-
-            }
 
             //If the player is confused then the player will chose a random card
             if(!unableMove && effects.Confused)
@@ -216,6 +186,44 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
 
             eventText.SetText("A Random Movement Card was chosen: " + moveCard.MoveCard.cardName + " Roll the Dice by pressing Space");
             hasSelected = true;
+        }
+
+        //This for loop checks which card has the lowest maan cost which will be use to check if the player can use the card
+        for (int i = 0; i < movementDeck.SelectedCards.Length; i++)
+        {
+            movementCard movecard = movementDeck.SelectedCards[i].GetComponent<movementCard>();
+            manaCostText[i].SetText(movecard.MoveCard.manaCost.ToString());
+            cardNameText[i].SetText(movecard.MoveCard.cardName);
+            cardDescriptionText[i].SetText(movecard.MoveCard.cardDescription);
+            if (movecard.ManaCost < lowestManaCost)
+            {
+                lowestManaCost = movecard.ManaCost;
+            }
+        }
+
+        if (statusDeck.SelectedCard != null) 
+        {
+            statusCard statcard = statusDeck.SelectedCard.GetComponent<statusCard>();
+            statusDisplay.SetActive(true);
+            manaCostText[3].SetText(statcard.StatusCard.manaCost.ToString());
+            cardNameText[3].SetText(statcard.StatusCard.cardName);
+            cardDescriptionText[3].SetText(statcard.StatusCard.cardDescription);
+
+            if (statcard.ManaCost < lowestManaCost)
+            {
+                lowestManaCost = statcard.ManaCost;
+            }
+        }
+        else
+        {
+            statusDisplay.SetActive(false);
+        }
+
+        if (controller.GetModel.CurrentMana < lowestManaCost)
+        {
+            unableMove = true;
+            eventText.SetText("Unable to Move due to low amount of Mana");
+
         }
 
         //This prevents the player to start their turn

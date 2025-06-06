@@ -3476,6 +3476,7 @@ MonoBehaviour:
   lowestManaCost: 0
   scene: 0
   decidingDisplay: {fileID: 1538993689}
+  statusDisplay: {fileID: 1388829540}
   manaCostText:
   - {fileID: 96748780}
   - {fileID: 449289939}
@@ -3775,11 +3776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2b02d3681a47c478877dee37df01ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleMovementCards: []
-  possibleOffenceCards: []
-  possibleDefenceCards: []
-  possibleStatusCards: []
-  possibleItems: []
   inMarket:
   - retailObject: 0
     retailType: 0
@@ -25636,6 +25632,7 @@ MonoBehaviour:
   lowestManaCost: 0
   scene: 0
   decidingDisplay: {fileID: 1044652630}
+  statusDisplay: {fileID: 987559476}
   manaCostText:
   - {fileID: 866837630}
   - {fileID: 1755024803}
@@ -25935,11 +25932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2b02d3681a47c478877dee37df01ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleMovementCards: []
-  possibleOffenceCards: []
-  possibleDefenceCards: []
-  possibleStatusCards: []
-  possibleItems: []
   inMarket:
   - retailObject: 0
     retailType: 0
@@ -33060,9 +33052,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventText: {fileID: 2116896888}
-  outcomeSounds:
-  - {fileID: 8300000, guid: 7463e5e78bb6baa4b8caeec3645d5ae7, type: 3}
-  - {fileID: 8300000, guid: c6b596fd07a14a64b89285b6f079b167, type: 3}
 --- !u!1 &862160035
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,13 @@ public class chocolateBarEffect : MonoBehaviour
     [SerializeField] private GameObject player;
     private itemBehaviour item;
     private currentBuffs buffs;
+    private List<buffEnum> possibleBuffs = new List<buffEnum>()
+    {
+        buffEnum.Invincible,
+        buffEnum.Healthy,
+        buffEnum.Hasty,
+        buffEnum.Lucky,
+    };
 
     // Chocolate Bar Applies a random buff (except Resistant & Impactful for 10 turns)
     void Awake()
@@ -23,31 +30,10 @@ public class chocolateBarEffect : MonoBehaviour
 
     public void UponPickup(object sender, EventArgs e)
     {
-        int randomBuff = UnityEngine.Random.Range(0, (int)buffEnum.Null);
-        while (randomBuff == (int)buffEnum.Impactful || randomBuff == (int)buffEnum.Resistant) 
-        { 
-            randomBuff = UnityEngine.Random.Range(0, (int)buffEnum.Null);
-        }
-        
-        if(randomBuff == (int)buffEnum.Invincible)
-        {
-            buffs.AddBuff(buffEnum.Invincible, 10, 0);
-        }
-
-        else if (randomBuff == (int)buffEnum.Healthy)
-        {
-            buffs.AddBuff(buffEnum.Healthy, 10, 0);
-        }
-
-        else if (randomBuff == (int)buffEnum.Hasty)
-        {
-            buffs.AddBuff(buffEnum.Hasty, 10, 0);
-        }
-
-        else if (randomBuff == (int)buffEnum.Lucky)
-        {
-            buffs.AddBuff(buffEnum.Lucky, 10, 0);
-        }
+        //This provides a random range between 0 to the list count of possible buffs
+        //This will then add the buff depending on the random int
+        int randomBuff = UnityEngine.Random.Range(0, possibleBuffs.Count);
+        buffs.AddBuff(possibleBuffs[randomBuff], 10, 0);
 
         item.pickupEvent -= UponPickup;
     }
