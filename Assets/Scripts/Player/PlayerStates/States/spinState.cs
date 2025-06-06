@@ -237,22 +237,7 @@ public class spinState : playerStateBase, IConfirm, ICancel
         GameObject relic = checkingAvailability;
         if (relic != null)
         {
-            relic.SetActive(true);
-            itemBehaviour item = relic.AddComponent<itemBehaviour>();
-            item.CreateItem(selectedItem);
-            controller.IncrementDeck(deckTypeEnum.Item);
-
-            eventText.SetText("Bonus Item: " + item.Item.itemName + " : " + item.Item.itemDescription + " Press Backspace once you're done shopping");
-            if (controller.Player == 1)
-            {
-                playerOneData playerData = GetComponentInChildren<playerOneData>();
-                playerData.storedRelics.Add(selectedInt);
-            }
-            else if (controller.Player == 2)
-            {
-                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                playerData.storedDefence.Add(selectedInt);
-            }
+            itemDeck.CreateItem(itemEnum.Relic);
         }
         else
         {

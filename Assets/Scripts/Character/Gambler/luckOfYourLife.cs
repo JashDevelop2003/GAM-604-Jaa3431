@@ -23,15 +23,18 @@ public class luckOfYourLife : MonoBehaviour
     private int outcome;
 
     //This is for the relics and provides the possible relics to select from to give to the player landing on the item space
-    [SerializeField] private List<itemStats> possibleRelics;
-    private itemStats selectedRelic;
     private itemDeckPool itemDeck;
+
+    private List<buffEnum> bonanzaBuffs = new List<buffEnum>()
+    {
+        buffEnum.Invincible,
+        buffEnum.Healthy,
+        buffEnum.Hasty,
+        buffEnum.Lucky,
+    };
 
     [Header("User Interface")]
     private decidingState stateUI;
-
-
-
 
     void Awake()
     {
@@ -46,8 +49,6 @@ public class luckOfYourLife : MonoBehaviour
 
         controller.oneUseEvent += LuckOfYourLife;
         state.endEvents += RandomiseOutcome;
-
-        possibleRelics = controller.GetData.possibleRelics;
 
         LuckOutcomeData outcomeData = luckOutcomeSystem.Retrieve();
         if (outcomeData != null)
@@ -93,10 +94,6 @@ public class luckOfYourLife : MonoBehaviour
         {
             CashoutCrashout();
         }
-        else
-        {
-            Debug.LogError("Int value was inefficient towards choosing 1 of the 6 values, check again");
-        }
 
     }
 
@@ -108,25 +105,19 @@ public class luckOfYourLife : MonoBehaviour
 
     void BuffBonanza()
     {
-        buffs.AddBuff(buffEnum.Lucky, 3, 0);
-        buffs.AddBuff(buffEnum.Hasty, 3, 0);
-        buffs.AddBuff(buffEnum.Healthy, 3, 0);
-        buffs.AddBuff(buffEnum.Invincible, 3, 0);
+        for (int i = 0; i < bonanzaBuffs.Count; i++) 
+        {
+            buffs.AddBuff(bonanzaBuffs[i], 3, 0);
+        }
         stateUI.EventText.SetText("Using Ability - Luck of Your Life: Buff Bonanza = Apply Lucky, Healthy, Hasty & Invincible for 3 turns");
     }
 
     void RandomRelic()
     {
-        int selectedInt = UnityEngine.Random.Range(0, possibleRelics.Count);
-        selectedRelic = possibleRelics[selectedInt];
         GameObject relic = itemDeck.GetAvailableItem();
         if (relic != null)
         {
-            relic.SetActive(true);
-            itemBehaviour item = relic.AddComponent<itemBehaviour>();
-            item.CreateItem(selectedRelic);
-            controller.IncrementDeck(deckTypeEnum.Item);
-            stateUI.EventText.SetText("Using Ability - Luck of Your Life: Random Relic = Obtain Random Relic: " + item.Item.itemName + " : " + item.Item.itemDescription);
+            itemDeck.CreateItem(itemEnum.Relic);
         }
         else
         {

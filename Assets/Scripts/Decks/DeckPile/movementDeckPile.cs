@@ -35,30 +35,26 @@ public class movementDeckPile : MonoBehaviour
     // This method draws 3 movement cards and prevent the card from being used more than expected
     public void DrawCards()
     {
-        //each move card integer is selected from 0 to the amount of cards in the list
-        for (int i = 0; i < moveCards.Length; i++)
+        bool sameCards;
+        do
         {
-            moveCards[i] = Random.Range(0, movementCards.Count);
-        }
+            sameCards = false;
+            //This makes each integer random
+            for (int i = 0; i < moveCards.Length; i++)
+            {
+                moveCards[i] = Random.Range(0, movementCards.Count);
 
-        //if the second card's integer is the same as the first card integer then it needs to change
-        //this loop occurs until the both the first and second card's integer are unique
-        while (moveCards[1] == moveCards[0])
-        {
-            moveCards[1] = Random.Range(0, movementCards.Count);
+                //This for loop checks if there are two identical integers
+                for (int j = 0; j < moveCards.Length; j++)
+                {
+                    //If there are 2 identical ints that isn't referring to itself then set the bool to true
+                    if (j != i && moveCards[i] == moveCards[j])
+                    {
+                        sameCards = true;
+                    }
+                }
+            }
         }
-
-        //if the third card's integer is the same as the first or second card's integer then it needs to change
-        //this loop occurs until the third card's integer is unique to the first and second card's integer
-        while (moveCards[2] == moveCards[1] || moveCards[2] == moveCards[0])
-        {
-            moveCards[2] = Random.Range(0, movementCards.Count);
-        }
-
-        //once all integers are unique they add that card to the selcted card that will be used in the deciding state
-        for (int i = 0;i < selectedCards.Length;i++) 
-        {
-            selectedCards[i] = movementCards[moveCards[i]];
-        }
+        while (sameCards);
     }
 }

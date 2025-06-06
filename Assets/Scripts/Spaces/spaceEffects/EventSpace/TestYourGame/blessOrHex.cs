@@ -13,9 +13,6 @@ public class blessOrHex : eventSpace
     [Header("User Interface")]
     [SerializeField] private TMP_Text eventText;
 
-    [Header("Sound Effects")]
-    [SerializeField] private AudioClip[] outcomeSounds = new AudioClip[2];
-
 
 
     // Start is called before the first frame update
@@ -27,55 +24,25 @@ public class blessOrHex : eventSpace
 
     public override void ActivateEvent()
     {
-        int Outcome = Random.Range(0, 2);
-        if (Outcome == 0)
+        itemDeckPool itemDeck = turnManager.CurrentPlayer.GetComponentInChildren<itemDeckPool>();
+        GameObject item = itemDeck.GetAvailableItem();
+        if (item != null)
         {
-            ObtainRelic();
+            int Outcome = Random.Range(0, 2);
+            if (Outcome == 0)
+            {
+                itemDeck.CreateItem(itemEnum.Relic);
+            }
+            else if (Outcome == 1)
+            {
+                itemDeck.CreateItem(itemEnum.Omen);
+            }
         }
-        else if (Outcome == 1)
+        else
         {
-            ObtainOmen();
+            eventText.SetText("You item bag is full, so you won't obtain a item");
         }
-        soundManager.PlaySound(outcomeSounds[Outcome]);
         StartCoroutine(EndTurn());
-    }
-
-    void ObtainRelic()
-    {
-
-        //This section checks if the player can obtain the relic in the first place
-        //If the method to get an available item slot turns out not to be null then they obtain the relic
-        //Otherwise they get nothing
-        itemDeckPool itemDeck = turnManager.CurrentPlayer.GetComponentInChildren<itemDeckPool>();
-        GameObject relic = itemDeck.GetAvailableItem();
-        if (relic != null)
-        {
-            itemDeck.CreateItem(itemEnum.Relic);
-        }
-
-        else if (relic == null)
-        {
-            eventText.SetText("Congratulations! you recieved a relic. However, You don't have any room for more relics so unlucky.");
-        }
-    }
-
-    void ObtainOmen()
-    {
-
-        //This section checks if the player can obtain the relic in the first place
-        //If the method to get an available item slot turns out not to be null then they obtain the relic
-        //Otherwise they get nothing
-        itemDeckPool itemDeck = turnManager.CurrentPlayer.GetComponentInChildren<itemDeckPool>();
-        GameObject omen = itemDeck.GetAvailableItem();
-        if (omen != null)
-        {
-            itemDeck.CreateItem(itemEnum.Omen);
-        }
-
-        else if (omen == null)
-        {
-            eventText.SetText("How unfortunate! you recieved a omen. However, You don't have any room for more omens so quite lucky I supposed.");
-        }
     }
 
     public IEnumerator EndTurn()

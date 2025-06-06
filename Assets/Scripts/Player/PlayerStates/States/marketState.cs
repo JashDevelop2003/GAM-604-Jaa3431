@@ -13,7 +13,7 @@ using UnityEngine.UI;
 /// 10% Chance for a item
 /// </summary>
 
-//A struct wiull be use to provide the retail object ()
+//A struct will be use to provide the retail object
 [System.Serializable]
 public struct InMarket
 {
@@ -36,27 +36,20 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
     private playerController controller;
 
     //this is for the movement cards and provides the possible movement card they can select from the character data
-    [SerializeField] private List<movementCardStats> possibleMovementCards;
-    private movementCardStats selectedMovementCard;
     private movementDeckPool movementDeck;
 
     //This is for the offence cards and provides the possible offence card they can select from the character data
-    [SerializeField] private List<offenceCardStats> possibleOffenceCards;
-    private offenceCardStats selectedOffenceCard;
     private offenceDeckPool offenceDeck;
 
     //This is for the defence cards and provides the possible defence card they can select from the character data
-    [SerializeField] private List<defenceCardStats> possibleDefenceCards;
-    private defenceCardStats selectedDefenceCard;
+
     private defenceDeckPool defenceDeck;
 
     //this is for the status cards and provide the possible stauts card they can select from the character data
-    [SerializeField] private List<statusCardStats> possibleStatusCards;
-    private statusCardStats selectedStatusCard;
+
     private statusDeckPool statusDeck;
 
-    [SerializeField] private List<itemStats> possibleItems;
-    private itemStats selectedItem;
+
     private itemDeckPool itemDeck;
 
     //This checks if there is the player's decks are all full
@@ -119,13 +112,7 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         Controls.confirmPressed += ConfirmingChoice;
         Controls.cancelPressed += Cancel;
 
-        //the controller is referenced to collect the character data of the possible card to obtain
         controller = GetComponent<playerController>();
-        possibleMovementCards = controller.GetData.possibleMovementCards;
-        possibleOffenceCards = controller.GetData.possibleOffenceCards;
-        possibleDefenceCards = controller.GetData.possibleDefenceCards;
-        possibleStatusCards = controller.GetData.possibleStatusCards;
-        possibleItems = controller.GetData.possibleRelics;
 
         //This checks if there is an avaialble slot for the player to create cards and items
         offenceDeck = GetComponentInChildren<offenceDeckPool>();
@@ -159,16 +146,15 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         else
         {
             //This applies the new resource in the game
-            //The while loop checks if the resource is available
+            //The do-while loop randomly chooses a card type and then checks if the resource is available
             for (int i = 0; i < outcomeResource.Length; i++)
             {
-                outcomeResource[i] = UnityEngine.Random.Range(1, 11);
-                outcomeType[i] = UnityEngine.Random.Range(0, 4);
-                while (checkingAvailability[outcomeType[i]] == null)
+                do
                 {
                     outcomeResource[i] = UnityEngine.Random.Range(1, 11);
                     outcomeType[i] = UnityEngine.Random.Range(0, 4);
                 }
+                while (checkingAvailability[outcomeType[i]] == null);
             }
         }
 
@@ -211,10 +197,6 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 cardUI[i].SetActive(false);
                 itemUI[i].SetActive(true);
                 itemPrice[i].SetText("Price: 100");
-            }
-            else
-            {
-                Debug.LogError("Something with wrong when identifying the outcome resource");
             }
 
             if (outcomeType[i] == (int)deckTypeEnum.Offence) 
@@ -311,10 +293,23 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         {
             if (selectedStock.retailObject == marketEnum.Item)
             {
-                ObtainItem();
+                checkingAvailability[4] = itemDeck.GetAvailableItem();
+                GameObject relic = checkingAvailability[4];
+                if (relic != null) 
+                { 
+                    itemDeck.CreateItem(itemEnum.Relic);
+                    PurchaseStock();
+                }
+                else
+                {
+                    eventText.SetText("There is no Available Slot for Items");
+                    soundManager.PlaySound(declineSound);
+                }
+
             }
             else
             {
+
                 if (selectedStock.retailObject == marketEnum.LegendaryCard)
                 {
                     ObtainCard(CardRarity.Legendary);
@@ -337,82 +332,18 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         StartCoroutine(EndShopping());
     }
 
-    void ObtainItem()
-    {
-        int selectedInt = UnityEngine.Random.Range(0, possibleItems.Count);
-        selectedItem = possibleItems[selectedInt];
-
-        checkingAvailability[4] = itemDeck.GetAvailableItem();
-        GameObject relic = checkingAvailability[4];
-        if (relic != null)
-        {
-            relic.SetActive(true);
-            itemBehaviour item = relic.AddComponent<itemBehaviour>();
-            item.CreateItem(selectedItem);
-            controller.IncrementDeck(deckTypeEnum.Item);
-            controller.ChangeCash(-selectedStock.price);
-            selectedStock.hasBought = true;
-            inMarket[boughtStock].hasBought = true;
-            sectionDisplay[boughtStock].color = setColour[4];
-            itemUI[boughtStock].SetActive(false);
-            eventText.SetText("item Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription + " Press Backspace once you're done shopping");
-            if (controller.Player == 1)
-            {
-                playerOneData playerData = GetComponentInChildren<playerOneData>();
-                playerData.storedRelics.Add(selectedInt);
-            }
-            else if (controller.Player == 2)
-            {
-                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                playerData.storedRelics.Add(selectedInt);
-            }
-        }
-        else
-        {
-            eventText.SetText("There is no Available Slot for Items");
-            soundManager.PlaySound(declineSound);
-        }
-
-    }
-
     void ObtainCard(CardRarity rarity)
     {
         //if the type selected is offence then the method needs to check for avaialble offence slots
         if (selectedStock.retailType == deckTypeEnum.Offence)
         {
-            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
-            int selectedCard = UnityEngine.Random.Range(0, possibleOffenceCards.Count);
-            selectedOffenceCard = possibleOffenceCards[selectedCard];
-            while (selectedOffenceCard.cardRarity != rarity)
-            {
-                selectedCard = UnityEngine.Random.Range(0, possibleOffenceCards.Count);
-                selectedOffenceCard = possibleOffenceCards[selectedCard];
-            }
 
             checkingAvailability[0] = offenceDeck.GetAvailableOffence();
             GameObject offenceCard = checkingAvailability[0];
             if (offenceCard != null)
             {
-                offenceCard.SetActive(true);
-                offenceCard offence = offenceCard.AddComponent<offenceCard>();
-                offence.CreateCard(selectedOffenceCard);
-                controller.IncrementDeck(deckTypeEnum.Offence);
-                controller.ChangeCash(-selectedStock.price);
-                selectedStock.hasBought = true;
-                inMarket[boughtStock].hasBought = true;
-                sectionDisplay[boughtStock].color = setColour[4];
-                cardUI[boughtStock].SetActive(false);
-                eventText.SetText("Offence Card Obtained: " + offence.AttackCard.cardName + " : " + offence.AttackCard.cardDescription + " Press Backspace once you're done shopping");
-                if (controller.Player == 1)
-                {
-                    playerOneData playerData = GetComponentInChildren<playerOneData>();
-                    playerData.storedOffence.Add(selectedCard);
-                }
-                else if (controller.Player == 2)
-                {
-                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                    playerData.storedOffence.Add(selectedCard);
-                }
+                offenceDeck.CreateCard(rarity);
+                PurchaseStock();
             }
             else
             {
@@ -423,39 +354,12 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
         else if (selectedStock.retailType == deckTypeEnum.Defence)
         {
-            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
-            int selectedCard = UnityEngine.Random.Range(0, possibleDefenceCards.Count);
-            selectedDefenceCard = possibleDefenceCards[selectedCard];
-            while (selectedDefenceCard.cardRarity != rarity)
-            {
-                selectedCard = UnityEngine.Random.Range(0, possibleDefenceCards.Count);
-                selectedDefenceCard = possibleDefenceCards[selectedCard];
-            }
-
             checkingAvailability[1] = defenceDeck.GetAvailableDefence();
             GameObject defenceCard = checkingAvailability[1];
             if (defenceCard != null)
             {
-                defenceCard.SetActive(true);
-                defenceCard defence = defenceCard.AddComponent<defenceCard>();
-                defence.CreateCard(selectedDefenceCard);
-                controller.IncrementDeck(deckTypeEnum.Defence);
-                controller.ChangeCash(-selectedStock.price);
-                selectedStock.hasBought = true;
-                inMarket[boughtStock].hasBought = true;
-                sectionDisplay[boughtStock].color = setColour[4];
-                cardUI[boughtStock].SetActive(false);
-                eventText.SetText("Defence Card Obtained: " + defence.DefendCard.cardName + " : " + defence.DefendCard.cardDescription + " Press Backspace once you're done shopping");
-                if (controller.Player == 1)
-                {
-                    playerOneData playerData = GetComponentInChildren<playerOneData>();
-                    playerData.storedDefence.Add(selectedCard);
-                }
-                else if (controller.Player == 2)
-                {
-                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                    playerData.storedDefence.Add(selectedCard);
-                }
+                defenceDeck.CreateCard(rarity);
+                PurchaseStock();
             }
             else
             {
@@ -466,39 +370,12 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
         else if (selectedStock.retailType == deckTypeEnum.Movement)
         {
-            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
-            int selectedCard = UnityEngine.Random.Range(0, possibleMovementCards.Count);
-            selectedMovementCard = possibleMovementCards[selectedCard];
-            while (selectedMovementCard.cardRarity != rarity)
-            {
-                selectedCard = UnityEngine.Random.Range(0, possibleMovementCards.Count);
-                selectedMovementCard = possibleMovementCards[selectedCard];
-            }
-
             checkingAvailability[2] = movementDeck.GetAvailableMovement();
             GameObject moveCard = checkingAvailability[2];
             if (moveCard != null)
             {
-                moveCard.SetActive(true);
-                movementCard move = moveCard.AddComponent<movementCard>();
-                move.CreateCard(selectedMovementCard);
-                controller.IncrementDeck(deckTypeEnum.Movement);
-                controller.ChangeCash(-selectedStock.price);
-                selectedStock.hasBought = true;
-                inMarket[boughtStock].hasBought = true;
-                sectionDisplay[boughtStock].color = setColour[4];
-                cardUI[boughtStock].SetActive(false);
-                eventText.SetText("Movement Card Obtained: " + move.MoveCard.cardName + " : " + move.MoveCard.cardDescription + " Press Backspace once you're done shopping");
-                if (controller.Player == 1)
-                {
-                    playerOneData playerData = GetComponentInChildren<playerOneData>();
-                    playerData.storedMovement.Add(selectedCard);
-                }
-                else if (controller.Player == 2)
-                {
-                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                    playerData.storedMovement.Add(selectedCard);
-                }
+                movementDeck.CreateCard(rarity);
+                PurchaseStock();
             }
             else
             {
@@ -510,39 +387,12 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
         else if (selectedStock.retailType == deckTypeEnum.Status)
         {
-            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
-            int selectedCard = UnityEngine.Random.Range(0, possibleStatusCards.Count);
-            selectedStatusCard = possibleStatusCards[selectedCard];
-            while (selectedStatusCard.cardRarity != rarity)
-            {
-                selectedCard = UnityEngine.Random.Range(0, possibleStatusCards.Count);
-                selectedStatusCard = possibleStatusCards[selectedCard];
-            }
-
             checkingAvailability[3] = statusDeck.GetAvailableStatus();
             GameObject statCard = checkingAvailability[3];
             if (statCard != null)
             {
-                statCard.SetActive(true);
-                statusCard stat = statCard.AddComponent<statusCard>();
-                stat.CreateCard(selectedStatusCard);
-                controller.IncrementDeck(deckTypeEnum.Status);
-                controller.ChangeCash(-selectedStock.price);
-                selectedStock.hasBought = true;
-                inMarket[boughtStock].hasBought = true;
-                sectionDisplay[boughtStock].color = setColour[4];
-                cardUI[boughtStock].SetActive(false);
-                eventText.SetText("Status Card Obtained: " + stat.StatusCard.cardName + " : " + stat.StatusCard.cardDescription + " Press Backspace once you're done shopping");
-                if (controller.Player == 1)
-                {
-                    playerOneData playerData = GetComponentInChildren<playerOneData>();
-                    playerData.storedStatus.Add(selectedCard);
-                }
-                else if (controller.Player == 2)
-                {
-                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                    playerData.storedStatus.Add(selectedCard);
-                }
+                statusDeck.CreateCard(rarity);
+                PurchaseStock();
             }
             else
             {
@@ -551,6 +401,15 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
             }
         }
 
+    }
+
+    private  void PurchaseStock()
+    {
+        controller.ChangeCash(-selectedStock.price);
+        selectedStock.hasBought = true;
+        inMarket[boughtStock].hasBought = true;
+        sectionDisplay[boughtStock].color = setColour[4];
+        cardUI[boughtStock].SetActive(false);
     }
 
     IEnumerator EndShopping()

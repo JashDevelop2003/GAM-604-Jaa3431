@@ -9,24 +9,12 @@ public class godPackEffect : MonoBehaviour
     [SerializeField] private GameObject player;
     private playerController controller;
     private itemBehaviour item;
-    //this is for the movement cards and provides the possible movement card they can select from the character data
+    
+    //The decks are reference to identify if there is any avialble slots to create a legendary card
     private movementDeckPool moveDeck;
-    [SerializeField] private List<movementCardStats> possibleMovementCards;
-    [SerializeField] private movementCardStats selectedMovementCard;
-
-    //This is for the offence cards and provides the possible offence card they can select from the character data
     private offenceDeckPool offenceDeck;
-    [SerializeField] private List<offenceCardStats> possibleOffenceCards;
-    [SerializeField] private offenceCardStats selectedOffenceCard;
-
-    //This is for the defence cards and provides the possible defence card they can select from the character data
     private defenceDeckPool defenceDeck;
-    [SerializeField] private List<defenceCardStats> possibleDefenceCards;
-    [SerializeField] private defenceCardStats selectedDefenceCard;
-
     private statusDeckPool statusDeck;
-    [SerializeField] private List<statusCardStats> possibleStatusCards;
-    [SerializeField] private statusCardStats selectedStatusCard;
 
     // God Pack gives the player 1 of each type of legendary card (if they have room for it)
     void Awake()
@@ -40,11 +28,6 @@ public class godPackEffect : MonoBehaviour
     
     public void UponPickup(object sender, EventArgs e)
     {
-        possibleDefenceCards = controller.GetData.possibleDefenceCards;
-        possibleOffenceCards = controller.GetData.possibleOffenceCards;
-        possibleMovementCards = controller.GetData.possibleMovementCards;
-        possibleStatusCards = controller.GetData.possibleStatusCards;
-
         StartCoroutine(ObtainCards());
     }
 
@@ -62,16 +45,6 @@ public class godPackEffect : MonoBehaviour
 
     void LegendaryOffence()
     {
-        int selectedInt = UnityEngine.Random.Range(0, possibleOffenceCards.Count);
-        selectedOffenceCard = possibleOffenceCards[selectedInt];
-
-        //This while loops keep changing the card until the rarity of the chosen card is Legendary
-        while (selectedOffenceCard.cardRarity != CardRarity.Legendary)
-        {
-            selectedInt = UnityEngine.Random.Range(0, possibleOffenceCards.Count);
-            selectedOffenceCard = possibleOffenceCards[selectedInt];
-        }
-
         //This section checks if the player can obtain the movement card in the first place
         //If the method to get an available item slot turns out not to be null then they obtain the card
         //Otherwise they get nothing
@@ -79,36 +52,12 @@ public class godPackEffect : MonoBehaviour
         GameObject attackCard = offenceDeck.GetAvailableOffence();
         if (attackCard != null)
         {
-            attackCard.SetActive(true);
-            offenceCard attack = attackCard.AddComponent<offenceCard>();
-            attack.CreateCard(selectedOffenceCard);
-            controller.IncrementDeck(deckTypeEnum.Offence);
-            if (controller.Player == 1)
-            {
-                playerOneData playerData = GetComponentInChildren<playerOneData>();
-                playerData.storedOffence.Add(selectedInt);
-            }
-            else if (controller.Player == 2)
-            {
-                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                playerData.storedOffence.Add(selectedInt);
-            }
-
+            offenceDeck.CreateCard(CardRarity.Legendary);
         }
     }
 
     void LegendaryDefence()
     {
-        int selectedInt = UnityEngine.Random.Range(0, possibleDefenceCards.Count);
-        selectedDefenceCard = possibleDefenceCards[selectedInt];
-
-        //This while loops keep changing the card until the rarity of the chosen card is Legendary
-        while (selectedDefenceCard.cardRarity != CardRarity.Legendary)
-        {
-            selectedInt = UnityEngine.Random.Range(0, possibleDefenceCards.Count);
-            selectedDefenceCard = possibleDefenceCards[selectedInt];
-        }
-
         //This section checks if the player can obtain the movement card in the first place
         //If the method to get an available item slot turns out not to be null then they obtain the card
         //Otherwise they get nothing
@@ -116,34 +65,12 @@ public class godPackEffect : MonoBehaviour
         GameObject defendCard = defenceDeck.GetAvailableDefence();
         if (defendCard != null)
         {
-            defendCard.SetActive(true);
-            defenceCard defend = defendCard.AddComponent<defenceCard>();
-            defend.CreateCard(selectedDefenceCard);
-            controller.IncrementDeck(deckTypeEnum.Defence);
-            if (controller.Player == 1)
-            {
-                playerOneData playerData = GetComponentInChildren<playerOneData>();
-                playerData.storedDefence.Add(selectedInt);
-            }
-            else if (controller.Player == 2)
-            {
-                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                playerData.storedDefence.Add(selectedInt);
-            }
+            defenceDeck.CreateCard(CardRarity.Legendary);
         }
     }
 
     void LegendaryMovement()
     {
-        int selectedInt = UnityEngine.Random.Range(0, possibleMovementCards.Count);
-        selectedMovementCard = possibleMovementCards[selectedInt];
-
-        //This while loops keep changing the card until the rarity of the chosen card is Legendary
-        while (selectedMovementCard.cardRarity != CardRarity.Legendary)
-        {
-            selectedInt = UnityEngine.Random.Range(0, possibleMovementCards.Count);
-            selectedMovementCard = possibleMovementCards[selectedInt];
-        }
 
         //This section checks if the player can obtain the movement card in the first place
         //If the method to get an available item slot turns out not to be null then they obtain the card
@@ -152,34 +79,12 @@ public class godPackEffect : MonoBehaviour
         GameObject moveCard = moveDeck.GetAvailableMovement();
         if (moveCard != null)
         {
-            moveCard.SetActive(true);
-            movementCard move = moveCard.AddComponent<movementCard>();
-            move.CreateCard(selectedMovementCard);
-            controller.IncrementDeck(deckTypeEnum.Movement);
-        }
-        if (controller.Player == 1)
-        {
-            playerOneData playerData = GetComponentInChildren<playerOneData>();
-            playerData.storedMovement.Add(selectedInt);
-        }
-        else if (controller.Player == 2)
-        {
-            playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-            playerData.storedMovement.Add(selectedInt);
+            moveDeck.CreateCard(CardRarity.Legendary);
         }
     }
 
     void LegendaryStatus()
     {
-        int selectedInt = UnityEngine.Random.Range(0, possibleStatusCards.Count);
-        selectedStatusCard = possibleStatusCards[selectedInt];
-
-        //This while loops keep changing the card until the rarity of the chosen card is Legendary
-        while (selectedStatusCard.cardRarity != CardRarity.Legendary)
-        {
-            selectedInt = UnityEngine.Random.Range(0, possibleStatusCards.Count);
-            selectedStatusCard = possibleStatusCards[selectedInt];
-        }
 
         //This section checks if the player can obtain the status card in the first place
         //If the method to get an available item slot turns out not to be null then they obtain the card
@@ -188,20 +93,7 @@ public class godPackEffect : MonoBehaviour
         GameObject statusCard = statusDeck.GetAvailableStatus();
         if (statusCard != null)
         {
-            statusCard.SetActive(true);
-            statusCard status = statusCard.AddComponent<statusCard>();
-            status.CreateCard(selectedStatusCard);
-            controller.IncrementDeck(deckTypeEnum.Status);
-            if (controller.Player == 1)
-            {
-                playerOneData playerData = GetComponentInChildren<playerOneData>();
-                playerData.storedStatus.Add(selectedInt);
-            }
-            else if (controller.Player == 2)
-            {
-                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                playerData.storedStatus.Add(selectedInt);
-            }
+            statusDeck.CreateCard(CardRarity.Legendary);
         }
     }
 }
