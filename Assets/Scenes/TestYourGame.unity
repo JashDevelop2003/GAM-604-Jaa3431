@@ -33884,6 +33884,9 @@ MonoBehaviour:
   manaCurrent: 0
   manaMax: 0
   cashCurrent: 0
+  storedThrust: 0
+  storedGuard: 0
+  storedRoll: 0
   usedAbility: 0
   currentPath: 0
   spaceInt: 0
@@ -42870,6 +42873,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 1627439447038818509, guid: f84b62052c19d7f48b76ab41231ea562, type: 3}
+  eventText: {fileID: 2116896888}
+  confirmSound: {fileID: 8300000, guid: 3445a8b2782c4134985eb470cc656b10, type: 3}
 --- !u!1 &1213319787
 GameObject:
   m_ObjectHideFlags: 0
@@ -52499,6 +52504,9 @@ MonoBehaviour:
   manaCurrent: 0
   manaMax: 0
   cashCurrent: 0
+  storedThrust: 0
+  storedGuard: 0
+  storedRoll: 0
   usedAbility: 0
   currentPath: 0
   spaceInt: 0
@@ -61604,6 +61612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 1627439447038818509, guid: f84b62052c19d7f48b76ab41231ea562, type: 3}
+  eventText: {fileID: 2116896888}
+  confirmSound: {fileID: 8300000, guid: 3445a8b2782c4134985eb470cc656b10, type: 3}
 --- !u!1 &1909086233
 GameObject:
   m_ObjectHideFlags: 0

@@ -351,37 +351,13 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         //if the type selected is offence then the method needs to check for avaialble offence slots
         else if (typeSelected == CardType.Offence)
         {
-            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
-            selectedCard = UnityEngine.Random.Range(0, possibleOffenceCards.Count);
-            selectedOffenceCard = possibleOffenceCards[selectedCard];
-            while (selectedOffenceCard.cardRarity != rarity)
-            {
-                selectedCard = UnityEngine.Random.Range(0, possibleOffenceCards.Count);
-                selectedOffenceCard = possibleOffenceCards[selectedCard];
-            }
-
             //this part of the method collect the offence deck pool to check if there is any objects that are set to false
             offenceDeckPool offencePool = GetComponentInChildren<offenceDeckPool>();
             GameObject offenceCard = offencePool.GetAvailableOffence();
             //if there is a object that is set to false then add the selected card into the deck
             if (offenceCard != null)
             {
-                offenceCard.SetActive(true);
-                offenceCard offence = offenceCard.AddComponent<offenceCard>();
-                offence.CreateCard(selectedOffenceCard);
-                controller.IncrementDeck(deckTypeEnum.Offence);
-                eventText.SetText(typeSelected.ToString() + " Card Obtained: " + offence.AttackCard.cardName);
-                soundManager.PlaySound(confirmSound);
-                if (controller.Player == 1)
-                {
-                    playerOneData playerData = GetComponentInChildren<playerOneData>();
-                    playerData.storedOffence.Add(selectedCard);
-                }
-                else if (controller.Player == 2)
-                {
-                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                    playerData.storedOffence.Add(selectedCard);
-                }
+                offencePool.CreateCard(rarity);
                 StartCoroutine(CardObtained());
             }
 
