@@ -56,5 +56,11 @@ public class movementDeckPile : MonoBehaviour
             }
         }
         while (sameCards);
+
+        //once all integers are unique they add that card to the selcted card that will be used in the deciding state
+        for (int i = 0;i < selectedCards.Length;i++) 
+        {
+            selectedCards[i] = movementCards[moveCards[i]];
+        }
     }
 }

@@ -40,10 +40,10 @@ public class offenceDeckPile : MonoBehaviour
                 attackCards[i] = Random.Range(0, offenceCards.Count);
 
                 //This for loop checks if there are two identical integers
-                for(int j = 0; j < attackCards.Length; j++)
+                for (int j = 0; j < attackCards.Length; j++)
                 {
                     //If there are 2 identical ints that isn't referring to itself then set the bool to true
-                    if(j != i && attackCards[i] == attackCards[j])
+                    if (j != i && attackCards[i] == attackCards[j])
                     {
                         sameCards = true;
                     }
@@ -51,5 +51,11 @@ public class offenceDeckPile : MonoBehaviour
             }
         }
         while (sameCards);
+
+        //once all integers are unique they add that card to the selcted card that will be used in the deciding state
+        for (int i = 0; i < selectedCards.Length; i++)
+        {
+            selectedCards[i] = offenceCards[attackCards[i]];
+        }
     }
 }
