@@ -30,32 +30,27 @@ public class defenceDeckPile : MonoBehaviour
     // This method draws 4 offence cards and prevent the card from being used more than expected
     public void DrawCards()
     {
-        //each move card integer is selected from 0 to the amount of cards in the list
-        for (int i = 0; i < defendCards.Length; i++)
+        bool sameCards;
+        do
         {
-            defendCards[i] = Random.Range(0, defenceCards.Count);
-        }
+            sameCards = false;
+            //This makes each integer random
+            for (int i = 0; i < defendCards.Length; i++)
+            {
+                defendCards[i] = Random.Range(0, defenceCards.Count);
 
-        //if the second card's integer is the same as the first card integer then it needs to change
-        //this loop occurs until the both the first and second card's integer are unique
-        while (defendCards[1] == defendCards[0])
-        {
-            defendCards[1] = Random.Range(0, defenceCards.Count);
+                //This for loop checks if there are two identical integers
+                for (int j = 0; j < defendCards.Length; j++)
+                {
+                    //If there are 2 identical ints that isn't referring to itself then set the bool to true
+                    if (j != i && defendCards[i] == defendCards[j])
+                    {
+                        sameCards = true;
+                    }
+                }
+            }
         }
-
-        //if the third card's integer is the same as the first or second card's integer then it needs to change
-        //this loop occurs until the third card's integer is unique to the first and second card's integer
-        while (defendCards[2] == defendCards[1] || defendCards[2] == defendCards[0])
-        {
-            defendCards[2] = Random.Range(0, defenceCards.Count);
-        }
-
-        //if the fourth card's integer is the same as the first, second or third card's integer then it needs to change
-        //this loop occurs until the fourth card's integer is unique to the first, second and third card's integer
-        while (defendCards[3] == defendCards[2] || defendCards[3] == defendCards[1] || defendCards[3] == defendCards[0])
-        {
-            defendCards[3] = Random.Range(0, defenceCards.Count);
-        }
+        while (sameCards);
 
         //once all integers are unique they add that card to the selcted card that will be used in the deciding state
         for (int i = 0; i < selectedCards.Length; i++)
