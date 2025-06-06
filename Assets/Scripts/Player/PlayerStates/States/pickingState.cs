@@ -229,58 +229,38 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     // Right is selecting defence
     public void DecidingUp(object sender, EventArgs e)
     {
-        if (checkingAvailability[2] != null)
-        {
-            typeSelected = CardType.Movement;
-            eventText.SetText(typeSelected.ToString());
-        }
-        else
-        {
-            typeSelected = CardType.Null;
-            eventText.SetText( "There isn't any room for a new movement card");
-        }
+        ChoosingCard(CardType.Movement);
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
-        if (checkingAvailability[3] != null)
-        {
-            typeSelected = CardType.Status;
-            eventText.SetText(typeSelected.ToString());
-        }
-        else
-        {
-            typeSelected = CardType.Null;
-            eventText.SetText("There isn't any room for a new status card");
-        }
-
+        ChoosingCard(CardType.Status);
     }
 
     public void DecidingLeft(object sender, EventArgs e)
     {
-        if (checkingAvailability[0] != null)
-        {
-            typeSelected = CardType.Offence;
-            eventText.SetText(typeSelected.ToString());
-        }
-        else
-        {
-            typeSelected = CardType.Null;
-            eventText.SetText("There isn't any room for a new offence card");
-        }
+        ChoosingCard(CardType.Offence);
+
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
-        if (checkingAvailability[1] != null)
+        ChoosingCard(CardType.Defence);
+
+    }
+
+    //This method will collect the input's type as a parameter to check if the card has available slot
+    private void ChoosingCard(CardType type)
+    {
+        if (checkingAvailability[(int)type] != null)
         {
-            typeSelected = CardType.Defence;
+            typeSelected = type;
             eventText.SetText(typeSelected.ToString());
         }
         else
         {
             typeSelected = CardType.Null;
-            eventText.SetText("There isn't any room for a new defence card");
+            eventText.SetText("There isn't any room for a new " + type.ToString() + " card");
         }
     }
 

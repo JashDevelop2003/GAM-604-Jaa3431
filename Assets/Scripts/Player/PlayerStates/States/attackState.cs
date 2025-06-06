@@ -146,37 +146,27 @@ public class attackState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     public void DecidingUp(object sender, EventArgs e)
     {
-        selectedCard = offenceDeck.SelectedCards[1];
-        attackCard = selectedCard.GetComponent<offenceCard>();
-        if (isRevealed)
-        {
-            offenceCardDescription.SetText(attackCard.AttackCard.cardDescription);
-        }
+        SelectingCard(1);
     }
 
     public void DecidingDown(object sender, EventArgs e)
     {
-        selectedCard = offenceDeck.SelectedCards[3];
-        attackCard = selectedCard.GetComponent<offenceCard>();
-        if (isRevealed)
-        {
-            offenceCardDescription.SetText(attackCard.AttackCard.cardDescription);
-        }
+        SelectingCard(3);
     }
 
     public void DecidingLeft(object sender, EventArgs e)
     {
-        selectedCard = offenceDeck.SelectedCards[0];
-        attackCard = selectedCard.GetComponent<offenceCard>();
-        if (isRevealed)
-        {
-            offenceCardDescription.SetText(attackCard.AttackCard.cardDescription);
-        }
+        SelectingCard(0);
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
-        selectedCard = offenceDeck.SelectedCards[2];
+        SelectingCard(2);
+    }
+
+    private void SelectingCard(int card)
+    {
+        selectedCard = offenceDeck.SelectedCards[card];
         attackCard = selectedCard.GetComponent<offenceCard>();
         if (isRevealed)
         {

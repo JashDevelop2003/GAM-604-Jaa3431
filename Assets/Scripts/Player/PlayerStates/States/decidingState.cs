@@ -305,13 +305,7 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     //For each move card selected must empty statCard and turn using ability to false to make sure that only the move card is used
     public void DecidingUp(object sender, EventArgs e)
     {
-        selectedCard = movementDeck.SelectedCards[1];
-        eventText.SetText(cardNameText[1].text + " " + cardDescriptionText[1].text);
-        moveCard = selectedCard.GetComponent<movementCard>();
-        statCard = null;
-        usingAbility = false;
-        viewingResource = false;
-        leaveGame = false;
+        ChoosingMovement(1);
     }
 
     //For status card selected must empty moveCard and turn using ability to false to make sure that only the status card is used
@@ -335,20 +329,19 @@ public class decidingState : playerStateBase, IDecideDown, IDecideUp, IDecideRig
     }
 
     public void DecidingLeft(object sender, EventArgs e)
-    {       
-        selectedCard = movementDeck.SelectedCards[0];
-        eventText.SetText(cardNameText[0].text + " " + cardDescriptionText[0].text);
-        moveCard = selectedCard.GetComponent<movementCard>();
-        statCard = null;
-        usingAbility = false;
-        viewingResource = false;
-        leaveGame = false;
+    {
+        ChoosingMovement(0);
     }
 
     public void DecidingRight(object sender, EventArgs e)
     {
-        selectedCard = movementDeck.SelectedCards[2];
-        eventText.SetText(cardNameText[2].text + " " + cardDescriptionText[2].text);
+        ChoosingMovement(2);
+    }
+
+    private void ChoosingMovement(int card)
+    {
+        selectedCard = movementDeck.SelectedCards[card];
+        eventText.SetText(cardNameText[card].text + " " + cardDescriptionText[card].text);
         moveCard = selectedCard.GetComponent<movementCard>();
         statCard = null;
         usingAbility = false;

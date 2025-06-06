@@ -249,29 +249,28 @@ public class marketState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
     public void DecidingUp(object sender, EventArgs e)
     {
-        selectedStock = inMarket[0];
-        boughtStock = 0;
-        eventText.SetText(selectedStock.retailObject.ToString() + " " + selectedStock.retailType.ToString() + " :" + selectedStock.price.ToString());
+        SelectingStock(0);
     }
     
     public void DecidingDown(object sender, EventArgs e)
     {
-        selectedStock = inMarket[2];
-        boughtStock = 2;
-        eventText.SetText(selectedStock.retailObject.ToString() + " " + selectedStock.retailType.ToString() + " :" + selectedStock.price.ToString());
+        SelectingStock(2);
     }
     
     public void DecidingLeft(object sender, EventArgs e)
     {
-        selectedStock = inMarket[3];
-        boughtStock = 3;
-        eventText.SetText(selectedStock.retailObject.ToString() + " " + selectedStock.retailType.ToString() + " :" + selectedStock.price.ToString());
+        SelectingStock(3);
     }
     
     public void DecidingRight(object sender, EventArgs e)
     {
-        selectedStock = inMarket[1];
-        boughtStock = 1;
+        SelectingStock(1);
+    }
+
+    private void SelectingStock(int stock)
+    {
+        selectedStock = inMarket[stock];
+        boughtStock = stock;
         eventText.SetText(selectedStock.retailObject.ToString() + " " + selectedStock.retailType.ToString() + " :" + selectedStock.price.ToString());
     }
     

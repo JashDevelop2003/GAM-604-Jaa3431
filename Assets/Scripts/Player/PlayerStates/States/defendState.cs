@@ -157,38 +157,27 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
 
     public void DefendingUp(object sender, EventArgs e)
     {
-        selectedCard = defenceDeck.SelectedCards[1];
-        defendCard = selectedCard.GetComponent<defenceCard>();
-        if (isRevealed)
-        {
-            defenceCardDescription.SetText(defendCard.DefendCard.cardDescription);
-        }
-
+        SelectingCard(1);
     }
 
     public void DefendingDown(object sender, EventArgs e)
     {
-        selectedCard = defenceDeck.SelectedCards[3];
-        defendCard = selectedCard.GetComponent<defenceCard>();
-        if (isRevealed)
-        {
-            defenceCardDescription.SetText(defendCard.DefendCard.cardDescription);
-        }
+        SelectingCard(3);
     }
 
     public void DefendingLeft(object sender, EventArgs e)
     {
-        selectedCard = defenceDeck.SelectedCards[0];
-        defendCard = selectedCard.GetComponent<defenceCard>();
-        if (isRevealed)
-        {
-            defenceCardDescription.SetText(defendCard.DefendCard.cardDescription);
-        }
+        SelectingCard(0);
     }
 
     public void DefendingRight(object sender, EventArgs e)
     {
-        selectedCard = defenceDeck.SelectedCards[2];
+        SelectingCard(2);
+    }
+
+    private void SelectingCard(int card)
+    {
+        selectedCard = defenceDeck.SelectedCards[card];
         defendCard = selectedCard.GetComponent<defenceCard>();
         if (isRevealed)
         {
