@@ -181,10 +181,6 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 soundManager.PlaySound(raritySound[1]);
                 eventText.SetText("Very Lucky Chance!! Select a card type you want to obtain.");
             }
-            else
-            {
-                Debug.LogError("Something went wrong with the random range");
-            }
         }        
         else
         {
@@ -204,10 +200,6 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
                 rarity = CardRarity.Legendary;
                 soundManager.PlaySound(raritySound[1]);
                 eventText.SetText("Very Lucky Chance!! Select a card type you want to obtain.");
-            }
-            else
-            {
-                Debug.LogError("Something went wrong with the random range");
             }
         }
 
@@ -305,14 +297,6 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         //if the type selected is movement then the method needs to check for avaialble movement slots
         else if (typeSelected == CardType.Movement)
         {
-            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
-            selectedCard = UnityEngine.Random.Range(0, possibleMovementCards.Count);
-            selectedMovementCard = possibleMovementCards[selectedCard];
-            while (selectedMovementCard.cardRarity != rarity)
-            {
-                selectedCard = UnityEngine.Random.Range(0, possibleMovementCards.Count);
-                selectedMovementCard = possibleMovementCards[selectedCard];
-            }
 
             //this part of the method collect the movement deck pool to check if there is any objects that are set to false
             movementDeckPool movePool = GetComponentInChildren<movementDeckPool>();
@@ -320,22 +304,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
             //if there is a object that is set to false then add the selected card into the deck
             if (moveCard != null)
             {
-                moveCard.SetActive(true);
-                movementCard movement = moveCard.AddComponent<movementCard>();
-                movement.CreateCard(selectedMovementCard);
-                controller.IncrementDeck(deckTypeEnum.Movement);
-                eventText.SetText(typeSelected.ToString() + " Card Obtained: " + movement.MoveCard.cardName);
-                soundManager.PlaySound(confirmSound);
-                if (controller.Player == 1)
-                {
-                    playerOneData playerData = GetComponentInChildren<playerOneData>();
-                    playerData.storedMovement.Add(selectedCard);
-                }
-                else if (controller.Player == 2) 
-                {
-                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                    playerData.storedMovement.Add(selectedCard);
-                }
+                movePool.CreateCard(rarity);
                 StartCoroutine(CardObtained());
             }
 
@@ -372,14 +341,6 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         //if the type selected is defence then the method needs to check for avaialble defence slots
         else if (typeSelected == CardType.Defence)
         {
-            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
-            selectedCard = UnityEngine.Random.Range(0, possibleDefenceCards.Count);
-            selectedDefenceCard = possibleDefenceCards[selectedCard];
-            while (selectedDefenceCard.cardRarity != rarity)
-            {
-                selectedCard = UnityEngine.Random.Range(0, possibleDefenceCards.Count);
-                selectedDefenceCard = possibleDefenceCards[selectedCard];
-            }
 
             //this part of the method collect the defence deck pool to check if there is any objects that are set to false
             defenceDeckPool defencePool = GetComponentInChildren<defenceDeckPool>();
@@ -387,22 +348,7 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
             //if there is a object that is set to false then add the selected card into the deck
             if (defenceCard != null)
             {
-                defenceCard.SetActive(true);
-                defenceCard defence = defenceCard.AddComponent<defenceCard>();
-                defence.CreateCard(selectedDefenceCard);
-                controller.IncrementDeck(deckTypeEnum.Defence);
-                eventText.SetText(typeSelected.ToString() + " Card Obtained: " + defence.DefendCard.cardName);
-                soundManager.PlaySound(confirmSound);
-                if (controller.Player == 1)
-                {
-                    playerOneData playerData = GetComponentInChildren<playerOneData>();
-                    playerData.storedDefence.Add(selectedCard);
-                }
-                else if (controller.Player == 2)
-                {
-                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                    playerData.storedDefence.Add(selectedCard);
-                }
+                defencePool.CreateCard(rarity);
                 StartCoroutine(CardObtained());
             }
 
@@ -417,37 +363,13 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         //if the type selected is Status then the method needs to check for avaialble Status slots
         else if (typeSelected == CardType.Status)
         {
-            //this part of the method creates the suitable and provide a while loop to ensure that the player obtains the correct rarity
-            selectedCard = UnityEngine.Random.Range(0, possibleStatusCards.Count);
-            selectedStatusCard = possibleStatusCards[selectedCard];
-            while (selectedStatusCard.cardRarity != rarity)
-            {
-                selectedCard = UnityEngine.Random.Range(0, possibleStatusCards.Count);
-                selectedStatusCard = possibleStatusCards[selectedCard];
-            }
-
             //this part of the method collect the status deck pool to check if there is any objects that are set to false
             statusDeckPool statusPool = GetComponentInChildren<statusDeckPool>();
             GameObject statusCard = statusPool.GetAvailableStatus();
             //if there is a object that is set to false then add the selected card into the deck
             if (statusCard != null)
             {
-                statusCard.SetActive(true);
-                statusCard status = statusCard.AddComponent<statusCard>();
-                status.CreateCard(selectedStatusCard);
-                controller.IncrementDeck(deckTypeEnum.Status);
-                eventText.SetText(typeSelected.ToString() + " Card Obtained: " + status.StatusCard.cardName);
-                soundManager.PlaySound(confirmSound);
-                if (controller.Player == 1)
-                {
-                    playerOneData playerData = GetComponentInChildren<playerOneData>();
-                    playerData.storedStatus.Add(selectedCard);
-                }
-                else if (controller.Player == 2)
-                {
-                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                    playerData.storedStatus.Add(selectedCard);
-                }
+                statusPool.CreateCard(rarity);
                 StartCoroutine(CardObtained());
             }
 

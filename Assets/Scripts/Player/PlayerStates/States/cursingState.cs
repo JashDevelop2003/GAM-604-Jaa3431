@@ -25,8 +25,6 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     private bool playerSelected;
 
     //This process is being use similar to the item state
-    [SerializeField] private List<itemStats> possibleOmens;
-    [SerializeField] private itemStats selectedOmen;
     private itemDeckPool itemDeck;
 
     [SerializeField] private GameObject[] checkingAvailability;
@@ -49,8 +47,6 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
 
     public override void EnterState(playerStateManager player)
     {
-        possibleOmens = null;
-        selectedOmen = null;
         playerSelected = false;
 
         controls = GetComponent<boardControls>();
@@ -191,31 +187,11 @@ public class cursingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     {
         if (selectedPlayer != null) 
         {
-            playerController controller = selectedPlayer.GetComponent<playerController>();
-            possibleOmens = controller.GetData.possibleOmens;
-            int randomOmen = UnityEngine.Random.Range(0, possibleOmens.Count);
-            selectedOmen = possibleOmens[randomOmen];
-
             itemDeck = selectedPlayer.GetComponentInChildren<itemDeckPool>();
             GameObject omen = itemDeck.GetAvailableItem();
             if (omen != null) 
             {
-                omen.SetActive(true);
-                itemBehaviour item = omen.AddComponent<itemBehaviour>();
-                item.CreateItem(selectedOmen);
-                controller.IncrementDeck(deckTypeEnum.Item);
-                soundManager.PlaySound(confirmSound);
-                eventText.SetText(selectedPlayer.name + " has been selected. Omen obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
-                if (controller.Player == 1)
-                {
-                    playerOneData playerData = GetComponentInChildren<playerOneData>();
-                    playerData.storedOmens.Add(randomOmen);
-                }
-                else if (controller.Player == 2)
-                {
-                    playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                    playerData.storedOmens.Add(randomOmen);
-                }
+                itemDeck.CreateItem(itemEnum.Omen);
                 StartCoroutine(CursingPlayer());
             }
 

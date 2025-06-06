@@ -28,7 +28,6 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
 
     //This is for the relics and provides the possible relics to select from to give to the player landing on the item space
     [SerializeField] private List<itemStats> possibleRelics;
-    private itemStats selectedRelic;
     private itemDeckPool itemDeck;
 
     public itemEnum typeSelected;
@@ -60,7 +59,6 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
         typeSelected = itemEnum.Null;
         itemDecided = false;
         checkingAvailability = null;
-        selectedRelic = null;
 
         pickingItemUI.SetActive(true);
         //This display the options for the player to either obtain a relic or make someone obtain a omen
@@ -141,25 +139,7 @@ public class itemState : playerStateBase, IDecideLeft, IDecideRight, IConfirm
     {
         if(typeSelected == itemEnum.Relic)
         {
-            int selectedInt = UnityEngine.Random.Range(0, possibleRelics.Count);
-            selectedRelic = possibleRelics[selectedInt];
-            GameObject relic = checkingAvailability;
-            relic.SetActive(true);
-            itemBehaviour item = relic.AddComponent<itemBehaviour>();
-            item.CreateItem(selectedRelic);
-            controller.IncrementDeck(deckTypeEnum.Item);
-            soundManager.PlaySound(confirmSound);
-            eventText.SetText(typeSelected.ToString() + " was selected. Player Obtained: " + item.Item.itemName + " : " + item.Item.itemDescription);
-            if (controller.Player == 1)
-            {
-                playerOneData playerData = GetComponentInChildren<playerOneData>();
-                playerData.storedRelics.Add(selectedInt);
-            }
-            else if (controller.Player == 2)
-            {
-                playerTwoData playerData = GetComponentInChildren<playerTwoData>();
-                playerData.storedDefence.Add(selectedInt);
-            }
+            itemDeck.CreateItem(itemEnum.Relic);
             StartCoroutine(WaitingforItem());
         }
         else if( typeSelected == itemEnum.Omen)

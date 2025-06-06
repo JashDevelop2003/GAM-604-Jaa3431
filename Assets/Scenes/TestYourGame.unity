@@ -3269,8 +3269,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   selectedPlayer: {fileID: 0}
-  possibleOmens: []
-  selectedOmen: {fileID: 0}
   checkingAvailability: []
   unavailablePlayers: 0
   choosingPlayerUI: {fileID: 539037562}
@@ -9881,6 +9879,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 7823039302855233355, guid: 1cfb42a2198d3b240966b65ec8bac54a, type: 3}
+  eventText: {fileID: 2116896888}
+  confirmSound:
+  - {fileID: 8300000, guid: d18a72499ba58dd40a0e379085d24c94, type: 3}
+  - {fileID: 8300000, guid: c6b596fd07a14a64b89285b6f079b167, type: 3}
 --- !u!1 &232768628
 GameObject:
   m_ObjectHideFlags: 0
@@ -15136,6 +15138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 6705159004726926144, guid: eb0952875358c06408b39caef335fe5d, type: 3}
+  eventText: {fileID: 2116896888}
+  confirmSound: {fileID: 8300000, guid: 8ce14858148c08a459f93602337335eb, type: 3}
 --- !u!1001 &367901690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17288,6 +17292,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 3397653743963208638, guid: 01add095f183e0c48b60d719d5e530a4, type: 3}
+  eventText: {fileID: 2116896888}
+  confirmSound: {fileID: 8300000, guid: 7da886a070ddeee4ba6bc0fd415e462c, type: 3}
 --- !u!1 &425318562
 GameObject:
   m_ObjectHideFlags: 0
@@ -21883,6 +21889,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 3397653743963208638, guid: 01add095f183e0c48b60d719d5e530a4, type: 3}
+  eventText: {fileID: 2116896888}
+  confirmSound: {fileID: 8300000, guid: 7da886a070ddeee4ba6bc0fd415e462c, type: 3}
 --- !u!1 &556356044
 GameObject:
   m_ObjectHideFlags: 0
@@ -25421,8 +25429,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   selectedPlayer: {fileID: 0}
-  possibleOmens: []
-  selectedOmen: {fileID: 0}
   checkingAvailability: []
   unavailablePlayers: 0
   choosingPlayerUI: {fileID: 111356482}
@@ -34122,6 +34128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 749973323476722428, guid: bab26cfe8510f444e973929680497e42, type: 3}
+  eventText: {fileID: 2116896888}
+  confirmSound: {fileID: 8300000, guid: c952c74dd0dfb5c44b632b0c5564c936, type: 3}
 --- !u!1 &885911774
 GameObject:
   m_ObjectHideFlags: 0
@@ -54788,6 +54796,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 7823039302855233355, guid: 1cfb42a2198d3b240966b65ec8bac54a, type: 3}
+  eventText: {fileID: 2116896888}
+  confirmSound:
+  - {fileID: 8300000, guid: d18a72499ba58dd40a0e379085d24c94, type: 3}
+  - {fileID: 8300000, guid: c6b596fd07a14a64b89285b6f079b167, type: 3}
 --- !u!1 &1620526348
 GameObject:
   m_ObjectHideFlags: 0
@@ -65718,6 +65730,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 6705159004726926144, guid: eb0952875358c06408b39caef335fe5d, type: 3}
+  eventText: {fileID: 2116896888}
+  confirmSound: {fileID: 8300000, guid: 8ce14858148c08a459f93602337335eb, type: 3}
 --- !u!1 &2004576580
 GameObject:
   m_ObjectHideFlags: 0
@@ -71034,6 +71048,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyPrefabs: {fileID: 749973323476722428, guid: bab26cfe8510f444e973929680497e42, type: 3}
+  eventText: {fileID: 2116896888}
+  confirmSound: {fileID: 8300000, guid: c952c74dd0dfb5c44b632b0c5564c936, type: 3}
 --- !u!1 &2146960332
 GameObject:
   m_ObjectHideFlags: 0

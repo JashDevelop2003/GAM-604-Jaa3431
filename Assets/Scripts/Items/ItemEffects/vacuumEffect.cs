@@ -7,6 +7,7 @@ public class vacuumEffect : MonoBehaviour
 {
     [SerializeField] private Transform playerTransform;
     private turnManager turnManager;
+    private dataManager dataManager;
     [SerializeField] private GameObject player;
     private playerController controller;
     [SerializeField] private GameObject opponent;
@@ -18,6 +19,7 @@ public class vacuumEffect : MonoBehaviour
     void Awake()
     {
         turnManager = Singleton<turnManager>.Instance;
+        dataManager = Singleton<dataManager>.Instance;
         playerTransform = this.transform.parent.parent.parent;
         player = playerTransform.gameObject;
         controller = player.GetComponent<playerController>();
@@ -43,7 +45,7 @@ public class vacuumEffect : MonoBehaviour
     //Coroutine is used to make sure that the turn manager is enabled in the scene
     IEnumerator WaitforLoad()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitUntil(() => dataManager.LoadComplete == true);
         for (int i = 0; i < turnManager.GetPlayers.Length; i++)
         {
             if (turnManager.GetPlayers[i].gameObject != player.gameObject)

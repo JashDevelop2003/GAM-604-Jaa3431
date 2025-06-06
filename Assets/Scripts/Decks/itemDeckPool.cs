@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
@@ -27,7 +28,19 @@ public class itemDeckPool : MonoBehaviour
 
     private playerController controller;
 
+    private soundManager soundManager;
 
+    //These are the variable to create and store the cards
+    private int selectedInt;
+    private itemStats selectedItem;
+    private Transform playerTransform;
+    private GameObject player;
+
+    [Header("User Interface")]
+    [SerializeField] private TMP_Text eventText;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip[] confirmSound = new AudioClip[2];
 
     private void Awake()
     {
@@ -42,6 +55,8 @@ public class itemDeckPool : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = Singleton<soundManager>.Instance;
+
         //Depending on the value of the capacity, create items of that type into the deck
         //Make sure that the caritemsds are derived classes to the deck
         for (int i = 0; i < amountToPool; i++)
@@ -89,6 +104,58 @@ public class itemDeckPool : MonoBehaviour
             itemBehaviour omen = item.AddComponent<itemBehaviour>();
             omen.LoadItem(controller.GetData.possibleOmens[id]);
             controller.IncrementDeck(deckTypeEnum.Item);
+        }
+    }
+
+    public void CreateItem(itemEnum type)
+    {
+        //The transform and gameobject are used to identify the player to find the data
+        playerTransform = this.transform.parent;
+        player = playerTransform.gameObject;
+
+        if (type == itemEnum.Relic)
+        {
+            selectedInt = Random.Range(0, controller.GetData.possibleRelics.Count);
+            selectedItem = controller.GetData.possibleRelics[selectedInt];
+        }
+        else if(type == itemEnum.Omen)
+        {
+            selectedInt = Random.Range(0, controller.GetData.possibleOmens.Count);
+            selectedItem = controller.GetData.possibleOmens[selectedInt];
+        }
+
+        GameObject chosenItem = GetAvailableItem();
+        chosenItem.SetActive(true);
+        itemBehaviour item = chosenItem.AddComponent<itemBehaviour>();
+        item.CreateItem(selectedItem);
+        controller.IncrementDeck(deckTypeEnum.Item);
+        soundManager.PlaySound(confirmSound[(int)type]);
+        eventText.SetText("Obtained " + type.ToString() + " : " + item.Item.itemName + " : " + item.Item.itemDescription);
+        if (controller.Player == 1)
+        {
+            playerOneData playerData = player.GetComponentInChildren<playerOneData>();
+            if(type == itemEnum.Relic)
+            {
+                playerData.storedRelics.Add(selectedInt);
+
+            }
+            else if(type == itemEnum.Omen)
+            {
+                playerData.storedOmens.Add(selectedInt);
+            }
+        }
+        else if (controller.Player == 2)
+        {
+            playerTwoData playerData = player.GetComponentInChildren<playerTwoData>();
+            if (type == itemEnum.Relic)
+            {
+                playerData.storedRelics.Add(selectedInt);
+
+            }
+            else if (type == itemEnum.Omen)
+            {
+                playerData.storedOmens.Add(selectedInt);
+            }
         }
     }
 }

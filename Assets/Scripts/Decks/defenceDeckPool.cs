@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class defenceDeckPool : MonoBehaviour
@@ -29,9 +30,25 @@ public class defenceDeckPool : MonoBehaviour
 
     private playerController controller;
 
+    private soundManager soundManager;
+
+    //These are the variable to create and store the cards
+    private int selectedInt;
+    private defenceCardStats selectedCard;
+    private Transform playerTransform;
+    private GameObject player;
+
+    [Header("User Interface")]
+    [SerializeField] private TMP_Text eventText;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip confirmSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = Singleton<soundManager>.Instance;
+
         //In order to decide on the amount of objects to pool and the starting cards, the method must collect the player controller from the parent
         controller = GetComponentInParent<playerController>();
         //This collects from the character data on the starting offence cards and deck capacity based upon the type of deck
@@ -94,5 +111,43 @@ public class defenceDeckPool : MonoBehaviour
             defence.CreateCard(controller.GetData.possibleDefenceCards[id]);
             controller.IncrementDeck(deckTypeEnum.Defence);
         }
+    }
+
+    //Create card is a public method that when called will create a new card
+    public void CreateCard(CardRarity rarity)
+    {
+        //The transform and gameobject are used to identify the player to find the data
+        playerTransform = this.transform.parent;
+        player = playerTransform.gameObject;
+
+        //Do while loop is used to find a card at first
+        do
+        {
+            selectedInt = UnityEngine.Random.Range(0, controller.GetData.possibleDefenceCards.Count);
+            selectedCard = controller.GetData.possibleDefenceCards[selectedInt];
+        }
+        while (selectedCard.cardRarity != rarity);
+
+        GameObject defenceCard = GetAvailableDefence();
+
+        defenceCard.SetActive(true);
+        defenceCard defence = defenceCard.AddComponent<defenceCard>();
+
+        defence.CreateCard(selectedCard);
+        controller.IncrementDeck(deckTypeEnum.Defence);
+
+        eventText.SetText(CardType.Offence + " Card Obtained: " + defence.DefendCard.cardName);
+        soundManager.PlaySound(confirmSound);
+        if (controller.Player == 1)
+        {
+            playerOneData playerData = player.GetComponentInChildren<playerOneData>();
+            playerData.storedDefence.Add(selectedInt);
+        }
+        else if (controller.Player == 2)
+        {
+            playerTwoData playerData = player.GetComponentInChildren<playerTwoData>();
+            playerData.storedDefence.Add(selectedInt);
+        }
+
     }
 }
