@@ -23,13 +23,17 @@ public class navigateTutorial : MonoBehaviour, IMenu, IDecideLeft, IDecideRight
     [SerializeField] private Transform[] spaces = new Transform[10];
 
     [Header("Scene Management")]
-    private sceneManager sceneManager;
     [SerializeField] private sceneEnum scene;
+    private sceneManager sceneManager;
 
     [Header("User Interface")]
     [SerializeField] private GameObject[] panels = new GameObject[5];
     [SerializeField] private TMP_Text description;
     [SerializeField] private string[] descriptions = new string[15];
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip navigateSound;
+    private soundManager soundManager;
 
     // Start is called before the first frame update
     void Awake()
@@ -37,9 +41,12 @@ public class navigateTutorial : MonoBehaviour, IMenu, IDecideLeft, IDecideRight
         currentStep = 0;
 
         sceneManager = Singleton<sceneManager>.Instance;
+        soundManager = Singleton<soundManager>.Instance;
         menuControls = GetComponent<mainMenuControls>();
         MenuControls.pressedLeft += DecidingLeft;
         MenuControls.pressedRight += DecidingRight;
+        MenuControls.pressedLeft += ApplySound;
+        MenuControls.pressedRight += ApplySound;
         MenuControls.pressedConfirm += MainMenu;
 
         stepEvent += ChangeDescription;
@@ -83,23 +90,23 @@ public class navigateTutorial : MonoBehaviour, IMenu, IDecideLeft, IDecideRight
         for (int i = 0; i < panels.Length; i++) 
         {
             panels[i].SetActive(false);
-            if (currentStep <= 14)
+            if (currentStep <= 15)
             {
                 panels[0].SetActive(true);
             }
-            else if (currentStep == 15)
+            else if (currentStep == 16)
             {
                 panels[1].SetActive(true);
             }
-            else if (currentStep == 16)
+            else if (currentStep == 17)
             {
                 panels[2].SetActive(true);
             }
-            else if (currentStep == 17)
+            else if (currentStep == 18)
             {
                 panels[3].SetActive(true);
             }
-            else if(currentStep == 18)
+            else if(currentStep == 19)
             {
                 panels[4].SetActive(true);
             }
@@ -114,10 +121,17 @@ public class navigateTutorial : MonoBehaviour, IMenu, IDecideLeft, IDecideRight
         }
     }
 
+    public void ApplySound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(navigateSound);
+    }
+
     private void OnDisable()
     {
         MenuControls.pressedLeft -= DecidingLeft;
         MenuControls.pressedRight -= DecidingRight;
+        MenuControls.pressedLeft -= ApplySound;
+        MenuControls.pressedRight -= ApplySound;
         MenuControls.pressedConfirm -= MainMenu;
         stepEvent -= ChangeDescription;
         stepEvent -= ChangePanel;
