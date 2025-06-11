@@ -14,13 +14,18 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
     }
 
     [Header("Scene Management")]
-    private sceneManager sceneManager;
     [SerializeField] private sceneEnum[] scene = new sceneEnum[5];
-    
+    private sceneManager sceneManager;
+
     [Header("User Interface")]
     [SerializeField] private Image[] choices = new Image[5];
     [SerializeField] private Color[] colourChoice = new Color[2];
     [SerializeField] private GameObject warningUI;
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip navSound;
+    [SerializeField] private AudioClip confirmSound;
+    private soundManager soundManager;
 
     private bool checkGame;
 
@@ -29,9 +34,12 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
     {
         currentChoice = 0;
         sceneManager = Singleton<sceneManager>.Instance;
+        soundManager = Singleton<soundManager>.Instance;
         menuControls = GetComponent<mainMenuControls>();
         MenuControls.pressedUp += DecidingUp;
         MenuControls.pressedDown += DecidingDown;
+        MenuControls.pressedUp += ApplySound;
+        MenuControls.pressedDown += ApplySound;
         MenuControls.pressedConfirm += ConfirmingChoice;
         choices[currentChoice].color = colourChoice[1];
         HighlightChoice();
@@ -66,11 +74,13 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
             if (gameData != null)
             {
                 sceneManager.ChangeScene(scene[currentChoice]);
+                soundManager.PlaySound(confirmSound);
             }
         }
         else
         {
             sceneManager.ChangeScene(scene[currentChoice]);
+            soundManager.PlaySound(confirmSound);
         }
     }
 
@@ -99,10 +109,17 @@ public class navigateMainMenu : MonoBehaviour, IDecideUp, IDecideDown, IConfirm
         }
     }
 
+    public void ApplySound(object sender, EventArgs e)
+    {
+        soundManager.PlaySound(navSound);
+    }
+
     private void OnDisable()
     {
         MenuControls.pressedUp -= DecidingUp;
         MenuControls.pressedDown -= DecidingDown;
+        MenuControls.pressedUp -= ApplySound;
+        MenuControls.pressedDown -= ApplySound;
         MenuControls.pressedConfirm -= ConfirmingChoice;
     }
 }
