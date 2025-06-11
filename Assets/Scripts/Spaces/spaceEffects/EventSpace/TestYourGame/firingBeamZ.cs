@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+/// <summary>
+/// This should be called firing RookZ
+/// </summary>
 
 public class firingBeamZ : eventSpace
 {
@@ -12,6 +15,9 @@ public class firingBeamZ : eventSpace
     private soundManager soundManager;
     private turnManager turnManager;
 
+    [SerializeField] private GameObject rook;
+    private rookZ moveRook;
+
     [Header("User Interface")]
     [SerializeField] private TMP_Text eventText;
 
@@ -20,6 +26,7 @@ public class firingBeamZ : eventSpace
 
     void Start()
     {
+        moveRook = rook.GetComponent<rookZ>();
         beamZ = beam.GetComponent<beamZ>();
         spaceManager = Singleton<spaceManager>.Instance;
         soundManager = Singleton<soundManager>.Instance;
@@ -28,7 +35,7 @@ public class firingBeamZ : eventSpace
 
     public override void ActivateEvent()
     {
-        eventText.SetText("I'm firing my Laser at: " + beam.name + " Anyone there loses 20 Health");
+        eventText.SetText("Rook coming through! " + beam.name + " Anyone there loses 20 Health");
         targetPlayers = beamZ.Players;
         soundManager.PlaySound(laserSound);
         foreach (GameObject player in targetPlayers)
@@ -38,6 +45,7 @@ public class firingBeamZ : eventSpace
         }
 
         targetPlayers = null;
+        moveRook.MoveRook();
         StartCoroutine(EndTurn());
     }
 

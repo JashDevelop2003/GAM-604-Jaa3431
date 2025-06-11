@@ -30,19 +30,22 @@ public class goldSevenEffect : MonoBehaviour
         state.startItemEvents += GoldSeven;
     }
 
-    // At the start of the player's turn guard increases by 7%
+    // At the start of the player's turn guard and thrust increases by 21% if they have strange 7, red 7 & blue 7 in their inventory
     public void GoldSeven(object sender, EventArgs e)
     {
         if (!hasAllSevens) 
         {
+            allItems = new List<GameObject>();
+
             foreach(Transform child in deckTransform)
             {
                 allItems.Add(child.gameObject);
             }
 
             for (int i = 0; i < allItems.Count; i++) 
-            { 
-                if(allItems[i].name == "Red 7")
+            {
+
+                if (allItems[i].name == "Red 7")
                 {
                     hasSeven[0] = true;
                 }
