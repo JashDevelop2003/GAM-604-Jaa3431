@@ -66,12 +66,17 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
     [SerializeField] private Image characterIcon;
     [SerializeField] private Image[] playerIcon = new Image[2];
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip[] characterSounds = new AudioClip[4];
+    private soundManager soundManager;
+
     void Awake()
     {
         player = 0;
         currentCharacter = 0;
         mainMenu = false;
         sceneManager = Singleton<sceneManager>.Instance;
+        soundManager = Singleton<soundManager>.Instance;
         menuControls = GetComponent<mainMenuControls>();
         MenuControls.pressedLeft += DecidingLeft;
         MenuControls.pressedRight += DecidingRight;
@@ -98,6 +103,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
             currentCharacter = characters.Length - 1;
         }
         mainMenu = false;
+        PlaySound(currentCharacter);
         ChangeCharacter();
     }
 
@@ -109,6 +115,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
             currentCharacter = 0;
         }
         mainMenu = false;
+        PlaySound(currentCharacter);
         ChangeCharacter();
     }
 
@@ -136,6 +143,7 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
                 if (playerChoice[i] == characters[currentCharacter].character) 
                 { 
                     sameCharacter = true;
+                    PlaySound(currentCharacter);
                 }
             }
             if (sameCharacter)
@@ -262,6 +270,11 @@ public class selectCharacter : MonoBehaviour, IDecideLeft, IDecideRight, IConfir
         infoText.SetText("Beginning Game at: " + scenes[1] + " board");
         yield return new WaitForSeconds(3);
         sceneManager.ChangeScene(scenes[1]);
+    }
+
+    void PlaySound(int character)
+    {
+        soundManager.PlaySound(characterSounds[character]);
     }
 
     private void OnDisable()

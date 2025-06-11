@@ -35,7 +35,7 @@ public class firingBeamZ : eventSpace
 
     public override void ActivateEvent()
     {
-        eventText.SetText("Rook coming through! " + beam.name + " Anyone there loses 20 Health");
+        eventText.SetText("Rook coming through! Anyone there loses 20 Health");
         targetPlayers = beamZ.Players;
         soundManager.PlaySound(laserSound);
         foreach (GameObject player in targetPlayers)
