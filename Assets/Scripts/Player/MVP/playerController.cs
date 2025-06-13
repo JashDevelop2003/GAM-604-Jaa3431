@@ -465,6 +465,7 @@ public class playerController : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        yield return new WaitForSeconds(2);
         if (player == 1)
         {
             eventText.SetText("Player 1 has been defeated, Player 2 Wins!");
@@ -474,7 +475,7 @@ public class playerController : MonoBehaviour
             eventText.SetText("Player 2 has been defeated, Player 1 Wins!");
 
         }
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         sceneManager sceneManager = Singleton<sceneManager>.Instance;
         sceneManager.ChangeScene(sceneEnum.Victory);
     }

@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Runtime.CompilerServices;
 
 public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft, IDecideRight, IConfirm
 {
@@ -95,6 +93,7 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
 
             statusCard.ActivateEffect(this.gameObject);
             eventText.SetText("The current Player is affected by: " + statusCard.StatusCard.cardName);
+            controller.ChangeMana(statusCard.ManaCost);
             StartCoroutine(ActivateCard());
         }
 
@@ -106,6 +105,7 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
                 statusCard.ActivateEffect(turnManager.GetPlayers[i]);
             }
             eventText.SetText("Everyone is affected by: " + statusCard.StatusCard.cardName);
+            controller.ChangeMana(statusCard.ManaCost);
             StartCoroutine(ActivateCard());
         }
 
@@ -113,14 +113,10 @@ public class targetState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft,
         {
             int randomPlayer = UnityEngine.Random.Range(0, turnManager.GetPlayers.Length);
             statusCard.ActivateAdditionalEffect();
+            controller.ChangeMana(statusCard.ManaCost);
             statusCard.ActivateEffect(turnManager.GetPlayers[randomPlayer]);
             eventText.SetText("The random player that is affected by: " + statusCard.StatusCard.cardName + "is : " + turnManager.GetPlayers[randomPlayer].name);
             StartCoroutine(ActivateCard());
-        }
-
-        else
-        {
-            Debug.LogError("Unsuitable Target is Set on Selected Card");
         }
 
     }
