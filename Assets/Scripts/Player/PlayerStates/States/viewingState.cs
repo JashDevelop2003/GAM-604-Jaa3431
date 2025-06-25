@@ -42,6 +42,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
     //Display the UI
     [SerializeField] private GameObject viewingUI;
     [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private TMP_Text eventText;
     
     //Displaying the cards
     [SerializeField] private GameObject cardUI;
@@ -128,7 +129,7 @@ public class viewingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
         cardMana.SetText(viewCard.AttackCard.manaCost.ToString());
         cardDetail.SetText(viewCard.AttackCard.attackValue.ToString());
         descriptionText.SetText(viewCard.AttackCard.cardDescription);
-        
+        eventText.SetText("Press Backsapce when you want to stop viewing your deck");
 
     }
     public override void UpdateState(playerStateManager player)

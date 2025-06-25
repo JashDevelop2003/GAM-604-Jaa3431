@@ -47,16 +47,16 @@ public class playerView : MonoBehaviour
     public void DisplayUI()
     {
         characterName.SetText(controller.GetData.name);
-        offenceValue.SetText(controller.GetModel.OffenceCards.ToString());
-        defenceValue.SetText(controller.GetModel.DefenceCards.ToString());
-        movementValue.SetText(controller.GetModel.MovementCards.ToString());
-        statusValue.SetText(controller.GetModel.StatusCards.ToString());
-        itemValue.SetText(controller.GetModel.ItemPile.ToString());
+        OffenceUI();
+        DefenceUI();
+        MovementUI();
+        StatusUI();
+        ItemUI();
 
-        healthPoints.SetText(controller.GetModel.CurrentHealth.ToString());
-        manaPoints.SetText(controller.GetModel.CurrentMana.ToString());
-        cashPoints.SetText(controller.GetModel.CurrentCash.ToString());
-        thrustPercentage.SetText((controller.GetModel.ThrustMultiplier * 100).ToString() + "%");
+        HealthUI();
+        ManaUI();
+        CashUI();
+        ThrustUI();
         guardPercentage.SetText((controller.GetModel.GuardMultiplier * 100).ToString() + "%");
         rollPercentage.SetText((controller.GetModel.RollMultiplier * 100).ToString() + "%");
 
@@ -103,23 +103,40 @@ public class playerView : MonoBehaviour
     public void OffenceUI()
     {
         offenceValue.SetText(controller.GetModel.OffenceCards.ToString());
+        CheckLimit(offenceValue, controller.GetModel.OffenceCards, 0);
     }
     public void DefenceUI()
     {
         defenceValue.SetText(controller.GetModel.DefenceCards.ToString());
+        CheckLimit(defenceValue, controller.GetModel.DefenceCards, 1);
     }
     public void MovementUI()
     {
         movementValue.SetText(controller.GetModel.MovementCards.ToString());
+        CheckLimit(movementValue, controller.GetModel.MovementCards, 2);
     }
     public void StatusUI()
     {
         statusValue.SetText(controller.GetModel.StatusCards.ToString());
+        CheckLimit(statusValue, controller.GetModel.StatusCards, 3);
     }
 
     public void ItemUI()
     {
         itemValue.SetText(controller.GetModel.ItemPile.ToString());
+        CheckLimit(itemValue, controller.GetModel.ItemPile, 4);
+    }
+
+    private void CheckLimit(TMP_Text text, int value, int deckCapacity)
+    {
+        if (value == controller.GetData.deckCapacity[deckCapacity])
+        {
+            text.color = Color.red;
+        }
+        else if (value == controller.GetData.deckCapacity[deckCapacity] - 1)
+        {
+            text.color = Color.yellow;
+        }
     }
 
     public void EffectUI (int effectInt, bool setActive)

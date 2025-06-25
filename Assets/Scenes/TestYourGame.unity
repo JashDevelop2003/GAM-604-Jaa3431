@@ -4184,6 +4184,7 @@ MonoBehaviour:
   - resourceList: []
   viewingUI: {fileID: 183696280}
   descriptionText: {fileID: 2033291988}
+  eventText: {fileID: 2116896888}
   cardUI: {fileID: 1850185920}
   cardImage: {fileID: 1850185922}
   cardSprite:
@@ -28390,6 +28391,7 @@ MonoBehaviour:
   - resourceList: []
   viewingUI: {fileID: 183696280}
   descriptionText: {fileID: 2033291988}
+  eventText: {fileID: 2116896888}
   cardUI: {fileID: 1850185920}
   cardImage: {fileID: 1850185922}
   cardSprite:
