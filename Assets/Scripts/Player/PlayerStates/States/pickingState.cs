@@ -156,10 +156,8 @@ public class pickingState : playerStateBase, IDecideUp, IDecideDown, IDecideLeft
             StartCoroutine(CardObtained());
         }
 
-        //this provides a random range to provide a 75% chance of being Uncommon & 25% of being Rare
-        //However is 100% for rare card if the player is lucky
-        //TODO: Add Legendary & Change the probability to (50/40/10)
-        //TODO: Change the lucky probability to (20/50/30)       
+        //this provides a random range to provide a 50% chance for an uncommon card, 40% for rare and 10% for legendary
+        //However the chance is dependent on if the player has lucky which changes to 20% chance for uncommon, 50% = for rare and 30% for legendary   
         rarityInt = UnityEngine.Random.Range(1, 11);
 
         if (buffs.IsLucky)
