@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using static UnityEditor.Progress;
-
 /// <summary>
 /// This state allows the player to either obtain a relic or move to the cursing state to select an player to obtain a omen item
 /// If the player chooses relic then they obtain a relice
