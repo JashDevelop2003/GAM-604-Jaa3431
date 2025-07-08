@@ -28,6 +28,8 @@ public class pentagramNecklessEffect : MonoBehaviour
     // At the start of the player's turn thrust increases by 10% per omen obained
     public void PentagramNeckless(object sender, EventArgs e)
     { 
+        allItems = new List<GameObject>();
+
         foreach (Transform child in deckTransform)
         {
              allItems.Add(child.gameObject);
@@ -47,6 +49,8 @@ public class pentagramNecklessEffect : MonoBehaviour
             controller.ChangeThrust(controller.GetModel.ThrustMultiplier + (omenCount * 0.1f));
             omenCount = 0;
         }
+
+        allItems = null;
     }
 
     private void OnDestroy()
