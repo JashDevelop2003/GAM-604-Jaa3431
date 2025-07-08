@@ -26,7 +26,6 @@ public class rapidRecoveryEffect : MonoBehaviour
     {
         playerController controller = player.GetComponent<playerController>();
         controller.ChangeHealth(10);
-        Debug.Log("Heal 10 Health");
     }
 
     void OnDisable()
