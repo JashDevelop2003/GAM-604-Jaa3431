@@ -38,9 +38,12 @@ public class pentagramNecklessEffect : MonoBehaviour
         for (int i = 0; i < allItems.Count; i++)
         {
             itemBehaviour checkType = allItems[i].GetComponent<itemBehaviour>();
-            if (checkType.Item.itemType == itemEnum.Omen)
+            if (checkType != null)
             {
-                omenCount++;
+                if (checkType.Item.itemType == itemEnum.Omen)
+                {
+                    omenCount++;
+                }
             }
         }
 
