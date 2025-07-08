@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// Last Resport is the Reaper's One Use Ability which provides a major risk for the player when using the ability
