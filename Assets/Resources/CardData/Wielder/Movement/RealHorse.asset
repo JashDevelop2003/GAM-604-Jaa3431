@@ -19,4 +19,5 @@ MonoBehaviour:
   cardDescription: Rolls 7-10
   minimumMoveValue: 7
   maximumMoveValue: 10
-  manaCost: 0
+  manaCost: 4
+  additionalEffect: {fileID: 0}
