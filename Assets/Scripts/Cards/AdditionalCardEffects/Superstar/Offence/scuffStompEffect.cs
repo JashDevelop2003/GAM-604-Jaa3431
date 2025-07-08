@@ -32,6 +32,7 @@ public class scuffStompEffect : MonoBehaviour
         if (outcome == 0)
         {
             player = combatSystem.AttackingPlayer;
+            combatSystem.AttackValue = 0;
             playerController controller = player.GetComponent<playerController>();
             controller.ChangeHealth(-3);
             combatSystem.OffenceValue.SetText("Attack Failed: Set Attack to 0 & Recieve 3 Damage");
