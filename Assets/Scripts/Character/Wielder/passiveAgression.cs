@@ -42,7 +42,7 @@ public class passiveAgression : MonoBehaviour
     private dataManager dataManager;
 
     //When awake the class has to gather the controller component and then decide if the player starts their character of with being passive or aggressive
-    void Awake()
+    void Start()
     {
         controller = GetComponentInParent<playerController>();
         state = GetComponentInParent<startState>();

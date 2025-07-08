@@ -220,13 +220,13 @@ public class defendState : playerStateBase, IDefendUp, IDefendDown, IDefendLeft,
             }
             else
             {
-                defenceCardDescription.SetText("Press P to Reveal the selected card's description & Press P again to Hide the description");
+                defenceCardDescription.SetText("Press P to Reveal the selected card's description & Press R again to Hide the description");
                 isRevealed = false;
             }
         }
         else
         {
-            defenceCardDescription.SetText("You haven't selected a card yet. Press P to Reveal the selected card's description & Press P again to Hide the description once selected a card");
+            defenceCardDescription.SetText("You haven't selected a card yet. Press R to Reveal the selected card's description & Press P again to Hide the description once selected a card");
         }
     }
 

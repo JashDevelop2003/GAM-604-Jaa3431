@@ -14,7 +14,7 @@ public class dirtyDeeds : MonoBehaviour
     private playerStateManager stateManager;
     private playerController oppponentController;
 
-    void Awake()
+    void Start()
     {
         combatSystem = combatSystem.instance;
         playerController = GetComponentInParent<playerController>();

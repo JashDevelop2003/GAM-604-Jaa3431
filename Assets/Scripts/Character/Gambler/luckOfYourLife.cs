@@ -36,7 +36,7 @@ public class luckOfYourLife : MonoBehaviour
     [Header("User Interface")]
     private decidingState stateUI;
 
-    void Awake()
+    void Start()
     {
         controller = GetComponentInParent<playerController>();
         state = GetComponentInParent<inactiveState>();

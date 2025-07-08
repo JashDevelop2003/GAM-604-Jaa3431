@@ -19,7 +19,7 @@ public class luckBeThisLadyTonight : MonoBehaviour
     private int randomMana;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         dataManager = Singleton<dataManager>.Instance;
         controller = GetComponentInParent<playerController>();

@@ -22,7 +22,7 @@ public class StanceSwap : MonoBehaviour
     private decidingState stateUI;
 
     //This gets the component the ability needs to be used
-    void Awake()
+    void Start()
     {
         controller = GetComponentInParent<playerController>();
         stateUI = GetComponentInParent<decidingState>();

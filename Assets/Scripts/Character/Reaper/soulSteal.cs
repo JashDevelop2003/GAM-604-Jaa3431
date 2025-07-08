@@ -19,7 +19,7 @@ public class soulSteal : MonoBehaviour
     private int defendValue;
 
     //When awake the class has to gather the controller component
-    void Awake()
+    void Start()
     {
         controller = GetComponentInParent<playerController>();
 

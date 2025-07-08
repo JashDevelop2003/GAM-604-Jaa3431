@@ -34,7 +34,7 @@ public class lastReapsort : MonoBehaviour
     private decidingState stateUI;
 
     //When awake the class has to gather the controller component
-    void Awake()
+    void Start()
     {
         controller = GetComponentInParent<playerController>();
         //This will be used for events

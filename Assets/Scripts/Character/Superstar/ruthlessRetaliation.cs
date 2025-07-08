@@ -41,7 +41,7 @@ public class ruthlessRetaliation : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         //Static instance is used to access the combat system
         //Singleton instance is used to access the data manager
